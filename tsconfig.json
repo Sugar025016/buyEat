@@ -19,9 +19,9 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "baseUrl": "./", // 解析非相对模块的基地址，默认是当前目录
+    "baseUrl": "./", // 解析非相對模塊的基地址，默認是當前目錄
     "paths": {
-      //路径映射，相对于baseUrl
+      //路徑映射，相對於baseUrl
       "@/*": ["src/*"]
     }
   },
