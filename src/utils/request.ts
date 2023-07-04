@@ -7,8 +7,6 @@ const request = axios.create({
 
 request.interceptors.request.use(
   (config) => {
-
-
     return config
   },
   (error) => {
@@ -51,7 +49,7 @@ request.interceptors.response.use(
         message = error.response.data.message
         break
     }
-    alert(message)//錯誤彈窗，可以用ant模板代替
+    alert(message) //錯誤彈窗，可以用ant模板代替
     return Promise.reject(error)
   },
 )
