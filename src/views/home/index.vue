@@ -2,12 +2,12 @@
 <template>
   <el-card>
     <div class="box">
-      <svg >
-    <use xlink:href="#icon-phone" fill="red"></use>
-</svg>
-      <svg-icon name="phone" color="red" ></svg-icon>
-      <svg-icon name="phone" color="red" ></svg-icon>
-      <svg-icon name="phone" color="red" ></svg-icon>
+      <svg>
+        <use xlink:href="#icon-phone" fill="red"></use>
+      </svg>
+      <svg-icon name="phone" color="red"></svg-icon>
+      <svg-icon name="phone" color="red"></svg-icon>
+      <svg-icon name="phone" color="red"></svg-icon>
       <div class="footer">
         <h3 class="title">-------------</h3>
         <p class="subtitle">Vue-Admin</p>
