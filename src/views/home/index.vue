@@ -1,9 +1,5 @@
 <script setup lang="ts"></script>
 <template>
-  <svg-icon name="phone" color="red"></svg-icon>
-  <svg-icon name="phone" color="red"></svg-icon>
-  <svg-icon name="phone" color="red"></svg-icon>
-
   <el-card>
     <div class="box">
       <div class="footer">
