@@ -1,17 +1,13 @@
-
-<script setup lang="ts">
-</script>
+<script setup lang="ts"></script>
 <template>
-  <svg-icon name="phone" color="red" ></svg-icon>
-  <svg-icon name="phone" color="red" ></svg-icon>
-  <svg-icon name="phone" color="red" ></svg-icon>
+  <svg-icon name="phone" color="red"></svg-icon>
+  <svg-icon name="phone" color="red"></svg-icon>
+  <svg-icon name="phone" color="red"></svg-icon>
 
   <el-card>
     <div class="box">
       <div class="footer">
-        <h3 class="title">
-          -------------
-        </h3>
+        <h3 class="title">-------------</h3>
         <p class="subtitle">Vue-Admin</p>
       </div>
     </div>

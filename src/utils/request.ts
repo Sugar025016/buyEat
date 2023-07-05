@@ -28,15 +28,15 @@ request.interceptors.response.use(
     switch (status) {
       // 401: 未登錄
       case 401:
-        message = '未登錄' 
-        break // 403 token過期 
-      case 403: 
-        message = '登錄過期，請重新登錄' 
-        break 
-      case 404: 
-        message = '網絡請求不存在' 
-        break 
-      case 500: 
+        message = '未登錄'
+        break // 403 token過期
+      case 403:
+        message = '登錄過期，請重新登錄'
+        break
+      case 404:
+        message = '網絡請求不存在'
+        break
+      case 500:
         message = '服務器出現問題'
         break
       default:
