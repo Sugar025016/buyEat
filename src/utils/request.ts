@@ -26,24 +26,18 @@ request.interceptors.response.use(
     let message = ''
     const status = error.response.status
     switch (status) {
-      // 401: 未登录
-      // 未登录则跳转登录页面，并携带当前页面的路径
-      // 在登录成功后返回当前页面，这一步需要在登录页操作。
+      // 401: 未登錄
       case 401:
-        message = '未登录'
-        break
-      // 403 token过期
-      // 登录过期对用户进行提示
-      // 清除本地token和清空vuex中token对象
-      // 跳转登录页面
-      case 403:
-        message = '登录过期，请重新登录'
-        break
-      case 404:
-        message = '网络请求不存在'
-        break
-      case 500:
-        message = '服务器出现问题'
+        message = '未登錄' 
+        break // 403 token過期 
+      case 403: 
+        message = '登錄過期，請重新登錄' 
+        break 
+      case 404: 
+        message = '網絡請求不存在' 
+        break 
+      case 500: 
+        message = '服務器出現問題'
         break
       default:
         message = error.response.data.message

@@ -2,6 +2,7 @@
 
 <template>
   <div>1111111111111111111111111</div>
+  <router-view></router-view>
 </template>
 
 <style scoped>
