@@ -19,6 +19,7 @@
     "build:pro": "vue-tsc && vite build --mode production"
   },
   "dependencies": {
+    "ant-design-vue": "^3.2.20",
     "axios": "^1.4.0",
     "pinia": "^2.1.4",
     "vue": "^3.2.47",
