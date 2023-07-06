@@ -1,7 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div>1111111111111111111111111</div>
+  <div>11111111Srtting111111111</div>
   <router-view></router-view>
 </template>
 
