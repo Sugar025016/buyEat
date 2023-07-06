@@ -5,7 +5,7 @@ import '@/styles/index.scss'
 
 import router from '@/router'
 import Antd from 'ant-design-vue'
-import 'ant-design-vue/dist/antd.css';
+import 'ant-design-vue/dist/antd.css'
 import pinia from '@/store'
 import 'virtual:svg-icons-register'
 import gloablComponent from '@/components'
