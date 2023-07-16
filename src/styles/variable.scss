@@ -1,4 +1,18 @@
-$color: red;
+
+
+
+
+
+
+
+$breakpoint-xs: 540px;
+$breakpoint-sm: 720px;
+$breakpoint-md: 960px;
+$breakpoint-lg: 1140px;
+$breakpoint-xl: 1320px;
+$breakpoint-xxl: 1500px;
+
+$color: #fd7e14;
 
 // 左侧logo高度
 $base-menu-logo-height: 50px;
@@ -7,3 +21,21 @@ $base-menu-logo-height: 50px;
 $base-logo-title-fontSize: 20px;
 
 $base-menu-width: 200px;
+
+
+
+.icon {
+  width: 30px;
+  height: 30px;
+  color: #fd7e14;
+}
+
+
+
+.border{
+  border: 1px solid #dad8d8;
+}
+
+.border:hover {
+  border: 1px solid $color;
+}

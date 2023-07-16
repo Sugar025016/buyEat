@@ -1,5 +1,9 @@
 // 二次封裝axios
 import axios from 'axios'
+import { ElMessage } from 'element-plus'
+import useUserStore from '@/store/modules/user'
+import { SET_TOKEN, GET_TOKEN, REMOVE_TOKEN } from '@/utils/token'
+
 const request = axios.create({
   baseURL: import.meta.env.VITE_APP_BASE_API,
   timeout: 5000,
@@ -7,6 +11,11 @@ const request = axios.create({
 
 request.interceptors.request.use(
   (config) => {
+    let userStore = useUserStore()
+    if (userStore.token) {
+      config.headers.token = userStore.token
+    }
+
     return config
   },
   (error) => {
@@ -27,6 +36,10 @@ request.interceptors.response.use(
     const status = error.response.status
     switch (status) {
       // 401: 未登錄
+      case 203:
+        message = '服务异常'
+        break // 403 token過期
+      // 401: 未登錄
       case 401:
         message = '未登錄'
         break // 403 token過期
@@ -43,6 +56,11 @@ request.interceptors.response.use(
         message = error.response.data.message
         break
     }
+
+    ElMessage({
+      type: 'error',
+      message,
+    })
     alert(message) //錯誤彈窗，可以用ant模板代替
     return Promise.reject(error)
   },

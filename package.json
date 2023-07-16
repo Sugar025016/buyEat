@@ -19,8 +19,18 @@
     "build:pro": "vue-tsc && vite build --mode production"
   },
   "dependencies": {
+    "@element-plus/icons-vue": "^2.1.0",
+    "@popperjs/core": "^2.11.8",
     "axios": "^1.4.0",
+    "bootstrap": "5.2",
+    "echarts": "^5.4.2",
+    "echarts-liquidfill": "^3.1.0",
+    "element-plus": "^2.3.7",
+    "mock": "^0.1.1",
+    "moment": "^2.29.4",
+    "nprogress": "^0.2.0",
     "pinia": "^2.1.4",
+    "vite-plugin-mock": "^2.9.8",
     "vue": "^3.2.47",
     "vue-router": "^4.2.2"
   },
