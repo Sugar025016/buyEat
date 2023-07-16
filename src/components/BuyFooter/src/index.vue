@@ -10,7 +10,7 @@
     </div>
     <el-divider />
     <div class="footer-bottom">
-      <bottom/>
+      <bottom />
     </div>
   </div>
 </template>
@@ -24,7 +24,6 @@ defineProps(['scene'])
 </script>
 <style lang="scss" scoped>
 .buy-footer {
-  
   .toolbar {
     display: flex;
     justify-content: space-between;
@@ -39,7 +38,7 @@ defineProps(['scene'])
       align-items: center;
     }
   }
-  .footer-bottom{
+  .footer-bottom {
     display: flex;
     justify-content: space-between;
     align-items: center;

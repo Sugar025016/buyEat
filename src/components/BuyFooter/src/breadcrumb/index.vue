@@ -1,6 +1,4 @@
-
 <template>
-
   <el-breadcrumb separator="/" :separator-icon="ArrowRight">
     <el-breadcrumb-item
       v-for="(item, index) in $route.matched"
@@ -8,10 +6,7 @@
       v-show="item.meta.title"
       :to="item.path"
     >
-
-      <span class=" title ">
-        便當報報
-      </span>
+      <span class="title">便當報報</span>
     </el-breadcrumb-item>
   </el-breadcrumb>
 </template>
@@ -24,9 +19,7 @@ const changeIcon = () => {
 }
 </script>
 
-
 <style lang="scss" scoped>
-
 .title {
   vertical-align: middle;
   font-size: 30px;

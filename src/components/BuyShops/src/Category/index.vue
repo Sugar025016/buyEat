@@ -99,7 +99,9 @@ const handler = (n: number) => {
       <el-form-item>
         <div class="mt-6 search-container border">
           <input class="search-input" type="text" placeholder="搜尋" />
-          <el-button class="search-button" type="warning" :icon="Search" round>搜尋</el-button>
+          <el-button class="search-button" type="warning" :icon="Search" round>
+            搜尋
+          </el-button>
           <div class="search-history">
             <div class="search-history-item">歷史紀錄 1</div>
             <div class="search-history-item">歷史紀錄 2</div>
@@ -188,14 +190,14 @@ const handler = (n: number) => {
   border-radius: 40px 40px;
   // background-color: aqua;
   .search-input {
-  border-radius: 30px 30px;
+    border-radius: 30px 30px;
     border: none; /* 移除邊框 */
     outline: none; /* 移除聚焦時的輪廓線 */
     width: 300px;
     margin: 0 10px 0 30px;
     font-size: 18px;
   }
-  .search-button{
+  .search-button {
     height: 40px;
   }
 }

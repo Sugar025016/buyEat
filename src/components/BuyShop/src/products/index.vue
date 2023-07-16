@@ -129,17 +129,11 @@ const myInput = document.getElementById('myInput')
 myModal?.addEventListener('shown.bs.modal', () => {
   myInput?.focus()
 })
-
 </script>
 
 <style lang="scss" scoped>
-
-@import "@/styles/bootstrap.scss";
-@import "../../../../../node_modules/bootstrap/scss/buttons";
-
-
-
-
+@import '@/styles/bootstrap.scss';
+@import '../../../../../node_modules/bootstrap/scss/buttons';
 
 .modal {
 }

@@ -6,8 +6,6 @@
  * @LastEditTime: 2023-06-02 10:33:35
  */
 export const constantRoute = [
-
-
   // {
   //   path: '/404',
   //   component: () => import('@/views/404/index.vue'),
@@ -40,15 +38,6 @@ export const constantRoute = [
     // ],
   },
 
-
-
-
-
-
-
-
-
-
   {
     path: '/404',
     component: () => import('@/views/404/index.vue'),
@@ -58,7 +47,6 @@ export const constantRoute = [
       hidden: true,
     },
   },
-  
 ]
 
 export const asyncRoute = [

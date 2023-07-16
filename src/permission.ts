@@ -24,7 +24,7 @@ router.beforeEach(async (to, from, next) => {
         next()
       } else {
         try {
-          console.log("await userStore.userInfo()",)
+          console.log('await userStore.userInfo()')
           await userStore.userInfo()
           next({ ...to })
         } catch (error) {

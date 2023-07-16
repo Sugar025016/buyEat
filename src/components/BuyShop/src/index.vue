@@ -10,7 +10,6 @@
     </div>
 
     <div class="buy-product-footer">
-      
       <products></products>
     </div>
   </div>
@@ -22,15 +21,14 @@ import shop from './shop/index.vue'
 </script>
 <style lang="scss" scoped>
 .buyShop {
-    display: block;
-    word-wrap: break-word;
-    word-break: break-all;
-    // break-all
-    // max-width: 200px;
-    overflow:hidden;
-  
+  display: block;
+  word-wrap: break-word;
+  word-break: break-all;
+  // break-all
+  // max-width: 200px;
+  overflow: hidden;
+
   .header {
-    
     .header-link {
       display: flex;
       align-items: center;

@@ -26,10 +26,18 @@
                 <td>Otto</td>
                 <td>@mdo</td>
                 <td>
-                <el-input-number v-model="num" :min="1" :max="10" @change="handleChange" size="small" />
-              </td>
+                  <el-input-number
+                    v-model="num"
+                    :min="1"
+                    :max="10"
+                    @change="handleChange"
+                    size="small"
+                  />
+                </td>
                 <td>@mdo</td>
-                <td><el-icon><DeleteFilled /></el-icon></td>
+                <td>
+                  <el-icon><DeleteFilled /></el-icon>
+                </td>
               </tr>
               <tr>
                 <th scope="row">2</th>
@@ -37,20 +45,36 @@
                 <td>Thornton</td>
                 <td>@fat</td>
                 <td>
-                <el-input-number v-model="num" :min="1" :max="10" @change="handleChange" size="small"/>
-              </td>
+                  <el-input-number
+                    v-model="num"
+                    :min="1"
+                    :max="10"
+                    @change="handleChange"
+                    size="small"
+                  />
+                </td>
                 <td>@mdo</td>
-                <td><el-icon><DeleteFilled /></el-icon></td>
+                <td>
+                  <el-icon><DeleteFilled /></el-icon>
+                </td>
               </tr>
               <tr>
                 <th scope="row">3</th>
                 <td colspan="2">Larry the Bird</td>
                 <td>@twitter</td>
                 <td>
-                <el-input-number v-model="num" :min="1" :max="10" @change="handleChange" size="small"/>
-              </td>
+                  <el-input-number
+                    v-model="num"
+                    :min="1"
+                    :max="10"
+                    @change="handleChange"
+                    size="small"
+                  />
+                </td>
                 <td>@mdo</td>
-                <td><el-icon><DeleteFilled /></el-icon></td>
+                <td>
+                  <el-icon><DeleteFilled /></el-icon>
+                </td>
               </tr>
             </tbody>
           </table>
@@ -81,54 +105,51 @@ const num = ref(1)
 const handleChange = (value: number) => {
   console.log(value)
 }
-
 </script>
 <style lang="scss" scoped>
 // @import "../node_modules/bootstrap/scss/_modal.scss";
 
+@import '@/styles/bootstrap.scss';
 
-@import "@/styles/bootstrap.scss";
+$table-cell-padding-y: 1.5rem; //
+$table-cell-padding-x: 0.5rem;
+$table-cell-padding-y-sm: 0.25rem;
+$table-cell-padding-x-sm: 0.25rem;
 
+$table-cell-vertical-align: top;
 
-$table-cell-padding-y:        1.5rem;//
-$table-cell-padding-x:        .5rem;
-$table-cell-padding-y-sm:     .25rem;
-$table-cell-padding-x-sm:     .25rem;
+$table-color: var(--#{$prefix}body-color);
+$table-bg: transparent;
+$table-accent-bg: transparent;
 
-$table-cell-vertical-align:   top;
+$table-th-font-weight: null;
 
-$table-color:                 var(--#{$prefix}body-color);
-$table-bg:                    transparent;
-$table-accent-bg:             transparent;
+$table-striped-color: $table-color;
+$table-striped-bg-factor: 0.05;
+$table-striped-bg: rgba($black, $table-striped-bg-factor);
 
-$table-th-font-weight:        null;
+$table-active-color: $table-color;
+$table-active-bg-factor: 0.1;
+$table-active-bg: rgba($black, $table-active-bg-factor);
 
-$table-striped-color:         $table-color;
-$table-striped-bg-factor:     .05;
-$table-striped-bg:            rgba($black, $table-striped-bg-factor);
+$table-hover-color: $table-color;
+$table-hover-bg-factor: 0.075;
+$table-hover-bg: rgba($black, $table-hover-bg-factor);
 
-$table-active-color:          $table-color;
-$table-active-bg-factor:      .1;
-$table-active-bg:             rgba($black, $table-active-bg-factor);
+$table-border-factor: 0.1;
+$table-border-width: $border-width;
+$table-border-color: rgb(155, 155, 155); //
 
-$table-hover-color:           $table-color;
-$table-hover-bg-factor:       .075;
-$table-hover-bg:              rgba($black, $table-hover-bg-factor);
-
-$table-border-factor:         .1;
-$table-border-width:          $border-width;
-$table-border-color:          rgb(155, 155, 155);//
-
-$table-striped-order:         odd;
+$table-striped-order: odd;
 $table-striped-columns-order: even;
 
 $table-group-separator-color: currentcolor;
 
-$table-caption-color:         $text-muted;
+$table-caption-color: $text-muted;
 
-$table-bg-scale:              -80%;
+$table-bg-scale: -80%;
 
-@import "node_modules/bootstrap/scss/_tables.scss";
+@import 'node_modules/bootstrap/scss/_tables.scss';
 
 .shopCart {
   display: block;
@@ -149,9 +170,8 @@ $table-bg-scale:              -80%;
   }
   .shopCart-body {
     // display: flex;
-    .table{
-      tr{
-
+    .table {
+      tr {
       }
     }
     .body-left {
@@ -160,7 +180,7 @@ $table-bg-scale:              -80%;
     .body-right {
       // width: 400px;
       // width: a;
-      margin: 10px; 
+      margin: 10px;
 
       // background-color: aqua;
       display: flex;

@@ -45,8 +45,8 @@ let useUserStore = defineStore('User', {
       if (res.code === 200) {
         // this.token = res.data as string
         // 持久化
-        SET_TOKEN((res.data as string))
-        this.token = (res.data as string)
+        SET_TOKEN(res.data as string)
+        this.token = res.data as string
         return 'ok'
       } else {
         return Promise.reject(new Error(res.data as string))
@@ -80,7 +80,6 @@ let useUserStore = defineStore('User', {
         })
         return 'ok'
       } else {
-
         console.log('XXXXXXXXXXX')
         return Promise.reject(new Error(res.message))
       }

@@ -1,5 +1,5 @@
 <template>
-  <div class="modal-dialog modal-dialog-centered ">
+  <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
         <el-button
@@ -46,11 +46,9 @@
 </template>
 <script setup lang="ts"></script>
 <style lang="scss" scoped>
-
-@import "@/styles/bootstrap.scss";
-@import "../node_modules/bootstrap/scss/_modal.scss";
-@import "../../../../../node_modules/bootstrap/scss/close";
-
+@import '@/styles/bootstrap.scss';
+@import '../node_modules/bootstrap/scss/_modal.scss';
+@import '../../../../../node_modules/bootstrap/scss/close';
 
 .modal-dialog {
   .modal-content {

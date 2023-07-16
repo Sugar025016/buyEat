@@ -110,8 +110,7 @@ $b-color: $color;
       }
     }
     .shop-content {
-
-  box-shadow: 0px 4px 3px 2px rgba(0, 0, 0, 0.1);
+      box-shadow: 0px 4px 3px 2px rgba(0, 0, 0, 0.1);
       background-color: rgb(255, 255, 254);
       // .shop-content-row {
       // margin: 30px;

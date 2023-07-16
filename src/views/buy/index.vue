@@ -23,20 +23,10 @@
 import TabBar from '@/layout/tabbar/index.vue'
 // import BuyTabBar from '@/components/BuyTabBar/index.vue'
 // import BuyTabBar from '@/components/BuyTabBar/src/index.vue'
-
-
 </script>
 
-<script setup lang="ts">
-
-</script>
+<script setup lang="ts"></script>
 <style lang="scss" scoped>
-
-
-
-
-
-
 .container {
   width: 100%;
 }
@@ -59,7 +49,7 @@ import TabBar from '@/layout/tabbar/index.vue'
     justify-content: center;
     align-items: center;
   }
-  .buy-message{
+  .buy-message {
     margin: 0;
   }
 

@@ -1,9 +1,13 @@
 <template>
   <div class="buy-massage">
     <el-icon :size="30" class="buy-massage-icon"><Bell /></el-icon>
-    <span class="buy-massage-span">連結Line Notify，最新消息不漏接，線上定參更方便！</span>
+    <span class="buy-massage-span">
+      連結Line Notify，最新消息不漏接，線上定參更方便！
+    </span>
 
-    <el-button class="buy-massage-button" type="warning" round>立即設定</el-button>
+    <el-button class="buy-massage-button" type="warning" round>
+      立即設定
+    </el-button>
   </div>
 </template>
 <script setup lang="ts"></script>
@@ -15,14 +19,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  .buy-massage-icon{
+  .buy-massage-icon {
     margin: 0 10px;
   }
-  .buy-massage-button{
+  .buy-massage-button {
     margin: 0px 10px;
     background-color: $color;
     font-size: 17px;
-
   }
 }
 </style>

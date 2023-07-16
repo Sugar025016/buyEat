@@ -10,9 +10,7 @@
     <img src="@/assets/images/product001.jpeg" alt="AA" />
   </div>
 </template>
-<script setup lang="ts">
-
-</script>
+<script setup lang="ts"></script>
 <style lang="scss" scoped>
 .productCard {
   box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.2);
@@ -25,7 +23,6 @@
   border-radius: 10px;
 
   .products-content {
-    
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -45,9 +42,8 @@
     }
   }
   img {
+    border-radius: 0 10px 10px 0;
 
-    border-radius:0 10px 10px 0;
-    
     height: 150px;
     width: 150px;
   }

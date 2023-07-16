@@ -9,7 +9,7 @@
     </div>
 
     <div style="padding: 14px">
-      <span >Yummy hamburger</span>
+      <span>Yummy hamburger</span>
       <div class="bottom">
         <time class="time">{{ currentDate }}</time>
         <el-button text class="button">Operating</el-button>
@@ -83,7 +83,7 @@ image?.addEventListener('load', function () {
   opacity: 100; /* 設置圖片透明度為 1 */
 }
 .no-image-label {
-  display: none;/* 設置缺圖片時隱藏（缺圖圖標） */
+  display: none; /* 設置缺圖片時隱藏（缺圖圖標） */
 }
 </style>
 

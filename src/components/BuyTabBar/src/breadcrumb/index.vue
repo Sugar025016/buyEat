@@ -1,6 +1,4 @@
-
 <template>
-
   <el-breadcrumb separator="/" :separator-icon="ArrowRight">
     <el-breadcrumb-item
       v-for="(item, index) in $route.matched"
@@ -11,9 +9,7 @@
       <el-icon style="vertical-align: middle">
         <component :is="item.meta.icon"></component>
       </el-icon>
-      <span class=" title ">
-        便當報報
-      </span>
+      <span class="title">便當報報</span>
     </el-breadcrumb-item>
   </el-breadcrumb>
 </template>
@@ -26,7 +22,6 @@ const changeIcon = () => {
 }
 </script>
 
-
 <style lang="scss" scoped>
 .title {
   margin: 0 5px;
@@ -35,5 +30,4 @@ const changeIcon = () => {
   color: $color;
   font-weight: 700;
 }
-
 </style>

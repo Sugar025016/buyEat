@@ -29,7 +29,9 @@
       <Card></Card>
     </el-row>
     <div class="buyShops-more">
-      <el-button class="buyShops-more-button" size="large" type="warning" round>載入更多</el-button>
+      <el-button class="buyShops-more-button" size="large" type="warning" round>
+        載入更多
+      </el-button>
     </div>
   </div>
 </template>
@@ -92,7 +94,6 @@ import Category from './Category/index.vue'
     margin: 20px 0 0 0;
   }
   .row3 {
-
     display: grid; /* 使用CSS Grid布局 */
     grid-template-columns: repeat(1, 1fr);
     grid-gap: 10px;
@@ -115,16 +116,15 @@ import Category from './Category/index.vue'
     @media (min-width: $breakpoint-xxl) {
       grid-template-columns: repeat(4, 1fr);
     }
-
   }
-  .buyShops-more{
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      .buyShops-more-button{
-        background-color: $color;
-      }
+  .buyShops-more {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .buyShops-more-button {
+      background-color: $color;
     }
+  }
 }
 </style>

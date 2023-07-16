@@ -1,5 +1,5 @@
 <template>
-    <el-header style="text-align: right; font-size: 12px">
+  <el-header style="text-align: right; font-size: 12px">
     <div class="toolbar">
       <div class="toolbar_left">
         <BreadCrumb />
@@ -43,11 +43,10 @@ defineProps(['scene'])
 </script>
 <style lang="scss" scoped>
 .toolbar {
-
   position: sticky;
-    top: 0; /* 元素固定的位置，這裡是頂部 */
-    background-color: #f1f1f1; /* 元素的背景色 */
-    z-index: 100; /* 可選的，如果有其他元素重疊時可以使用 */
+  top: 0; /* 元素固定的位置，這裡是頂部 */
+  background-color: #f1f1f1; /* 元素的背景色 */
+  z-index: 100; /* 可選的，如果有其他元素重疊時可以使用 */
   display: flex;
   justify-content: space-between;
   align-items: center;

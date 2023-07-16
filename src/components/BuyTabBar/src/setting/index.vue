@@ -113,11 +113,11 @@ const setColor = () => {
     </template>
   </el-dropdown>
   <div class="car">
-  <a class="position-relative" href="#">
-    <ShoppingBag class="icon car" />
-    <span class="cartQuantity text-white bg-warning conut">3</span>
-  </a>
-</div>
+    <a class="position-relative" href="#">
+      <ShoppingBag class="icon car" />
+      <span class="cartQuantity text-white bg-warning conut">3</span>
+    </a>
+  </div>
 </template>
 <style lang="scss" scoped>
 img {
@@ -130,50 +130,46 @@ img {
 .car {
   margin: 0 30px 0 0;
   // background-color: aqua;
-.conut{
-  border-radius:50%;
-  background: $color;
-  background-color: $color;
-  // background-color: brown;
+  .conut {
+    border-radius: 50%;
+    background: $color;
+    background-color: $color;
+    // background-color: brown;
+  }
 }
-}
 
-
-
-a{
+a {
   display: inline-block;
   text-decoration: none;
-  &:hover{
+  &:hover {
     text-decoration: none;
   }
 }
-.position{
-  &-relative{
-    position:relative;
+.position {
+  &-relative {
+    position: relative;
   }
-  &-absolute{
-    position:absolute;
+  &-absolute {
+    position: absolute;
   }
 }
-.cartQuantity{
-  position:absolute;
+.cartQuantity {
+  position: absolute;
   width: 22px;
   height: 22px;
-  border-radius:50%;
+  border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
-  right:18px;
-  top:-5px;
+  right: 18px;
+  top: -5px;
 }
-.bg-warning{
+.bg-warning {
   background-color: $color;
 }
 
-
-.text-white{
+.text-white {
   font-size: 18px;
   color: white;
-
 }
 </style>
