@@ -1,20 +1,5 @@
-/*
- * @Description: Stay hungry，Stay foolish
- * @Author: Huccct
- * @Date: 2023-05-19 17:46:49
- * @LastEditors: Huccct
- * @LastEditTime: 2023-06-02 10:33:35
- */
+
 export const constantRoute = [
-  // {
-  //   path: '/404',
-  //   component: () => import('@/views/404/index.vue'),
-  //   name: '404',
-  //   meta: {
-  //     title: '404',
-  //     hidden: true,
-  //   },
-  // },
   {
     path: '/',
     component: () => import('@/views/buy/index.vue'),
@@ -24,22 +9,206 @@ export const constantRoute = [
       hidden: false,
       icon: '',
     },
-    // redirect: '/buy',
-    // children: [
-    //   {
-    //     path: '/buy',
-    //     component: () => import('@/views/home/index.vue'),
-    //     meta: {
-    //       title: '首页',
-    //       hidden: false,
-    //       icon: 'HomeFilled',
-    //     },
-    //   },
-    // ],
-  },
+    redirect: '/BuyShops',
+    children: [
+      {
+        path: '/BuyShops',
+        component: () => import('@/components/BuyShops/src/index.vue'),
+        name: 'BuyShops',
+        meta: {
+          title: '首页',
+          hidden: false,
+          icon: 'HomeFilled',
+        },
+      },
+      {
+        path: '/BuyMember',
+        component: () => import('@/components/BuyMember/src/index.vue'),
+        meta: {
+          title: '首页',
+          hidden: false,
+          icon: 'HomeFilled',
+        },
+        redirect: '/BuyMember/profile/:number',
+        children: [
+          {
+            path: '/BuyMember/profile/:number',
+            name: 'profile',
+            component: () => import('@/components/BuyMember/src/profile/index.vue'),
+            meta: {
+              title: '首页',
+              hidden: false,
+              icon: 'HomeFilled',
+            },
+          },
+          {
+            path: 'changeProfile/:number',
+            name: 'changeProfile',
+            component: () => import('@/components/BuyMember/src/changeProfile/index.vue'),
+            meta: {
+              title: '首页',
+              hidden: false,
+              icon: 'HomeFilled',
+            },
+          },
+          {
+            path: 'changeCompany/:number',
+            name:'changeCompany',
+            component: () => import('@/components/BuyMember/src/changeCompany/index.vue'),
+            meta: {
+              title: '首页',
+              hidden: false,
+              icon: 'HomeFilled',
+            },
+          },
+          {
+            path: 'changePassword/:number',
+            name: 'changePassword',
+            component: () => import('@/components/BuyMember/src/changePassword/index.vue'),
+            meta: {
+              title: '首页',
+              hidden: false,
+              icon: 'HomeFilled',
+            },
+          },
+          {
+            path: 'love/:number',
+            name: 'love',
+            component: () => import('@/components/BuyMember/src/love/index.vue'),
+            meta: {
+              title: '首页',
+              hidden: false,
+              icon: 'HomeFilled',
+            },
+          },
+          {
+            path: 'recommend/:number',
+            name: 'recommend',
+            component: () => import('@/components/BuyMember/src/recommend/index.vue'),
+            meta: {
+              title: '首页',
+              hidden: false,
+              icon: 'HomeFilled',
+            },
+          },
+        ]
+      },
+      // {
+      //   path: '/BuyMember/:title',
+      //   component: () => import('@/components/BuyMember/src/index.vue'),
+      //   meta: {
+      //     title: '首页',
+      //     hidden: false,
+      //     icon: 'HomeFilled',
+      //   },
 
+      //   children: [
+      //     {
+      //       path: ':title',
+      //       component: () => import('@/components/BuyMember/src/profile/index.vue'),
+      //       meta: {
+      //         title: '首页',
+      //         hidden: false,
+      //         icon: 'HomeFilled',
+      //       },
+      //     },
+      //     {
+      //       path: ':title',
+      //       name: 'changeProfile',
+      //       component: () => import('@/components/BuyMember/src/changeProfile/index.vue'),
+      //       meta: {
+      //         title: '首页',
+      //         hidden: false,
+      //         icon: 'HomeFilled',
+      //       },
+      //     },
+      //   ]
+      // },
+      {
+        path: 'BuyOrder',
+        name: 'BuyOrder',
+        component: () => import('@/components/BuyOrder/src/index.vue'),
+        meta: {
+          title: '首页',
+          hidden: false,
+          icon: 'HomeFilled',
+        },
+      },
+      {
+        path: 'BuyShop',
+        name: 'BuyShop',
+        component: () => import('@/components/BuyShop/src/index.vue'),
+        meta: {
+          title: '首页',
+          hidden: false,
+          icon: 'HomeFilled',
+        },
+      },
+      {
+        path: 'BuyShopCar',
+        name: 'BuyShopCar',
+        component: () => import('@/components/BuyShopCar/src/index.vue'),
+        meta: {
+          title: '首页',
+          hidden: false,
+          icon: 'HomeFilled',
+        },
+      },
+    ],
+  },
   {
-    path: '/404',
+    path: '/Login',
+    component: () => import('@/views/loginRegister/index.vue'),
+    meta: {
+      title: '首页',
+      hidden: false,
+      icon: 'HomeFilled',
+    },
+    redirect: '/Login',
+    children: [
+      {
+        path: '/Login',
+        component: () => import('@/components/Login/src/index.vue'),
+        meta: {
+          title: '首页',
+          hidden: false,
+          icon: 'HomeFilled',
+        },
+      },
+      {
+        path: 'forgetPassword',
+        component: () => import('@/components/ForgotPassword /src/index.vue'),
+        meta: {
+          title: '首页',
+          hidden: false,
+          icon: 'HomeFilled',
+        },
+      },
+    ]
+  },
+  {
+    path: '/Register',
+    component: () => import('@/views/loginRegister/index.vue'),
+    meta: {
+      title: '首页',
+      hidden: false,
+      icon: 'HomeFilled',
+    },
+    redirect: '/Register',
+    children: [
+      {
+        path: '/Register',
+        component: () => import('@/components/Register/src/index.vue'),
+        meta: {
+          title: '首页',
+          hidden: false,
+          icon: 'HomeFilled',
+        },
+      },
+    ]
+  },
+  {
+    path: '/:pathMatch(.*)*',
     component: () => import('@/views/404/index.vue'),
     name: '404',
     meta: {
@@ -135,13 +304,12 @@ export const asyncRoute = [
         },
       },
       {
-        path: '/product/sku',
-        component: () => import('@/views/product/sku/index.vue'),
-        name: 'Sku',
+        path: '/:pathMatch(.*)*',
+        redirect: '/404',
+        name: 'Any',
         meta: {
-          title: 'Sku',
-          icon: 'ScaleToOriginal',
-          hidden: false,
+          title: '任意路由',
+          hidden: true,
         },
       },
     ],

@@ -1,24 +1,31 @@
 <template>
-  <el-breadcrumb separator="/" :separator-icon="ArrowRight">
-    <el-breadcrumb-item
+  <!-- <el-breadcrumb separator="/" :separator-icon="ArrowRight"> -->
+    <!-- <el-breadcrumb-item
       v-for="(item, index) in $route.matched"
       :key="index"
       v-show="item.meta.title"
       :to="item.path"
+    > -->
+    <!-- <div class="flex justify-space-between mb-4 flex-wrap gap-4"> -->
+    <el-button class="title" 
+      
+    @click="goRoute('/')"
+    text
+      >便當報報</el-button
     >
-      <el-icon style="vertical-align: middle">
-        <component :is="item.meta.icon"></component>
-      </el-icon>
-      <span class="title">便當報報</span>
-    </el-breadcrumb-item>
-  </el-breadcrumb>
+  <!-- </el-breadcrumb> -->
 </template>
 <script setup lang="ts">
-import { ArrowRight, Fold, Expand } from '@element-plus/icons-vue'
+// import { ArrowRight, Fold, Expand } from '@element-plus/icons-vue'
 import useLayOutSettingStore from '@/store/modules/setting'
 let LayOutSettingStore = useLayOutSettingStore()
-const changeIcon = () => {
-  LayOutSettingStore.isCollapse = !LayOutSettingStore.isCollapse
+// const changeIcon = () => {
+//   LayOutSettingStore.isCollapse = !LayOutSettingStore.isCollapse
+// }
+import { useRouter } from 'vue-router'
+let $router = useRouter()
+const goRoute =  (path:string) => {
+  $router.push(path)
 }
 </script>
 
@@ -27,7 +34,13 @@ const changeIcon = () => {
   margin: 0 5px;
   vertical-align: middle;
   font-size: 35px;
-  color: $color;
   font-weight: 700;
+  // cursor: pointer;
+}
+
+.el-button.is-text {
+  color: $color;
+
+
 }
 </style>

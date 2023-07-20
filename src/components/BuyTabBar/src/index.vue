@@ -4,6 +4,10 @@
       <div class="toolbar_left">
         <BreadCrumb />
       </div>
+
+      <div class="toolbar_order">
+        <order></order>
+      </div>
       <div class="toolbar_right">
         <Setting />
       </div>
@@ -14,6 +18,7 @@
 <script setup lang="ts">
 import BreadCrumb from './breadcrumb/index.vue'
 import Setting from './setting/index.vue'
+import order from './order/index.vue'
 import { onMounted, ref } from 'vue'
 // import useCategoryStore from '@/store/modules/category'
 
@@ -52,10 +57,20 @@ defineProps(['scene'])
   align-items: center;
   width: 100%;
   height: 100%;
+  // display: grid;
+  // grid-template-columns: repeat(3, 1fr);
   .toolbar_left {
     display: flex;
     align-items: center;
     margin-left: 10px;
+  }
+
+  .toolbar_order {
+    // width: 100px;
+    display: inline-block;
+    // display: inline-flex;
+
+    // margin: auto;淤ㄝ
   }
   .toolbar_right {
     display: flex;

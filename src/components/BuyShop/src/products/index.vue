@@ -7,7 +7,7 @@
         :class="{ active: activeTab === index }"
         @click="changeTab(index)"
       >
-        <span class="tab-label">{{ tab.label }}</span>
+        <span class="tab-label underline">{{ tab.label }}</span>
         <span class="underline"></span>
       </div>
     </div>
@@ -65,7 +65,7 @@
 
 <script setup lang="ts">
 import productsCard from '.././productsCard/index.vue'
-import product from '.././product/index.vue'
+import product from '../productModal/index.vue'
 import { reactive, ref } from 'vue'
 
 const showModal = ref(false)
@@ -164,62 +164,56 @@ myModal?.addEventListener('shown.bs.modal', () => {
 
 .tabs {
   width: 100%;
-}
+  .tabs-header {
+    display: flex;
+    margin: 20px 0 0 0;
+    color: #636262;
+    border-bottom: 1px solid #63626236;
+    white-space: nowrap;
+    overflow-x: auto;
+    div {
+      position: relative;
+      padding: 0 16px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+    .tab-label {
+      display: inline-block;
+      position: relative;
+      padding: 16px 0;
+      z-index: 1;
+    }
 
-.tabs-header {
-  display: flex;
-  margin: 20px 0 0 0;
-  color: #636262;
-  border-bottom: 1px solid #63626236;
-  white-space: nowrap;
-  overflow-x: auto;
-}
-
-.tabs-header div {
-  position: relative;
-  padding: 0 16px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-}
-
-.tabs-header .tab-label {
-  display: inline-block;
-  position: relative;
-  padding: 16px 0;
-  z-index: 1;
-}
-
-.tabs-header .underline {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 3px;
-  background-color: transparent;
-  transition: background-color 0.2s;
-  display: inline-flex;
-  position: relative;
-  align-items: center;
-  justify-content: center;
-}
-
-.tabs-header div:hover .underline {
-  border-bottom: 3px solid $color;
-}
-
-.tabs-header div:hover {
-  color: #000000;
-}
-
-.tabs-content {
-  font-size: 30px;
-  margin: 10px;
-  border-bottom: #636262;
-  display: flex;
-  align-items: center;
+    .underline {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background-color: transparent;
+      transition: background-color 0.2s;
+      display: inline-flex;
+      position: relative;
+      align-items: center;
+      justify-content: center;
+    }
+    div:hover .underline {
+      border-bottom: 3px solid $color;
+    }
+    div:hover {
+      color: #000000;
+    }
+    .tabs-content {
+      font-size: 30px;
+      margin: 10px;
+      border-bottom: #636262;
+      display: flex;
+      align-items: center;
+    }
+  }
 }
 
 .products-title {

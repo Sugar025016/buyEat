@@ -1,8 +1,8 @@
 <template>
   <div class="shopCart">
     <div class="shopCart-header">
-      <h1>AAAAAAAAAAAAA</h1>
-      <span>BBBBBBBBBB</span>
+      <h1>購物車</h1>
+      <span>訂購店家:AAAA，滿300可外送</span>
     </div>
     <div class="shopCart-body">
       <el-row class="shopCart-body" :gutter="20">
@@ -86,7 +86,7 @@
             <el-button type="warning" size="large" class="button-orange" round>
               確認訂單
             </el-button>
-            <el-button type="warning" size="large" class="button-wight" round>
+            <el-button type="warning" size="large" class="button-wight" @click="link" round>
               繼續購物
             </el-button>
             <el-button type="warning" size="large" class="button-wight" round>
@@ -100,55 +100,26 @@
 </template>
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useRoute } from 'vue-router'
+import { useRouter } from 'vue-router'
+let $router = useRouter()
+const route = useRoute()
 
 const num = ref(1)
 const handleChange = (value: number) => {
   console.log(value)
+}
+
+const link = () => {
+  $router.push('/BuyShop')
 }
 </script>
 <style lang="scss" scoped>
 // @import "../node_modules/bootstrap/scss/_modal.scss";
 
 @import '@/styles/bootstrap.scss';
-
 $table-cell-padding-y: 1.5rem; //
-$table-cell-padding-x: 0.5rem;
-$table-cell-padding-y-sm: 0.25rem;
-$table-cell-padding-x-sm: 0.25rem;
-
-$table-cell-vertical-align: top;
-
-$table-color: var(--#{$prefix}body-color);
-$table-bg: transparent;
-$table-accent-bg: transparent;
-
-$table-th-font-weight: null;
-
-$table-striped-color: $table-color;
-$table-striped-bg-factor: 0.05;
-$table-striped-bg: rgba($black, $table-striped-bg-factor);
-
-$table-active-color: $table-color;
-$table-active-bg-factor: 0.1;
-$table-active-bg: rgba($black, $table-active-bg-factor);
-
-$table-hover-color: $table-color;
-$table-hover-bg-factor: 0.075;
-$table-hover-bg: rgba($black, $table-hover-bg-factor);
-
-$table-border-factor: 0.1;
-$table-border-width: $border-width;
 $table-border-color: rgb(155, 155, 155); //
-
-$table-striped-order: odd;
-$table-striped-columns-order: even;
-
-$table-group-separator-color: currentcolor;
-
-$table-caption-color: $text-muted;
-
-$table-bg-scale: -80%;
-
 @import 'node_modules/bootstrap/scss/_tables.scss';
 
 .shopCart {

@@ -97,6 +97,7 @@ import Category from './Category/index.vue'
     display: grid; /* 使用CSS Grid布局 */
     grid-template-columns: repeat(1, 1fr);
     grid-gap: 10px;
+    margin: 10px 0;
 
     @media (min-width: $breakpoint-xs) {
       grid-template-columns: repeat(1, 1fr);

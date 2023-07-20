@@ -1,23 +1,19 @@
 <template>
-  <el-card class="card" :body-style="{ padding: '0px' }">
-
+  <el-card :body-style="{ padding: '0px' }">
     <div class="image-container">
       <img
         src="@/assets/images/food001.jpg"
         alt="Your Image"
         onerror="this.classList.add('no-image-label');"
       />
-    
-      <div class="overlay">
-        <div class="overlay-text">可線上訂購</div>
-      </div>
-      <!-- <div class="overlay">
-        <div class="overlay-text">可線上訂購</div>
-      </div> -->
     </div>
 
     <div style="padding: 14px">
-      <span>Yummy hamburger</span>
+      <div class="title">
+        <span>Yummy hamburger111111111</span>
+
+        <def-svg-icon name="heart-fill2" color="red"></def-svg-icon>
+      </div>
       <div class="bottom">
         <time class="time">{{ currentDate }}</time>
         <el-button text class="button">Operating</el-button>
@@ -52,45 +48,22 @@ image?.addEventListener('load', function () {
   justify-content: space-between;
   align-items: center;
 }
-
+.title {
+  display: flex;
+  justify-content: space-between;
+}
 .button {
   padding: 0;
   min-height: auto;
 }
-.card{
 
-  position: relative;
-
-  overflow:none;
-  display: inline-block;
-}
 .image-container {
   position: relative;
   max-width: 100%;
-  /* overflow: hidden; */
+  overflow: hidden;
   border-radius: 10px;
 }
 
-.overlay {
-  position: absolute;
-  top: 15px;
-  right: -5px;
-  width: 100px;
-  height: 25px;
-  background-color: #fd7e14;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 100;
-
-}
-
-.overlay-text {
-    color: #ffffff;
-    font-size: 14px;
-    font-weight: bold;
-  z-index: 100;
-  }
 .image-container::before {
   content: '';
   display: block;

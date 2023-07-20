@@ -15,31 +15,32 @@ router.beforeEach(async (to, from, next) => {
   let token = userStore.token
   let username = userStore.username
   console.log('username:' + username)
-  if (token) {
-    if (to.path === '/login') {
-      next({ path: '/' })
-    } else {
-      console.log('username:' + username)
-      if (username) {
-        next()
-      } else {
-        try {
-          console.log('await userStore.userInfo()')
-          await userStore.userInfo()
-          next({ ...to })
-        } catch (error) {
-          await userStore.userLogout()
-          next({ path: '/login', query: { redirect: to.path } })
-        }
-      }
-    }
-  } else {
-    if (to.path == '/') {
-      next()
-    } else {
-      next({ path: '/login', query: { redirect: to.path } })
-    }
-  }
+  next();
+  // if (token) {
+  //   if (to.path === '/login') {
+  //     next({ path: '/' })
+  //   } else {
+  //     console.log('username:' + username)
+  //     if (username) {
+  //       next()
+  //     } else {
+  //       try {
+  //         console.log('await userStore.userInfo()')
+  //         await userStore.userInfo()
+  //         next({ ...to })
+  //       } catch (error) {
+  //         await userStore.userLogout()
+  //         next({ path: '/login', query: { redirect: to.path } })
+  //       }
+  //     }
+  //   }
+  // } else {
+  //   if (to.path == '/') {
+  //     next()
+  //   } else {
+  //     next({ path: '/login', query: { redirect: to.path } })
+  //   }
+  // }
 })
 // 全局后置守卫
 
