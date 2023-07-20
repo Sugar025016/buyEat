@@ -1,6 +1,6 @@
 <template>
   <el-breadcrumb separator="/" :separator-icon="ArrowRight">
-      <span class="title">便當報報</span>
+    <span class="title">便當報報</span>
   </el-breadcrumb>
 </template>
 <script setup lang="ts">

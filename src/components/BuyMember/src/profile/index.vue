@@ -74,10 +74,9 @@
     span {
       font-size: 16px;
       margin: 20px 0;
-
     }
     .text-button {
-        margin: 0 20px ;
+      margin: 0 20px;
       background-color: $color;
       color: #000;
     }

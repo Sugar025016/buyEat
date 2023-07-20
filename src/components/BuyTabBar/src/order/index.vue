@@ -4,7 +4,6 @@
       <!-- <a>訂單</a> -->
 
       <router-link :to="'/BuyOrder'" class="link">訂單</router-link>
-
     </div>
     <div class="order-text more">
       <span>更多</span>
@@ -31,7 +30,7 @@ let userStore = useUserStore()
 
 import { useRouter } from 'vue-router'
 let $router = useRouter()
-const goRoute =  (path:string) => {
+const goRoute = (path: string) => {
   $router.push(path)
 }
 </script>
@@ -42,9 +41,9 @@ const goRoute =  (path:string) => {
   // display: inline-flex;
   // display: inline-block;
   display: flex;
-  .order-text{
-    margin:10px;
-    font-size:15px;
+  .order-text {
+    margin: 10px;
+    font-size: 15px;
     a {
       color: #000;
       text-decoration: none;

@@ -60,7 +60,7 @@
     div {
       display: flex;
       flex-direction: column;
-      margin: 0 0 20px  0;
+      margin: 0 0 20px 0;
 
       .rounded-input {
         padding: 10px;
@@ -77,17 +77,16 @@
     margin: auto;
   }
   .social-media {
-    margin:20px auto;
+    margin: 20px auto;
     display: flex;
-    justify-content:space-between;
+    justify-content: space-between;
     min-width: 350px;
     button {
-    // display: block;
-    display: flex;
+      // display: block;
+      display: flex;
 
       width: 100%;
     }
   }
-
 }
 </style>

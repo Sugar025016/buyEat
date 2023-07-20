@@ -53,7 +53,9 @@
         </el-dropdown-item>
       </el-dropdown-menu>
       <el-dropdown-menu>
-        <el-dropdown-item @click="changeLink('love', 2)">收藏店家</el-dropdown-item>
+        <el-dropdown-item @click="changeLink('love', 2)">
+          收藏店家
+        </el-dropdown-item>
       </el-dropdown-menu>
       <el-dropdown-menu>
         <el-dropdown-item @click="logout('logout')">登出</el-dropdown-item>
@@ -62,10 +64,10 @@
   </el-dropdown>
   <div class="car">
     <!-- <a class="position-relative" href="#"> -->
-      <router-link :to="'/BuyShopCar'" class="link">
+    <router-link :to="'/BuyShopCar'" class="link">
       <ShoppingBag class="icon car" />
       <span class="cartQuantity text-white bg-warning conut">3</span>
-    </router-link> 
+    </router-link>
     <!-- </a> -->
   </div>
 </template>
@@ -110,7 +112,7 @@ const fullScreen = () => {
 }
 
 const logout = async (path: string) => {
-  $router.push(path )
+  $router.push(path)
 }
 const changeLink = async (path: string, number: number = 0) => {
   $router.push('/BuyMember/' + path + '/' + number)

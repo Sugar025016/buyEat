@@ -1,13 +1,12 @@
 <template>
   <el-card class="card" :body-style="{ padding: '0px' }">
-
     <div class="image-container">
       <img
         src="@/assets/images/food001.jpg"
         alt="Your Image"
         onerror="this.classList.add('no-image-label');"
       />
-    
+
       <div class="overlay">
         <div class="overlay-text">可線上訂購</div>
       </div>
@@ -57,11 +56,10 @@ image?.addEventListener('load', function () {
   padding: 0;
   min-height: auto;
 }
-.card{
-
+.card {
   position: relative;
 
-  overflow:none;
+  overflow: none;
   display: inline-block;
 }
 .image-container {
@@ -82,15 +80,14 @@ image?.addEventListener('load', function () {
   justify-content: center;
   align-items: center;
   z-index: 100;
-
 }
 
 .overlay-text {
-    color: #ffffff;
-    font-size: 14px;
-    font-weight: bold;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: bold;
   z-index: 100;
-  }
+}
 .image-container::before {
   content: '';
   display: block;

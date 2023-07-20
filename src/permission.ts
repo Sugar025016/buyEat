@@ -15,7 +15,7 @@ router.beforeEach(async (to, from, next) => {
   let token = userStore.token
   let username = userStore.username
   console.log('username:' + username)
-  next();
+  next()
   // if (token) {
   //   if (to.path === '/login') {
   //     next({ path: '/' })

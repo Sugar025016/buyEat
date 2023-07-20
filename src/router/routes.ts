@@ -1,4 +1,3 @@
-
 export const constantRoute = [
   {
     path: '/',
@@ -34,7 +33,8 @@ export const constantRoute = [
           {
             path: '/BuyMember/profile/:number',
             name: 'profile',
-            component: () => import('@/components/BuyMember/src/profile/index.vue'),
+            component: () =>
+              import('@/components/BuyMember/src/profile/index.vue'),
             meta: {
               title: '首页',
               hidden: false,
@@ -44,7 +44,8 @@ export const constantRoute = [
           {
             path: 'changeProfile/:number',
             name: 'changeProfile',
-            component: () => import('@/components/BuyMember/src/changeProfile/index.vue'),
+            component: () =>
+              import('@/components/BuyMember/src/changeProfile/index.vue'),
             meta: {
               title: '首页',
               hidden: false,
@@ -53,8 +54,9 @@ export const constantRoute = [
           },
           {
             path: 'changeCompany/:number',
-            name:'changeCompany',
-            component: () => import('@/components/BuyMember/src/changeCompany/index.vue'),
+            name: 'changeCompany',
+            component: () =>
+              import('@/components/BuyMember/src/changeCompany/index.vue'),
             meta: {
               title: '首页',
               hidden: false,
@@ -64,7 +66,8 @@ export const constantRoute = [
           {
             path: 'changePassword/:number',
             name: 'changePassword',
-            component: () => import('@/components/BuyMember/src/changePassword/index.vue'),
+            component: () =>
+              import('@/components/BuyMember/src/changePassword/index.vue'),
             meta: {
               title: '首页',
               hidden: false,
@@ -74,7 +77,8 @@ export const constantRoute = [
           {
             path: 'love/:number',
             name: 'love',
-            component: () => import('@/components/BuyMember/src/love/index.vue'),
+            component: () =>
+              import('@/components/BuyMember/src/love/index.vue'),
             meta: {
               title: '首页',
               hidden: false,
@@ -84,14 +88,15 @@ export const constantRoute = [
           {
             path: 'recommend/:number',
             name: 'recommend',
-            component: () => import('@/components/BuyMember/src/recommend/index.vue'),
+            component: () =>
+              import('@/components/BuyMember/src/recommend/index.vue'),
             meta: {
               title: '首页',
               hidden: false,
               icon: 'HomeFilled',
             },
           },
-        ]
+        ],
       },
       // {
       //   path: '/BuyMember/:title',
@@ -184,7 +189,7 @@ export const constantRoute = [
           icon: 'HomeFilled',
         },
       },
-    ]
+    ],
   },
   {
     path: '/Register',
@@ -205,7 +210,7 @@ export const constantRoute = [
           icon: 'HomeFilled',
         },
       },
-    ]
+    ],
   },
   {
     path: '/:pathMatch(.*)*',

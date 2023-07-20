@@ -86,7 +86,13 @@
             <el-button type="warning" size="large" class="button-orange" round>
               確認訂單
             </el-button>
-            <el-button type="warning" size="large" class="button-wight" @click="link" round>
+            <el-button
+              type="warning"
+              size="large"
+              class="button-wight"
+              @click="link"
+              round
+            >
               繼續購物
             </el-button>
             <el-button type="warning" size="large" class="button-wight" round>

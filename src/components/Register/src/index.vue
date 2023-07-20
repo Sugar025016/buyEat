@@ -41,7 +41,6 @@
   </div>
 </template>
 <script setup lang="ts">
-
 import { ref } from 'vue'
 
 const checked1 = ref(true)
@@ -104,7 +103,6 @@ const checked1 = ref(true)
     display: flex;
     justify-content: space-between;
     min-width: 350px;
-
   }
 }
 </style>

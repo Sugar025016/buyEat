@@ -1,6 +1,6 @@
 <template>
   <div class="changeProfile">
-    <div >
+    <div>
       <span>糖心蛋</span>
       <input type="text" class="rounded-input" placeholder="输入文本" />
     </div>
@@ -20,8 +20,6 @@
 .changeProfile {
   display: grid;
   grid-template-columns: repeat(1, 1fr);
-
- 
 
   @media (min-width: $breakpoint-md) {
     grid-template-columns: repeat(2, 1fr);
