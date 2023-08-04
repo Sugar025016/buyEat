@@ -69,8 +69,8 @@ import { useRoute } from 'vue-router'
 import { useRouter } from 'vue-router'
 let $router = useRouter()
 const route = useRoute()
-const userData= 'userData';
-const userLove= 'userLove';
+const userData = 'userData'
+const userLove = 'userLove'
 interface Tab {
   label: string
   content: string
@@ -87,7 +87,6 @@ const loveTabs: Tab[] = [
 ]
 
 const changeTab = (name: string, number: string = userData) => {
-  
   $router.push('/BuyMember/' + name + '/' + number)
 }
 </script>

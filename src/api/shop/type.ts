@@ -1,4 +1,3 @@
-
 export interface ResponseData {
   code: number
   message: string
@@ -52,7 +51,6 @@ export interface Shop {
   img: String
 }
 
-
 export interface Category {
   id?: number
   name: string
@@ -61,6 +59,6 @@ export interface Category {
 export interface ShopSearch {
   city?: string
   area?: string
-  categoryId?:number
-  other?:string
+  categoryId?: number
+  other?: string
 }

@@ -1,28 +1,25 @@
 <script setup lang="ts">
 import { Search } from '@element-plus/icons-vue'
-import { onMounted, ref ,watch} from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import useCategoryStore from '@/store/modules/category'
 import cityAreas from '@/utils/areaData.js'
 
-
 // const city: string[] = Object.keys(cityAreas)
 // const areas: string[][] = Object.values(cityAreas)
-const selectedOption1 = ref('');
-const selectedOption2 = ref('');
+const selectedOption1 = ref('')
+const selectedOption2 = ref('')
 
-const city = ['台北', '台中', '高雄']; // 假设 city 是第一个下拉选单的选项数据
+const city = ['台北', '台中', '高雄'] // 假设 city 是第一个下拉选单的选项数据
 const areas = {
   0: ['中山區', '大同區', '松山區'], // 假设这是台北市对应的區域数据
   1: ['西屯區', '南屯區', '北屯區'], // 假设这是台中市对应的區域数据
   2: ['前鎮區', '苓雅區', '三民區'], // 假设这是高雄市对应的區域数据
-};
+}
 
 // 监听 selectedOption1 的变化，动态更新 selectedOption2 的值
 watch(selectedOption1, (newValue) => {
-  selectedOption2.value = '';
-});
-
-
+  selectedOption2.value = ''
+})
 </script>
 <template>
   <div>
@@ -33,7 +30,7 @@ watch(selectedOption1, (newValue) => {
       </option>
     </select>
 
-    <select v-model="selectedOption2" >
+    <select v-model="selectedOption2">
       <option disabled value="">請選擇區域</option>
       <option v-for="area in areas[selectedOption1]" :key="area" :value="area">
         {{ area }}
@@ -42,7 +39,6 @@ watch(selectedOption1, (newValue) => {
   </div>
 </template>
 <style lang="scss" scoped>
-
 .custom-select-wrapper select::-ms-expand {
   display: none;
 }

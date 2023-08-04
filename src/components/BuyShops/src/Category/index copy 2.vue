@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import { Search } from '@element-plus/icons-vue'
-import { onMounted, ref ,watch} from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import useCategoryStore from '@/store/modules/category'
 import cityAreas from '@/utils/areaData.js'
 
-let selectedOption1:any = ref('');
-let selectedOption2 = ref('');
+let selectedOption1: any = ref('')
+let selectedOption2 = ref('')
 const city: string[] = Object.keys(cityAreas)
 const areas: string[][] = Object.values(cityAreas)
-let area:string[];
+let area: string[]
 
 let categoryStore = useCategoryStore()
 console.log('area', Object.keys(cityAreas))
@@ -22,9 +22,8 @@ const getC1 = async () => {
 }
 
 watch(selectedOption1, (newValue) => {
-  selectedOption2.value = '';
-});
-
+  selectedOption2.value = ''
+})
 
 // console.log('categoryStore.c1Id', categoryStore.c1Id)
 // const handler = (n: number) => {
@@ -52,7 +51,7 @@ watch(selectedOption1, (newValue) => {
 //   return area
 // }
 
-function changeCity(a:number) {
+function changeCity(a: number) {
   console.log('selectedOption')
   console.log(selectedOption)
   //  area= areas.南投縣
@@ -67,9 +66,9 @@ function changeCity(a:number) {
   // area = areas[select]
 }
 
-watch(selectedOption1, (newValue:any) => {
-  selectedOption2.value = '';
-});
+watch(selectedOption1, (newValue: any) => {
+  selectedOption2.value = ''
+})
 </script>
 <template>
   <!--   <el-card>
@@ -176,10 +175,7 @@ watch(selectedOption1, (newValue:any) => {
 
   <el-form-item>
     <div class="custom-select-wrapper">
-      <select
-        class="custom-select"
-        v-model="selectedOption1"
-      >
+      <select class="custom-select" v-model="selectedOption1">
         <option disabled selected value="">縣市</option>
         <option v-for="(c1, index) in city" :key="index" :value="index">
           {{ c1 }}
@@ -193,12 +189,13 @@ watch(selectedOption1, (newValue:any) => {
     </div>
   </el-form-item>
 
-
   <el-form-item>
     <div class="custom-select-wrapper">
-      <select class="custom-select" 
-      :disabled="disableSelect1!=''"
-        v-model="selectedOption2">
+      <select
+        class="custom-select"
+        :disabled="disableSelect1 != ''"
+        v-model="selectedOption2"
+      >
         <option disabled selected value="">區域鄉鎮</option>
         <option v-for="c1 in areas[selectedOption1]" :key="c1" :value="c1">
           {{ c1 }}

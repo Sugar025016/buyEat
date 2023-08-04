@@ -1,5 +1,5 @@
 <template>
-  <el-card class="card" :body-style="{ padding: '0px' }" >
+  <el-card class="card" :body-style="{ padding: '0px' }">
     <div class="image-container">
       <img
         v-if="shop.img"
@@ -46,7 +46,6 @@ image?.addEventListener('load', function () {
   overflow: visible;
 }
 .card {
-
   cursor: pointer;
   position: relative;
 

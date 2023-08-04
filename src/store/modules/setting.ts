@@ -1,4 +1,3 @@
-
 import { defineStore } from 'pinia'
 
 let useLayOutSettingStore = defineStore('SettingStore', {

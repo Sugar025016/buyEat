@@ -54,7 +54,6 @@ let useUserStore = defineStore('User', {
     },
     async userInfo() {
       // let res: userInfoResponseData = await reqUserInfo()
-
       // await console.log('token')
       // console.log('res.code')
       // console.log(res.code)
@@ -63,7 +62,6 @@ let useUserStore = defineStore('User', {
       //   await console.log(res.data)
       //   this.username = res.data.name as string
       //   this.avatar = res.data.avatar as string
-
       //   console.log('res.data')
       //   console.log(res.data)
       //   console.log('res.data.name')

@@ -222,8 +222,6 @@ export const constantRoute = [
   },
 ]
 
-
-
 export const asyncRoute = [
   // {
   //   path: '/acl',
@@ -331,5 +329,3 @@ export const anyRoute = {
     hidden: true,
   },
 }
-
-

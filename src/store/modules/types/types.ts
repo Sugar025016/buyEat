@@ -1,4 +1,3 @@
-
 import type { RouteRecordRaw } from 'vue-router'
 import type { CategoryObj } from '@/api/product/attr/type'
 import { Category, Shop, ShopList } from '@/api/shop/type'

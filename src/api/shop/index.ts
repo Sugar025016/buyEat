@@ -1,6 +1,14 @@
-
 import request from '@/utils/request'
-import type { CategoryResponseData, AttrResponseData, Attr, ShopList, Category, Shop, shopResponseData, ShopSearch } from './type'
+import type {
+  CategoryResponseData,
+  AttrResponseData,
+  Attr,
+  ShopList,
+  Category,
+  Shop,
+  shopResponseData,
+  ShopSearch,
+} from './type'
 enum API {
   C1_URL = '/admin/product/getCategory1',
   C2_URL = '/admin/product/getCategory2/',
@@ -37,8 +45,7 @@ export const reqAttr = (
 // export const reqRemoveAttr = (attrId: number) =>
 //   request.delete<any, any>(API.DELETEATTR_URL + attrId)
 
-export const getShop = () =>
-  request.get<any, Shop>(API.SHOP + 1)
+export const getShop = () => request.get<any, Shop>(API.SHOP + 1)
 
 // export const getShopList = () =>
 // request.get<any, ShopList>(API.SHOPS)
@@ -50,14 +57,18 @@ export const getShop = () =>
 // request.get<any, Shop[]>(API.SHOP + `/?city=${data.city!==undefined?data.city:null}`)
 
 export const getShopList = (data: ShopSearch) =>
-  request.get<any, Shop[]>(API.SHOP + '/?' + 
-  `${data.city !== undefined ? 'city=' + data.city : null}` + 
-  `&${data.area !== undefined ? 'area=' + data.area : null}`+ 
-  `&${data.categoryId !== undefined ? 'categoryId=' + data.categoryId : null}`+ 
-  `&${data.other !== undefined ? 'other=' + data.other : null}`)
+  request.get<any, Shop[]>(
+    API.SHOP +
+      '/?' +
+      `${data.city !== undefined ? 'city=' + data.city : null}` +
+      `&${data.area !== undefined ? 'area=' + data.area : null}` +
+      `&${
+        data.categoryId !== undefined ? 'categoryId=' + data.categoryId : null
+      }` +
+      `&${data.other !== undefined ? 'other=' + data.other : null}`,
+  )
 // export const getShopList = (data: string) =>
 // request.get<any, ShopList>(API.SHOPS + `/?city=${data}`)
 
 // export const getShopList = (data: string) =>
 // request.get<any, Shop[]>(API.SHOPS + `/?city=${data}`)
-

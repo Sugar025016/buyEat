@@ -1,6 +1,6 @@
 <template>
   <div class="login">
-    <h1 class="title">{{title}}</h1>
+    <h1 class="title">{{ title }}</h1>
 
     <div class="table">
       <span class="table-title">忘記密碼</span>
@@ -22,8 +22,7 @@
   </div>
 </template>
 <script setup lang="ts">
-
-let title=document.title;
+let title = document.title
 </script>
 <style lang="scss" scoped>
 .login {

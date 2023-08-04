@@ -1,4 +1,3 @@
-
 <script setup lang="ts"></script>
 <template>
   <h1>分页组件</h1>

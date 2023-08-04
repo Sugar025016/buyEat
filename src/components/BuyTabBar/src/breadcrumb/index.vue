@@ -7,7 +7,7 @@
       :to="item.path"
     > -->
   <!-- <div class="flex justify-space-between mb-4 flex-wrap gap-4"> -->
-  <el-button class="title" @click="goRoute('/')" text>{{title}} </el-button>
+  <el-button class="title" @click="goRoute('/')" text>{{ title }}</el-button>
   <!-- </el-breadcrumb> -->
 </template>
 <script setup lang="ts">
@@ -20,7 +20,7 @@ let LayOutSettingStore = useLayOutSettingStore()
 import { useRouter } from 'vue-router'
 let $router = useRouter()
 
-let title=document.title;
+let title = document.title
 const goRoute = (path: string) => {
   $router.push(path)
 }
