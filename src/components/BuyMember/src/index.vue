@@ -3,19 +3,19 @@
     <el-col :span="6">
       <div class="body-left">
         <el-button
-          @click="changeTab('profile', '1')"
+          @click="changeTab('profile', userData)"
           size="large"
           class="tabsChange"
-          :class="{ buttonDown: route.params.number === '1' }"
+          :class="{ buttonDown: route.params.number === userData }"
           round
         >
           會員資料
         </el-button>
         <el-button
-          @click="changeTab('love', '2')"
+          @click="changeTab('love', userLove)"
           size="large"
           class="tabsChange"
-          :class="{ buttonDown: route.params.number === '2' }"
+          :class="{ buttonDown: route.params.number === userLove }"
           round
         >
           收藏店家
@@ -33,8 +33,8 @@
           <div
             v-for="(tab, index) in userTabs"
             :key="index"
-            @click="changeTab(tab.content, route.params.number[0])"
-            v-show="route.params.number === '1'"
+            @click="changeTab(tab.content, userData)"
+            v-show="route.params.number === userData"
           >
             <span
               class="tab-label underline"
@@ -46,8 +46,8 @@
           <div
             v-for="(tab, index) in loveTabs"
             :key="index"
-            @click="changeTab(tab.content, route.params.number[0])"
-            v-show="route.params.number === '2'"
+            @click="changeTab(tab.content, userLove)"
+            v-show="route.params.number === userLove"
           >
             <span
               class="tab-label underline"
@@ -69,7 +69,8 @@ import { useRoute } from 'vue-router'
 import { useRouter } from 'vue-router'
 let $router = useRouter()
 const route = useRoute()
-
+const userData= 'userData';
+const userLove= 'userLove';
 interface Tab {
   label: string
   content: string
@@ -85,7 +86,8 @@ const loveTabs: Tab[] = [
   { label: '為你推薦', content: 'recommend' },
 ]
 
-const changeTab = (name: string, number: string = '1') => {
+const changeTab = (name: string, number: string = userData) => {
+  
   $router.push('/BuyMember/' + name + '/' + number)
 }
 </script>

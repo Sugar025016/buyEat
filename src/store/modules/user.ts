@@ -53,36 +53,36 @@ let useUserStore = defineStore('User', {
       }
     },
     async userInfo() {
-      let res: userInfoResponseData = await reqUserInfo()
+      // let res: userInfoResponseData = await reqUserInfo()
 
-      await console.log('token')
-      console.log('res.code')
-      console.log(res.code)
-      // await console.log(token)
-      if (res.code === 200) {
-        await console.log(res.data)
-        this.username = res.data.name as string
-        this.avatar = res.data.avatar as string
+      // await console.log('token')
+      // console.log('res.code')
+      // console.log(res.code)
+      // // await console.log(token)
+      // if (res.code === 200) {
+      //   await console.log(res.data)
+      //   this.username = res.data.name as string
+      //   this.avatar = res.data.avatar as string
 
-        console.log('res.data')
-        console.log(res.data)
-        console.log('res.data.name')
-        console.log(res.data.name)
-        console.log('this.name')
-        console.log(this.username)
-        let userAsyncRoute = filterAsyncRoute(
-          cloneDeep(asyncRoute),
-          res.data.routes,
-        )
-        this.menuRoutes = [...constantRoute, ...userAsyncRoute, anyRoute]
-        ;[...userAsyncRoute, anyRoute].forEach((route: any) => {
-          router.addRoute(route)
-        })
-        return 'ok'
-      } else {
-        console.log('XXXXXXXXXXX')
-        return Promise.reject(new Error(res.message))
-      }
+      //   console.log('res.data')
+      //   console.log(res.data)
+      //   console.log('res.data.name')
+      //   console.log(res.data.name)
+      //   console.log('this.name')
+      //   console.log(this.username)
+      //   let userAsyncRoute = filterAsyncRoute(
+      //     cloneDeep(asyncRoute),
+      //     res.data.routes,
+      //   )
+      //   this.menuRoutes = [...constantRoute, ...userAsyncRoute, anyRoute]
+      //   ;[...userAsyncRoute, anyRoute].forEach((route: any) => {
+      //     router.addRoute(route)
+      //   })
+      //   return 'ok'
+      // } else {
+      //   console.log('XXXXXXXXXXX')
+      //   return Promise.reject(new Error(res.message))
+      // }
     },
     async userLogout() {
       let res = await reqLogOut()

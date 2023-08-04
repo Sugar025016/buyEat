@@ -1,6 +1,6 @@
 <template>
   <el-breadcrumb separator="/" :separator-icon="ArrowRight">
-    <span class="title">便當報報</span>
+    <span class="title">{{title}}</span>
   </el-breadcrumb>
 </template>
 <script setup lang="ts">
@@ -10,6 +10,7 @@ let LayOutSettingStore = useLayOutSettingStore()
 const changeIcon = () => {
   LayOutSettingStore.isCollapse = !LayOutSettingStore.isCollapse
 }
+let title=document.title;
 </script>
 
 <style lang="scss" scoped>

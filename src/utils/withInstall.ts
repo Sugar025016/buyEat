@@ -1,10 +1,4 @@
-/*
- * @Description: Stay hungry，Stay foolish
- * @Author: Huccct
- * @Date: 2023-05-17 20:35:02
- * @LastEditors: Huccct
- * @LastEditTime: 2023-05-17 20:35:05
- */
+
 import type { Plugin } from 'vue'
 
 export const withInstall = <T, E extends Record<string, any>>(

@@ -1,6 +1,6 @@
 <template>
   <div class="login">
-    <h1 class="title">便當報報</h1>
+    <h1 class="title">{{title}}</h1>
 
     <div class="table">
       <span class="table-title">忘記密碼</span>
@@ -43,6 +43,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
+let title=document.title;
 const checked1 = ref(true)
 </script>
 <style lang="scss" scoped>

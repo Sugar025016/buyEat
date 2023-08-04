@@ -39,21 +39,21 @@
     </span>
     <template #dropdown>
       <el-dropdown-menu>
-        <el-dropdown-item @click="changeLink('profile', 1)">
+        <el-dropdown-item @click="changeLink('profile', userData)">
           會員資料
         </el-dropdown-item>
-        <el-dropdown-item @click="changeLink('changeProfile', 1)">
+        <el-dropdown-item @click="changeLink('changeProfile', userData)">
           修改會員資料
         </el-dropdown-item>
-        <el-dropdown-item @click="changeLink('changeCompany', 1)">
+        <el-dropdown-item @click="changeLink('changeCompany', userData)">
           修改公司資料
         </el-dropdown-item>
-        <el-dropdown-item @click="changeLink('changePassword', 1)">
+        <el-dropdown-item @click="changeLink('changePassword', userData)">
           修改登入密碼
         </el-dropdown-item>
       </el-dropdown-menu>
       <el-dropdown-menu>
-        <el-dropdown-item @click="changeLink('love', 2)">
+        <el-dropdown-item @click="changeLink('love', userLove)">
           收藏店家
         </el-dropdown-item>
       </el-dropdown-menu>
@@ -114,8 +114,10 @@ const fullScreen = () => {
 const logout = async (path: string) => {
   $router.push(path)
 }
-const changeLink = async (path: string, number: number = 0) => {
-  $router.push('/BuyMember/' + path + '/' + number)
+const userData = 'userData'
+const userLove = 'userLove'
+const changeLink = async (path: string, page: string = userData) => {
+  $router.push('/BuyMember/' + path + '/' + page)
 }
 
 const color = ref('rgba(255, 69, 0, 0.68)')
@@ -158,6 +160,10 @@ img {
 .car {
   margin: 0 30px 0 0;
   // background-color: aqua;
+
+  .icon {
+    margin: 0;
+  }
   .conut {
     border-radius: 50%;
     background: $color;
@@ -174,17 +180,25 @@ img {
     position: absolute;
   }
 }
-.cartQuantity {
-  position: absolute;
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
+.link {
   display: flex;
   justify-content: center;
   align-items: center;
-  right: 48px;
-  top: 8px;
+  text-decoration: none;
+  .cartQuantity {
+    position: relative;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    right: 10px;
+    top: -10px;
+  }
 }
+
 .bg-warning {
   background-color: $color;
 }

@@ -17,12 +17,13 @@
   </div>
 </template>
 
-<script setup lang="ts">
-// import BuyTabBar from '@/components/BuyTabBar/index.vue'
-// import BuyTabBar from '@/components/BuyTabBar/src/index.vue'
-</script>
 
-<script setup lang="ts"></script>
+
+<script setup lang="ts">
+
+
+
+</script>
 <style lang="scss" scoped>
 .container {
   width: 100%;

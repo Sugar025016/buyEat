@@ -19,14 +19,9 @@
     </el-row>
 
     <el-row class="row3">
-      <Card></Card>
-      <Card></Card>
-      <Card></Card>
-      <Card></Card>
-      <Card></Card>
-      <Card></Card>
-      <Card></Card>
-      <Card></Card>
+      <template v-for="c1 in categoryStore.c1Arr">
+        <Card :shop="c1"></Card>
+      </template>
     </el-row>
     <div class="buyShops-more">
       <el-button class="buyShops-more-button" size="large" type="warning" round>
@@ -39,6 +34,23 @@
 <script setup lang="ts">
 import Card from './card/index.vue'
 import Category from './Category/index.vue'
+
+import { onMounted } from 'vue'
+import useShopStore from '@/store/modules/shop'
+
+import type { ShopSearch } from '@/api/shop/type'
+
+let categoryStore = useShopStore()
+// onMounted(() => {
+//   getC1()
+// })
+// const getC1 = async () => {
+//   let data: ShopSearch = {
+//     city: '台南市',
+//   }
+//   categoryStore.getShopList(data)
+//   console.log('categoryStore', categoryStore.c1Arr)
+// }
 </script>
 <style lang="scss" scoped>
 .shadow {
@@ -91,14 +103,14 @@ import Category from './Category/index.vue'
   }
 
   .row2 {
-    margin: 20px 0 0 0;
+    margin: 40px 0 20px 0;
   }
   .row3 {
     display: grid; /* 使用CSS Grid布局 */
     grid-template-columns: repeat(1, 1fr);
     grid-gap: 10px;
     margin: 10px 0;
-
+    padding: 0 5px;
     @media (min-width: $breakpoint-xs) {
       grid-template-columns: repeat(1, 1fr);
     }

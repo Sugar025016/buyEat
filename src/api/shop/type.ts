@@ -1,10 +1,4 @@
-/*
- * @Description: Stay hungry，Stay foolish
- * @Author: Huccct
- * @Date: 2023-05-26 15:59:58
- * @LastEditors: Huccct
- * @LastEditTime: 2023-05-27 13:46:40
- */
+
 export interface ResponseData {
   code: number
   message: string
@@ -22,6 +16,9 @@ export interface CategoryResponseData extends ResponseData {
   data: CategoryObj[]
 }
 
+export interface shopResponseData extends ResponseData {
+  data: Shop[]
+}
 export interface AttrValue {
   id?: number
   valueName: string
@@ -43,4 +40,27 @@ export type AttrList = Attr[]
 
 export interface AttrResponseData extends ResponseData {
   data: Attr[]
+}
+
+export type ShopList = Shop[]
+
+export interface Shop {
+  id: number
+  name: string
+  description: String
+  address: String
+  img: String
+}
+
+
+export interface Category {
+  id?: number
+  name: string
+}
+
+export interface ShopSearch {
+  city?: string
+  area?: string
+  categoryId?:number
+  other?:string
 }
