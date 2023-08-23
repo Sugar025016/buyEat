@@ -1,5 +1,5 @@
 import request from '@/utils/request'
-import type { ProductsResponseData, ProductData } from './type'
+import type { ProductsResponseData } from './type'
 enum API {
   PRODUCT = '/api/product/',
   SHOP = '/api/shop/',

@@ -13,7 +13,7 @@
     </div>
     <div class="tabs-content">
       <div
-        :id="tab.id"
+        :id="tab.id.toString()"
         v-for="(tab, index) in TabProductsData"
         :key="index"
         v-show="true"
@@ -38,14 +38,6 @@
     <div class="content"></div>
   </div>
 
-  <button
-    type="button"
-    class="btn btn-primary"
-    data-bs-toggle="modal"
-    data-bs-target="#staticBackdrop"
-  >
-    Launch static backdrop modal
-  </button>
 
   <div
     class="modal fade"
@@ -78,7 +70,6 @@ let userStore = useUserStore()
 // import { ProductData } from '@/api/product/type'
 // import { CategoryResponseData, ProductData, ProductsResponseData } from '@/api/product/type'
 
-console.log('+++++++++$BuyShop + product+-++++++')
 let $route = useRoute()
 
 let id: number = $route.params.id
@@ -113,11 +104,9 @@ const openModal = (v: ProductData) => {
   isProductModalVisible.value = true
 }
 
-console.log('$route.query.id', id)
 const getProductsData = async (id: number) => {
   let res: TabProductsResponseData = await getTabProducts(id)
   TabProductsData.value = res.data
-  console.log('productData', TabProductsData.value)
 }
 
 // const openModal = (v: ProductData) => {
@@ -125,7 +114,6 @@ const getProductsData = async (id: number) => {
 // }
 
 const scrollToSection = (sectionId: number) => {
-  console.log('--------sectionId-------', sectionId)
   const element = document.getElementById(sectionId)
   if (element) {
     const headerHeight = 100

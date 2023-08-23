@@ -2,11 +2,12 @@
   <div class="shopCart">
     <div class="shopCart-header">
       <h1>購物車</h1>
-      <span>訂購店家:{{ carts.shopName }}，滿300可外送</span>
     </div>
     <div class="shopCart-body">
       <el-row class="shopCart-body" :gutter="20">
         <el-col :span="16">
+
+      <span>訂購店家:{{ carts.shopName }}，滿300可外送</span>
           <table class="table">
             <thead>
               <tr>
@@ -21,7 +22,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="(cart, index) in carts.cartResponses">
+              <tr v-for="cart in carts.cartResponses">
                 <th scope="row">{{ cart.productResponse.productName }}</th>
                 <td>{{ cart.department }}</td>
                 <td>{{ cart.orderUsername }}</td>
@@ -32,17 +33,9 @@
                     v-model="cart.qty"
                     :min="1"
                     :max="10"
-                    @change="handleChange(cart.qty)"
                     @click="updateCart(cart.cartId, cart.qty)"
                     size="small"
                   />
-                  <!-- <el-input-number
-                    v-model="cart.qty"
-                    :min="1"
-                    :max="10"
-                    @change="updateCart(cart.cartId,cart.qty )"
-                    size="small"
-                  /> -->
                 </td>
                 <td>{{ cart.productResponse.price * cart.qty }}</td>
                 <td>
@@ -56,8 +49,9 @@
         </el-col>
         <el-col :span="8">
           <div class="body-right">
-            <span>總金額</span>
-            <span>NT$350</span>
+            <span class="total">總金額:</span>
+            <span class="total-data">NT${{ sum }}</span>
+            <hr>
             <el-button type="warning" size="large" class="button-orange" round>
               確認訂單
             </el-button>
@@ -81,7 +75,6 @@
 </template>
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import { useRoute } from 'vue-router'
 import { useRouter } from 'vue-router'
 import { apiGetCart, apiDeleteCart, apiPutCart } from '@/api/cart'
 import { CartResponseData, CartsData } from '@/api/cart/type'
@@ -89,12 +82,8 @@ import useUserStore from '@/store/modules/user'
 
 let userStore = useUserStore()
 let $router = useRouter()
-const route = useRoute()
 
-const num = ref(1)
-const handleChange = (value: number) => {
-  console.log(value)
-}
+const sum = ref(0)
 
 const carts = ref<CartsData>({
   shopName: '',
@@ -110,23 +99,25 @@ const link = () => {
   }
 }
 
-// const shopId = ref<number>()
 const getCart = async () => {
   let res: CartResponseData = await apiGetCart()
-  console.log('getHasProduct*******', res)
+
   if (res.code === 200) {
     carts.value = res.data
     userStore.cartCount = res.data.cartResponses.reduce(
       (total, cartData) => total + cartData.qty,
       0,
     )
+
+    sum.value = carts.value.cartResponses.reduce(
+      (total, v) => total + v.qty * v.productResponse.price,
+      0,
+    )
   }
 }
 
 onMounted(() => {
-  console.log('onMounted*******')
   getCart()
-  console.log('onMounted*******')
 })
 const deleteCart = async (cartId: number) => {
   let res: CartResponseData = await apiDeleteCart(cartId)
@@ -192,13 +183,19 @@ $table-border-color: rgb(155, 155, 155); //
       //   vertical-align: baseline;
     }
     .body-right {
-      // width: 400px;
-      // width: a;
       margin: 10px;
 
-      // background-color: aqua;
       display: flex;
       flex-direction: column;
+      .total {
+        font-size: 20px;
+        margin: 0  0 5px 10px ;
+        color: #818181;
+      }
+      .total-data {
+        font-size: 30px;
+        margin: 0  0 0 10px ;
+      }
       button {
         margin: 5px 0;
         background-color: $color;

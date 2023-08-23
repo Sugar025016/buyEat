@@ -2,10 +2,7 @@
 import axios from 'axios'
 import { ElMessage } from 'element-plus'
 import useUserStore from '@/store/modules/user'
-import { SET_TOKEN, GET_TOKEN, REMOVE_TOKEN } from '@/utils/token'
-import { useRouter } from 'vue-router'
-import { MessageBox } from '@element-plus/icons-vue'
-let $router = useRouter()
+import { SET_TOKEN } from '@/utils/token'
 
 // let userStore = useUserStore()
 const request = axios.create({
@@ -15,7 +12,7 @@ const request = axios.create({
 
 request.interceptors.request.use(
   (config) => {
-    let userStore = useUserStore()
+    const userStore = useUserStore()
     if (userStore.token) {
       config.headers.token = userStore.token
     }
@@ -30,15 +27,9 @@ request.interceptors.request.use(
 request.interceptors.response.use(
   (response) => {
     if (response.status === 200) {
-      console.log('response.status:', response)
       if (response.config.url === '/login') {
-        console.log(
-          'response.status:-----X-XSRF-TOKEN---',
-          response.config.headers['X-XSRF-TOKEN'],
-        )
         SET_TOKEN(response.config.headers['X-XSRF-TOKEN'])
         // userStore.token=response.config.headers['X-XSRF-TOKEN'];
-        console.log('response.status:', GET_TOKEN)
       }
       return Promise.resolve({
         data: response.data,
@@ -54,12 +45,11 @@ request.interceptors.response.use(
     }
   },
   (error) => {
-    let userStore = useUserStore()
-    const $router = useRouter()
+    const userStore = useUserStore()
     let message = ''
 
     const status = error.response.status
-    console.log('error.error.error:', error)
+
     switch (status) {
       // 401: 未登錄
       case 203:
@@ -71,7 +61,6 @@ request.interceptors.response.use(
         userStore.userClear()
         break // 403 token過期
       case 403:
-        console.log('api-403清空userStore')
         userStore.userClear()
         message = '登錄過期，請重新登錄'
         break

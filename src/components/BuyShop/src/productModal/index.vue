@@ -117,10 +117,7 @@ const changeCount = (v: number) => {
 }
 
 const addCart = async () => {
-  console.log(
-    'props.product!.orderUsername////////////',
-    props.product!.orderUsername,
-  )
+
   let cartReq = ref<CartRequest>({
     productId: props.product!.productId,
     department: props.product!.department,
@@ -130,9 +127,9 @@ const addCart = async () => {
   })
   // Object.assign(cartReq.value, productModal.value)
 
-  console.log('getHasProduct*******', cartReq)
+
   let res = await apiAddCart(cartReq.value)
-  console.log('getHasProduct*******', res)
+
   if (res.code === 200) {
     userStore.cartCount = res.data
   }

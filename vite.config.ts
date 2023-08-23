@@ -3,6 +3,7 @@ import vue from '@vitejs/plugin-vue'
 import path from 'path'
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 import { viteMockServe } from 'vite-plugin-mock'
+import removeConsole from 'vite-plugin-remove-console'
 // https://vitejs.dev/config/
 export default defineConfig(({ command, mode }) => {
   let env = loadEnv(mode, process.cwd())
@@ -17,6 +18,7 @@ export default defineConfig(({ command, mode }) => {
         // default
         localEnabled: command === 'serve',
       }),
+      removeConsole(),
     ],
     resolve: {
       alias: {

@@ -1,10 +1,5 @@
 import request from '@/utils/request'
-import type {
-  UserResponseData,
-  User,
-  AllRoleResponseData,
-  SetRoleData,
-} from './type'
+import type { UserResponseData, User } from './type'
 
 enum API {
   ALLUSER_URL = '/backstage/user',

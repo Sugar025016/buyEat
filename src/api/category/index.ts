@@ -1,5 +1,5 @@
 import request from '@/utils/request'
-import type { Category, CategoryListResponse } from './type'
+import type { CategoryListResponse } from './type'
 enum API {
   CATEGORY = '/api/category',
 }

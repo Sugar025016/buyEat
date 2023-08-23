@@ -43,7 +43,6 @@ image?.addEventListener('load', function () {
 })
 
 const toShop = (id: number) => {
-  console.log('Clicked with ID:', id)
   $router.push(`/BuyShop/${id}`)
 }
 </script>

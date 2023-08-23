@@ -60,7 +60,7 @@ const getHasProduct = async (pager = 1) => {
     pageSize.value,
     shopId,
   )
-  console.log('getHasProduct*******', res)
+
   if (res.code === 200) {
     total.value = res.data.totalElements
     productArr.value = res.data.content
@@ -269,7 +269,6 @@ const handleAvatarSuccess: UploadProps['onSuccess'] = (
   response,
   uploadFile,
 ) => {
-  console.log(response)
   productParams.imgUrl = response.url
   productParams.imgId = response.id
   formRef.value.clearValidate('img')

@@ -106,7 +106,6 @@ onMounted(() => {
 watch(
   () => props.identifyCode,
   (val) => {
-    console.log(val)
     drawPic()
   },
 )

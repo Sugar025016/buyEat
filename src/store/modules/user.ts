@@ -1,5 +1,4 @@
 import { defineStore } from 'pinia'
-import router from '@/router'
 import {
   reqLogin,
   reqUserInfo,
@@ -13,14 +12,13 @@ import type {
   LoginFormData,
   LoginResponseData,
   LovesResponseData,
-  ProductData,
   UserProfile,
   UserProfileChangeResponse,
   UserPwd,
   UserInfoResponseData,
 } from '@/api/user/type'
 import type { UserState } from './types/types'
-import { SET_TOKEN, GET_TOKEN, REMOVE_TOKEN } from '@/utils/token'
+import { GET_TOKEN, REMOVE_TOKEN } from '@/utils/token'
 import {
   constantRoute,
   asyncRoute,
@@ -28,9 +26,11 @@ import {
   menuRoutes,
 } from '@/router/routes'
 
-// @ts-ignore
+// @ts-expect-error
 import cloneDeep from 'lodash/cloneDeep'
-import { number } from 'echarts'
+import { useRouter } from 'vue-router'
+
+let $router = useRouter()
 
 function filterAsyncRoute(asyncRoute: any, routes: any) {
   return asyncRoute.filter((item: any) => {
@@ -43,7 +43,7 @@ function filterAsyncRoute(asyncRoute: any, routes: any) {
   })
 }
 
-let useUserStore = defineStore('User', {
+const useUserStore = defineStore('User', {
   state: (): UserState => {
     return {
       token: GET_TOKEN()!,
@@ -63,24 +63,18 @@ let useUserStore = defineStore('User', {
   actions: {
     //用户登录方法
     async userLogin(data: LoginFormData) {
-      console.log('LoginFormData', data)
-
-      let formData = new FormData()
+      const formData = new FormData()
       if (data.username !== undefined) {
         formData.append('username', data.username)
       }
       if (data.password !== undefined) {
         formData.append('password', data.password)
       }
-      let res: LoginResponseData = await reqLogin(formData)
+      const res: LoginResponseData = await reqLogin(formData)
       // success=>token
       // error=>error.message
       if (res.data?.code === 200) {
-        console.log('-----------token----------')
-
-        console.log(GET_TOKEN())
         this.token = GET_TOKEN()
-        console.log(this.token)
 
         return 'ok'
       } else {
@@ -88,21 +82,19 @@ let useUserStore = defineStore('User', {
       }
     },
     async userInfo() {
-      let res: UserInfoResponseData = await reqUserInfo()
+      const res: UserInfoResponseData = await reqUserInfo()
       if (res.code === 200) {
-        console.log('UserInfoResponseData----------this.res.data', res.data)
         this.username = res.data.name
         this.account = res.data.account
         this.phone = res.data.phone
         this.email = res.data.email
         this.favoriteShop = res.data.favoriteShops
         this.cartCount = res.data.cartCount
-        console.log(
-          'UserInfoResponseData----------this.cartCount',
-          this.cartCount,
-        )
 
-        let userAsyncRoute = filterAsyncRoute(cloneDeep(asyncRoute), this.token)
+        const userAsyncRoute = filterAsyncRoute(
+          cloneDeep(asyncRoute),
+          this.token,
+        )
         return 'ok'
       } else {
         return Promise.reject(new Error(res.message))
@@ -112,13 +104,13 @@ let useUserStore = defineStore('User', {
       //   router.addRoute(route)
       // })
       // } else {
-      //   console.log('XXXXXXXXXXX')
+      //
       //   return Promise.reject(new Error(res.message))
       // }
     },
 
     async changeUserInfo(v: UserProfile) {
-      let res: UserInfoResponseData = await reqChangeUserInfo(v)
+      const res: UserInfoResponseData = await reqChangeUserInfo(v)
       if (res.code === 200) {
         return await this.userInfo()
       } else {
@@ -126,7 +118,7 @@ let useUserStore = defineStore('User', {
       }
     },
     async changeUserPwd(v: UserPwd) {
-      let res: UserProfileChangeResponse = await reqChangeUserPwd(v)
+      const res: UserProfileChangeResponse = await reqChangeUserPwd(v)
       if (res.code === 200) {
         return 'ok'
       } else {
@@ -134,7 +126,7 @@ let useUserStore = defineStore('User', {
       }
     },
     async getLove() {
-      let res: LovesResponseData = await reqFavorites()
+      const res: LovesResponseData = await reqFavorites()
       if (res.code === 200) {
         this.favoriteShop = res.data
         return res.data
@@ -144,8 +136,7 @@ let useUserStore = defineStore('User', {
     },
 
     async changeFavoriteStore(id: number) {
-      console.log(id)
-      let res: LovesResponseData = await reqChangeFavorite(id)
+      const res: LovesResponseData = await reqChangeFavorite(id)
       if (res.code === 200) {
         this.favoriteShop = await res.data
         return this.favoriteShop
@@ -154,9 +145,10 @@ let useUserStore = defineStore('User', {
       }
     },
     async userLogout() {
-      let res = await reqLogOut()
+      const res = await reqLogOut()
       if (res.code === 200) {
         this.userClear()
+        return res;
       } else {
         return Promise.reject(new Error(res.message))
       }

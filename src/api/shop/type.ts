@@ -20,9 +20,9 @@ export type ShopList = ShopData[]
 export interface ShopData {
   id: number
   name: string
-  description: String
-  address: String
-  img: String
+  description: string
+  address: string
+  img: string
 }
 
 export interface ShopsResponseData extends ResponseData {

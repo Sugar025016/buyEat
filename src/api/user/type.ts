@@ -52,9 +52,9 @@ export interface UserProfileChangeResponse extends ResponseData {
 export interface ShopData {
   id: number
   name: string
-  description: String
-  address: String
-  img: String
+  description: string
+  address: string
+  img: string
 }
 
 export type ShopList = ShopData[]

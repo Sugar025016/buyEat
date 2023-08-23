@@ -36,8 +36,8 @@ export interface CartResponseData extends ResponseData {
 export interface CartRequest {
   cartId?: number
   productId: number
-  department?: String
+  department?: string
   orderUsername: string
   qty: number
-  note: String
+  note: string
 }

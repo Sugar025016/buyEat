@@ -1,5 +1,3 @@
-import { String } from 'lodash'
-
 export interface ResponseData {
   code: number
   message: string

@@ -1,10 +1,3 @@
-/*
- * @Description: Stay hungry，Stay foolish
- * @Author: Huccct
- * @Date: 2023-05-30 21:19:56
- * @LastEditors: Huccct
- * @LastEditTime: 2023-05-31 20:42:46
- */
 import request from '@/utils/request'
 import type {
   UserResponseData,
@@ -25,7 +18,6 @@ enum API {
 
 export const reqUserInfo = (page: number, limit: number, username: string) =>
   request.get<any, UserResponseData>(
-    // API.ALLUSER_URL + `?name=${username}&page=${page}&limit=${limit}`,
     API.ALLUSER_URL + `?page=${page}&limit=${limit}`,
   )
 

@@ -25,7 +25,7 @@ let userStore = useUserStore()
 // import useCategoryStore from '@/store/modules/category'
 
 // let categoryStore = useCategoryStore()
-// console.log('categoryStore', categoryStore)
+//
 onMounted(() => {
   getC1()
 })

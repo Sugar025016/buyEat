@@ -40,16 +40,12 @@ watch(selectedOption3, () => {
 
 let shopStore = useShopStore()
 
-console.log('let categoryList: CategoryList', categoryList)
 const getCategory = async () => {
   let res: CategoryListResponse = await getCategoryList()
   categoryList.value = res.data
-  console.log('categoryList', categoryList)
 }
 const getC1 = async () => {
-  console.log('data', data)
   await shopStore.getShopList(data)
-  console.log('shopStore', shopStore.c1Arr)
 }
 
 const searchText = ref('')

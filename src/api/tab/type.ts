@@ -8,7 +8,7 @@ export interface ProductData {
   id: number
   name: string
   description: string
-  img: String
+  img: string
   prise: number
 }
 
@@ -31,9 +31,9 @@ export interface ProductModalData {
   name: string
   description: string
   qty: number
-  img: String
+  img: string
   prise: number
-  department: String
+  department: string
   orderUsername: string
-  note: String
+  note: string
 }

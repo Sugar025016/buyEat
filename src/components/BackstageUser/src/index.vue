@@ -66,7 +66,7 @@ const getHasUser = async (pager = 1) => {
   // if (res.code === 200) {
   total.value = res.data.totalElements
   userArr.value = res.data.content
-  console.log(userArr.value)
+
   // }
 }
 

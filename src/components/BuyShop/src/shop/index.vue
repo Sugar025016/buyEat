@@ -109,7 +109,7 @@ import useUserStore from '@/store/modules/user'
 let userStore = useUserStore()
 const isLove = (v: ShopList) => {
   isFavorite.value = v?.some((v: ShopData) => v.id === id)
-  console.log('@@@@@@@@@@@@userStore.favoriteShop', userStore.favoriteShop)
+
   if (isFavorite.value) {
     favorite.value = '#fd7e14'
   } else {

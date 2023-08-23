@@ -72,7 +72,6 @@ import { TabProductsResponseData, TabData, ProductData } from '@/api/tab/type'
 // import { ProductData } from '@/api/product/type'
 // import { CategoryResponseData, ProductData, ProductsResponseData } from '@/api/product/type'
 
-console.log('+++++++++$BuyShop + product+-++++++')
 let $route = useRoute()
 
 let id: number = $route.params.id
@@ -93,11 +92,9 @@ const openModal = (v: ProductData) => {
   isProductModalVisible.value = true
 }
 
-console.log('$route.query.id', id)
 const getProductsData = async (id: number) => {
   let res: TabProductsResponseData = await getTabProducts(id)
   TabProductsData.value = res.data
-  console.log('productData', TabProductsData.value)
 }
 
 // const openModal = (v: ProductData) => {
@@ -105,7 +102,6 @@ const getProductsData = async (id: number) => {
 // }
 
 const scrollToSection = (sectionId: number) => {
-  console.log('--------sectionId-------', sectionId)
   const element = document.getElementById(sectionId)
   if (element) {
     const headerHeight = 100

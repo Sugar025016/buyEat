@@ -8,7 +8,7 @@ export interface ProductData {
   id: number | string
   name: string
   description: string
-  img: String
+  img: string
 }
 
 export type ProductList = ProductData[]

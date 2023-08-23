@@ -1,10 +1,9 @@
 import { getShopList } from '@/api/shop'
 import { defineStore } from 'pinia'
-import type { ShopList, ShopsResponseData, ShopSearch } from '@/api/shop/type'
+import type { ShopsResponseData, ShopSearch } from '@/api/shop/type'
 import { CategoryState } from './types/types'
-import { LoginResponseData } from '@/api/user/type'
 
-let useShopStore = defineStore('Category', {
+const useShopStore = defineStore('Category', {
   state: (): CategoryState => {
     return {
       c1Id: '',
@@ -28,25 +27,23 @@ let useShopStore = defineStore('Category', {
     //   let shop: Shop = await getShop()
     //   //   if (res.code === 200) {
     //   this.c5Arr = shop
-    //   console.log('this.c5Arr', this.c5Arr)
+    //
     //   //   }
     // },
     // async getShopList() {
     //   let response =await  getShopList()
-    //   console.log("response", response)
+    //
     //   let res: ShopList = await  getShopList()
-    //   console.log(getShopList())
+    //
     //   //   if (res.code === 200) {
     //   this.c1Arr = res
-    //   console.log("this.c1Arr", this.c1Arr)
+    //
     //   //   }
 
     // },
 
     async getShopList(data: ShopSearch) {
-      console.log('getShopList://///////////////////')
-      console.log('getShopList:', data)
-      let res: ShopsResponseData = await getShopList(data)
+      const res: ShopsResponseData = await getShopList(data)
       if (res.code === 200) {
         this.c1Arr = res.data
       } else {

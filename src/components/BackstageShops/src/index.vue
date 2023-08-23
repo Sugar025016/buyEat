@@ -1,18 +1,13 @@
 <script setup lang="ts">
-import { ref, onMounted, reactive, nextTick, watch } from 'vue'
+import { ref, onMounted, reactive, nextTick } from 'vue'
 import { reqShopInfo, reqAddOrUpdateShop } from '@/api/backstage/shop'
 import type {
   ShopSearch,
   ShopResponseData,
   ShopList,
   ShopData,
-  Address,
-  AllRoleResponseData,
-  AllRole,
-  SetRoleData,
 } from '@/api/backstage/Shop/type'
 import { ElMessage } from 'element-plus'
-
 import { UploadProps } from 'element-plus/es/components/upload/src/upload'
 import cityAreas from '@/utils/areaData.js'
 import { GET_TOKEN } from '@/utils/token'
@@ -282,8 +277,7 @@ const beforeAvatarUpload: UploadProps['beforeUpload'] = (rawFile) => {
     return false
   }
 }
-console.log(' GET_TOKEN()--------', GET_TOKEN())
-console.log(' userStore.token--------', userStore.token)
+
 const uploadHeaders = {
   'X-CSRF-Token': userStore.token, // 初始为空
 }
@@ -291,7 +285,6 @@ const handleAvatarSuccess: UploadProps['onSuccess'] = (
   response,
   uploadFile,
 ) => {
-  console.log(response)
   shopParams.imgUrl = response.url
   shopParams.imgId = response.id
   formRef.value.clearValidate('img')

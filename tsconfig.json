@@ -23,7 +23,10 @@
     "paths": {
       //路徑映射，相對於baseUrl
       "@/*": ["src/*"]
-    }
+    },
+
+    "removeComments": true,
+    "stripInternal": true
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
   "references": [{ "path": "./tsconfig.node.json" }]

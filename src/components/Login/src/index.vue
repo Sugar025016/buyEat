@@ -128,8 +128,6 @@ const validatorPassword = (rule: any, value: any, callback: any) => {
 }
 
 const validatorVerifyCode = (rule: any, value: any, callback: any) => {
-  console.log(value, identifyCode.value)
-
   if (value.length === 0) {
     callback(new Error('请输入验证码'))
   } else if (value.length < 4) {
@@ -146,15 +144,13 @@ const login = async () => {
   loading.value = true
   try {
     await useStore.userLogin(loginForm)
-    console.log('---------------------')
-    console.log(useStore.token)
+
     nextTick(() => {
       useStore.userInfo()
     })
 
     let redirect: string = $route.query.redirect as string
-    console.log('-----------///////////----------')
-    console.log(redirect)
+
     $router.push({ path: redirect || '/' })
     // $router.push('/')
     ElNotification({

@@ -1,10 +1,8 @@
 import { defineStore } from 'pinia'
-// import { ElMessage, ElMessageBox } from 'element-plus'
-// import ElMessageBox from "element-plus"
 import { ElMessage, ElMessageBox } from 'element-plus'
 import type { Action } from 'element-plus'
 
-let useLoadingStore = defineStore('LoadingStore', {
+const useLoadingStore = defineStore('LoadingStore', {
   state: () => {
     return {
       isLoading: false,

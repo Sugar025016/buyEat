@@ -1,5 +1,5 @@
 import request from '@/utils/request'
-import type { ProductSearch, ProductData, ProductResponseData } from './type'
+import type { ProductData, ProductResponseData } from './type'
 enum API {
   product = '/backstage/product',
 }

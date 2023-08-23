@@ -73,14 +73,7 @@ let dark = ref<boolean>(false)
 const goRoute = (path: string) => {
   $router.push(path)
 }
-console.log('＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃$route', $route)
-console.log(
-  '＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃$userStore',
-  userStore,
-  userStore.username,
-  userStore.phone,
-)
-console.log(window.location.hash)
+
 const path = window.location.hash
 $router.getRoutes()
 
@@ -89,13 +82,12 @@ const updateRefsh = () => {
 }
 const toLogin = () => {
   // $router.push('/login')
-  console.log('＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃$window.location', userStore.token)
+
   if (
     !userStore.token ||
     userStore.token === undefined ||
     userStore.token === ''
   ) {
-    console.log('＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃$window.location', path)
     $router.push({ path: '/login', query: { redirect: path } })
   }
 }
@@ -108,18 +100,17 @@ const fullScreen = () => {
   }
 }
 
-const logout = async (path: string) => {
-  let respone = await userStore.userLogout()
-  if (respone === 'ok') {
+const logout = async () => {
+  let res: any = await userStore.userLogout()
+  if (res.code === 200) {
     if ($route.meta.mustToken) {
-      $router.push(path)
+      $router.push({ path: '/', query: { redirect: $route.path } })
     }
   }
 }
 const userData = 'userData'
 const userLove = 'userLove'
 const changeLink = async (path: string, page: string = userData) => {
-  console.log('@@@###', userStore.username)
   $router.push('/BuyMember/' + path + '/' + page)
 }
 

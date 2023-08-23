@@ -62,38 +62,25 @@ import { onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { getProducts } from '@/api/product'
 import {
-  CategoryResponseData,
   ProductData,
   ProductsResponseData,
 } from '@/api/product/type'
 
-console.log('+++++++++$BuyShop + product+-++++++')
 let $route = useRoute()
 
 let id: number = $route.params.id
 
 let productData = ref<ProductData[]>([])
 
-console.log('$route.query.id', id)
 const getProductsData = async (id: number) => {
   let res: ProductsResponseData = await getProducts(id)
   productData.value = res.data
-  console.log('productData', productData.value)
 }
 
 onMounted(() => {
   getProductsData(id)
 })
 
-const showModal = ref(false)
-
-const openModal = () => {
-  showModal.value = !showModal.value
-}
-
-const closeModal = () => {
-  showModal.value = false
-}
 
 interface Tab {
   label: string
@@ -117,19 +104,7 @@ const changeTab = (index: number) => {
   activeTab.value = index
 }
 
-// const dialogFormVisible = ref(false)
-// const formLabelWidth = '140px'
 
-// const form = reactive({
-//   name: '',
-//   region: '',
-//   date1: '',
-//   date2: '',
-//   delivery: false,
-//   type: [],
-//   resource: '',
-//   desc: '',
-// })
 const myModal = document.getElementById('myModal')
 const myInput = document.getElementById('myInput')
 
@@ -142,8 +117,7 @@ myModal?.addEventListener('shown.bs.modal', () => {
 @import '@/styles/bootstrap.scss';
 @import '../../../../../node_modules/bootstrap/scss/buttons';
 
-.modal {
-}
+
 
 .el-dialog {
   background-image: url('@/assets/images/product001.jpeg') !important; /* 設置背景圖片 */

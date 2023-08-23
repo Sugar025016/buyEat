@@ -18,3 +18,9 @@ If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has a
 2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
 
 ## node @16
+
+## npm run format //格式化
+
+## npm run fix //代碼檢查
+
+## console .log.\*$ //清除console.log
