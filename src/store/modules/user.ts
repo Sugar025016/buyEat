@@ -148,7 +148,7 @@ const useUserStore = defineStore('User', {
       const res = await reqLogOut()
       if (res.code === 200) {
         this.userClear()
-        return res;
+        return res
       } else {
         return Promise.reject(new Error(res.message))
       }

@@ -6,8 +6,7 @@
     <div class="shopCart-body">
       <el-row class="shopCart-body" :gutter="20">
         <el-col :span="16">
-
-      <span>訂購店家:{{ carts.shopName }}，滿300可外送</span>
+          <span>訂購店家:{{ carts.shopName }}，滿300可外送</span>
           <table class="table">
             <thead>
               <tr>
@@ -51,7 +50,7 @@
           <div class="body-right">
             <span class="total">總金額:</span>
             <span class="total-data">NT${{ sum }}</span>
-            <hr>
+            <hr />
             <el-button type="warning" size="large" class="button-orange" round>
               確認訂單
             </el-button>
@@ -189,12 +188,12 @@ $table-border-color: rgb(155, 155, 155); //
       flex-direction: column;
       .total {
         font-size: 20px;
-        margin: 0  0 5px 10px ;
+        margin: 0 0 5px 10px;
         color: #818181;
       }
       .total-data {
         font-size: 30px;
-        margin: 0  0 0 10px ;
+        margin: 0 0 0 10px;
       }
       button {
         margin: 5px 0;

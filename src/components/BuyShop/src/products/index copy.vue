@@ -61,10 +61,7 @@ import productModal from '../productModal/index.vue'
 import { onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { getProducts } from '@/api/product'
-import {
-  ProductData,
-  ProductsResponseData,
-} from '@/api/product/type'
+import { ProductData, ProductsResponseData } from '@/api/product/type'
 
 let $route = useRoute()
 
@@ -80,7 +77,6 @@ const getProductsData = async (id: number) => {
 onMounted(() => {
   getProductsData(id)
 })
-
 
 interface Tab {
   label: string
@@ -104,7 +100,6 @@ const changeTab = (index: number) => {
   activeTab.value = index
 }
 
-
 const myModal = document.getElementById('myModal')
 const myInput = document.getElementById('myInput')
 
@@ -116,8 +111,6 @@ myModal?.addEventListener('shown.bs.modal', () => {
 <style lang="scss" scoped>
 @import '@/styles/bootstrap.scss';
 @import '../../../../../node_modules/bootstrap/scss/buttons';
-
-
 
 .el-dialog {
   background-image: url('@/assets/images/product001.jpeg') !important; /* 設置背景圖片 */

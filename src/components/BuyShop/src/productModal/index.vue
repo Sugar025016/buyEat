@@ -117,7 +117,6 @@ const changeCount = (v: number) => {
 }
 
 const addCart = async () => {
-
   let cartReq = ref<CartRequest>({
     productId: props.product!.productId,
     department: props.product!.department,
@@ -126,7 +125,6 @@ const addCart = async () => {
     note: props.product!.note,
   })
   // Object.assign(cartReq.value, productModal.value)
-
 
   let res = await apiAddCart(cartReq.value)
 

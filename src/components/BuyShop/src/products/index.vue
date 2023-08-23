@@ -38,7 +38,6 @@
     <div class="content"></div>
   </div>
 
-
   <div
     class="modal fade"
     id="staticBackdrop"
