@@ -28,7 +28,6 @@ const goRoute = (path: string) => {
 
 <style lang="scss" scoped>
 .title {
-  margin: 0 5px;
   vertical-align: middle;
   font-size: 35px;
   font-weight: 700;

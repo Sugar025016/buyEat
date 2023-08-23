@@ -2,29 +2,38 @@
   <div class="">
     <div class="shop">
       <el-row :gutter="0" class="shop-card">
-        <el-col :span="8" class="shop-img">
+        <el-col :span="8" class="shop-img" :style="shopImageStyle">
           <div class="shop-border"></div>
         </el-col>
         <el-col :span="16" class="shop-content">
           <!-- <el-row :gutter="0" class="shop-content-row"> -->
 
           <div class="shop-title">
-            <span>AAAAAAAAAAAa</span>
-            <img
+            <span>{{ shopData?.name }}</span>
+            <!-- <img v-show="love"
               src="@/assets/icons/heart.png"
               class="rounded-full"
               loading="lazy"
-            />
+            /> -->
+            <div @click="changeFavorite" class="favorite">
+              <def-svg-icon
+                class="buy-svg-icon"
+                name="favorite"
+                :color="favorite"
+                width="30px"
+                height="30px"
+              ></def-svg-icon>
+            </div>
           </div>
           <div class="shop-remark">
             <span>
-              BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+              {{ shopData?.description }}
             </span>
           </div>
           <div class="shop-information">
             <div class="information">
               <el-icon :size="20"><Location /></el-icon>
-              <span>BBBBBBBBBBBBBBBBBBBBBBBBBBBBB</span>
+              <span>{{ shopData?.address }}</span>
             </div>
             <div class="information">
               <el-icon :size="20"><Watch /></el-icon>
@@ -81,6 +90,68 @@
 </template>
 <script setup lang="ts">
 import { House, ChatRound, User, Watch } from '@element-plus/icons-vue'
+import { useRoute } from 'vue-router'
+import { onMounted, ref, computed, watch } from 'vue'
+import { getShop } from '@/api/shop'
+import { ShopData, ShopResponseData } from '@/api/shop/type'
+
+import { ShopList } from '@/api/user/type'
+
+
+let $route = useRoute()
+
+let id: number = parseInt($route.params.id as string)
+
+let shopData = ref<ShopData>()
+let isFavorite = ref<boolean>()
+let favorite = ref('')
+
+
+import useUserStore from '@/store/modules/user'
+let userStore = useUserStore()
+const isLove = (v:ShopList) => {
+  isFavorite.value = v?.some((v: ShopData) => v.id === id)
+  console.log("@@@@@@@@@@@@userStore.favoriteShop",userStore.favoriteShop)
+  if( isFavorite.value){
+    favorite.value='#fd7e14'
+  }else{
+    favorite.value='rgb(139, 139, 139)'
+  }
+}
+onMounted(() => {
+  getShopData(id)
+  isLove(userStore.favoriteShop)
+})
+
+
+const changeFavorite = async () => {
+  await userStore.changeFavoriteStore(id)
+}
+
+watch(
+  () => userStore.favoriteShop,
+  () => {
+    isLove(userStore.favoriteShop)
+  },
+)
+onMounted(async() => {
+  await getShopData(id)
+  await isLove(userStore.favoriteShop)
+})
+
+const getShopData = async (id: number) => {
+  let res: ShopResponseData = await getShop(id)
+  shopData.value = res.data
+}
+
+const shopImageStyle = computed(() => {
+  if (shopData.value && shopData.value.img) {
+    return {
+      backgroundImage: `url(${shopData.value.img})`,
+    }
+  }
+  return {}
+})
 </script>
 <style lang="scss" scoped>
 $b-color: $color;
@@ -96,7 +167,10 @@ $b-color: $color;
       display: flex;
       width: 100%;
       height: 380px;
-      background: url('@/assets/images/food.jpg') no-repeat;
+      // background: url('@/assets/images/food.jpg') no-repeat;
+      // background: url('@/assets/images/food.jpg') no-repeat;
+      // background-image: url('#{shopData.img}');
+      // background: url(`#{shopData.img}`);
       background-size: cover;
       border-radius: 20px;
       padding: 5px 5px 5px 5px;
@@ -123,6 +197,16 @@ $b-color: $color;
         margin: 0 0 5px 0;
 
         justify-content: space-between;
+        .favorite {
+          display: flex;
+          justify-content: center; /* 水平置中 */
+          align-items: center; /* 垂直置中 */
+        }
+        .favorite:hover {
+          // background-color: #f0f0f0;
+          // border: 1px solid #ccc;
+          cursor: pointer; /* 添加手型光标效果 */
+        }
         img {
           width: 50px;
           height: 50px;
@@ -176,7 +260,7 @@ $b-color: $color;
         }
         .shop-button:hover {
           background-color: $color;
-          color: white;
+          color:white ;
         }
       }
     }

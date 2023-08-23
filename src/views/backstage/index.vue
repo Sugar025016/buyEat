@@ -1,6 +1,6 @@
 <template>
   <div class="common-layout">
-    <el-container>
+    <el-container   style="height: 100vh">
       <!-- <el-aside width="200px">
 
       </el-aside> -->
@@ -23,7 +23,7 @@
             </div>
             <def-backstage-Menu
               class=""
-              :menuList="userStore.asyncRoute"
+              :menuList="userStore.menuRoutes"
             ></def-backstage-Menu>
           </el-menu>
         </el-scrollbar>
@@ -137,4 +137,6 @@ let $route = useRoute()
     }
   }
 }
+
+
 </style>

@@ -29,7 +29,7 @@ const fullScreen = () => {
 
 const logout = async () => {
   await userStore.userLogout()
-  $router.push({ path: '/login', query: { redirect: $route.path } })
+  // $router.push({ path: '/', query: { redirect: $route.path } })
 }
 
 const color = ref('rgba(255, 69, 0, 0.68)')

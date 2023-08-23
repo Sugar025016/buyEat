@@ -2,7 +2,7 @@
   <div class="shopCart">
     <div class="shopCart-header">
       <h1>購物車</h1>
-      <span>訂購店家:AAAA，滿300可外送</span>
+      <span>訂購店家:{{ carts.shopName }}，滿300可外送</span>
     </div>
     <div class="shopCart-body">
       <el-row class="shopCart-body" :gutter="20">
@@ -14,66 +14,41 @@
                 <th scope="col">部門/單位</th>
                 <th scope="col">訂購人</th>
                 <th scope="col">單價</th>
+                <th scope="col">備註</th>
                 <th scope="col">數量</th>
                 <th scope="col">小計</th>
                 <th scope="col">變更</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
+              <tr v-for="(cart, index) in carts.cartResponses">
+                <th scope="row">{{ cart.productResponse.productName }}</th>
+                <td>{{ cart.department }}</td>
+                <td>{{ cart.orderUsername }}</td>
+                <td>{{ cart.productResponse.price }}</td>
+                <td>{{ cart.note }}</td>
                 <td>
                   <el-input-number
-                    v-model="num"
+                    v-model="cart.qty"
                     :min="1"
                     :max="10"
-                    @change="handleChange"
+                    @change="handleChange(cart.qty)"
+                    @click="updateCart(cart.cartId, cart.qty)"
                     size="small"
                   />
-                </td>
-                <td>@mdo</td>
-                <td>
-                  <el-icon><DeleteFilled /></el-icon>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-                <td>
-                  <el-input-number
-                    v-model="num"
+                  <!-- <el-input-number
+                    v-model="cart.qty"
                     :min="1"
                     :max="10"
-                    @change="handleChange"
+                    @change="updateCart(cart.cartId,cart.qty )"
                     size="small"
-                  />
+                  /> -->
                 </td>
-                <td>@mdo</td>
+                <td>{{ cart.productResponse.price * cart.qty }}</td>
                 <td>
-                  <el-icon><DeleteFilled /></el-icon>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td colspan="2">Larry the Bird</td>
-                <td>@twitter</td>
-                <td>
-                  <el-input-number
-                    v-model="num"
-                    :min="1"
-                    :max="10"
-                    @change="handleChange"
-                    size="small"
-                  />
-                </td>
-                <td>@mdo</td>
-                <td>
-                  <el-icon><DeleteFilled /></el-icon>
+                  <el-icon @click="deleteCart(cart.cartId)">
+                    <DeleteFilled />
+                  </el-icon>
                 </td>
               </tr>
             </tbody>
@@ -105,9 +80,14 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { useRouter } from 'vue-router'
+import { apiGetCart, apiDeleteCart, apiPutCart } from '@/api/cart'
+import { CartResponseData, CartsData } from '@/api/cart/type'
+import useUserStore from '@/store/modules/user'
+
+let userStore = useUserStore()
 let $router = useRouter()
 const route = useRoute()
 
@@ -116,8 +96,62 @@ const handleChange = (value: number) => {
   console.log(value)
 }
 
+const carts = ref<CartsData>({
+  shopName: '',
+  isOrderable: false,
+  cartResponses: [],
+})
+
 const link = () => {
-  $router.push('/BuyShop')
+  if (carts.value?.shopId) {
+    $router.push('/BuyShop/' + carts.value.shopId)
+  } else {
+    $router.push('/')
+  }
+}
+
+// const shopId = ref<number>()
+const getCart = async () => {
+  let res: CartResponseData = await apiGetCart()
+  console.log('getHasProduct*******', res)
+  if (res.code === 200) {
+    carts.value = res.data
+    userStore.cartCount = res.data.cartResponses.reduce(
+      (total, cartData) => total + cartData.qty,
+      0,
+    )
+  }
+}
+
+onMounted(() => {
+  console.log('onMounted*******')
+  getCart()
+  console.log('onMounted*******')
+})
+const deleteCart = async (cartId: number) => {
+  let res: CartResponseData = await apiDeleteCart(cartId)
+  if (res.code === 200) {
+    carts.value = res.data
+    if (res.data.cartResponses) {
+      userStore.cartCount = res.data.cartResponses.reduce(
+        (total, cartData) => total + cartData.qty,
+        0,
+      )
+    } else {
+      userStore.cartCount = 0
+    }
+  }
+}
+
+const updateCart = async (cartId: number, qty: number) => {
+  let res: CartResponseData = await apiPutCart(cartId, qty)
+  if (res.code === 200) {
+    carts.value = res.data
+    userStore.cartCount = res.data.cartResponses.reduce(
+      (total, cartData) => total + cartData.qty,
+      0,
+    )
+  }
 }
 </script>
 <style lang="scss" scoped>
@@ -149,6 +183,9 @@ $table-border-color: rgb(155, 155, 155); //
     // display: flex;
     .table {
       tr {
+        .el-icon {
+          cursor: pointer; /* 添加手型光标效果 */
+        }
       }
     }
     .body-left {

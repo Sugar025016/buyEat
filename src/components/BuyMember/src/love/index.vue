@@ -1,13 +1,31 @@
 <template>
   <div class="cards">
-    <card></card>
-    <card></card>
-    <card></card>
-    <card></card>
+    <template v-for="c1 in userStore.favoriteShop">
+      <Card :shop="c1"></Card>
+    </template>
   </div>
 </template>
 <script setup lang="ts">
-import card from '../card/index.vue'
+import Card from '../card/index.vue'
+
+import useUserStore from '@/store/modules/user'
+import { onMounted, ref } from 'vue'
+import {  ProductList } from '@/api/user/type'
+
+let userStore = useUserStore()
+
+let loves = ref<ProductList>([])
+
+
+
+onMounted(() => {
+  getLove()
+})
+
+const getLove = async () => {
+  let res: ProductList = await userStore.getLove()
+  loves.value = res
+}
 </script>
 <style lang="scss" scoped>
 .cards {

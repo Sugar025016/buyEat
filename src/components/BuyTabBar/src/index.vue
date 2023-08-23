@@ -4,9 +4,8 @@
       <div class="toolbar_left">
         <BreadCrumb />
       </div>
-
       <div class="toolbar_order">
-        <order></order>
+        <order ></order>
       </div>
       <div class="toolbar_right">
         <Setting />
@@ -20,6 +19,9 @@ import BreadCrumb from './breadcrumb/index.vue'
 import Setting from './setting/index.vue'
 import order from './order/index.vue'
 import { onMounted, ref } from 'vue'
+import useUserStore from '@/store/modules/user'
+
+let userStore = useUserStore()
 // import useCategoryStore from '@/store/modules/category'
 
 // let categoryStore = useCategoryStore()
@@ -57,6 +59,7 @@ defineProps(['scene'])
   align-items: center;
   width: 100%;
   height: 100%;
+  padding: 0 30px;
   // display: grid;
   // grid-template-columns: repeat(3, 1fr);
   .toolbar_left {

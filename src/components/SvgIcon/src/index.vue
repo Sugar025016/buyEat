@@ -17,6 +17,11 @@ defineProps({
     type: String,
     default: '16px',
   },
+
+  background: {
+    type: String,
+    background: 'red',
+  },
 })
 </script>
 <template>

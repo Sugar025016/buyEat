@@ -1,16 +1,19 @@
 <template>
   <div class="productCard">
     <div class="products-content">
-      <span class="content-title">AAAAAAAA</span>
+      <span class="content-title">{{ product.name }}</span>
       <span class="content-description">
-        BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+        {{ product.description }}
       </span>
-      <span class="content-price">180$</span>
+      <span class="content-price">{{ product.prise }}$</span>
     </div>
-    <img src="@/assets/images/product001.jpeg" alt="AA" />
+    <img :src="product.img" v-if="product.img" alt="AA" />
+    <!-- <img src="@/assets/images/product001.jpeg" alt="AA" /> -->
   </div>
 </template>
-<script setup lang="ts"></script>
+<script setup lang="ts">
+defineProps(['product'])
+</script>
 <style lang="scss" scoped>
 .productCard {
   box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.2);

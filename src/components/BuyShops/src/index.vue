@@ -35,22 +35,11 @@
 import Card from './card/index.vue'
 import Category from './Category/index.vue'
 
-import { onMounted } from 'vue'
 import useShopStore from '@/store/modules/shop'
 
-import type { ShopSearch } from '@/api/shop/type'
 
 let categoryStore = useShopStore()
-// onMounted(() => {
-//   getC1()
-// })
-// const getC1 = async () => {
-//   let data: ShopSearch = {
-//     city: '台南市',
-//   }
-//   categoryStore.getShopList(data)
-//   console.log('categoryStore', categoryStore.c1Arr)
-// }
+
 </script>
 <style lang="scss" scoped>
 .shadow {

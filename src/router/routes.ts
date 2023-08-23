@@ -2,11 +2,12 @@ export const constantRoute = [
   {
     path: '/',
     component: () => import('@/views/buy/index.vue'),
-    name: 'buy',
+    name: 'home',
     meta: {
       title: 'buy',
       hidden: false,
       icon: '',
+      mustToken:false,
     },
     redirect: '/BuyShops',
     children: [
@@ -18,6 +19,7 @@ export const constantRoute = [
           title: '首页',
           hidden: false,
           icon: 'HomeFilled',
+          mustToken:false,
         },
       },
       {
@@ -27,6 +29,7 @@ export const constantRoute = [
           title: 'BuyMember',
           hidden: false,
           icon: 'HomeFilled',
+          mustToken:true,
         },
         redirect: '/BuyMember/profile/:number',
         children: [
@@ -39,6 +42,7 @@ export const constantRoute = [
               title: 'profile',
               hidden: false,
               icon: 'HomeFilled',
+              mustToken:true,
             },
           },
           {
@@ -50,6 +54,7 @@ export const constantRoute = [
               title: 'changeProfile',
               hidden: false,
               icon: 'HomeFilled',
+              mustToken:true,
             },
           },
           {
@@ -61,6 +66,7 @@ export const constantRoute = [
               title: 'changeCompany',
               hidden: false,
               icon: 'HomeFilled',
+              mustToken:true,
             },
           },
           {
@@ -72,6 +78,7 @@ export const constantRoute = [
               title: 'changePassword',
               hidden: false,
               icon: 'HomeFilled',
+              mustToken:true,
             },
           },
           {
@@ -83,6 +90,7 @@ export const constantRoute = [
               title: 'love',
               hidden: false,
               icon: 'HomeFilled',
+              mustToken:true,
             },
           },
           {
@@ -94,6 +102,7 @@ export const constantRoute = [
               title: 'recommend',
               hidden: false,
               icon: 'HomeFilled',
+              mustToken:true,
             },
           },
         ],
@@ -106,26 +115,29 @@ export const constantRoute = [
           title: 'BuyOrder',
           hidden: false,
           icon: 'HomeFilled',
+          mustToken:true,
         },
       },
       {
-        path: 'BuyShop',
+        path: 'BuyShop/:id',
         name: 'BuyShop',
         component: () => import('@/components/BuyShop/src/index.vue'),
         meta: {
           title: 'BuyShop',
           hidden: false,
           icon: 'HomeFilled',
+          mustToken:false,
         },
       },
       {
-        path: 'BuyShopCar',
-        name: 'BuyShopCar',
-        component: () => import('@/components/BuyShopCar/src/index.vue'),
+        path: 'BuyShopCart',
+        name: 'BuyShopCart',
+        component: () => import('@/components/BuyShopCart/src/index.vue'),
         meta: {
-          title: 'BuyShopCar',
+          title: 'BuyShopCart',
           hidden: false,
           icon: 'HomeFilled',
+          mustToken:true,
         },
       },
     ],
@@ -137,6 +149,7 @@ export const constantRoute = [
       title: 'loginRegister',
       hidden: false,
       icon: 'HomeFilled',
+      mustToken:false,
     },
     redirect: '/Login',
     children: [
@@ -147,6 +160,7 @@ export const constantRoute = [
           title: 'Login',
           hidden: false,
           icon: 'HomeFilled',
+          mustToken:false,
         },
       },
       {
@@ -156,6 +170,7 @@ export const constantRoute = [
           title: '首页',
           hidden: false,
           icon: 'HomeFilled',
+          mustToken:false,
         },
       },
     ],
@@ -167,6 +182,7 @@ export const constantRoute = [
       title: 'loginRegister',
       hidden: false,
       icon: 'HomeFilled',
+      mustToken:true,
     },
     redirect: '/Register',
     children: [
@@ -177,6 +193,7 @@ export const constantRoute = [
           title: 'Register',
           hidden: false,
           icon: 'HomeFilled',
+          mustToken:true,
         },
       },
     ],
@@ -188,6 +205,7 @@ export const constantRoute = [
       title: '後台',
       hidden: false,
       icon: 'HomeFilled',
+      mustToken:true,
     },
     redirect: '/Backstage/shops',
     children: [
@@ -198,6 +216,27 @@ export const constantRoute = [
           title: 'Shops',
           hidden: false,
           icon: 'HomeFilled',
+          mustToken:true,
+        },
+      },
+      {
+        path: '/Backstage/users',
+        component: () => import('@/components/BackstageUser/src/index.vue'),
+        meta: {
+          title: 'users',
+          hidden: false,
+          icon: 'HomeFilled',
+          mustToken:true,
+        },
+      },
+      {
+        path: 'product',
+        component: () => import('@/components/BackstageProduct/src/index.vue'),
+        meta: {
+          title: 'product',
+          hidden: false,
+          icon: 'HomeFilled',
+          mustToken:true,
         },
       },
       {
@@ -207,6 +246,7 @@ export const constantRoute = [
           title: 'ategory',
           hidden: false,
           icon: 'HomeFilled',
+          mustToken:true,
         },
       },
     ],
@@ -223,102 +263,107 @@ export const constantRoute = [
 ]
 
 export const asyncRoute = [
-  // {
-  //   path: '/acl',
-  //   component: () => import('@/layout/index.vue'),
-  //   name: 'Acl',
-  //   meta: {
-  //     title: '权限管理',
-  //     hidden: false,
-  //     icon: 'Lock',
-  //   },
-  //   redirect: '/acl/user',
-  //   children: [
-  //     {
-  //       path: '/acl/user',
-  //       component: () => import('@/views/acl/user/index.vue'),
-  //       name: 'User',
-  //       meta: {
-  //         title: '用户管理',
-  //         hidden: false,
-  //         icon: 'User',
-  //       },
-  //     },
-  //     {
-  //       path: '/acl/role',
-  //       component: () => import('@/views/acl/role/index.vue'),
-  //       name: 'Role',
-  //       meta: {
-  //         title: '角色管理',
-  //         hidden: false,
-  //         icon: 'Avatar',
-  //       },
-  //     },
-  //     {
-  //       path: '/acl/permission',
-  //       component: () => import('@/views/acl/permission/index.vue'),
-  //       name: 'Permission',
-  //       meta: {
-  //         title: '菜单管理',
-  //         hidden: false,
-  //         icon: 'List',
-  //       },
-  //     },
-  //   ],
-  // },
-  // {
-  //   path: '/product',
-  //   component: () => import('@/layout/index.vue'),
-  //   name: 'Product',
-  //   meta: {
-  //     title: '商品管理',
-  //     hidden: false,
-  //     icon: 'Goods',
-  //   },
-  //   redirect: '/product/trademark',
-  //   children: [
-  //     {
-  //       path: '/product/trademark',
-  //       component: () => import('@/views/product/trademark/index.vue'),
-  //       name: 'Trademark',
-  //       meta: {
-  //         title: '品牌管理',
-  //         icon: 'ShoppingCart',
-  //         hidden: false,
-  //       },
-  //     },
-  //     {
-  //       path: '/product/attr',
-  //       component: () => import('@/views/product/attr/index.vue'),
-  //       name: 'Attr',
-  //       meta: {
-  //         title: '属性管理',
-  //         icon: 'Management',
-  //         hidden: false,
-  //       },
-  //     },
-  //     {
-  //       path: '/product/spu',
-  //       component: () => import('@/views/product/spu/index.vue'),
-  //       name: 'Spu',
-  //       meta: {
-  //         title: 'Spu',
-  //         icon: 'SetUp',
-  //         hidden: false,
-  //       },
-  //     },
-  //     {
-  //       path: '/product/sku',
-  //       component: () => import('@/views/product/sku/index.vue'),
-  //       name: 'Sku',
-  //       meta: {
-  //         title: 'Sku',
-  //         icon: 'ScaleToOriginal',
-  //         hidden: false,
-  //       },
-  //     },
-  //   ],
-  // },
+  {
+    path: '/Backstage',
+    component: () => import('@/views/backstage/index.vue'),
+    meta: {
+      title: '後台',
+      hidden: false,
+      icon: 'HomeFilled',
+      mustToken:true,
+    },
+    redirect: '/Backstage/shops',
+    children: [
+      {
+        path: '/Backstage/shops',
+        component: () => import('@/components/BackstageShops/src/index.vue'),
+        meta: {
+          title: 'Shops',
+          hidden: false,
+          icon: 'HomeFilled',
+          mustToken:true,
+        },
+      },
+      {
+        path: '/Backstage/users',
+        component: () => import('@/components/BackstageUser/src/index.vue'),
+        meta: {
+          title: 'users',
+          hidden: false,
+          icon: 'HomeFilled',
+          mustToken:true,
+        },
+      },
+      {
+        path: 'category',
+        component: () => import('@/components/BackstageCategory/src/index.vue'),
+        meta: {
+          title: 'ategory',
+          hidden: false,
+          icon: 'HomeFilled',
+          mustToken:true,
+        },
+      },
+    ],
+  },
+]
+
+
+
+export const menuRoutes = [
+  {
+    path: '/Backstage',
+    component: () => import('@/views/backstage/index.vue'),
+    meta: {
+      title: '後台',
+      hidden: false,
+      icon: 'HomeFilled',
+      mustToken:true,
+    },
+    redirect: '/Backstage/shops',
+    children: [
+      {
+        path: '/Backstage/shops',
+        component: () => import('@/components/BackstageShops/src/index.vue'),
+        meta: {
+          title: 'Shops',
+          hidden: false,
+          icon: 'HomeFilled',
+          mustToken:true,
+        },
+      },
+      {
+        path: '/Backstage/users',
+        component: () => import('@/components/BackstageUser/src/index.vue'),
+        meta: {
+          title: 'Users',
+          hidden: false,
+          icon: 'HomeFilled',
+          mustToken:true,
+        },
+      },
+      {
+        path: 'product',
+        component: () => import('@/components/BackstageProduct/src/index.vue'),
+        meta: {
+          title: 'product',
+          hidden: false,
+          icon: 'HomeFilled',
+          mustToken:true,
+        },
+      },
+      {
+        path: 'category',
+        component: () => import('@/components/BackstageCategory/src/index.vue'),
+        meta: {
+          title: 'ategory',
+          hidden: false,
+          icon: 'HomeFilled',
+          mustToken:true,
+        },
+      },
+    ],
+  },
 ]
 export const anyRoute = {
   path: '/:pathMatch(.*)*',

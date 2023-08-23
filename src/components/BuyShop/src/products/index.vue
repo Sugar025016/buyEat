@@ -2,42 +2,40 @@
   <div class="tabs">
     <div class="tabs-header">
       <div
-        v-for="(tab, index) in tabs"
+        v-for="(tab, index) in TabProductsData"
         :key="index"
         :class="{ active: activeTab === index }"
-        @click="changeTab(index)"
       >
-        <span class="tab-label underline">{{ tab.label }}</span>
-        <span class="underline"></span>
+        <span class="tab-label underline" @click="scrollToSection(tab.id)">
+          {{ tab.name }}
+        </span>
       </div>
     </div>
     <div class="tabs-content">
       <div
-        v-for="(tab, index) in tabs"
+        :id="tab.id"
+        v-for="(tab, index) in TabProductsData"
         :key="index"
-        v-show="activeTab === index"
+        v-show="true"
+        class="content"
       >
-        {{ tab.content }}
+        <h3>{{ tab.name }}</h3>
+        <div class="products-body">
+          <component v-for="product in tab.products" :key="product.id">
+            <productsCard
+              :product="product"
+              @click="openModal(product)"
+              data-bs-toggle="modal"
+              data-bs-target="#staticBackdrop"
+            ></productsCard>
+          </component>
+        </div>
       </div>
     </div>
   </div>
   <div class="container">
     <div class="divider"></div>
     <div class="content"></div>
-  </div>
-
-  <div class="products-body">
-    <productsCard></productsCard>
-    <productsCard></productsCard>
-    <productsCard></productsCard>
-    <productsCard></productsCard>
-    <productsCard></productsCard>
-    <productsCard></productsCard>
-    <productsCard></productsCard>
-    <productsCard></productsCard>
-    <productsCard></productsCard>
-    <productsCard></productsCard>
-    <productsCard></productsCard>
   </div>
 
   <button
@@ -49,60 +47,117 @@
     Launch static backdrop modal
   </button>
 
-  <!-- Modal -->
   <div
     class="modal fade"
     id="staticBackdrop"
-    data-bs-backdrop="static"
     data-bs-keyboard="false"
     tabindex="-1"
     aria-labelledby="staticBackdropLabel"
     aria-hidden="true"
   >
-    <product></product>
+    <product-modal
+      :product="productData"
+      title="Modal Title"
+    ></product-modal>
   </div>
 </template>
 
 <script setup lang="ts">
 import productsCard from '.././productsCard/index.vue'
-import product from '../productModal/index.vue'
-import { reactive, ref } from 'vue'
+import productModal from '../productModal/index.vue'
+import { onMounted, ref } from 'vue'
+import { useRoute } from 'vue-router'
+import { getTabProducts } from '@/api/tab'
+import { ProductModalData,TabProductsResponseData, TabData, ProductData  } from '@/api/tab/type'
+import useUserStore from '@/store/modules/user'
+
+let userStore = useUserStore()
+
+// import { ProductData } from '@/api/product/type'
+// import { CategoryResponseData, ProductData, ProductsResponseData } from '@/api/product/type'
+
+console.log('+++++++++$BuyShop + product+-++++++')
+let $route = useRoute()
+
+let id: number = $route.params.id
+
+let TabProductsData = ref<TabData[]>([])
+const isProductModalVisible = ref(false) // 控制是否显示 product-modal
+// const productData = ref({ /* 你的产品数据 */ })
+
+let productData = ref<ProductModalData>({
+  productId: 0,
+  name: '',
+  description: '',
+  qty:1,
+  img: '',
+  prise: 0,
+  department:'',
+  orderUsername:'',
+  note:'',
+})
+
+
+
+
+const openModal = (v: ProductData) => {
+  productData.value.productId=v.id
+  productData.value.name=v.name
+  productData.value.description=''
+  productData.value.qty=1
+  productData.value.img=v.img
+  productData.value.prise=v.prise
+  productData.value.department=''
+  productData.value.orderUsername=userStore.username
+  productData.value.note=''
+
+
+  isProductModalVisible.value = true
+}
+
+console.log('$route.query.id', id)
+const getProductsData = async (id: number) => {
+  let res: TabProductsResponseData = await getTabProducts(id)
+  TabProductsData.value = res.data
+  console.log('productData', TabProductsData.value)
+}
+
+// const openModal = (v: ProductData) => {
+//   productData.value = v
+// }
+
+const scrollToSection = (sectionId: number) => {
+  console.log('--------sectionId-------', sectionId)
+  const element = document.getElementById(sectionId)
+  if (element) {
+    const headerHeight = 100
+    const targetPosition =
+      element.getBoundingClientRect().top + window.scrollY - headerHeight
+    window.scrollTo({ top: targetPosition, behavior: 'smooth' })
+    // element.scrollIntoView({ behavior: 'smooth' })
+  }
+  // VueScrollTo.scrollTo(`#${sectionId}`, 500, { easing: 'ease-in-out' });
+}
+
+onMounted(() => {
+  getProductsData(id)
+})
 
 const showModal = ref(false)
 
-const openModal = () => {
-  showModal.value = !showModal.value
-}
+// const openModal = () => {
+//   showModal.value = !showModal.value
+// }
 
 const closeModal = () => {
   showModal.value = false
+  isProductModalVisible.value = false
 }
 
 interface Tab {
   label: string
   content: string
 }
-
-const tabs: Tab[] = [
-  { label: 'Tab 1------------', content: 'Content 1' },
-  { label: 'Tab 2', content: 'Content 2' },
-  { label: 'Tab 3', content: 'Content 3' },
-  { label: 'Tab 3', content: 'Content 3' },
-  { label: 'Tab 3', content: 'Content 3' },
-  { label: 'Tab 3', content: 'Content 3' },
-  { label: 'Tab 3', content: 'Content 3' },
-  { label: 'Tab 3', content: 'Content 3' },
-  { label: 'Tab 3', content: 'Content 3' },
-  { label: 'Tab 3', content: 'Content 3' },
-  { label: 'Tab 3', content: 'Content 3' },
-  { label: 'Tab 3', content: 'Content 3' },
-  { label: 'Tab 3', content: 'Content 3' },
-  // { label: 'Tab 3', content: 'Content 3' },
-  // { label: 'Tab 3', content: 'Content 3' },
-  // { label: 'Tab 3', content: 'Content 3' },
-  // { label: 'Tab 3', content: 'Content 3' },
-  // { label: 'Tab 3', content: 'Content 3' },
-]
 
 const activeTab = ref(0)
 
@@ -185,20 +240,22 @@ myModal?.addEventListener('shown.bs.modal', () => {
       position: relative;
       padding: 16px 0;
       z-index: 1;
+      font-size: 20px;
+      height: 50px;
+      width: 100%;
     }
 
     .underline {
       position: absolute;
       bottom: 0;
       left: 0;
-      width: 100%;
-      height: 3px;
       background-color: transparent;
       transition: background-color 0.2s;
       display: inline-flex;
       position: relative;
       align-items: center;
       justify-content: center;
+      border-bottom: 3px solid rgba(255, 0, 0, 0);
     }
     div:hover .underline {
       border-bottom: 3px solid $color;
@@ -206,12 +263,16 @@ myModal?.addEventListener('shown.bs.modal', () => {
     div:hover {
       color: #000000;
     }
-    .tabs-content {
-      font-size: 30px;
-      margin: 10px;
-      border-bottom: #636262;
-      display: flex;
-      align-items: center;
+  }
+  .tabs-content {
+    // font-size: 30px;
+    // margin: 10px;
+    // border-bottom: #636262;
+    // display: flex;
+    // align-items: center;
+    .content {
+      margin: 25px 0;
+      // background-color: aqua;
     }
   }
 }

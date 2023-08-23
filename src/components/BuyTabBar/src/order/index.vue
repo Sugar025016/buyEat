@@ -9,7 +9,7 @@
       <span>更多</span>
       <el-dropdown class="car">
         <span class="el-dropdown-link" style="cursor: pointer">
-          {{ userStore.username }}
+          <!-- {{ userStore.username }} -->
           <el-icon class="el-icon--right">
             <arrow-down />
           </el-icon>

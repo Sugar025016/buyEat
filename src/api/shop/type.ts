@@ -15,40 +15,25 @@ export interface CategoryResponseData extends ResponseData {
   data: CategoryObj[]
 }
 
-export interface shopResponseData extends ResponseData {
-  data: Shop[]
-}
-export interface AttrValue {
-  id?: number
-  valueName: string
-  attrId?: number
-  flag?: boolean
-}
 
-export type AttrValueList = AttrValue[]
 
-export interface Attr {
-  id?: number
-  attrName: string
-  categoryId: number | string
-  categoryLevel: number
-  attrValueList: AttrValueList
-}
+export type ShopList = ShopData[]
 
-export type AttrList = Attr[]
-
-export interface AttrResponseData extends ResponseData {
-  data: Attr[]
-}
-
-export type ShopList = Shop[]
-
-export interface Shop {
+export interface ShopData {
   id: number
   name: string
   description: String
   address: String
   img: String
+}
+
+
+export interface ShopsResponseData extends ResponseData {
+  data: ShopList
+}
+
+export interface ShopResponseData extends ResponseData {
+  data: ShopData
 }
 
 export interface Category {

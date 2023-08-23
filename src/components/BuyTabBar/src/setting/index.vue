@@ -1,36 +1,16 @@
 <template>
-  <!-- <el-button circle size="small" :icon="Refresh" @click="updateRefsh" />
-  <el-button circle size="small" :icon="FullScreen" @click="fullScreen" /> -->
-  <!-- <el-popover placement="bottom" title="主题设置" :width="200" trigger="hover">
-    <el-form>
-      <el-form-item label="主题颜色">
-        <el-color-picker
-          v-model="color"
-          show-alpha
-          :predefine="predefineColors"
-          size="small"
-          @change="setColor"
-        />
-      </el-form-item>
-      <el-form-item label="暗黑模式">
-        <el-switch
-          v-model="dark"
-          size="small"
-          inline-prompt
-          active-icon="MoonNight"
-          inactive-icon="Sunny"
-          @change="changeDark"
-        />
-      </el-form-item>
-    </el-form>
-    <template #reference>
-      <el-button circle size="small" :icon="Setting" />
-    </template>
+  <def-svg-icon
+    @click="toLogin"
+    name="person"
+    color="#fd7e14"
+    width="35px"
+    height="35px"
+    class="svg-icon"
+  ></def-svg-icon>
+  <!-- <img :src="userStore.avatar" alt=""  v-if="(userStore.token != '')"/> -->
 
-  </el-popover> -->
-
-  <img :src="userStore.avatar" alt="" />
-  <el-dropdown class="car">
+  <el-dropdown class="car" v-if="userStore.username">
+  <!-- <el-dropdown class="car" > -->
     <span class="el-dropdown-link" style="cursor: pointer">
       {{ userStore.username }}
       <el-icon class="el-icon--right">
@@ -58,17 +38,15 @@
         </el-dropdown-item>
       </el-dropdown-menu>
       <el-dropdown-menu>
-        <el-dropdown-item @click="logout('logout')">登出</el-dropdown-item>
+        <el-dropdown-item @click="logout('BuyShops')">登出</el-dropdown-item>
       </el-dropdown-menu>
     </template>
   </el-dropdown>
-  <div class="car">
-    <!-- <a class="position-relative" href="#"> -->
-    <router-link :to="'/BuyShopCar'" class="link">
+  <div class="car shopCar">
+    <router-link :to="'/BuyShopCart'" class="link">
       <ShoppingBag class="icon car" />
-      <span class="cartQuantity text-white bg-warning conut">3</span>
+      <span class="cartQuantity text-white bg-warning conut">{{ userStore.cartCount }}</span>
     </router-link>
-    <!-- </a> -->
   </div>
 </template>
 
@@ -93,7 +71,8 @@ let dark = ref<boolean>(false)
 const goRoute = (path: string) => {
   $router.push(path)
 }
-console.log('＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃$window.location')
+console.log('＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃$route', $route)
+console.log('＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃$userStore', userStore,userStore.username,userStore.phone)
 console.log(window.location.hash)
 const path = window.location.hash
 $router.getRoutes()
@@ -101,7 +80,14 @@ $router.getRoutes()
 const updateRefsh = () => {
   layoutSettingStore.refsh = !layoutSettingStore.refsh
 }
-
+const toLogin = () => {
+  // $router.push('/login')
+    console.log('＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃$window.location', userStore.token)
+  if (!userStore.token ||userStore.token === undefined ||userStore.token === '') {
+    console.log('＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃$window.location', path)
+    $router.push({ path: '/login', query: { redirect: path } })
+  }
+}
 const fullScreen = () => {
   let full = document.fullscreenElement
   if (!full) {
@@ -112,11 +98,17 @@ const fullScreen = () => {
 }
 
 const logout = async (path: string) => {
-  $router.push(path)
+  let respone = await userStore.userLogout()
+  if (respone === 'ok') {
+    if ($route.meta.mustToken) {
+      $router.push(path)
+    }
+  }
 }
 const userData = 'userData'
 const userLove = 'userLove'
 const changeLink = async (path: string, page: string = userData) => {
+  console.log("@@@###",userStore.username)
   $router.push('/BuyMember/' + path + '/' + page)
 }
 
@@ -157,8 +149,13 @@ img {
   margin: 0 10px;
 }
 
+.svg-icon {
+  border-radius: 20px;
+  margin: 2px;
+}
+
 .car {
-  margin: 0 30px 0 0;
+  // margin: 0 30px 0 0;
   // background-color: aqua;
 
   .icon {
@@ -170,6 +167,10 @@ img {
     background-color: $color;
     // background-color: brown;
   }
+}
+
+.shopCar {
+  margin: 0 0 0 30px;
 }
 
 .position {

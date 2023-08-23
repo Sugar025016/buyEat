@@ -237,7 +237,7 @@ const reset = () => {
   </el-card>
   <el-card style="margin: 10px 0">
     <el-button type="primary" size="default" @click="addUser">
-      添加用户
+      添加商店
     </el-button>
     <el-button
       type="danger"

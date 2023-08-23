@@ -15,9 +15,27 @@
       </el-footer>
     </el-container>
   </div>
+  <div>
+    <div v-if="isLoading" class="loading-overlay">
+      <div class="loading-icon">Loading...</div>
+    </div>
+  </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import useLoadingStore from '@/store/modules/loading'
+import { ref, watch } from 'vue'
+const loadingStore = useLoadingStore()
+
+const isLoading = ref(loadingStore.isLoading)
+
+watch(
+  () => loadingStore.isLoading,
+  (newValue) => {
+    isLoading.value = newValue
+  },
+)
+</script>
 <style lang="scss" scoped>
 .container {
   width: 100%;
@@ -116,5 +134,24 @@
       }
     }
   }
+}
+
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.loading-icon {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
 }
 </style>

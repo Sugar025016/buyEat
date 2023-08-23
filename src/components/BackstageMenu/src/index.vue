@@ -35,7 +35,7 @@
         <el-icon>
           <component :is="item.meta.icon"></component>
         </el-icon>
-        <span>{{ item.meta.title }}2</span>
+        <span>{{ item.meta.title }}</span>
       </template>
       <Menu :menuList="item.children"></Menu>
     </el-sub-menu>

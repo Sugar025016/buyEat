@@ -5,19 +5,19 @@
 
       <div class="text">
         <span>帳號：</span>
-        <span>AAA</span>
+        <span>{{ userStore.account }}</span>
       </div>
       <div class="text">
         <span>姓名：</span>
-        <span>BBBBBB</span>
+        <span>{{ userStore.username }}</span>
       </div>
       <div class="text">
         <span>E-mail：</span>
-        <span>aaaa@gmail.com</span>
+        <span>{{ userStore.email }}</span>
       </div>
       <div class="text">
         <span>手機：</span>
-        <span>09123456789</span>
+        <span>{{ userStore.phone }}</span>
         <el-button class="text-button" round>驗證手機號碼</el-button>
       </div>
       <div class="text">
@@ -62,7 +62,13 @@
     </el-col>
   </el-row>
 </template>
-<script setup lang="ts"></script>
+<script setup lang="ts">
+
+import useUserStore from '@/store/modules/user'
+let userStore = useUserStore()
+
+
+</script>
 <style lang="scss" scoped>
 .member {
   h3 {

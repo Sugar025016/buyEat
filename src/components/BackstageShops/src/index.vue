@@ -1,107 +1,166 @@
 <script setup lang="ts">
-import { ref, onMounted, reactive, nextTick } from 'vue'
-import {
-  reqUserInfo,
-  reqAddOrUpdateUser,
-  reqAllRole,
-  reqSetUserRole,
-  reqRemoveUser,
-  reqSelectUser,
-} from '@/api/acl/user'
+import { ref, onMounted, reactive, nextTick, watch } from 'vue'
+import { reqShopInfo, reqAddOrUpdateShop } from '@/api/backstage/shop'
 import type {
-  UserResponseData,
-  Records,
-  User,
+  ShopSearch,
+  ShopResponseData,
+  ShopList,
+  ShopData,
+  Address,
   AllRoleResponseData,
   AllRole,
   SetRoleData,
-} from '@/api/acl/user/type'
-import useLayOutSettingStore from '@/store/modules/setting'
+} from '@/api/backstage/Shop/type'
+import { ElMessage } from 'element-plus'
+
+import { UploadProps } from 'element-plus/es/components/upload/src/upload'
+import cityAreas from '@/utils/areaData.js'
+import { GET_TOKEN } from '@/utils/token'
+import useUserStore from '@/store/modules/user'
+import { ShopPutRequest } from '@/api/backstage/shop/type'
+// import useLayOutSettingStore from '@/store/modules/setting'
+let userStore = useUserStore()
+
 let pageNo = ref<number>(1)
 
 let pageSize = ref<number>(5)
 
 let total = ref<number>(0)
 
-let userArr = ref<Records>([])
+let shopArr = ref<ShopList>([])
 
 let drawer = ref<boolean>(false)
-let drawer1 = ref<boolean>(false)
 
-let allRole = ref<AllRole>([])
+let shopParams = reactive<ShopPutRequest>({
+  id: 0,
+  userAccount: '',
+  shopName: '',
 
-let userRole = ref<AllRole>([])
-let userParams = reactive<User>({
-  username: '',
-  name: '',
-  password: '',
+  phone: '',
+  description: '',
+  address: {
+    id: 0,
+    city: '',
+    area: '',
+    detail: '',
+  },
+  imgId: 0,
+  imgUrl: undefined,
+  isOrderable: false,
+  disable: false,
 })
 
-let selectIdArr = ref<User[]>([])
+// let ShopParams = reactive<ShopData>({
+//   id: 0,
+//   userAccount: '',
+//   userName: '',
+//   shopName: '',
+//   phone: '',
+//   description: '',
+//   address: {
+//     id: 0,
+//     city: '',
+//     area: '',
+//     detail: '',
+//   },
+//   imgId:0,
+//   imageGetUrl: '',
+//   img: undefined,
+//   isOrderable: false,
+//   disable: false,
+// })
+
+let selectIdArr = ref<ShopData[]>([])
 onMounted(() => {
-  getHasUser()
+  getHasShop()
 })
 
 let formRef = ref<any>()
-let keyword = ref<string>('')
+// let keyword = ref<string>('')
 
-let settingStore = useLayOutSettingStore()
-const getHasUser = async (pager = 1) => {
-  // pageNo.value = pager
-  // let res: UserResponseData = await reqUserInfo(
-  //   pageNo.value,
-  //   pageSize.value,
-  //   keyword.value,
-  // )
-  // if (res.code === 200) {
-  //   total.value = res.data.total
-  //   userArr.value = res.data.records
-  // }
+// let settingStore = useLayOutSettingStore()
+
+let shopSearch: ShopSearch = {}
+const getHasShop = async (pager = 1) => {
+  pageNo.value = pager
+  let res: ShopResponseData = await reqShopInfo(
+    pageNo.value,
+    pageSize.value,
+    shopSearch,
+  )
+  if (res.code === 200) {
+    total.value = res.data.totalElements
+    shopArr.value = res.data.content
+  }
 }
 
 const handler = () => {
-  getHasUser()
+  getHasShop()
 }
 
-const addUser = () => {
+const addShop = () => {
   drawer.value = true
-  Object.assign(userParams, {
+  Object.assign(shopParams, {
     id: 0,
-    username: '',
-    name: '',
-    password: '',
+    userAccount: '',
+    userName: '',
+    shopName: '',
+    phone: '',
+    description: '',
+    address: {
+      city: '',
+      area: '',
+      detail: '',
+    },
+    imgId: 0,
+    imageGetUrl: '',
+    img: '',
   })
   nextTick(() => {
-    formRef.value.clearValidate('username')
-    formRef.value.clearValidate('name')
-    formRef.value.clearValidate('password')
+    //清除特定字段的驗證狀態
+    formRef.value.clearValidate('userAccount')
+    formRef.value.clearValidate('userName')
+    formRef.value.clearValidate('shopName')
+    formRef.value.clearValidate('phone')
   })
 }
 
-const updateUser = (row: User) => {
+const updateShop = (row: ShopData) => {
   drawer.value = true
-  Object.assign(userParams, row)
+  Object.assign(shopParams, row)
+
+  // 创建一个临时的地址对象，以免影响到 row 对象
+  const tempAddress = {
+    id: shopParams.address.id,
+    city: shopParams.address.city,
+    area: shopParams.address.area,
+    detail: shopParams.address.detail,
+  }
+
+  shopParams.address = tempAddress
+
   nextTick(() => {
-    formRef.value.clearValidate('username')
-    formRef.value.clearValidate('name')
+    formRef.value.clearValidate('description')
+    formRef.value.clearValidate('address')
+    formRef.value.clearValidate('img')
   })
 }
 
 const save = async () => {
   formRef.value.validate()
-  let res: any = await reqAddOrUpdateUser(userParams)
+  let res: any = await reqAddOrUpdateShop(shopParams)
   if (res.code === 200) {
     drawer.value = false
     ElMessage({
       type: 'success',
-      message: userParams.id ? '更新成功' : '添加成功',
+      message: shopParams.id ? '更新成功' : '添加成功',
     })
     window.location.reload()
   } else {
     drawer.value = false
     ElMessage({
       type: 'error',
-      message: userParams.id ? '更新失败' : '添加失败',
+      message: shopParams.id ? '更新失败' : '添加失败',
     })
   }
 }
@@ -110,114 +169,136 @@ const cancel = () => {
   drawer.value = false
 }
 
-const validatorUserName = (rule: any, value: any, callBack: any) => {
-  if (value.trim().length >= 5) {
+const validatorShopName = (rule: any, value: any, callBack: any) => {
+  if (value.trim().length >= 2) {
     callBack()
   } else {
-    callBack(new Error('用户名字至少五位'))
+    callBack(new Error('商店名稱至少2位'))
   }
 }
 
-const validatorName = (rule: any, value: any, callBack: any) => {
-  if (value.trim().length >= 5) {
+const validatorShopPhone = (rule: any, value: any, callBack: any) => {
+  if (value.trim().length >= 10 && length <= 11) {
     callBack()
   } else {
-    callBack(new Error('用户昵称至少五位'))
+    callBack(new Error('商店電話至少10位~11位'))
   }
 }
 
-const validatorPassword = (rule: any, value: any, callBack: any) => {
-  if (value.trim().length >= 5) {
+const validatorShopDescription = (rule: any, value: any, callBack: any) => {
+  if (value.trim().length <= 255) {
     callBack()
   } else {
-    callBack(new Error('用户密码至少六位'))
+    callBack(new Error('商店介紹不可超過255個字'))
   }
 }
 
+const validatorShopAddressDetail = (rule: any, value: any, callBack: any) => {
+  if (value.trim().length <= 255) {
+    callBack()
+  } else {
+    callBack(new Error('商店地址不可超過255個字'))
+  }
+}
 const rules = {
-  username: [{ required: true, trigger: 'blur', validator: validatorUserName }],
-  name: [{ required: true, trigger: 'blur', validator: validatorName }],
-  password: [{ required: true, trigger: 'blur', validator: validatorPassword }],
+  shopName: [{ required: true, trigger: 'blur', validator: validatorShopName }],
+  phone: [{ required: true, trigger: 'blur', validator: validatorShopPhone }],
+  description: [
+    { required: true, trigger: 'blur', validator: validatorShopDescription },
+  ],
+  addressDetail: [
+    { required: true, trigger: 'blur', validator: validatorShopAddressDetail },
+  ],
 }
 
-const setRole = async (row: User) => {
-  drawer1.value = true
-  Object.assign(userParams, row)
-  let res: AllRoleResponseData = await reqAllRole(userParams.id as number)
-  if (res.code === 200) {
-    allRole.value = res.data.allRolesList
-    userRole.value = res.data.assignRoles
-    drawer1.value = true
-  }
-}
+// const checkAll = ref<boolean>(false)
+// const isIndeterminate = ref<boolean>(true)
 
-const checkAll = ref<boolean>(false)
-const isIndeterminate = ref<boolean>(true)
+// const handleCheckAllChange = (val: boolean) => {
+//   ShopRole.value = val ? allRole.value : []
+//   isIndeterminate.value = false
+// }
 
-const handleCheckAllChange = (val: boolean) => {
-  userRole.value = val ? allRole.value : []
-  isIndeterminate.value = false
-}
+// const handleCheckedShopsChange = (value: string[]) => {
+//   const checkedCount = value.length
+//   checkAll.value = checkedCount === allRole.value.length
+//   isIndeterminate.value =
+//     checkedCount > 0 && checkedCount < allRole.value.length
+// }
 
-const handleCheckedUsersChange = (value: string[]) => {
-  const checkedCount = value.length
-  checkAll.value = checkedCount === allRole.value.length
-  isIndeterminate.value =
-    checkedCount > 0 && checkedCount < allRole.value.length
-}
-
-const confirmClick = async () => {
-  let data: SetRoleData = {
-    userId: userParams.id as number,
-    roleIdList: userRole.value.map((item) => {
-      return item.id as number
-    }),
-  }
-  let res: any = await reqSetUserRole(data)
-  if (res.code === 200) {
-    ElMessage({
-      type: 'success',
-      message: '分配职务成功',
-    })
-    drawer1.value = false
-    getHasUser(pageNo.value)
-  }
-}
-
-const deleteUser = async (userId: number) => {
-  let res: any = await reqRemoveUser(userId)
-  if (res.code === 200) {
-    ElMessage({ type: 'success', message: '删除成功' })
-    getHasUser(userArr.value.length > 1 ? pageNo.value : pageNo.value - 1)
-  }
-}
+// const deleteShop = async (ShopId: number) => {
+//   let res: any = await reqRemoveShop(ShopId)
+//   if (res.code === 200) {
+//     ElMessage({ type: 'success', message: '删除成功' })
+//     getHasShop(ShopArr.value.length > 1 ? pageNo.value : pageNo.value - 1)
+//   }
+// }
 
 const selectChange = (value: any) => {
   selectIdArr.value = value
 }
 
-const deleteSelectUser = async () => {
-  let idList: any = selectIdArr.value.map((item) => {
-    return item.id
-  })
-  let res: any = await reqSelectUser(idList)
-  if (res.code === 200) {
-    ElMessage({ type: 'success', message: '删除成功' })
-    getHasUser(userArr.value.length > 1 ? pageNo.value : pageNo.value - 1)
+// const deleteSelectShop = async () => {
+//   let idList: any = selectIdArr.value.map((item) => {
+//     return item.id
+//   })
+//   let res: any = await reqSelectShop(idList)
+//   if (res.code === 200) {
+//     ElMessage({ type: 'success', message: '删除成功' })
+//     getHasShop(ShopArr.value.length > 1 ? pageNo.value : pageNo.value - 1)
+//   }
+// }
+
+// const search = () => {
+//   getHasShop()
+//   keyword.value = ''
+// }
+
+// const reset = () => {
+//   settingStore.refsh = !settingStore.refsh
+// }
+
+const city: string[] = Object.keys(cityAreas)
+
+const beforeAvatarUpload: UploadProps['beforeUpload'] = (rawFile) => {
+  if (
+    rawFile.type === 'image/png' ||
+    rawFile.type === 'image/jpeg' ||
+    rawFile.type === 'image/gif'
+  ) {
+    if (rawFile.size / 1024 / 1024 < 4) {
+      return true
+    } else {
+      ElMessage({
+        type: 'error',
+        message: '上传的文件大小应小于4M',
+      })
+    }
+  } else {
+    ElMessage({
+      type: 'error',
+      message: '上传的文件类型必须是PNG|JPG|GIF',
+    })
+    return false
   }
 }
-
-const search = () => {
-  getHasUser()
-  keyword.value = ''
+console.log(' GET_TOKEN()--------', GET_TOKEN())
+console.log(' userStore.token--------', userStore.token)
+const uploadHeaders = {
+  'X-CSRF-Token': userStore.token, // 初始为空
 }
-
-const reset = () => {
-  settingStore.refsh = !settingStore.refsh
+const handleAvatarSuccess: UploadProps['onSuccess'] = (
+  response,
+  uploadFile,
+) => {
+  console.log(response)
+  shopParams.imgUrl = response.url
+  shopParams.imgId = response.id
+  formRef.value.clearValidate('img')
 }
 </script>
 <template>
-  <el-card style="height: 80px">
+  <!-- <el-card style="height: 80px">
     <el-form :inline="true" class="form">
       <el-form-item label="用户名:">
         <el-input placeholder="请你输入搜索用户名" v-model="keyword"></el-input>
@@ -234,75 +315,113 @@ const reset = () => {
         <el-button size="default" @click="reset">重置</el-button>
       </el-form-item>
     </el-form>
-  </el-card>
+  </el-card> -->
   <el-card style="margin: 10px 0">
-    <el-button type="primary" size="default" @click="addUser">
-      添加用户
+    <el-button type="primary" size="default" @click="addShop">
+      添加商店
     </el-button>
     <el-button
       type="danger"
       size="default"
       :disabled="selectIdArr.length ? false : true"
-      @click="deleteSelectUser"
+      @click="deleteSelectShop"
     >
       批量删除
     </el-button>
     <el-table
       style="margin: 10px 0"
-      border
-      :data="userArr"
+      :data="shopArr"
       @selection-change="selectChange"
+      border
     >
       <el-table-column type="selection" align="center"></el-table-column>
       <el-table-column label="#" align="center" type="index"></el-table-column>
-      <el-table-column label="id" align="center" prop="id"></el-table-column>
       <el-table-column
-        label="用户名字"
+        label="id"
         align="center"
-        prop="username"
+        prop="id"
+        width="50"
+      ></el-table-column>
+      <el-table-column
+        label="用戶帳號"
+        prop="userAccount"
+        width="100"
+      ></el-table-column>
+      <el-table-column
+        label="用戶名稱"
+        prop="userName"
+        width="100"
+      ></el-table-column>
+      <el-table-column
+        label="商店名稱"
+        prop="shopName"
+        width="100"
+      ></el-table-column>
+      <el-table-column
+        label="商店電話"
+        prop="phone"
         show-overflow-tooltip
       ></el-table-column>
       <el-table-column
-        label="用户名称"
-        align="center"
-        prop="name"
-        show-overflow-tooltip
+        label="標籤"
+        prop="tabs"
       ></el-table-column>
-      <el-table-column
-        label="用户角色"
-        align="center"
-        prop="roleName"
-        show-overflow-tooltip
-      ></el-table-column>
+      <el-table-column label="介紹" prop="description"></el-table-column>
+      <el-table-column label="地址">
+        <template #default="{ row }">
+          {{ row.address.city }} - {{ row.address.area }} -
+          {{ row.address.detail }}
+        </template>
+      </el-table-column>
       <el-table-column
         label="创建时间"
-        align="center"
         prop="createTime"
         show-overflow-tooltip
       ></el-table-column>
       <el-table-column
         label="更新时间"
-        align="center"
         prop="updateTime"
         show-overflow-tooltip
       ></el-table-column>
-      <el-table-column label="操作" width="300px" align="center">
+      <el-table-column
+        label="imgUrl"
+        prop="imgUrl"
+        align="center"
+        show-overflow-tooltip
+      >
         <template #="{ row, $index }">
-          <el-button size="small" icon="User" @click="setRole(row)">
-            分配角色
-          </el-button>
+          <img :src="row.imgUrl" alt="" style="width: 130px; height: 100px" />
+        </template>
+      </el-table-column>
+
+      <el-table-column label="操作" width="180px" align="center">
+        <template #="{ row, $index }">
+          <div>
+            開始訂購:
+            <el-switch v-model="row.isOrderable" />
+          </div>
+          <div>
+            關閉商店:
+            <el-switch
+              v-model="row.disable"
+              style="
+                --el-switch-on-color: #13ce66;
+                --el-switch-off-color: #ff4949;
+              "
+            />
+          </div>
           <el-button
             type="primary"
             size="small"
             icon="Edit"
-            @click="updateUser(row)"
+            @click="updateShop(row)"
           >
             编辑
           </el-button>
           <el-popconfirm
-            :title="`你确定删除${row.username}`"
+            :title="`你确定删除${row.ShopName}`"
             width="260px"
-            @confirm="deleteUser(row.id)"
+            @confirm="deleteShop(row.id)"
           >
             <template #reference>
               <el-button type="danger" size="small" icon="Delete">
@@ -320,33 +439,106 @@ const reset = () => {
       :background="true"
       layout="prev, pager, next, jumper, -> , sizes, total"
       :total="total"
-      @current-change="getHasUser"
+      @current-change="getHasShop"
       @size-change="handler"
     />
   </el-card>
   <el-drawer v-model="drawer">
     <template #header>
-      <h4>{{ userParams.id ? '更新用户' : '添加用户' }}</h4>
+      <h4>{{ shopParams.id ? '更新商店' : '添加商店' }}</h4>
     </template>
     <template #default>
-      <el-form :model="userParams" :rules="rules" ref="formRef">
-        <el-form-item label="用户姓名" prop="username">
+      <el-form :model="shopParams" :rules="rules" ref="formRef">
+        <el-form-item label="會員帳號" prop="userAccount" v-if="!shopParams.id">
           <el-input
-            placeholder="请您输入用户姓名"
-            v-model="userParams.username"
+            placeholder="请您输入會員帳號"
+            v-model="shopParams.userAccount"
           ></el-input>
         </el-form-item>
-        <el-form-item label="用户昵称" prop="name">
+        <el-form-item label="商店名稱" prop="shopName" v-if="!shopParams.id">
           <el-input
-            placeholder="请您输入用户昵称"
-            v-model="userParams.name"
+            placeholder="请您输入商店名稱"
+            v-model="shopParams.shopName"
           ></el-input>
         </el-form-item>
-        <el-form-item label="用户密码" prop="password" v-if="!userParams.id">
+        <el-form-item label="商店電話" prop="phone">
           <el-input
-            placeholder="请您输入用户密码"
-            v-model="userParams.password"
+            placeholder="请您输入商店電話"
+            v-model="shopParams.phone"
           ></el-input>
+        </el-form-item>
+        <el-form-item label="商店介紹" prop="description">
+          <el-input
+            placeholder="请您输入商店介紹"
+            v-model="shopParams.description"
+          ></el-input>
+        </el-form-item>
+        <el-form-item label="地址-city" prop="addressDetail">
+          <el-select
+            v-model="shopParams.address.city"
+            class="m-2"
+            placeholder="Select"
+            size="large"
+          >
+            <el-option
+              v-for="(item, index) in city"
+              :key="index"
+              :label="item"
+              :value="item"
+              :disabled="index === 0"
+            />
+          </el-select>
+        </el-form-item>
+
+        <el-form-item label="地址-area" prop="addressDetail">
+          <el-select
+            v-model="shopParams.address.area"
+            class="m-2"
+            placeholder="Select"
+            size="large"
+            no-data-text="請先選擇城市"
+          >
+            <el-option
+              v-for="(item, index) in cityAreas[
+                shopParams.address.city as keyof typeof cityAreas
+              ]"
+              :key="item"
+              :label="item"
+              :value="item"
+              :disabled="index === 0"
+            />
+          </el-select>
+        </el-form-item>
+        <el-form-item label="地址-detail" prop="addressDetail">
+          <el-input
+            size="large"
+            placeholder="请您输入商店地址"
+            v-model="shopParams.address.detail"
+          ></el-input>
+        </el-form-item>
+        <el-form-item label="商店圖">
+          <el-upload
+            class="avatar-uploader"
+            action="/api/api/upload"
+            :show-file-list="false"
+            :on-success="handleAvatarSuccess"
+            :before-upload="beforeAvatarUpload"
+            :with-credentials="true"
+            :headers="uploadHeaders"
+          >
+            <!-- <img
+              v-if="ShopParams.img"
+              :src="`${ShopParams.imageGetUrl}${ShopParams.img}`"
+              class="avatar"
+            /> -->
+
+            <img
+              v-if="shopParams.imgUrl"
+              :src="shopParams.imgUrl"
+              class="avatar"
+            />
+            <el-icon v-else class="avatar-uploader-icon"><Plus /></el-icon>
+          </el-upload>
         </el-form-item>
       </el-form>
     </template>
@@ -354,45 +546,6 @@ const reset = () => {
       <div style="flex: auto">
         <el-button @click="cancel">取消</el-button>
         <el-button type="primary" @click="save">确定</el-button>
-      </div>
-    </template>
-  </el-drawer>
-  <el-drawer v-model="drawer1">
-    <template #header>
-      <h4>分配角色</h4>
-    </template>
-    <template #default>
-      <el-form>
-        <el-form-item label="用户姓名">
-          <el-input v-model="userParams.username" :disabled="true"></el-input>
-        </el-form-item>
-        <el-form-item label="职位列表">
-          <el-checkbox
-            v-model="checkAll"
-            :indeterminate="isIndeterminate"
-            @change="handleCheckAllChange"
-          >
-            全选
-          </el-checkbox>
-          <el-checkbox-group
-            v-model="userRole"
-            @change="handleCheckedUsersChange"
-          >
-            <el-checkbox
-              v-for="(role, index) in allRole"
-              :key="index"
-              :label="role"
-            >
-              {{ role.roleName }}
-            </el-checkbox>
-          </el-checkbox-group>
-        </el-form-item>
-      </el-form>
-    </template>
-    <template #footer>
-      <div style="flex: auto">
-        <el-button @click="drawer1 = false">取消</el-button>
-        <el-button type="primary" @click="confirmClick">确定</el-button>
       </div>
     </template>
   </el-drawer>

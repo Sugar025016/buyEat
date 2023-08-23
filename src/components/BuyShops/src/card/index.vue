@@ -1,5 +1,5 @@
 <template>
-  <el-card class="card" :body-style="{ padding: '0px' }">
+  <el-card class="card" @click="toShop(shop.id)" :body-style="{ padding: '0px' }">
     <div class="image-container">
       <img
         v-if="shop.img"
@@ -25,16 +25,24 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 
+import { useRouter } from 'vue-router'
 defineProps(['shop'])
 
 const currentDate = ref(new Date())
 
+let $router = useRouter()
 var imageContainer = document.querySelector('.image-container')
 var image = imageContainer?.querySelector('img')
 
 image?.addEventListener('load', function () {
   imageContainer?.classList.add('loaded')
 })
+
+const toShop = (id: number) => {
+  console.log('Clicked with ID:', id);
+  $router.push(`/BuyShop/${id}`)
+}
+
 </script>
 
 <style lang="scss" scoped>
@@ -46,6 +54,7 @@ image?.addEventListener('load', function () {
   overflow: visible;
 }
 .card {
+  // padding: 0px;
   cursor: pointer;
   position: relative;
 

@@ -8,7 +8,6 @@
         <shop></shop>
       </div>
     </div>
-
     <div class="buy-product-footer">
       <products></products>
     </div>
@@ -34,11 +33,9 @@ import shop from './shop/index.vue'
       align-items: center;
       justify-content: flex-end;
     }
-
-    // .header-shop {
-    // }
-    // .buy-product-footer {
-    // }
+  }
+  .buy-product-footer {
+    margin: 30px 0 0 0;
   }
 }
 </style>

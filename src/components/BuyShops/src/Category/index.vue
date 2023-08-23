@@ -5,7 +5,11 @@ import useShopStore from '@/store/modules/shop'
 import { ShopSearch } from '@/api/shop/type'
 import { getCategoryList } from '@/api/category'
 import cityAreas from '@/utils/areaData.js'
-import { Category, CategoryList } from '@/api/category/type'
+import {
+  Category,
+  CategoryList,
+  CategoryListResponse,
+} from '@/api/category/type'
 
 let selectedOption1 = ref(0)
 let selectedOption2 = ref('')
@@ -38,12 +42,13 @@ let shopStore = useShopStore()
 
 console.log('let categoryList: CategoryList', categoryList)
 const getCategory = async () => {
-  let res: CategoryList = await getCategoryList()
-  categoryList.value = res
+  let res: CategoryListResponse = await getCategoryList()
+  categoryList.value = res.data
   console.log('categoryList', categoryList)
 }
 const getC1 = async () => {
-  shopStore.getShopList(data)
+  console.log('data', data)
+  await shopStore.getShopList(data)
   console.log('shopStore', shopStore.c1Arr)
 }
 
@@ -62,10 +67,7 @@ const handleInput = () => {
 }
 
 const search = () => {
-  console.log('const search = () => {')
   if (searchText.value) {
-    // Perform search logic
-    // Add searchText to searchHistory
     if (!searchHistory.value.includes(searchText.value)) {
       searchHistory.value.unshift(searchText.value)
       if (searchHistory.value.length > 5) {
@@ -187,6 +189,7 @@ onMounted(() => {
     padding: 0px;
     display: flex;
     align-items: center;
+    
 
     .custom-select-wrapper {
       width: 100%;
@@ -255,6 +258,7 @@ onMounted(() => {
         border: 0px solid #ccc;
         border-radius: 40px 0 0 40px;
         outline: none;
+        background: #cccccc00;
       }
 
       button {
@@ -268,6 +272,10 @@ onMounted(() => {
         border-radius: 40px;
         width: 20%;
       }
+    }
+
+    .search-input:hover {
+      border: 1px solid $color;
     }
 
     .search-history {
