@@ -1,4 +1,3 @@
-
 import request from '@/utils/request'
 import type {
   UserResponseData,
@@ -19,8 +18,8 @@ enum API {
 
 export const reqUserInfo = (page: number, limit: number, username: string) =>
   request.get<any, UserResponseData>(
-    API.ALLUSER_URL + `?name=${username}&page=${page-1}&size=${limit}`
-)
+    API.ALLUSER_URL + `?name=${username}&page=${page - 1}&size=${limit}`,
+  )
 
 export const reqAddOrUpdateUser = (data: User) => {
   if (data.id) {

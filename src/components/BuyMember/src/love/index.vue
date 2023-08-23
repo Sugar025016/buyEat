@@ -10,13 +10,11 @@ import Card from '../card/index.vue'
 
 import useUserStore from '@/store/modules/user'
 import { onMounted, ref } from 'vue'
-import {  ProductList } from '@/api/user/type'
+import { ProductList } from '@/api/user/type'
 
 let userStore = useUserStore()
 
 let loves = ref<ProductList>([])
-
-
 
 onMounted(() => {
   getLove()

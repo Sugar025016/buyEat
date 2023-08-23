@@ -39,7 +39,13 @@
           </el-input>
         </el-form-item>
         <el-form-item prop="verifyCode">
-          <el-checkbox  class="custom-checkbox" v-model="loginForm.rememberMe" label="記住我" size="large" text-color="#F56C6C"/>
+          <el-checkbox
+            class="custom-checkbox"
+            v-model="loginForm.rememberMe"
+            label="記住我"
+            size="large"
+            text-color="#F56C6C"
+          />
         </el-form-item>
       </el-form>
       <el-form-item>

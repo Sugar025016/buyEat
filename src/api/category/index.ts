@@ -4,5 +4,5 @@ enum API {
   CATEGORY = '/api/category',
 }
 
-export const getCategoryList = () => 
-request.get<any, CategoryListResponse>(API.CATEGORY)
+export const getCategoryList = () =>
+  request.get<any, CategoryListResponse>(API.CATEGORY)

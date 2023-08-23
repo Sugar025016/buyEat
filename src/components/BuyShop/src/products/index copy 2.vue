@@ -55,7 +55,10 @@
     aria-labelledby="staticBackdropLabel"
     aria-hidden="true"
   >
-    <product-modal v-if="isProductModalVisible"  :product="productData" ></product-modal>
+    <product-modal
+      v-if="isProductModalVisible"
+      :product="productData"
+    ></product-modal>
   </div>
 </template>
 
@@ -65,7 +68,7 @@ import productModal from '../productModal/index.vue'
 import { onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { getTabProducts } from '@/api/tab'
-import { TabProductsResponseData, TabData ,ProductData } from '@/api/tab/type'
+import { TabProductsResponseData, TabData, ProductData } from '@/api/tab/type'
 // import { ProductData } from '@/api/product/type'
 // import { CategoryResponseData, ProductData, ProductsResponseData } from '@/api/product/type'
 
@@ -82,8 +85,8 @@ let productData = ref<ProductData>({
   id: '',
   name: '',
   description: '',
-  img:'',
-  prise:0
+  img: '',
+  prise: 0,
 })
 const openModal = (v: ProductData) => {
   productData.value = v

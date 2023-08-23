@@ -15,8 +15,6 @@ export interface CategoryResponseData extends ResponseData {
   data: CategoryObj[]
 }
 
-
-
 export type ShopList = ShopData[]
 
 export interface ShopData {
@@ -26,7 +24,6 @@ export interface ShopData {
   address: String
   img: String
 }
-
 
 export interface ShopsResponseData extends ResponseData {
   data: ShopList

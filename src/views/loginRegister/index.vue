@@ -26,9 +26,9 @@
     grid-template-rows: 1fr auto;
     .buy-body {
       margin: 10px;
-  display: flex;
-  align-items:center;
-  justify-content:center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     .buy-el-footer {
       background-color: black;

@@ -4,8 +4,6 @@ export interface ResponseData {
   ok: boolean
 }
 
-
-
 export interface Address {
   id?: number
   city: string
@@ -22,7 +20,7 @@ export interface ProductData {
   description: string
   prise: number
   isOrderable: boolean
-  isDelete:boolean
+  isDelete: boolean
   createTime: string
   updateTime: string
   imgId?: number
@@ -39,12 +37,9 @@ export interface Page {
   totalPages: number
 }
 
-
 export interface ProductResponseData extends ResponseData {
   data: Page
 }
-
-
 
 export interface ProductSearch {
   city?: string
@@ -63,7 +58,7 @@ export interface ProductPutRequest {
   description: string
   prise: number
   isOrderable: boolean
-  isDelete:boolean
+  isDelete: boolean
   imgId?: number
   imgUrl?: URL
 }
@@ -78,7 +73,7 @@ export interface ProductAddRequest {
   description: string
   prise: number
   isOrderable: boolean
-  isDelete:boolean
+  isDelete: boolean
   createTime: string
   updateTime: string
   imgId?: number

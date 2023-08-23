@@ -61,7 +61,11 @@ import productModal from '../productModal/index.vue'
 import { onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { getProducts } from '@/api/product'
-import { CategoryResponseData, ProductData, ProductsResponseData } from '@/api/product/type'
+import {
+  CategoryResponseData,
+  ProductData,
+  ProductsResponseData,
+} from '@/api/product/type'
 
 console.log('+++++++++$BuyShop + product+-++++++')
 let $route = useRoute()

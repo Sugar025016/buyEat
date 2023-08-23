@@ -89,8 +89,6 @@ const loveTabs: Tab[] = [
 const changeTab = (name: string, number: string = userData) => {
   $router.push('/BuyMember/' + name + '/' + number)
 }
-
-
 </script>
 <style lang="scss" scoped>
 .member {

@@ -97,7 +97,6 @@ import { ShopData, ShopResponseData } from '@/api/shop/type'
 
 import { ShopList } from '@/api/user/type'
 
-
 let $route = useRoute()
 
 let id: number = parseInt($route.params.id as string)
@@ -106,23 +105,21 @@ let shopData = ref<ShopData>()
 let isFavorite = ref<boolean>()
 let favorite = ref('')
 
-
 import useUserStore from '@/store/modules/user'
 let userStore = useUserStore()
-const isLove = (v:ShopList) => {
+const isLove = (v: ShopList) => {
   isFavorite.value = v?.some((v: ShopData) => v.id === id)
-  console.log("@@@@@@@@@@@@userStore.favoriteShop",userStore.favoriteShop)
-  if( isFavorite.value){
-    favorite.value='#fd7e14'
-  }else{
-    favorite.value='rgb(139, 139, 139)'
+  console.log('@@@@@@@@@@@@userStore.favoriteShop', userStore.favoriteShop)
+  if (isFavorite.value) {
+    favorite.value = '#fd7e14'
+  } else {
+    favorite.value = 'rgb(139, 139, 139)'
   }
 }
 onMounted(() => {
   getShopData(id)
   isLove(userStore.favoriteShop)
 })
-
 
 const changeFavorite = async () => {
   await userStore.changeFavoriteStore(id)
@@ -134,7 +131,7 @@ watch(
     isLove(userStore.favoriteShop)
   },
 )
-onMounted(async() => {
+onMounted(async () => {
   await getShopData(id)
   await isLove(userStore.favoriteShop)
 })
@@ -260,7 +257,7 @@ $b-color: $color;
         }
         .shop-button:hover {
           background-color: $color;
-          color:white ;
+          color: white;
         }
       }
     }

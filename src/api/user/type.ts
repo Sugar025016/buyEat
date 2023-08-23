@@ -26,22 +26,19 @@ export interface UserInfoResponseData extends ResponseData {
     name: string
     account: string
     phone: string
-    email:string
+    email: string
     favoriteShops: ShopList
     avatar: string
-    cartCount:number
+    cartCount: number
   }
 }
-
-
 
 export interface UserProfile {
   name: string
   account: string
   phone: string
-  email:string
+  email: string
 }
-
 
 export interface UserPwd {
   password: string
@@ -51,9 +48,6 @@ export interface UserPwd {
 export interface UserProfileChangeResponse extends ResponseData {
   data: string
 }
-
-
-
 
 export interface ShopData {
   id: number

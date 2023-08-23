@@ -362,10 +362,7 @@ const handleAvatarSuccess: UploadProps['onSuccess'] = (
         prop="phone"
         show-overflow-tooltip
       ></el-table-column>
-      <el-table-column
-        label="標籤"
-        prop="tabs"
-      ></el-table-column>
+      <el-table-column label="標籤" prop="tabs"></el-table-column>
       <el-table-column label="介紹" prop="description"></el-table-column>
       <el-table-column label="地址">
         <template #default="{ row }">

@@ -19,7 +19,7 @@ router.beforeEach(async (to, from, next) => {
   let username = userStore.username
   console.log('username:' + username)
   console.log('token:' + token)
-  if(token&& !username){
+  if (token && !username) {
     try {
       console.log('7777777777777777777')
       console.log('to', to)
@@ -28,7 +28,6 @@ router.beforeEach(async (to, from, next) => {
       console.log('777777777-------------')
       next({ ...to })
     } catch (error) {
-
       console.log('路由報錯清空userStore')
       await userStore.userClear()
       next({ path: '/login', query: { redirect: to.path } })
@@ -47,7 +46,7 @@ router.beforeEach(async (to, from, next) => {
       } else {
         console.log('4444444444444444444')
         console.log('username:' + username)
-          next()
+        next()
       }
     } else {
       if (to.path == '/login') {
@@ -57,18 +56,13 @@ router.beforeEach(async (to, from, next) => {
         next({ path: '/login', query: { redirect: to.path } })
       }
     }
-  } else if (to.path === '/login' && token ) {
-
+  } else if (to.path === '/login' && token) {
     next({ path: '/' })
   } else {
-
     console.log('10101010101010101010')
     console.log(to)
     next()
   }
-
-
-
 })
 // 全局后置守卫
 

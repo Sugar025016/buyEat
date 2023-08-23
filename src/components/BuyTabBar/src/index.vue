@@ -5,7 +5,7 @@
         <BreadCrumb />
       </div>
       <div class="toolbar_order">
-        <order ></order>
+        <order></order>
       </div>
       <div class="toolbar_right">
         <Setting />

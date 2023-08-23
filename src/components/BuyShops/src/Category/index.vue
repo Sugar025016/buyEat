@@ -189,7 +189,6 @@ onMounted(() => {
     padding: 0px;
     display: flex;
     align-items: center;
-    
 
     .custom-select-wrapper {
       width: 100%;

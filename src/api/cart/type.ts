@@ -4,7 +4,6 @@ export interface ResponseData {
   ok: boolean
 }
 
-
 export interface CartsData {
   shopId?: number
   shopName: string
@@ -30,11 +29,9 @@ export interface ProductResponse {
   isOrderable: boolean
 }
 
-
 export interface CartResponseData extends ResponseData {
   data: CartsData
 }
-
 
 export interface CartRequest {
   cartId?: number
@@ -44,5 +41,3 @@ export interface CartRequest {
   qty: number
   note: String
 }
-
-

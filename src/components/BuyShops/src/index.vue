@@ -37,9 +37,7 @@ import Category from './Category/index.vue'
 
 import useShopStore from '@/store/modules/shop'
 
-
 let categoryStore = useShopStore()
-
 </script>
 <style lang="scss" scoped>
 .shadow {

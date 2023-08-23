@@ -1,6 +1,6 @@
 <template>
   <div class="common-layout">
-    <el-container   style="height: 100vh">
+    <el-container style="height: 100vh">
       <!-- <el-aside width="200px">
 
       </el-aside> -->
@@ -137,6 +137,4 @@ let $route = useRoute()
     }
   }
 }
-
-
 </style>

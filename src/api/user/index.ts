@@ -1,4 +1,3 @@
-
 import request from '@/utils/request'
 import type {
   LoginFormData,
@@ -21,12 +20,10 @@ enum API {
 export const reqLogin = (data: FormData) =>
   request.post<any, LoginResponseData>(API.LOGIN_URL, data)
 
-
 export const reqUserInfo = () =>
   request.get<any, UserInfoResponseData>(API.USERINFO_URL)
 
 export const reqLogOut = () => request.get<any, any>(API.LOGOUT_URL)
-
 
 export const reqChangeUserInfo = (userProfile: UserProfile) =>
   request.put<any, UserInfoResponseData>(API.USERINFO_URL, userProfile)
@@ -39,4 +36,3 @@ export const reqFavorites = () =>
 
 export const reqChangeFavorite = (id: number) =>
   request.put<any, LovesResponseData>(API.USER_FAVORITE_URL + '/' + id)
-

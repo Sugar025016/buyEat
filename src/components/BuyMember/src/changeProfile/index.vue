@@ -39,7 +39,6 @@
       確認修改
     </el-button>
   </div>
-
 </template>
 <script setup lang="ts">
 import useUserStore from '@/store/modules/user'
@@ -50,7 +49,7 @@ import { UserProfile } from '@/api/user/type'
 
 let userStore = useUserStore()
 
-const loadingStore = useLoadingStore();
+const loadingStore = useLoadingStore()
 
 let userProfile = ref<UserProfile>({
   account: '',
@@ -76,8 +75,6 @@ const changeUserProfile = async () => {
   loadingStore.stopLoading()
   loadingStore.open(response)
 }
-
-
 </script>
 <style lang="scss" scoped>
 .changeProfile-header {
@@ -114,8 +111,8 @@ const changeUserProfile = async () => {
     background-color: $color;
   }
   .button:hover {
-      background-color: rgb(253, 102, 20);
-    }
+    background-color: rgb(253, 102, 20);
+  }
 }
 
 .loading-overlay {

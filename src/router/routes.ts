@@ -7,7 +7,7 @@ export const constantRoute = [
       title: 'buy',
       hidden: false,
       icon: '',
-      mustToken:false,
+      mustToken: false,
     },
     redirect: '/BuyShops',
     children: [
@@ -19,7 +19,7 @@ export const constantRoute = [
           title: '首页',
           hidden: false,
           icon: 'HomeFilled',
-          mustToken:false,
+          mustToken: false,
         },
       },
       {
@@ -29,7 +29,7 @@ export const constantRoute = [
           title: 'BuyMember',
           hidden: false,
           icon: 'HomeFilled',
-          mustToken:true,
+          mustToken: true,
         },
         redirect: '/BuyMember/profile/:number',
         children: [
@@ -42,7 +42,7 @@ export const constantRoute = [
               title: 'profile',
               hidden: false,
               icon: 'HomeFilled',
-              mustToken:true,
+              mustToken: true,
             },
           },
           {
@@ -54,7 +54,7 @@ export const constantRoute = [
               title: 'changeProfile',
               hidden: false,
               icon: 'HomeFilled',
-              mustToken:true,
+              mustToken: true,
             },
           },
           {
@@ -66,7 +66,7 @@ export const constantRoute = [
               title: 'changeCompany',
               hidden: false,
               icon: 'HomeFilled',
-              mustToken:true,
+              mustToken: true,
             },
           },
           {
@@ -78,7 +78,7 @@ export const constantRoute = [
               title: 'changePassword',
               hidden: false,
               icon: 'HomeFilled',
-              mustToken:true,
+              mustToken: true,
             },
           },
           {
@@ -90,7 +90,7 @@ export const constantRoute = [
               title: 'love',
               hidden: false,
               icon: 'HomeFilled',
-              mustToken:true,
+              mustToken: true,
             },
           },
           {
@@ -102,7 +102,7 @@ export const constantRoute = [
               title: 'recommend',
               hidden: false,
               icon: 'HomeFilled',
-              mustToken:true,
+              mustToken: true,
             },
           },
         ],
@@ -115,7 +115,7 @@ export const constantRoute = [
           title: 'BuyOrder',
           hidden: false,
           icon: 'HomeFilled',
-          mustToken:true,
+          mustToken: true,
         },
       },
       {
@@ -126,7 +126,7 @@ export const constantRoute = [
           title: 'BuyShop',
           hidden: false,
           icon: 'HomeFilled',
-          mustToken:false,
+          mustToken: false,
         },
       },
       {
@@ -137,7 +137,7 @@ export const constantRoute = [
           title: 'BuyShopCart',
           hidden: false,
           icon: 'HomeFilled',
-          mustToken:true,
+          mustToken: true,
         },
       },
     ],
@@ -149,7 +149,7 @@ export const constantRoute = [
       title: 'loginRegister',
       hidden: false,
       icon: 'HomeFilled',
-      mustToken:false,
+      mustToken: false,
     },
     redirect: '/Login',
     children: [
@@ -160,7 +160,7 @@ export const constantRoute = [
           title: 'Login',
           hidden: false,
           icon: 'HomeFilled',
-          mustToken:false,
+          mustToken: false,
         },
       },
       {
@@ -170,7 +170,7 @@ export const constantRoute = [
           title: '首页',
           hidden: false,
           icon: 'HomeFilled',
-          mustToken:false,
+          mustToken: false,
         },
       },
     ],
@@ -182,7 +182,7 @@ export const constantRoute = [
       title: 'loginRegister',
       hidden: false,
       icon: 'HomeFilled',
-      mustToken:true,
+      mustToken: true,
     },
     redirect: '/Register',
     children: [
@@ -193,7 +193,7 @@ export const constantRoute = [
           title: 'Register',
           hidden: false,
           icon: 'HomeFilled',
-          mustToken:true,
+          mustToken: true,
         },
       },
     ],
@@ -205,7 +205,7 @@ export const constantRoute = [
       title: '後台',
       hidden: false,
       icon: 'HomeFilled',
-      mustToken:true,
+      mustToken: true,
     },
     redirect: '/Backstage/shops',
     children: [
@@ -216,7 +216,7 @@ export const constantRoute = [
           title: 'Shops',
           hidden: false,
           icon: 'HomeFilled',
-          mustToken:true,
+          mustToken: true,
         },
       },
       {
@@ -226,7 +226,7 @@ export const constantRoute = [
           title: 'users',
           hidden: false,
           icon: 'HomeFilled',
-          mustToken:true,
+          mustToken: true,
         },
       },
       {
@@ -236,7 +236,7 @@ export const constantRoute = [
           title: 'product',
           hidden: false,
           icon: 'HomeFilled',
-          mustToken:true,
+          mustToken: true,
         },
       },
       {
@@ -246,7 +246,7 @@ export const constantRoute = [
           title: 'ategory',
           hidden: false,
           icon: 'HomeFilled',
-          mustToken:true,
+          mustToken: true,
         },
       },
     ],
@@ -270,7 +270,7 @@ export const asyncRoute = [
       title: '後台',
       hidden: false,
       icon: 'HomeFilled',
-      mustToken:true,
+      mustToken: true,
     },
     redirect: '/Backstage/shops',
     children: [
@@ -281,7 +281,7 @@ export const asyncRoute = [
           title: 'Shops',
           hidden: false,
           icon: 'HomeFilled',
-          mustToken:true,
+          mustToken: true,
         },
       },
       {
@@ -291,7 +291,7 @@ export const asyncRoute = [
           title: 'users',
           hidden: false,
           icon: 'HomeFilled',
-          mustToken:true,
+          mustToken: true,
         },
       },
       {
@@ -301,14 +301,12 @@ export const asyncRoute = [
           title: 'ategory',
           hidden: false,
           icon: 'HomeFilled',
-          mustToken:true,
+          mustToken: true,
         },
       },
     ],
   },
 ]
-
-
 
 export const menuRoutes = [
   {
@@ -318,7 +316,7 @@ export const menuRoutes = [
       title: '後台',
       hidden: false,
       icon: 'HomeFilled',
-      mustToken:true,
+      mustToken: true,
     },
     redirect: '/Backstage/shops',
     children: [
@@ -329,7 +327,7 @@ export const menuRoutes = [
           title: 'Shops',
           hidden: false,
           icon: 'HomeFilled',
-          mustToken:true,
+          mustToken: true,
         },
       },
       {
@@ -339,7 +337,7 @@ export const menuRoutes = [
           title: 'Users',
           hidden: false,
           icon: 'HomeFilled',
-          mustToken:true,
+          mustToken: true,
         },
       },
       {
@@ -349,7 +347,7 @@ export const menuRoutes = [
           title: 'product',
           hidden: false,
           icon: 'HomeFilled',
-          mustToken:true,
+          mustToken: true,
         },
       },
       {
@@ -359,7 +357,7 @@ export const menuRoutes = [
           title: 'ategory',
           hidden: false,
           icon: 'HomeFilled',
-          mustToken:true,
+          mustToken: true,
         },
       },
     ],

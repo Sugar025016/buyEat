@@ -39,9 +39,19 @@
             v-model="product!.orderUsername"
           />
           <span>部門/單位</span>
-          <input type="text" class="rounded-input" placeholder="输入文本" v-model="product!.department"/>
+          <input
+            type="text"
+            class="rounded-input"
+            placeholder="输入文本"
+            v-model="product!.department"
+          />
           <span>備註</span>
-          <input type="text" class="rounded-input" placeholder="输入文本" v-model="product!.note"/>
+          <input
+            type="text"
+            class="rounded-input"
+            placeholder="输入文本"
+            v-model="product!.note"
+          />
         </div>
       </div>
       <div class="modal-footer">
@@ -107,7 +117,10 @@ const changeCount = (v: number) => {
 }
 
 const addCart = async () => {
-  console.log("props.product!.orderUsername////////////",props.product!.orderUsername)
+  console.log(
+    'props.product!.orderUsername////////////',
+    props.product!.orderUsername,
+  )
   let cartReq = ref<CartRequest>({
     productId: props.product!.productId,
     department: props.product!.department,
@@ -123,7 +136,6 @@ const addCart = async () => {
   if (res.code === 200) {
     userStore.cartCount = res.data
   }
-
 }
 </script>
 <style lang="scss" scoped>

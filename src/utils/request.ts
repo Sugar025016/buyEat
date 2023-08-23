@@ -31,15 +31,18 @@ request.interceptors.response.use(
   (response) => {
     if (response.status === 200) {
       console.log('response.status:', response)
-      if (response.config.url === "/login") {
-        console.log('response.status:-----X-XSRF-TOKEN---', response.config.headers['X-XSRF-TOKEN'])
+      if (response.config.url === '/login') {
+        console.log(
+          'response.status:-----X-XSRF-TOKEN---',
+          response.config.headers['X-XSRF-TOKEN'],
+        )
         SET_TOKEN(response.config.headers['X-XSRF-TOKEN'])
         // userStore.token=response.config.headers['X-XSRF-TOKEN'];
         console.log('response.status:', GET_TOKEN)
       }
       return Promise.resolve({
         data: response.data,
-        code: response.status
+        code: response.status,
       })
 
       // return Promise.resolve(response)
@@ -52,9 +55,9 @@ request.interceptors.response.use(
   },
   (error) => {
     let userStore = useUserStore()
-    const $router = useRouter();
+    const $router = useRouter()
     let message = ''
-    
+
     const status = error.response.status
     console.log('error.error.error:', error)
     switch (status) {

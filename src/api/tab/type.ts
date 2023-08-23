@@ -20,7 +20,6 @@ export interface TabData {
   products: ProductList
 }
 
-
 export type TabsData = TabData[]
 
 export interface TabProductsResponseData extends ResponseData {

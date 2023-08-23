@@ -1,10 +1,6 @@
 import { getShopList } from '@/api/shop'
 import { defineStore } from 'pinia'
-import type {
-  ShopList,
-  ShopsResponseData,
-  ShopSearch,
-} from '@/api/shop/type'
+import type { ShopList, ShopsResponseData, ShopSearch } from '@/api/shop/type'
 import { CategoryState } from './types/types'
 import { LoginResponseData } from '@/api/user/type'
 
@@ -48,8 +44,8 @@ let useShopStore = defineStore('Category', {
     // },
 
     async getShopList(data: ShopSearch) {
-      console.log("getShopList://///////////////////")
-      console.log("getShopList:",data)
+      console.log('getShopList://///////////////////')
+      console.log('getShopList:', data)
       let res: ShopsResponseData = await getShopList(data)
       if (res.code === 200) {
         this.c1Arr = res.data
@@ -57,7 +53,6 @@ let useShopStore = defineStore('Category', {
         return Promise.reject(new Error(res.message))
       }
     },
-
   },
   getters: {},
 })

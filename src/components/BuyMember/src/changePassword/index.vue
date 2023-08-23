@@ -2,15 +2,30 @@
   <div class="changeProfile">
     <div>
       <span>現有密碼</span>
-      <input type="password" class="rounded-input" placeholder="输入文本" v-model="pwd"/>
+      <input
+        type="password"
+        class="rounded-input"
+        placeholder="输入文本"
+        v-model="pwd"
+      />
     </div>
     <div>
       <span>新密碼</span>
-      <input type="password" class="rounded-input" placeholder="输入文本" v-model="newPwd"/>
+      <input
+        type="password"
+        class="rounded-input"
+        placeholder="输入文本"
+        v-model="newPwd"
+      />
     </div>
     <div>
       <span>再次輸入新密碼</span>
-      <input type="password" class="rounded-input" placeholder="输入文本" v-model="checkPwd"/>
+      <input
+        type="password"
+        class="rounded-input"
+        placeholder="输入文本"
+        v-model="checkPwd"
+      />
     </div>
   </div>
   <div class="changeProfile-foot">
@@ -26,12 +41,11 @@
   </div>
 </template>
 <script setup lang="ts">
-
 import useLoadingStore from '@/store/modules/loading'
 import useUserStore from '@/store/modules/user'
-import { ref } from 'vue';
+import { ref } from 'vue'
 let userStore = useUserStore()
-const loadingStore = useLoadingStore();
+const loadingStore = useLoadingStore()
 
 const pwd = ref('')
 const newPwd = ref('')

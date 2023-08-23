@@ -8,8 +8,6 @@
 </template>
 <script setup lang="ts">
 import card from '../card/index.vue'
-
-
 </script>
 <style lang="scss" scoped>
 .cards {

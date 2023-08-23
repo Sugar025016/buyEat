@@ -1,4 +1,3 @@
-
 export interface ResponseData {
   code: number
   message: string
@@ -19,17 +18,16 @@ export interface content {
 export type Contents = content[]
 
 export interface Users {
-    content:Contents
-    totalElements: number
-    size: number
-    number: number
-    totalPages: number
+  content: Contents
+  totalElements: number
+  size: number
+  number: number
+  totalPages: number
 }
 
-export interface UserResponseData extends ResponseData{
-  data:Users
+export interface UserResponseData extends ResponseData {
+  data: Users
 }
-
 
 // export interface UserResponseData extends ResponseData{
 //   data:UserPage

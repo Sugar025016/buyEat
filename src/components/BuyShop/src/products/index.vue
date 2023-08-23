@@ -55,10 +55,7 @@
     aria-labelledby="staticBackdropLabel"
     aria-hidden="true"
   >
-    <product-modal
-      :product="productData"
-      title="Modal Title"
-    ></product-modal>
+    <product-modal :product="productData" title="Modal Title"></product-modal>
   </div>
 </template>
 
@@ -68,7 +65,12 @@ import productModal from '../productModal/index.vue'
 import { onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { getTabProducts } from '@/api/tab'
-import { ProductModalData,TabProductsResponseData, TabData, ProductData  } from '@/api/tab/type'
+import {
+  ProductModalData,
+  TabProductsResponseData,
+  TabData,
+  ProductData,
+} from '@/api/tab/type'
 import useUserStore from '@/store/modules/user'
 
 let userStore = useUserStore()
@@ -89,28 +91,24 @@ let productData = ref<ProductModalData>({
   productId: 0,
   name: '',
   description: '',
-  qty:1,
+  qty: 1,
   img: '',
   prise: 0,
-  department:'',
-  orderUsername:'',
-  note:'',
+  department: '',
+  orderUsername: '',
+  note: '',
 })
 
-
-
-
 const openModal = (v: ProductData) => {
-  productData.value.productId=v.id
-  productData.value.name=v.name
-  productData.value.description=''
-  productData.value.qty=1
-  productData.value.img=v.img
-  productData.value.prise=v.prise
-  productData.value.department=''
-  productData.value.orderUsername=userStore.username
-  productData.value.note=''
-
+  productData.value.productId = v.id
+  productData.value.name = v.name
+  productData.value.description = ''
+  productData.value.qty = 1
+  productData.value.img = v.img
+  productData.value.prise = v.prise
+  productData.value.department = ''
+  productData.value.orderUsername = userStore.username
+  productData.value.note = ''
 
   isProductModalVisible.value = true
 }

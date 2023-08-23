@@ -1,25 +1,17 @@
 import request from '@/utils/request'
-import type {
-  CartData,
-  CartResponseData,
-  CartRequest,
-} from './type'
+import type { CartData, CartResponseData, CartRequest } from './type'
 enum API {
   cart = '/api/cart',
 }
 
-
-
 export const apiGetCart = () => request.get<any, CartResponseData>(API.cart)
 
-
-export const apiDeleteCart = (data: number ) => {
-  return request.delete<any, CartResponseData>(API.cart+'/'+data);
-};
+export const apiDeleteCart = (data: number) => {
+  return request.delete<any, CartResponseData>(API.cart + '/' + data)
+}
 
 export const apiAddCart = (data: CartRequest) => {
-    return request.post<any, any>(API.cart, data)
-  
+  return request.post<any, any>(API.cart, data)
 }
 // export const apiAddUpdateCart = (data: CartRequest) => {
 //   if (data.cartId) {
@@ -29,6 +21,6 @@ export const apiAddCart = (data: CartRequest) => {
 //   }
 // }
 
-export const apiPutCart = (cartId:number,qty:number ) => {
-    return request.put<any, any>(API.cart + '/'+cartId + '/'+qty)
+export const apiPutCart = (cartId: number, qty: number) => {
+  return request.put<any, any>(API.cart + '/' + cartId + '/' + qty)
 }

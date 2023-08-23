@@ -19,7 +19,11 @@ import type {
 
 import { reqAddOrUpdateUser, reqUserInfo } from '@/api/backstage/user'
 
-import type { UserResponseData ,Contents ,  User} from '@/api/backstage/user/type'
+import type {
+  UserResponseData,
+  Contents,
+  User,
+} from '@/api/backstage/user/type'
 
 import useLayOutSettingStore from '@/store/modules/setting'
 let pageNo = ref<number>(1)
@@ -60,9 +64,9 @@ const getHasUser = async (pager = 1) => {
     keyword.value,
   )
   // if (res.code === 200) {
-    total.value = res.data.totalElements
-    userArr.value = res.data.content
-    console.log(userArr.value)
+  total.value = res.data.totalElements
+  userArr.value = res.data.content
+  console.log(userArr.value)
   // }
 }
 

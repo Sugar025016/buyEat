@@ -6,15 +6,14 @@ export interface UserState {
   menuRoutes: RouteRecordRaw[]
   asyncRoute: RouteRecordRaw[]
   username: string
-  account:string
-  email:string
-  phone:string
+  account: string
+  email: string
+  phone: string
   avatar: string
   buttons: string[]
   favoriteShop: ShopList
-  cartCount:number
+  cartCount: number
 }
-
 
 export interface CategoryState {
   c1Id: string | number

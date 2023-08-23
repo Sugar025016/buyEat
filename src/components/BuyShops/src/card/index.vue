@@ -1,5 +1,9 @@
 <template>
-  <el-card class="card" @click="toShop(shop.id)" :body-style="{ padding: '0px' }">
+  <el-card
+    class="card"
+    @click="toShop(shop.id)"
+    :body-style="{ padding: '0px' }"
+  >
     <div class="image-container">
       <img
         v-if="shop.img"
@@ -39,10 +43,9 @@ image?.addEventListener('load', function () {
 })
 
 const toShop = (id: number) => {
-  console.log('Clicked with ID:', id);
+  console.log('Clicked with ID:', id)
   $router.push(`/BuyShop/${id}`)
 }
-
 </script>
 
 <style lang="scss" scoped>

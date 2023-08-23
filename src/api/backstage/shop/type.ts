@@ -1,12 +1,10 @@
-import { String } from "lodash"
+import { String } from 'lodash'
 
 export interface ResponseData {
   code: number
   message: string
   ok: boolean
 }
-
-
 
 export type ShopList = ShopData[]
 export interface Address {
@@ -30,7 +28,7 @@ export interface ShopData {
   updateTime?: string
   isOrderable: boolean
   isDisable: boolean
-  isDelete:boolean
+  isDelete: boolean
 }
 
 export interface Page {
@@ -41,12 +39,9 @@ export interface Page {
   totalPages: number
 }
 
-
 export interface ShopResponseData extends ResponseData {
   data: Page
 }
-
-
 
 export interface ShopSearch {
   city?: string
@@ -54,7 +49,6 @@ export interface ShopSearch {
   categoryId?: number
   other?: string
 }
-
 
 export interface ShopAddRequest {
   userAccount: string

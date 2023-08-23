@@ -10,7 +10,7 @@
   <!-- <img :src="userStore.avatar" alt=""  v-if="(userStore.token != '')"/> -->
 
   <el-dropdown class="car" v-if="userStore.username">
-  <!-- <el-dropdown class="car" > -->
+    <!-- <el-dropdown class="car" > -->
     <span class="el-dropdown-link" style="cursor: pointer">
       {{ userStore.username }}
       <el-icon class="el-icon--right">
@@ -45,7 +45,9 @@
   <div class="car shopCar">
     <router-link :to="'/BuyShopCart'" class="link">
       <ShoppingBag class="icon car" />
-      <span class="cartQuantity text-white bg-warning conut">{{ userStore.cartCount }}</span>
+      <span class="cartQuantity text-white bg-warning conut">
+        {{ userStore.cartCount }}
+      </span>
     </router-link>
   </div>
 </template>
@@ -72,7 +74,12 @@ const goRoute = (path: string) => {
   $router.push(path)
 }
 console.log('＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃$route', $route)
-console.log('＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃$userStore', userStore,userStore.username,userStore.phone)
+console.log(
+  '＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃$userStore',
+  userStore,
+  userStore.username,
+  userStore.phone,
+)
 console.log(window.location.hash)
 const path = window.location.hash
 $router.getRoutes()
@@ -82,8 +89,12 @@ const updateRefsh = () => {
 }
 const toLogin = () => {
   // $router.push('/login')
-    console.log('＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃$window.location', userStore.token)
-  if (!userStore.token ||userStore.token === undefined ||userStore.token === '') {
+  console.log('＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃$window.location', userStore.token)
+  if (
+    !userStore.token ||
+    userStore.token === undefined ||
+    userStore.token === ''
+  ) {
     console.log('＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃$window.location', path)
     $router.push({ path: '/login', query: { redirect: path } })
   }
@@ -108,7 +119,7 @@ const logout = async (path: string) => {
 const userData = 'userData'
 const userLove = 'userLove'
 const changeLink = async (path: string, page: string = userData) => {
-  console.log("@@@###",userStore.username)
+  console.log('@@@###', userStore.username)
   $router.push('/BuyMember/' + path + '/' + page)
 }
 

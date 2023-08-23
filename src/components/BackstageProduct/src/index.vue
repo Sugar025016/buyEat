@@ -38,7 +38,7 @@ let productParams = reactive<ProductPutRequest>({
   isDelete: false,
   imgId: 0,
   imgUrl: undefined,
-  tabName:'',
+  tabName: '',
 })
 
 let selectIdArr = ref<ProductData[]>([])
