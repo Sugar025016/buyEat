@@ -1,6 +1,10 @@
 <script setup lang="ts">
-import { ref, onMounted, reactive, nextTick } from 'vue'
-import { reqShopInfo, reqAddOrUpdateShop } from '@/api/backstage/shop'
+import { ref, onMounted, reactive, nextTick, watch } from 'vue'
+import {
+  reqRemoveShop,
+  reqShopInfo,
+  reqAddOrUpdateShop,
+} from '@/api/backstage/shop'
 import type {
   ShopSearch,
   ShopResponseData,
@@ -10,9 +14,16 @@ import type {
 import { ElMessage } from 'element-plus'
 import { UploadProps } from 'element-plus/es/components/upload/src/upload'
 import cityAreas from '@/utils/areaData.js'
-import { GET_TOKEN } from '@/utils/token'
 import useUserStore from '@/store/modules/user'
 import { ShopPutRequest } from '@/api/backstage/shop/type'
+import { reqSearchUser } from '@/api/backstage/user'
+import { fromEvent } from 'rxjs'
+import { debounceTime, switchMap } from 'rxjs/operators'
+import debounce from 'lodash/debounce';
+import {
+  SearchUserResponseData,
+  SearchUsers,
+} from '@/api/backstage/user/type'
 // import useLayOutSettingStore from '@/store/modules/setting'
 let userStore = useUserStore()
 
@@ -44,26 +55,6 @@ let shopParams = reactive<ShopPutRequest>({
   isOrderable: false,
   disable: false,
 })
-
-// let ShopParams = reactive<ShopData>({
-//   id: 0,
-//   userAccount: '',
-//   userName: '',
-//   shopName: '',
-//   phone: '',
-//   description: '',
-//   address: {
-//     id: 0,
-//     city: '',
-//     area: '',
-//     detail: '',
-//   },
-//   imgId:0,
-//   imageGetUrl: '',
-//   img: undefined,
-//   isOrderable: false,
-//   disable: false,
-// })
 
 let selectIdArr = ref<ShopData[]>([])
 onMounted(() => {
@@ -111,12 +102,24 @@ const addShop = () => {
     imageGetUrl: '',
     img: '',
   })
+  const tempAddress = {
+    id: shopParams.address.id,
+    city: shopParams.address.city,
+    area: shopParams.address.area,
+    detail: shopParams.address.detail,
+  }
+
+  shopParams.address = tempAddress
   nextTick(() => {
     //清除特定字段的驗證狀態
     formRef.value.clearValidate('userAccount')
     formRef.value.clearValidate('userName')
     formRef.value.clearValidate('shopName')
     formRef.value.clearValidate('phone')
+    formRef.value.clearValidate('img')
+    formRef.value.clearValidate('address.city')
+    formRef.value.clearValidate('address.area')
+    formRef.value.clearValidate('address.detail')
   })
 }
 
@@ -134,21 +137,24 @@ const updateShop = (row: ShopData) => {
 
   shopParams.address = tempAddress
 
+
   nextTick(() => {
     formRef.value.clearValidate('description')
-    formRef.value.clearValidate('address')
     formRef.value.clearValidate('img')
+    formRef.value.clearValidate('address.city')
+    formRef.value.clearValidate('address.area')
+    formRef.value.clearValidate('address.detail')
   })
 }
 
 const save = async () => {
-  formRef.value.validate()
+  await formRef.value.validate()
   let res: any = await reqAddOrUpdateShop(shopParams)
   if (res.code === 200) {
     drawer.value = false
     ElMessage({
-      type: 'success',
       message: shopParams.id ? '更新成功' : '添加成功',
+      type: 'success',
     })
     window.location.reload()
   } else {
@@ -168,7 +174,7 @@ const validatorShopName = (rule: any, value: any, callBack: any) => {
   if (value.trim().length >= 2) {
     callBack()
   } else {
-    callBack(new Error('商店名稱至少2位'))
+    callBack(new Error('店名稱至少2位'))
   }
 }
 
@@ -176,7 +182,7 @@ const validatorShopPhone = (rule: any, value: any, callBack: any) => {
   if (value.trim().length >= 10 && length <= 11) {
     callBack()
   } else {
-    callBack(new Error('商店電話至少10位~11位'))
+    callBack(new Error('電話至少10位~11位'))
   }
 }
 
@@ -184,7 +190,7 @@ const validatorShopDescription = (rule: any, value: any, callBack: any) => {
   if (value.trim().length <= 255) {
     callBack()
   } else {
-    callBack(new Error('商店介紹不可超過255個字'))
+    callBack(new Error('介紹不可超過255個字'))
   }
 }
 
@@ -192,42 +198,54 @@ const validatorShopAddressDetail = (rule: any, value: any, callBack: any) => {
   if (value.trim().length <= 255) {
     callBack()
   } else {
-    callBack(new Error('商店地址不可超過255個字'))
+    callBack(new Error('地址不可超過255個字'))
   }
 }
 const rules = {
   shopName: [{ required: true, trigger: 'blur', validator: validatorShopName }],
   phone: [{ required: true, trigger: 'blur', validator: validatorShopPhone }],
-  description: [
-    { required: true, trigger: 'blur', validator: validatorShopDescription },
+  description: [{ trigger: 'blur', validator: validatorShopDescription }],
+  'address.city': [
+    { required: true, message: '區域不能為空', trigger: 'change' },
   ],
-  addressDetail: [
-    { required: true, trigger: 'blur', validator: validatorShopAddressDetail },
+  'address.area': [
+    { required: true, message: '區域不能為空', trigger: 'change' },
+  ],
+  'address.detail': [
+    {
+      required: true,
+      message: 'Detail cannot be empty',
+      trigger: 'blur',
+      validator: validatorShopAddressDetail,
+    },
+    {
+      validator: validateNotEmptyString,
+      trigger: 'blur',
+      message: '地址不能為空',
+    },
   ],
 }
+function validateNotEmptyString(rule: any, value: any, callback: any) {
+  if (value.trim() === '') {
+    callback(new Error('Detail cannot be an empty string'))
+  } else {
+    callback()
+  }
+}
+
+
+
 
 // const checkAll = ref<boolean>(false)
 // const isIndeterminate = ref<boolean>(true)
 
-// const handleCheckAllChange = (val: boolean) => {
-//   ShopRole.value = val ? allRole.value : []
-//   isIndeterminate.value = false
-// }
-
-// const handleCheckedShopsChange = (value: string[]) => {
-//   const checkedCount = value.length
-//   checkAll.value = checkedCount === allRole.value.length
-//   isIndeterminate.value =
-//     checkedCount > 0 && checkedCount < allRole.value.length
-// }
-
-// const deleteShop = async (ShopId: number) => {
-//   let res: any = await reqRemoveShop(ShopId)
-//   if (res.code === 200) {
-//     ElMessage({ type: 'success', message: '删除成功' })
-//     getHasShop(ShopArr.value.length > 1 ? pageNo.value : pageNo.value - 1)
-//   }
-// }
+const deleteShop = async (ShopId: number) => {
+  let res: any = await reqRemoveShop(ShopId)
+  if (res.code === 200) {
+    ElMessage({ type: 'success', message: '删除成功' })
+    getHasShop(shopArr.value.length > 1 ? pageNo.value : pageNo.value - 1)
+  }
+}
 
 const selectChange = (value: any) => {
   selectIdArr.value = value
@@ -252,6 +270,35 @@ const selectChange = (value: any) => {
 // const reset = () => {
 //   settingStore.refsh = !settingStore.refsh
 // }
+
+
+const loading = ref(false)
+const search = async (query: string) => {
+  let res: SearchUserResponseData = await reqSearchUser(query)
+  if (res.code === 200) {
+    searchUsers.value = res.data
+  } else {
+    drawer.value = false
+    ElMessage({  
+      type: 'error',
+      message: '搜尋失败',
+    })
+  }
+}
+const searchUsers = ref<SearchUsers>([])
+
+const remoteMethod = debounce((query) => {
+  // 在这里执行搜索操作
+  
+  if (query) {
+    loading.value = true
+    search(query.toLowerCase())
+    loading.value = false
+  } else {
+    searchUsers.value = []
+  }
+  // 这只是一个示例，您需要根据实际情况实现搜索逻辑
+}, 1000); // 1000 毫秒的防抖延迟
 
 const city: string[] = Object.keys(cityAreas)
 
@@ -289,6 +336,13 @@ const handleAvatarSuccess: UploadProps['onSuccess'] = (
   shopParams.imgId = response.id
   formRef.value.clearValidate('img')
 }
+
+watch(
+  () => shopParams.address.city,
+  () => {
+    shopParams.address.area = ''
+  },
+)
 </script>
 <template>
   <!-- <el-card style="height: 80px">
@@ -373,12 +427,7 @@ const handleAvatarSuccess: UploadProps['onSuccess'] = (
         prop="updateTime"
         show-overflow-tooltip
       ></el-table-column>
-      <el-table-column
-        label="imgUrl"
-        prop="imgUrl"
-        align="center"
-        show-overflow-tooltip
-      >
+      <el-table-column label="圖片" prop="imgUrl" align="center">
         <template #="{ row, $index }">
           <img :src="row.imgUrl" alt="" style="width: 130px; height: 100px" />
         </template>
@@ -440,10 +489,22 @@ const handleAvatarSuccess: UploadProps['onSuccess'] = (
     <template #default>
       <el-form :model="shopParams" :rules="rules" ref="formRef">
         <el-form-item label="會員帳號" prop="userAccount" v-if="!shopParams.id">
-          <el-input
-            placeholder="请您输入會員帳號"
+          <el-select
             v-model="shopParams.userAccount"
-          ></el-input>
+            filterable
+            remote
+            reserve-keyword
+            placeholder="搜尋"
+            :remote-method="remoteMethod"
+            :loading="loading"
+          >
+            <el-option
+              v-for="item in searchUsers"
+              :key="item"
+              :label="item"
+              :value="item"
+            />
+          </el-select>
         </el-form-item>
         <el-form-item label="商店名稱" prop="shopName" v-if="!shopParams.id">
           <el-input
@@ -463,11 +524,11 @@ const handleAvatarSuccess: UploadProps['onSuccess'] = (
             v-model="shopParams.description"
           ></el-input>
         </el-form-item>
-        <el-form-item label="地址-city" prop="addressDetail">
+        <el-form-item label="地址-city" prop="address.city">
           <el-select
             v-model="shopParams.address.city"
             class="m-2"
-            placeholder="Select"
+            placeholder="城市"
             size="large"
           >
             <el-option
@@ -479,12 +540,11 @@ const handleAvatarSuccess: UploadProps['onSuccess'] = (
             />
           </el-select>
         </el-form-item>
-
-        <el-form-item label="地址-area" prop="addressDetail">
+        <el-form-item label="地址-area" prop="address.area">
           <el-select
             v-model="shopParams.address.area"
             class="m-2"
-            placeholder="Select"
+            placeholder="區域"
             size="large"
             no-data-text="請先選擇城市"
           >
@@ -495,11 +555,10 @@ const handleAvatarSuccess: UploadProps['onSuccess'] = (
               :key="item"
               :label="item"
               :value="item"
-              :disabled="index === 0"
             />
           </el-select>
         </el-form-item>
-        <el-form-item label="地址-detail" prop="addressDetail">
+        <el-form-item label="地址-detail" prop="address.detail">
           <el-input
             size="large"
             placeholder="请您输入商店地址"
@@ -535,7 +594,7 @@ const handleAvatarSuccess: UploadProps['onSuccess'] = (
     <template #footer>
       <div style="flex: auto">
         <el-button @click="cancel">取消</el-button>
-        <el-button type="primary" @click="save">确定</el-button>
+        <el-button type="primary" @click="save()">确定</el-button>
       </div>
     </template>
   </el-drawer>

@@ -43,3 +43,13 @@ export interface User {
   createTime?: string
   updateTime?: string
 }
+
+export interface SearchUser {
+  account?: string
+}
+
+export type SearchUsers = SearchUser[]
+
+export interface SearchUserResponseData extends ResponseData {
+  data: SearchUsers
+}

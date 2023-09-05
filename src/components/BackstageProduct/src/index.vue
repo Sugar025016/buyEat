@@ -1,19 +1,27 @@
 <script setup lang="ts">
-import { ref, onMounted, reactive, nextTick, watch } from 'vue'
+import { Plus } from '@element-plus/icons-vue'
+import { ref, onMounted, reactive, nextTick } from 'vue'
 import { reqProductInfo, reqAddOrUpdateProduct } from '@/api/backstage/product'
 import type {
-  ProductSearch,
   ProductResponseData,
   ProductList,
   ProductData,
 } from '@/api/backstage/Product/type'
-import { ElMessage } from 'element-plus'
 
 import { UploadProps } from 'element-plus/es/components/upload/src/upload'
 import cityAreas from '@/utils/areaData.js'
-import { GET_TOKEN } from '@/utils/token'
 import useUserStore from '@/store/modules/user'
 import { ProductPutRequest } from '@/api/backstage/product/type'
+import { reqSearchTab, reqTab } from '@/api/backstage/tab'
+import { SearchShopsRequestData } from '@/api/backstage/Shop/type'
+import {
+  SearchTabsData,
+  SearchShopsData,
+  SearchShopRequestData,
+} from '@/api/backstage/tab/type'
+import debounce from 'lodash/debounce'
+import { ElMessageBox } from 'element-plus/lib/components/message-box/index.js'
+import { ElMessage } from 'element-plus/lib/components/index.js'
 // import useLayOutSettingStore from '@/store/modules/setting'
 let userStore = useUserStore()
 
@@ -76,6 +84,8 @@ const addProduct = () => {
   Object.assign(productParams, {
     shopId: 0,
     shopName: '',
+    tabId: 0,
+    tabName: '',
     id: 0,
     productName: '',
     description: '',
@@ -85,37 +95,50 @@ const addProduct = () => {
     imgId: 0,
     imgUrl: undefined,
   })
+  searchTabsData.value = []
   nextTick(() => {
     //清除特定字段的驗證狀態
-    formRef.value.clearValidate('userAccount')
-    formRef.value.clearValidate('userName')
+    formRef.value.clearValidate('shopName')
+    formRef.value.clearValidate('tabName')
     formRef.value.clearValidate('productName')
-    formRef.value.clearValidate('phone')
-  })
-}
-
-// const updateProduct = (row: ProductData) => {
-//   drawer.value = true
-//   Object.assign(ProductParams, row)
-//   nextTick(() => {
-//     // formRef.value.clearValidate('description')
-//     formRef.value.clearValidate('address')
-//     formRef.value.clearValidate('img')
-//   })
-// }
-
-const updateProduct = (row: ProductData) => {
-  drawer.value = true
-  Object.assign(productParams, row)
-  nextTick(() => {
-    formRef.value.clearValidate('description')
-    formRef.value.clearValidate('address')
+    formRef.value.clearValidate('prise')
     formRef.value.clearValidate('img')
   })
 }
 
+const updateProduct = async (row: ProductData) => {
+  let res: SearchShopRequestData = await reqTab(row.shopId)
+  if (res.code === 200) {
+    searchTabsData.value = res.data.tabs
+    
+  } else {
+    ElMessage({
+      type: 'error',
+      message: '空標籤',
+    })
+  }
+
+  drawer.value = true
+
+  Object.assign(productParams, row)
+
+  nextTick(() => {
+    formRef.value.clearValidate('shopName')
+    formRef.value.clearValidate('tabName')
+    formRef.value.clearValidate('productName')
+    formRef.value.clearValidate('prise')
+    formRef.value.clearValidate('img')
+  })
+  
+}
+
 const save = async () => {
-  formRef.value.validate()
+  await formRef.value.validate()
+  if (!productParams.id && productParams.tabName) {
+    productParams.tabId = searchTabsData.value.find(
+      (v) => v.name === productParams.tabName,
+    )?.id
+  }
   let res: any = await reqAddOrUpdateProduct(productParams)
   if (res.code === 200) {
     drawer.value = false
@@ -153,25 +176,14 @@ const validatorProductPhone = (rule: any, value: any, callBack: any) => {
   }
 }
 
-const validatorProductDescription = (rule: any, value: any, callBack: any) => {
-  if (value.trim().length <= 255) {
+const validatorProductPrise = (rule: any, value: any, callBack: any) => {
+  if (value > 0) {
     callBack()
   } else {
-    callBack(new Error('商店介紹不可超過255個字'))
+    callBack(new Error('請輸入價格'))
   }
 }
 
-const validatorProductAddressDetail = (
-  rule: any,
-  value: any,
-  callBack: any,
-) => {
-  if (value.trim().length <= 255) {
-    callBack()
-  } else {
-    callBack(new Error('商店地址不可超過255個字'))
-  }
-}
 const rules = {
   productName: [
     { required: true, trigger: 'blur', validator: validatorProductName },
@@ -179,14 +191,26 @@ const rules = {
   phone: [
     { required: true, trigger: 'blur', validator: validatorProductPhone },
   ],
-  description: [
-    { required: true, trigger: 'blur', validator: validatorProductDescription },
-  ],
-  addressDetail: [
+  shopName: [
     {
       required: true,
       trigger: 'blur',
-      validator: validatorProductAddressDetail,
+      message: '請輸入商店',
+    },
+  ],
+
+  tabName: [
+    {
+      required: true,
+      trigger: 'blur',
+      message: '請選擇標籤',
+    },
+  ],
+  prise: [
+    {
+      required: true,
+      trigger: 'blur',
+      validator: validatorProductPrise,
     },
   ],
 }
@@ -273,8 +297,143 @@ const handleAvatarSuccess: UploadProps['onSuccess'] = (
   productParams.imgId = response.id
   formRef.value.clearValidate('img')
 }
+
+const loading = ref(false)
+const search = async (query: string) => {
+  let res: SearchShopsRequestData = await reqSearchTab(query)
+  if (res.code === 200) {
+    searchShopsData.value = res.data
+  } else {
+    drawer.value = false
+    ElMessage({
+      type: 'error',
+      message: '搜尋失败',
+    })
+  }
+}
+const searchShopsData = ref<SearchShopsData>([])
+
+const remoteMethod = debounce((query) => {
+  // 在这里执行搜索操作
+  
+  if (query) {
+    loading.value = true
+    search(query.toLowerCase())
+    loading.value = false
+  } else {
+    searchShopsData.value = []
+  }
+  // 这只是一个示例，您需要根据实际情况实现搜索逻辑
+}, 500) // 1000 毫秒的防抖延迟
+
+const searchTabsData = ref<SearchTabsData>([])
+
+const shopChange = () => {
+  if (searchShopsData.value) {
+    const selectedShop = searchShopsData.value.find(
+      (v) => v.name === productParams.shopName,
+    )
+    productParams.shopId = selectedShop?.id
+    
+    if (selectedShop) {
+      searchTabsData.value = selectedShop.tabs
+      
+    } else {
+      searchTabsData.value = []
+    }
+    productParams.tabId = 0
+    productParams.tabName = ''
+  }
+}
+
+const tabChange = () => {
+  if (searchShopsData.value) {
+    const selectedShop = searchShopsData.value.find(
+      (v) => v.name === productParams.shopName,
+    )
+    productParams.shopId = selectedShop?.id
+    
+    if (selectedShop) {
+      searchTabsData.value = selectedShop.tabs
+      
+    } else {
+      searchTabsData.value = []
+    }
+    productParams.tabId = 0
+    productParams.tabName = ''
+  }
+}
+
+const open = () => {
+  ElMessageBox.prompt('Please input your e-mail', 'Tip', {
+    confirmButtonText: 'OK',
+    cancelButtonText: 'Cancel',
+    inputPattern:
+      / \S/,
+    inputErrorMessage: 'Invalid Email',
+    closeOnClickModal: true,
+    zIndex: 9999,
+  })
+    .then(({ value }) => {
+      ElMessage({
+        type: 'success',
+        message: `Your email is:${value}`,
+      })
+    })
+    .catch(() => {
+      ElMessage({
+        type: 'info',
+        message: 'Input canceled',
+      })
+    })
+}
+
+
+const handleClose = (done) => {
+  if (loading.value) {
+    return
+  }
+  ElMessageBox.confirm('Do you want to submit?')
+    .then(() => {
+      loading.value = true
+      timer = setTimeout(() => {
+        done()
+        // 动画关闭需要一定的时间
+        setTimeout(() => {
+          loading.value = false
+        }, 400)
+      }, 2000)
+    })
+    .catch(() => {
+      // catch error
+    })
+}
 </script>
 <template>
+
+<el-dialog v-model="dialogFormVisible" title="Shipping address">
+    <el-form :model="form">
+      <el-form-item label="Promotion name" :label-width="formLabelWidth">
+        <el-input v-model="form.name" autocomplete="off" />
+      </el-form-item>
+      <el-form-item label="Zones" :label-width="formLabelWidth">
+        <el-select v-model="form.region" placeholder="Please select a zone">
+          <el-option label="Zone No.1" value="shanghai" />
+          <el-option label="Zone No.2" value="beijing" />
+        </el-select>
+      </el-form-item>
+    </el-form>
+    <template #footer>
+      <span class="dialog-footer">
+        <el-button @click="dialogFormVisible = false">Cancel</el-button>
+        <el-button type="primary" @click="dialogFormVisible = false">
+          Confirm
+        </el-button>
+      </span>
+    </template>
+  </el-dialog>
+
+  
   <!-- <el-card style="height: 80px">
     <el-form :inline="true" class="form">
       <el-form-item label="用户名:">
@@ -313,36 +472,16 @@ const handleAvatarSuccess: UploadProps['onSuccess'] = (
     >
       <el-table-column type="selection" align="center"></el-table-column>
       <el-table-column label="#" align="center" type="index"></el-table-column>
-
-      <el-table-column
-        label="shopId"
-        align="center"
-        prop="shopId"
-        width="50"
-      ></el-table-column>
       <el-table-column
         label="商店名稱"
         prop="shopName"
         width="100"
       ></el-table-column>
       <el-table-column
-        label="tabId"
-        align="center"
-        prop="tabId"
-        width="50"
-      ></el-table-column>
-      <el-table-column
         label="標籤名稱"
         prop="tabName"
         width="100"
       ></el-table-column>
-      <el-table-column
-        label="id"
-        align="center"
-        prop="id"
-        width="50"
-      ></el-table-column>
-
       <el-table-column
         label="產品名稱"
         prop="productName"
@@ -365,12 +504,7 @@ const handleAvatarSuccess: UploadProps['onSuccess'] = (
         prop="updateTime"
         show-overflow-tooltip
       ></el-table-column>
-      <el-table-column
-        label="imgUrl"
-        prop="imgUrl"
-        align="center"
-        show-overflow-tooltip
-      >
+      <el-table-column label="imgUrl" prop="imgUrl" align="center">
         <template #="{ row, $index }">
           <img :src="row.imgUrl" alt="" style="width: 130px; height: 100px" />
         </template>
@@ -415,52 +549,73 @@ const handleAvatarSuccess: UploadProps['onSuccess'] = (
       @size-change="handler"
     />
   </el-card>
-  <el-drawer v-model="drawer">
+  <el-drawer v-model="drawer" class="drawer" >
     <template #header>
-      <h4>{{ productParams.id ? '更新商店' : '添加商店' }}</h4>
+      <h4>{{ productParams.id ? '更新產品' : '添加產品' }}</h4>
     </template>
     <template #default>
       <el-form :model="productParams" :rules="rules" ref="formRef">
-        <!-- <el-form-item label="商店名稱" prop="shopName" v-if="!productParams.id">
-          <el-input
-            placeholder="请您输入會員帳號"
+        <el-form-item label="商店名稱" prop="shopName" v-if="!productParams.id">
+          <el-select
             v-model="productParams.shopName"
-          ></el-input>
-        </el-form-item> -->
-        <el-form-item label="商店ID" prop="shopId" v-if="!productParams.id">
-          <el-input
-            placeholder="请您输入商店ID"
-            v-model="productParams.shopId"
-          ></el-input>
+            filterable
+            remote
+            reserve-keyword
+            placeholder="请您输入商店名稱"
+            :remote-method="remoteMethod"
+            :loading="loading"
+            @change="shopChange"
+          >
+            <el-option
+              v-for="item in searchShopsData"
+              :key="item.id"
+              :label="item.name"
+              :value="item.name"
+            />
+          </el-select>
         </el-form-item>
-        <el-form-item label="標籤ID" prop="tabId" v-if="!productParams.id">
-          <el-input
-            placeholder="请您输入標籤ID"
-            v-model="productParams.tabId"
-          ></el-input>
+        <el-form-item label="標籤名稱" prop="tabName" class="drawer-tab">
+          <div class="drawer-tab">
+            <el-select
+              v-model="productParams.tabName"
+              placeholder="请選澤標籤名稱"
+              no-data-text="請先選擇商店"
+            >
+              <el-option
+                v-for="item in searchTabsData"
+                :key="item.id"
+                :label="item.name"
+                :value="item.name"
+              />
+            </el-select>
+            <!-- <el-button text
+              style="color: #ffffff;  font-size: 20px"
+              :icon="Plus"
+              @click="open"
+            ></el-button> -->
+          </div>
         </el-form-item>
-        <!-- <el-form-item label="標籤名稱" prop="tabName" v-if="!productParams.id">
-          <el-input
-            placeholder="请您输入標籤名稱"
-            v-model="productParams.tabName"
-          ></el-input>
-        </el-form-item> -->
         <el-form-item label="產品名稱" prop="productName">
           <el-input
-            placeholder="请您输入商店名稱"
+            placeholder="请您输入產品名稱"
             v-model="productParams.productName"
           ></el-input>
         </el-form-item>
-        <el-form-item label="商店介紹" prop="description">
+        <el-form-item label="產品介紹" prop="description">
           <el-input
-            placeholder="请您输入商店介紹"
+            placeholder="请您输入產品介紹"
             v-model="productParams.description"
           ></el-input>
         </el-form-item>
         <el-form-item label="產品價格" prop="prise">
           <el-input
-            placeholder="请您输入商店電話"
+            placeholder="请您输入產品價格"
             v-model="productParams.prise"
+            :formatter="
+              (value: string) =>
+                `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+            "
+            :parser="(value: string) => value.replace(/\$\s?|(,*)/g, '')"
           ></el-input>
         </el-form-item>
         <el-form-item label="產品圖">
@@ -475,7 +630,7 @@ const handleAvatarSuccess: UploadProps['onSuccess'] = (
           >
             <img
               v-if="productParams.imgUrl"
-              :src="productParams.imgUrl"
+              :src="productParams.imgUrl.toString()"
               class="avatar"
             />
             <el-icon v-else class="avatar-uploader-icon"><Plus /></el-icon>
@@ -496,5 +651,34 @@ const handleAvatarSuccess: UploadProps['onSuccess'] = (
   display: flex;
   justify-content: space-between;
   align-items: center;
+  .drawer-tab-button {
+    margin: 5px;
+  }
+  .el-button {
+    margin: 5px;
+  }
+
 }
+.el-form-item__content {
+  background-color: aqua;
+  .drawer-tab {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.el-popup-parent--hidden{
+  .el-overlay{
+  z-index: 100000;
+  background-color: aquamarine;
+}
+.is-message-box{
+  z-index: 1000000;
+
+}
+}
+
+
+
 </style>

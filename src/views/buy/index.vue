@@ -70,7 +70,7 @@ watch(
     }
 
     .buy-body {
-      overflow: hidden;
+      overflow: visible;
       padding: 0px;
       margin: 40px 0;
       @media (min-width: $breakpoint-xs) {

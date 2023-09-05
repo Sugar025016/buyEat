@@ -50,13 +50,20 @@ const getC1 = async () => {
 
 const searchText = ref('')
 const showHistory = ref(false)
-const searchHistory = ref([
-  'Keyword 1',
-  'Keyword 2',
-  'Keyword 3',
-  'Keyword 4',
-  'Keyword 5',
-])
+
+
+const searchHistory = ref<string[]>([])
+const getSearchHistory = () => {
+  const storedHistoryJSON = localStorage.getItem('searchHistory')
+  if (storedHistoryJSON !== null) {
+    searchHistory.value = JSON.parse(storedHistoryJSON)
+    // 现在您可以使用 storedHistory
+  } else {
+    
+    // 处理 localStorage 中没有搜索记录的情况，例如设置一个默认值
+    searchHistory.value = [] // 默认值为空数组
+  }
+}
 
 const handleInput = () => {
   showHistory.value = true
@@ -64,12 +71,13 @@ const handleInput = () => {
 
 const search = () => {
   if (searchText.value) {
-    if (!searchHistory.value.includes(searchText.value)) {
+    if (!searchHistory.value.includes(searchText.value)  ) {
       searchHistory.value.unshift(searchText.value)
       if (searchHistory.value.length > 5) {
         searchHistory.value.pop()
       }
     }
+    localStorage.setItem('searchHistory', JSON.stringify(searchHistory.value))
     showHistory.value = false
   }
   data.other = searchText.value === '' ? undefined : searchText.value
@@ -84,7 +92,7 @@ const fillInput = (history: string) => {
 onMounted(() => {
   getC1()
   getCategory()
-
+  getSearchHistory()
   window.addEventListener('click', (event) => {
     const target = event.target as HTMLElement
     if (!target.closest('.search-input')) {
@@ -92,6 +100,8 @@ onMounted(() => {
     }
   })
 })
+
+
 </script>
 <template>
   <div class="form">

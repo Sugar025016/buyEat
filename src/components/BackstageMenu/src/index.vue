@@ -26,10 +26,14 @@
       </el-menu-item>
     </template>
     <!-- 有子路由且大于一个 -->
-    <el-sub-menu
+    <!-- <el-sub-menu
       v-if="item.children && item.children.length > 1"
       :index="item.path"
       @click="goRoute"
+    > -->
+    <el-sub-menu
+      v-if="item.children && item.children.length > 1"
+      :index="item.path"
     >
       <template #title>
         <el-icon>

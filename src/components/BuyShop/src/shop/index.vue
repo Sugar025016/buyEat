@@ -37,7 +37,24 @@
             </div>
             <div class="information">
               <el-icon :size="20"><Watch /></el-icon>
-              <span>BBBBBBBBBBBBBBBBBBBBBBBBBB</span>
+              <span>今日營業時間：</span>
+              <!-- <component v-if="shopData && shopData.schedules[dayOfWeek] && shopData.schedules[dayOfWeek].timePeriods && shopData.schedules[dayOfWeek].timePeriods.length > 0" 
+                v-for="timePeriod in shopData?.schedules[dayOfWeek].timePeriods">
+                <span>{{timePeriod.startTime}}-{{timePeriod.endTime}}</span>
+              </component>
+              <span v-else>{{ shopData?.schedules[dayOfWeek] }}</span> -->
+
+              <component
+                v-if="
+                  shopData?.schedules[dayOfWeek].timePeriods &&
+                  shopData?.schedules[dayOfWeek].timePeriods?.length > 0
+                "
+                v-for="timePeriod in shopData?.schedules[dayOfWeek].timePeriods"
+              >
+                <span>{{ timePeriod.startTime }}~{{ timePeriod.endTime }}</span>
+              </component>
+              <span v-else>{{ shopData?.schedules[dayOfWeek] }}</span>
+              <span v-else>非營業日</span>
             </div>
           </div>
           <div class="shop-buttons">
@@ -74,28 +91,34 @@
             <el-button
               size="large"
               type="warning"
-              class="shop-button"
+              class="shop-button btn btn-primary"
               :icon="Watch"
               round
               plain
               color=""
+              data-bs-toggle="modal"
+              data-bs-target="#scheduleModal"
             >
-              Primary
+              營業資訊
             </el-button>
           </div>
         </el-col>
       </el-row>
     </div>
   </div>
+  <scheduleModal :schedules="shopData?.schedules" :phone="shopData?.phone" :name="shopData?.name"></scheduleModal>
+  <!-- <scheduleModal :schedules="123"></scheduleModal> -->
 </template>
+
 <script setup lang="ts">
 import { House, ChatRound, User, Watch } from '@element-plus/icons-vue'
 import { useRoute } from 'vue-router'
 import { onMounted, ref, computed, watch } from 'vue'
 import { getShop } from '@/api/shop'
-import { ShopData, ShopResponseData } from '@/api/shop/type'
+import { ShopList, ShopData, ShopResponseData } from '@/api/shop/type'
+// import 'bootstrap/dist/css/bootstrap.css' // Import Bootstrap CSS
 
-import { ShopList } from '@/api/user/type'
+import scheduleModal from '../scheduleModal/index.vue'
 
 let $route = useRoute()
 
@@ -107,8 +130,9 @@ let favorite = ref('')
 
 import useUserStore from '@/store/modules/user'
 let userStore = useUserStore()
+
 const isLove = (v: ShopList) => {
-  isFavorite.value = v?.some((v: ShopData) => v.id === id)
+  isFavorite.value = v?.some((value: ShopData) => value.id === id)
 
   if (isFavorite.value) {
     favorite.value = '#fd7e14'
@@ -116,10 +140,6 @@ const isLove = (v: ShopList) => {
     favorite.value = 'rgb(139, 139, 139)'
   }
 }
-onMounted(() => {
-  getShopData(id)
-  isLove(userStore.favoriteShop)
-})
 
 const changeFavorite = async () => {
   await userStore.changeFavoriteStore(id)
@@ -149,8 +169,17 @@ const shopImageStyle = computed(() => {
   }
   return {}
 })
+const currentDate = new Date()
+// const dayOfWeek = currentDate.getDay();
+const dayOfWeek = 1
+
+const myModal = ref() // 建立 ref 來引用 Modal
+
+
 </script>
 <style lang="scss" scoped>
+
+
 $b-color: $color;
 .shop {
   .shop-card {

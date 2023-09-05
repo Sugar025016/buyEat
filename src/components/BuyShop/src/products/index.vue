@@ -38,16 +38,7 @@
     <div class="content"></div>
   </div>
 
-  <div
-    class="modal fade"
-    id="staticBackdrop"
-    data-bs-keyboard="false"
-    tabindex="-1"
-    aria-labelledby="staticBackdropLabel"
-    aria-hidden="true"
-  >
-    <product-modal :product="productData" title="Modal Title"></product-modal>
-  </div>
+  <product-modal :product="productData" title="Modal Title"></product-modal>
 </template>
 
 <script setup lang="ts">
@@ -100,7 +91,7 @@ const openModal = (v: ProductData) => {
   productData.value.orderUsername = userStore.username
   productData.value.note = ''
 
-  isProductModalVisible.value = true
+  // isProductModalVisible.value = true
 }
 
 const getProductsData = async (id: number) => {
@@ -129,15 +120,6 @@ onMounted(() => {
 })
 
 const showModal = ref(false)
-
-// const openModal = () => {
-//   showModal.value = !showModal.value
-// }
-
-const closeModal = () => {
-  showModal.value = false
-  isProductModalVisible.value = false
-}
 
 interface Tab {
   label: string
@@ -176,6 +158,7 @@ myModal?.addEventListener('shown.bs.modal', () => {
 @import '../../../../../node_modules/bootstrap/scss/buttons';
 
 .modal {
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .el-dialog {

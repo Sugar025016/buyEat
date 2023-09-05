@@ -2,6 +2,7 @@ import request from '@/utils/request'
 import type { ShopSearch, ShopData, ShopResponseData } from './type'
 enum API {
   SHOP = '/backstage/shop',
+  SHOP_NAME = '/backstage/shop/name',
 }
 
 export const getShop = (data: number) =>
@@ -19,3 +20,8 @@ export const reqAddOrUpdateShop = (data: ShopData) => {
     return request.post<any, any>(API.SHOP, data)
   }
 }
+
+
+export const reqRemoveShop = (data: number) =>
+  request.get<any, ShopData>(API.SHOP + '/' + data)
+

@@ -1,4 +1,12 @@
 <template>
+    <div
+    class="modal fade"
+    id="staticBackdrop"
+    data-bs-keyboard="false"
+    tabindex="-1"
+    aria-labelledby="staticBackdropLabel"
+    aria-hidden="true"
+  >
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <!-- <div class="modal-header" > -->
@@ -12,7 +20,6 @@
           class="btn-close"
           data-bs-dismiss="modal"
           aria-label="Close"
-          @click="closeModal"
         ></el-button>
         <div class="image-container">
           <!-- <img src="@/assets/images/product001.jpeg" alt="a" /> -->
@@ -92,9 +99,10 @@
       </div>
     </div>
   </div>
+  </div>
 </template>
 <script setup lang="ts">
-import { reactive, ref } from 'vue'
+import { ref } from 'vue'
 import { ProductModalData } from '@/api/tab/type'
 import useUserStore from '@/store/modules/user'
 import { apiAddCart } from '@/api/cart'

@@ -3,7 +3,7 @@
     <h1 class="title">{{ title }}</h1>
 
     <div class="table">
-      <span class="table-title">忘記密碼</span>
+      <span class="table-title">註冊帳號</span>
       <div>
         <span>帳號</span>
         <input type="text" class="rounded-input" placeholder="输入文本" />

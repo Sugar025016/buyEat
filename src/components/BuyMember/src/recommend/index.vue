@@ -1,9 +1,6 @@
 <template>
   <div class="cards">
-    <card></card>
-    <card></card>
-    <card></card>
-    <card></card>
+    <!-- <card></card> -->
   </div>
 </template>
 <script setup lang="ts">

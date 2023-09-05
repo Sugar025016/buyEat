@@ -66,6 +66,14 @@ let title = document.title
         margin: 5px;
       }
     }
+        .el-button {
+      // display: block;
+      display: flex;
+
+      width: 100%;
+      background-color: $color;
+      color: #ffffff;
+    }
   }
   .register {
     margin: auto;
@@ -75,12 +83,7 @@ let title = document.title
     display: flex;
     justify-content: space-between;
     min-width: 350px;
-    button {
-      // display: block;
-      display: flex;
 
-      width: 100%;
-    }
   }
 }
 </style>

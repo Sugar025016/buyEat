@@ -11,7 +11,7 @@ export interface Address {
   detail: string
 }
 export interface ProductData {
-  shopId?: number
+  shopId: number
   shopName: string
   tabId?: number
   tabName: string

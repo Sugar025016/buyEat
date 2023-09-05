@@ -59,6 +59,19 @@
           登录
         </el-button>
       </el-form-item>
+      <div class="forget">
+        <router-link :to="'/Login/forgetPassword'" class="link">
+          忘記密碼
+        </router-link>
+      </div>
+      <hr />
+      <div class="forget">
+        <!-- <a href="#">沒有帳號這邊可以註冊</a> -->
+
+        <router-link :to="'/Register'" class="link">
+          沒有帳號這邊可以註冊
+        </router-link>
+      </div>
     </el-card>
   </div>
 </template>
@@ -226,15 +239,13 @@ const rules = {
       margin-top: -10px;
     }
 
-    h3 {
-      background: rgb(82, 76, 76);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+    h3 { 
       font-size: 36px;
       text-align: center;
       font-weight: 600;
       margin-bottom: 40px;
       margin-top: -10px;
+      color: rgb(255, 255, 255);
     }
     .login_btn {
       width: 100%;
@@ -244,6 +255,23 @@ const rules = {
       border: 0px;
       height: 40px;
       border-radius: 40px;
+    }
+    .forget {
+      width: 100%;
+      display: flex;
+      text-align: center;
+      a {
+        width: 100%;
+        text-decoration: none;
+        color: $color;
+
+        margin: 1px;
+      }
+    }
+    hr {
+      border-bottom: 1px;
+      border-style: solid;
+      border-color: rgb(155, 155, 155);
     }
   }
 }

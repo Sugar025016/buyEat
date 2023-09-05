@@ -22,7 +22,23 @@ export interface ShopData {
   name: string
   description: string
   address: string
+  phone: string
   img: string
+  schedules:Schedules
+}
+
+
+export type Schedules = Schedule[]
+export interface Schedule {
+  id: number
+  week: number
+  timePeriods: TimePeriods
+}
+
+export type TimePeriods = TimePeriod[]
+export interface TimePeriod {
+  startTime: string
+  endTime: string
 }
 
 export interface ShopsResponseData extends ResponseData {

@@ -3,8 +3,8 @@ import axios from 'axios'
 import { ElMessage } from 'element-plus'
 import useUserStore from '@/store/modules/user'
 import { SET_TOKEN } from '@/utils/token'
+import router from '@/router'
 
-// let userStore = useUserStore()
 const request = axios.create({
   baseURL: import.meta.env.VITE_APP_BASE_API,
   timeout: 5000,
@@ -57,10 +57,12 @@ request.interceptors.response.use(
         break // 403 token過期
       // 401: 未登錄
       case 401:
+        router.push('/login')
         message = '未登錄'
         userStore.userClear()
         break // 403 token過期
       case 403:
+        router.push('/login')
         userStore.userClear()
         message = '登錄過期，請重新登錄'
         break

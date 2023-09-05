@@ -182,7 +182,7 @@ export const constantRoute = [
       title: 'loginRegister',
       hidden: false,
       icon: 'HomeFilled',
-      mustToken: true,
+      mustToken: false,
     },
     redirect: '/Register',
     children: [
@@ -193,7 +193,7 @@ export const constantRoute = [
           title: 'Register',
           hidden: false,
           icon: 'HomeFilled',
-          mustToken: true,
+          mustToken: false,
         },
       },
     ],
@@ -310,7 +310,7 @@ export const asyncRoute = [
 
 export const menuRoutes = [
   {
-    path: '/Backstage',
+    path: '/Backstage/shops',
     component: () => import('@/views/backstage/index.vue'),
     meta: {
       title: '後台',
@@ -318,10 +318,10 @@ export const menuRoutes = [
       icon: 'HomeFilled',
       mustToken: true,
     },
-    redirect: '/Backstage/shops',
+    redirect: 'shops',
     children: [
       {
-        path: '/Backstage/shops',
+        path: 'shops',
         component: () => import('@/components/BackstageShops/src/index.vue'),
         meta: {
           title: 'Shops',
@@ -331,7 +331,7 @@ export const menuRoutes = [
         },
       },
       {
-        path: '/Backstage/users',
+        path: 'users',
         component: () => import('@/components/BackstageUser/src/index.vue'),
         meta: {
           title: 'Users',
@@ -344,7 +344,7 @@ export const menuRoutes = [
         path: 'product',
         component: () => import('@/components/BackstageProduct/src/index.vue'),
         meta: {
-          title: 'product',
+          title: 'Product',
           hidden: false,
           icon: 'HomeFilled',
           mustToken: true,
@@ -354,7 +354,7 @@ export const menuRoutes = [
         path: 'category',
         component: () => import('@/components/BackstageCategory/src/index.vue'),
         meta: {
-          title: 'ategory',
+          title: 'Category',
           hidden: false,
           icon: 'HomeFilled',
           mustToken: true,
