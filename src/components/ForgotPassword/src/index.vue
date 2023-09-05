@@ -66,7 +66,7 @@ let title = document.title
         margin: 5px;
       }
     }
-        .el-button {
+    .el-button {
       // display: block;
       display: flex;
 
@@ -83,7 +83,6 @@ let title = document.title
     display: flex;
     justify-content: space-between;
     min-width: 350px;
-
   }
 }
 </style>

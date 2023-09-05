@@ -1,5 +1,5 @@
 <template>
-    <div
+  <div
     class="modal fade"
     id="staticBackdrop"
     data-bs-keyboard="false"
@@ -7,98 +7,98 @@
     aria-labelledby="staticBackdropLabel"
     aria-hidden="true"
   >
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <!-- <div class="modal-header" > -->
-      <!-- <div class="modal-header" style="background-image: url(product.img);"> -->
-      <div
-        class="modal-header"
-        :style="{ backgroundImage: 'url(' + product!.img + ')' }"
-      >
-        <el-button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></el-button>
-        <div class="image-container">
-          <!-- <img src="@/assets/images/product001.jpeg" alt="a" /> -->
-        </div>
-      </div>
-
-      <div class="modal-body">
-        <h1 class="modal-title fs-5" id="staticBackdropLabel">
-          {{ product!.name }}
-        </h1>
-        <span class="modal-description fs-6" id="staticBackdropLabel">
-          {{ product!.description }}
-        </span>
-        <hr class="divider" />
-        <!-- <div class="divider"></div> -->
-
-        <!-- <h1 class="modal-title fs-5" id="staticBackdropLabel">"name"</h1> -->
-        <div class="modal-body-content">
-          <span>訂購人</span>
-          <input
-            type="text"
-            class="rounded-input"
-            placeholder="输入文本"
-            v-model="product!.orderUsername"
-          />
-          <span>部門/單位</span>
-          <input
-            type="text"
-            class="rounded-input"
-            placeholder="输入文本"
-            v-model="product!.department"
-          />
-          <span>備註</span>
-          <input
-            type="text"
-            class="rounded-input"
-            placeholder="输入文本"
-            v-model="product!.note"
-          />
-        </div>
-      </div>
-      <div class="modal-footer">
-        <div class="count">
-          <el-button
-            type="warning"
-            class="btn btn-primary btn-count"
-            @click="changeCount(-1)"
-            :disabled="count < 2"
-            size="large"
-          >
-            <el-icon><Minus /></el-icon>
-          </el-button>
-
-          <span class="fs-5">{{ props.product!.qty }}</span>
-
-          <el-button
-            type="warning"
-            class="btn btn-primary btn-count"
-            @click="changeCount(1)"
-            :disabled="count > 9"
-            size="large"
-          >
-            <el-icon><Plus /></el-icon>
-          </el-button>
-        </div>
-        <el-button
-          type="warning"
-          class="btn btn-primary"
-          size="large"
-          @click="addCart()"
-          data-bs-dismiss="modal"
-          round
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <!-- <div class="modal-header" > -->
+        <!-- <div class="modal-header" style="background-image: url(product.img);"> -->
+        <div
+          class="modal-header"
+          :style="{ backgroundImage: 'url(' + product!.img + ')' }"
         >
-          加入購物車
-          <span>{{ props.product!.qty * props.product!.prise }}</span>
-        </el-button>
+          <el-button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></el-button>
+          <div class="image-container">
+            <!-- <img src="@/assets/images/product001.jpeg" alt="a" /> -->
+          </div>
+        </div>
+
+        <div class="modal-body">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">
+            {{ product!.name }}
+          </h1>
+          <span class="modal-description fs-6" id="staticBackdropLabel">
+            {{ product!.description }}
+          </span>
+          <hr class="divider" />
+          <!-- <div class="divider"></div> -->
+
+          <!-- <h1 class="modal-title fs-5" id="staticBackdropLabel">"name"</h1> -->
+          <div class="modal-body-content">
+            <span>訂購人</span>
+            <input
+              type="text"
+              class="rounded-input"
+              placeholder="输入文本"
+              v-model="product!.orderUsername"
+            />
+            <span>部門/單位</span>
+            <input
+              type="text"
+              class="rounded-input"
+              placeholder="输入文本"
+              v-model="product!.department"
+            />
+            <span>備註</span>
+            <input
+              type="text"
+              class="rounded-input"
+              placeholder="输入文本"
+              v-model="product!.note"
+            />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <div class="count">
+            <el-button
+              type="warning"
+              class="btn btn-primary btn-count"
+              @click="changeCount(-1)"
+              :disabled="count < 2"
+              size="large"
+            >
+              <el-icon><Minus /></el-icon>
+            </el-button>
+
+            <span class="fs-5">{{ props.product!.qty }}</span>
+
+            <el-button
+              type="warning"
+              class="btn btn-primary btn-count"
+              @click="changeCount(1)"
+              :disabled="count > 9"
+              size="large"
+            >
+              <el-icon><Plus /></el-icon>
+            </el-button>
+          </div>
+          <el-button
+            type="warning"
+            class="btn btn-primary"
+            size="large"
+            @click="addCart()"
+            data-bs-dismiss="modal"
+            round
+          >
+            加入購物車
+            <span>{{ props.product!.qty * props.product!.prise }}</span>
+          </el-button>
+        </div>
       </div>
     </div>
-  </div>
   </div>
 </template>
 <script setup lang="ts">

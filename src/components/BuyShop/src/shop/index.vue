@@ -106,7 +106,11 @@
       </el-row>
     </div>
   </div>
-  <scheduleModal :schedules="shopData?.schedules" :phone="shopData?.phone" :name="shopData?.name"></scheduleModal>
+  <scheduleModal
+    :schedules="shopData?.schedules"
+    :phone="shopData?.phone"
+    :name="shopData?.name"
+  ></scheduleModal>
   <!-- <scheduleModal :schedules="123"></scheduleModal> -->
 </template>
 
@@ -174,12 +178,8 @@ const currentDate = new Date()
 const dayOfWeek = 1
 
 const myModal = ref() // 建立 ref 來引用 Modal
-
-
 </script>
 <style lang="scss" scoped>
-
-
 $b-color: $color;
 .shop {
   .shop-card {

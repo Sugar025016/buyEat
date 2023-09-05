@@ -21,7 +21,5 @@ export const reqAddOrUpdateShop = (data: ShopData) => {
   }
 }
 
-
 export const reqRemoveShop = (data: number) =>
   request.get<any, ShopData>(API.SHOP + '/' + data)
-

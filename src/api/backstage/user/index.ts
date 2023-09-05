@@ -25,4 +25,4 @@ export const reqAddOrUpdateUser = (data: User) => {
 }
 
 export const reqSearchUser = (data: string) =>
-  request.get<any,SearchUserResponseData >(API.USER_ACCOUNT_URL + '/' + data)
+  request.get<any, SearchUserResponseData>(API.USER_ACCOUNT_URL + '/' + data)

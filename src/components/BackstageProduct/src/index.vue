@@ -110,7 +110,6 @@ const updateProduct = async (row: ProductData) => {
   let res: SearchShopRequestData = await reqTab(row.shopId)
   if (res.code === 200) {
     searchTabsData.value = res.data.tabs
-    
   } else {
     ElMessage({
       type: 'error',
@@ -129,7 +128,6 @@ const updateProduct = async (row: ProductData) => {
     formRef.value.clearValidate('prise')
     formRef.value.clearValidate('img')
   })
-  
 }
 
 const save = async () => {
@@ -315,7 +313,7 @@ const searchShopsData = ref<SearchShopsData>([])
 
 const remoteMethod = debounce((query) => {
   // 在这里执行搜索操作
-  
+
   if (query) {
     loading.value = true
     search(query.toLowerCase())
@@ -334,10 +332,9 @@ const shopChange = () => {
       (v) => v.name === productParams.shopName,
     )
     productParams.shopId = selectedShop?.id
-    
+
     if (selectedShop) {
       searchTabsData.value = selectedShop.tabs
-      
     } else {
       searchTabsData.value = []
     }
@@ -352,10 +349,9 @@ const tabChange = () => {
       (v) => v.name === productParams.shopName,
     )
     productParams.shopId = selectedShop?.id
-    
+
     if (selectedShop) {
       searchTabsData.value = selectedShop.tabs
-      
     } else {
       searchTabsData.value = []
     }
@@ -368,8 +364,7 @@ const open = () => {
   ElMessageBox.prompt('Please input your e-mail', 'Tip', {
     confirmButtonText: 'OK',
     cancelButtonText: 'Cancel',
-    inputPattern:
-      / \S/,
+    inputPattern: / \S/,
     inputErrorMessage: 'Invalid Email',
     closeOnClickModal: true,
     zIndex: 9999,
@@ -387,7 +382,6 @@ const open = () => {
       })
     })
 }
-
 
 const handleClose = (done) => {
   if (loading.value) {
@@ -410,8 +404,7 @@ const handleClose = (done) => {
 }
 </script>
 <template>
-
-<el-dialog v-model="dialogFormVisible" title="Shipping address">
+  <el-dialog v-model="dialogFormVisible" title="Shipping address">
     <el-form :model="form">
       <el-form-item label="Promotion name" :label-width="formLabelWidth">
         <el-input v-model="form.name" autocomplete="off" />
@@ -433,7 +426,6 @@ const handleClose = (done) => {
     </template>
   </el-dialog>
 
-  
   <!-- <el-card style="height: 80px">
     <el-form :inline="true" class="form">
       <el-form-item label="用户名:">
@@ -549,7 +541,7 @@ const handleClose = (done) => {
       @size-change="handler"
     />
   </el-card>
-  <el-drawer v-model="drawer" class="drawer" >
+  <el-drawer v-model="drawer" class="drawer">
     <template #header>
       <h4>{{ productParams.id ? '更新產品' : '添加產品' }}</h4>
     </template>
@@ -657,7 +649,6 @@ const handleClose = (done) => {
   .el-button {
     margin: 5px;
   }
-
 }
 .el-form-item__content {
   background-color: aqua;
@@ -668,17 +659,13 @@ const handleClose = (done) => {
   }
 }
 
-.el-popup-parent--hidden{
-  .el-overlay{
-  z-index: 100000;
-  background-color: aquamarine;
+.el-popup-parent--hidden {
+  .el-overlay {
+    z-index: 100000;
+    background-color: aquamarine;
+  }
+  .is-message-box {
+    z-index: 1000000;
+  }
 }
-.is-message-box{
-  z-index: 1000000;
-
-}
-}
-
-
-
 </style>

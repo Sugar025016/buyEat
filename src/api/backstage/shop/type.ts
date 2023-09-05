@@ -70,4 +70,3 @@ export interface ShopPutRequest {
   isOrderable: boolean
   disable: boolean
 }
-

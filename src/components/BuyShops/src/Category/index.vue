@@ -51,7 +51,6 @@ const getC1 = async () => {
 const searchText = ref('')
 const showHistory = ref(false)
 
-
 const searchHistory = ref<string[]>([])
 const getSearchHistory = () => {
   const storedHistoryJSON = localStorage.getItem('searchHistory')
@@ -59,7 +58,6 @@ const getSearchHistory = () => {
     searchHistory.value = JSON.parse(storedHistoryJSON)
     // 现在您可以使用 storedHistory
   } else {
-    
     // 处理 localStorage 中没有搜索记录的情况，例如设置一个默认值
     searchHistory.value = [] // 默认值为空数组
   }
@@ -71,7 +69,7 @@ const handleInput = () => {
 
 const search = () => {
   if (searchText.value) {
-    if (!searchHistory.value.includes(searchText.value)  ) {
+    if (!searchHistory.value.includes(searchText.value)) {
       searchHistory.value.unshift(searchText.value)
       if (searchHistory.value.length > 5) {
         searchHistory.value.pop()
@@ -100,8 +98,6 @@ onMounted(() => {
     }
   })
 })
-
-
 </script>
 <template>
   <div class="form">

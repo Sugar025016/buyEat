@@ -4,7 +4,6 @@ export interface ResponseData {
   ok: boolean
 }
 
-
 export interface SearchTabData {
   id: number
   name: string
@@ -15,16 +14,15 @@ export type SearchTabsData = SearchTabData[]
 export interface SearchShopData {
   id: number
   name: string
-  tabs:SearchTabsData
+  tabs: SearchTabsData
 }
 
 export type SearchShopsData = SearchShopData[]
 
-export interface SearchShopsRequestData  extends ResponseData{
+export interface SearchShopsRequestData extends ResponseData {
   data: SearchShopsData
 }
 
-
-export interface SearchShopRequestData  extends ResponseData{
+export interface SearchShopRequestData extends ResponseData {
   data: SearchShopData
 }

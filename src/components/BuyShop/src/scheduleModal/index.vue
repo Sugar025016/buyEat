@@ -87,8 +87,7 @@ defineProps(['schedules', 'phone', 'name'])
   .modal-title {
     margin: 10px;
   }
-  .modal-header{
-
+  .modal-header {
     border-bottom: 2px;
     border-style: solid;
     border-color: rgb(155, 155, 155);
@@ -97,7 +96,7 @@ defineProps(['schedules', 'phone', 'name'])
     // border-width: 2px;
 
     .item {
-      margin: 10px 10px 30px  10px;
+      margin: 10px 10px 30px 10px;
       .title {
         display: flex;
         // justify-content: center;

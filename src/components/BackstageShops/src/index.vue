@@ -19,11 +19,8 @@ import { ShopPutRequest } from '@/api/backstage/shop/type'
 import { reqSearchUser } from '@/api/backstage/user'
 import { fromEvent } from 'rxjs'
 import { debounceTime, switchMap } from 'rxjs/operators'
-import debounce from 'lodash/debounce';
-import {
-  SearchUserResponseData,
-  SearchUsers,
-} from '@/api/backstage/user/type'
+import debounce from 'lodash/debounce'
+import { SearchUserResponseData, SearchUsers } from '@/api/backstage/user/type'
 // import useLayOutSettingStore from '@/store/modules/setting'
 let userStore = useUserStore()
 
@@ -137,7 +134,6 @@ const updateShop = (row: ShopData) => {
 
   shopParams.address = tempAddress
 
-
   nextTick(() => {
     formRef.value.clearValidate('description')
     formRef.value.clearValidate('img')
@@ -233,9 +229,6 @@ function validateNotEmptyString(rule: any, value: any, callback: any) {
   }
 }
 
-
-
-
 // const checkAll = ref<boolean>(false)
 // const isIndeterminate = ref<boolean>(true)
 
@@ -271,7 +264,6 @@ const selectChange = (value: any) => {
 //   settingStore.refsh = !settingStore.refsh
 // }
 
-
 const loading = ref(false)
 const search = async (query: string) => {
   let res: SearchUserResponseData = await reqSearchUser(query)
@@ -279,7 +271,7 @@ const search = async (query: string) => {
     searchUsers.value = res.data
   } else {
     drawer.value = false
-    ElMessage({  
+    ElMessage({
       type: 'error',
       message: '搜尋失败',
     })
@@ -289,7 +281,7 @@ const searchUsers = ref<SearchUsers>([])
 
 const remoteMethod = debounce((query) => {
   // 在这里执行搜索操作
-  
+
   if (query) {
     loading.value = true
     search(query.toLowerCase())
@@ -298,7 +290,7 @@ const remoteMethod = debounce((query) => {
     searchUsers.value = []
   }
   // 这只是一个示例，您需要根据实际情况实现搜索逻辑
-}, 1000); // 1000 毫秒的防抖延迟
+}, 1000) // 1000 毫秒的防抖延迟
 
 const city: string[] = Object.keys(cityAreas)
 

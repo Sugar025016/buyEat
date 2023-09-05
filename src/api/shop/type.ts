@@ -24,9 +24,8 @@ export interface ShopData {
   address: string
   phone: string
   img: string
-  schedules:Schedules
+  schedules: Schedules
 }
-
 
 export type Schedules = Schedule[]
 export interface Schedule {

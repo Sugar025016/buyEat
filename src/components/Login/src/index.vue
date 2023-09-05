@@ -239,7 +239,7 @@ const rules = {
       margin-top: -10px;
     }
 
-    h3 { 
+    h3 {
       font-size: 36px;
       text-align: center;
       font-weight: 600;
