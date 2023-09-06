@@ -104,7 +104,7 @@ const save = async () => {
   formRef.value.validate()
   let res: any = await reqAddOrUpdateUser(userParams)
   if (res.code === 200) {
-  getHasUser()
+    getHasUser()
     drawer.value = false
     ElMessage({
       type: 'success',
