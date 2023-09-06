@@ -17,8 +17,6 @@ import cityAreas from '@/utils/areaData.js'
 import useUserStore from '@/store/modules/user'
 import { ShopPutRequest } from '@/api/backstage/shop/type'
 import { reqSearchUser } from '@/api/backstage/user'
-import { fromEvent } from 'rxjs'
-import { debounceTime, switchMap } from 'rxjs/operators'
 import debounce from 'lodash/debounce'
 import { SearchUserResponseData, SearchUsers } from '@/api/backstage/user/type'
 // import useLayOutSettingStore from '@/store/modules/setting'
@@ -328,13 +326,11 @@ const handleAvatarSuccess: UploadProps['onSuccess'] = (
   shopParams.imgId = response.id
   formRef.value.clearValidate('img')
 }
+const changeCity =()=> {
 
-watch(
-  () => shopParams.address.city,
-  () => {
-    shopParams.address.area = ''
-  },
-)
+  shopParams.address.area = ''
+}
+
 </script>
 <template>
   <!-- <el-card style="height: 80px">
@@ -522,6 +518,7 @@ watch(
             class="m-2"
             placeholder="城市"
             size="large"
+            @change="changeCity"
           >
             <el-option
               v-for="(item, index) in city"
@@ -541,7 +538,7 @@ watch(
             no-data-text="請先選擇城市"
           >
             <el-option
-              v-for="(item, index) in cityAreas[
+              v-for="item in cityAreas[
                 shopParams.address.city as keyof typeof cityAreas
               ]"
               :key="item"
