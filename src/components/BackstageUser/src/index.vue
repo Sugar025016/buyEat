@@ -26,6 +26,8 @@ import type {
 } from '@/api/backstage/user/type'
 
 import useLayOutSettingStore from '@/store/modules/setting'
+import { ElMessage } from 'element-plus/lib/components/index.js'
+
 let pageNo = ref<number>(1)
 
 let pageSize = ref<number>(5)
@@ -102,6 +104,7 @@ const save = async () => {
   formRef.value.validate()
   let res: any = await reqAddOrUpdateUser(userParams)
   if (res.code === 200) {
+  getHasUser()
     drawer.value = false
     ElMessage({
       type: 'success',
@@ -266,17 +269,19 @@ const reset = () => {
     >
       <el-table-column type="selection" align="center"></el-table-column>
       <el-table-column label="#" align="center" type="index"></el-table-column>
-      <el-table-column label="id" align="center" prop="id"></el-table-column>
+      <!-- <el-table-column label="id" align="center" prop="id" width="50"></el-table-column> -->
       <el-table-column
         label="用户名字"
         align="center"
         prop="account"
+        width="150"
         show-overflow-tooltip
       ></el-table-column>
       <el-table-column
         label="用户帳號"
         align="center"
-        prop="account"
+        prop="name"
+        width="150"
         show-overflow-tooltip
       ></el-table-column>
       <el-table-column
@@ -284,6 +289,7 @@ const reset = () => {
         align="center"
         prop="roleName"
         show-overflow-tooltip
+        width="150"
       ></el-table-column>
       <el-table-column
         label="創建時間"
