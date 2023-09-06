@@ -326,11 +326,9 @@ const handleAvatarSuccess: UploadProps['onSuccess'] = (
   shopParams.imgId = response.id
   formRef.value.clearValidate('img')
 }
-const changeCity =()=> {
-
+const changeCity = () => {
   shopParams.address.area = ''
 }
-
 </script>
 <template>
   <!-- <el-card style="height: 80px">
