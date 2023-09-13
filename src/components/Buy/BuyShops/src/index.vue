@@ -46,9 +46,9 @@ let categoryStore = useShopStore()
 }
 
 .buyShops {
-        border-radius: 40px;
+  border-radius: 40px;
   .row1 {
-        border-radius: 40px;
+    border-radius: 40px;
     .buyCard {
       width: 100%;
       height: 50vh;

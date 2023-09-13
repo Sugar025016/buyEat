@@ -252,7 +252,8 @@ export const constantRoute = [
       },
       {
         path: 'category',
-        component: () => import('@/components/Backstage/BackstageCategory/src/index.vue'),
+        component: () =>
+          import('@/components/Backstage/BackstageCategory/src/index.vue'),
         meta: {
           title: 'ategory',
           hidden: false,
@@ -307,7 +308,8 @@ export const asyncRoute = [
       },
       {
         path: 'category',
-        component: () => import('@/components/Backstage/BackstageCategory/src/index.vue'),
+        component: () =>
+          import('@/components/Backstage/BackstageCategory/src/index.vue'),
         meta: {
           title: 'ategory',
           hidden: false,
@@ -363,7 +365,8 @@ export const menuRoutes = [
       },
       {
         path: 'category',
-        component: () => import('@/components/Backstage/BackstageCategory/src/index.vue'),
+        component: () =>
+          import('@/components/Backstage/BackstageCategory/src/index.vue'),
         meta: {
           title: 'Category',
           hidden: false,

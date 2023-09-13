@@ -27,7 +27,13 @@
       </div>
       <div class="text">
         <span>外送地址：</span>
-        <span v-if="userStore.address">{{ userStore.address.city + userStore.address.area + userStore.address.detail }}</span>
+        <span v-if="userStore.address">
+          {{
+            userStore.address.city +
+            userStore.address.area +
+            userStore.address.detail
+          }}
+        </span>
       </div>
     </el-col>
     <el-col :span="12">

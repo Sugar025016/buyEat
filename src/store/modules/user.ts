@@ -58,7 +58,7 @@ const useUserStore = defineStore('User', {
       avatar: '',
       buttons: [],
       cartCount: 0,
-      address:{
+      address: {
         id: 0,
         city: '',
         area: '',
@@ -103,7 +103,7 @@ const useUserStore = defineStore('User', {
         //   cloneDeep(asyncRoute),
         //   this.token,
         // )
-        
+
         return 'ok'
       } else {
         return Promise.reject(new Error(res.message))
@@ -153,8 +153,10 @@ const useUserStore = defineStore('User', {
       }
     },
     async isLove(id: number) {
-      console.log("this.favoriteShop",this.favoriteShop)
-      const isFavorite = this.favoriteShop.some((value: ShopData) => value.id === id)
+      console.log('this.favoriteShop', this.favoriteShop)
+      const isFavorite = this.favoriteShop.some(
+        (value: ShopData) => value.id === id,
+      )
       if (isFavorite) {
         return '#fd7e14'
       } else {
@@ -176,11 +178,11 @@ const useUserStore = defineStore('User', {
       this.username = ''
       this.account = ''
       this.avatar = ''
-        ; (this.email = ''),
-          (this.phone = ''),
-          (this.favoriteShop = []),
-          (this.cartCount = 0),
-          REMOVE_TOKEN()
+      ;(this.email = ''),
+        (this.phone = ''),
+        (this.favoriteShop = []),
+        (this.cartCount = 0),
+        REMOVE_TOKEN()
     },
     async getUserAddress() {
       const res: UserInfoResponseData = await reqChangeUserInfo(v)
@@ -190,7 +192,6 @@ const useUserStore = defineStore('User', {
         return Promise.reject(new Error(res.message))
       }
     },
-
   },
   getters: {},
 })

@@ -25,7 +25,7 @@ export interface ShopData {
   phone?: string
   img: string
   schedules?: Schedules
-  orderable?:boolean
+  orderable?: boolean
 }
 
 export type Schedules = Schedule[]

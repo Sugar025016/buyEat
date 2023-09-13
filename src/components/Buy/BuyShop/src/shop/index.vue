@@ -142,13 +142,13 @@ let userStore = useUserStore()
 // }
 
 const changeFavorite = async () => {
-  await userStore.changeFavoriteStore(id) 
-  favorite.value=await userStore.isLove(id)
+  await userStore.changeFavoriteStore(id)
+  favorite.value = await userStore.isLove(id)
 }
 
 onMounted(async () => {
   await getShopData(id)
-  favorite.value=await userStore.isLove(id)
+  favorite.value = await userStore.isLove(id)
 })
 
 const getShopData = async (id: number) => {
@@ -165,8 +165,7 @@ const shopImageStyle = computed(() => {
   return {}
 })
 const currentDate = new Date()
-const dayOfWeek = currentDate.getDay();
-
+const dayOfWeek = currentDate.getDay()
 </script>
 <style lang="scss" scoped>
 $b-color: $color;

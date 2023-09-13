@@ -37,5 +37,5 @@ export const reqFavorites = () =>
 export const reqChangeFavorite = (id: number) =>
   request.put<any, LovesResponseData>(API.USER_FAVORITE_URL + '/' + id)
 
-  export const reqUserAddress = () =>
+export const reqUserAddress = () =>
   request.get<any, UserInfoResponseData>(API.USER_ADDRESS_URL)

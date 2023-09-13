@@ -72,11 +72,11 @@ onMounted(async () => {
 
 <style lang="scss" scoped>
 .el-card {
-        border-radius: 20px;
+  border-radius: 20px;
   overflow: visible;
 }
 .card {
-        border-radius: 20px;
+  border-radius: 20px;
   // padding: 0px;
   cursor: pointer;
   position: relative;
@@ -102,7 +102,7 @@ onMounted(async () => {
   }
 
   .image-container img {
-        border-radius: 20px 20px 0  0;
+    border-radius: 20px 20px 0 0;
     position: absolute;
     top: 0;
     left: 0;

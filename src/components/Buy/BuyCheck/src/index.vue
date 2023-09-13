@@ -144,13 +144,13 @@ const selectedDate = ref('')
 const textarea = ref('')
 
 // 计算日期选项
-const today =  new Date('2017-07-09'); 
+const today = new Date('2017-07-09')
 const oneWeekLater = new Date(today)
 oneWeekLater.setDate(today.getDate() + 70)
 
 const selectedTime = ref<string | null>(null)
 
-const availableTimes = computed((startHours:number) => {
+const availableTimes = computed((startHours: number) => {
   const times = []
   const startTime1 = new Date()
   startTime1.setHours(10, 0, 0, 0)
@@ -189,10 +189,9 @@ while (today <= oneWeekLater) {
 
   dateOptions.value.push(dateData)
   today.setDate(today.getDate() + 1)
-  console.log(today.getTime());
-  console.log(today.getTimezoneOffset());
-  console.log(today.getDay());
-
+  console.log(today.getTime())
+  console.log(today.getTimezoneOffset())
+  console.log(today.getDay())
 }
 
 const disabledDate = (date: any) => {

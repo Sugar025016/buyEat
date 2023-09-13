@@ -51,8 +51,13 @@
             <span class="total">總金額:</span>
             <span class="total-data">NT${{ sum }}</span>
             <hr />
-            <el-button type="warning" size="large" class="button-orange" 
-              @click="checkLink" round>
+            <el-button
+              type="warning"
+              size="large"
+              class="button-orange"
+              @click="checkLink"
+              round
+            >
               確認訂單
             </el-button>
             <el-button
@@ -93,7 +98,7 @@ const carts = ref<CartsData>({
 
 const shopLink = () => {
   if (carts.value?.shopId) {
-    console.log("carts.value.shopId",carts.value.shopId)
+    console.log('carts.value.shopId', carts.value.shopId)
     $router.push('/BuyShop/' + carts.value.shopId)
   } else {
     $router.push('/')
@@ -101,7 +106,7 @@ const shopLink = () => {
 }
 
 const checkLink = () => {
-    $router.push('/BuyCheck')
+  $router.push('/BuyCheck')
 }
 
 const getCart = async () => {

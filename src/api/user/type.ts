@@ -1,5 +1,4 @@
-
-import { ShopList } from '../shop/type';
+import { ShopList } from '../shop/type'
 
 export interface LoginFormData {
   username?: string
@@ -33,7 +32,7 @@ export interface UserInfoResponseData extends ResponseData {
     favoriteShops: ShopList
     avatar: string
     cartCount: number
-    address?:Address
+    address?: Address
   }
 }
 
@@ -63,7 +62,6 @@ export interface UserProfileChangeResponse extends ResponseData {
 export interface LovesResponseData extends ResponseData {
   data: ShopList
 }
-
 
 export interface UserAddressResponseData extends ResponseData {
   data: ShopList
