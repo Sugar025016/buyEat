@@ -29,6 +29,7 @@ import {
 // @ts-expect-error
 import cloneDeep from 'lodash/cloneDeep'
 import { useRouter } from 'vue-router'
+import { ShopData, ShopList } from '@/api/shop/type'
 
 let $router = useRouter()
 
@@ -57,6 +58,12 @@ const useUserStore = defineStore('User', {
       avatar: '',
       buttons: [],
       cartCount: 0,
+      address:{
+        id: 0,
+        city: '',
+        area: '',
+        detail: '',
+      },
     }
   },
   // 异步|逻辑的地方
@@ -75,7 +82,7 @@ const useUserStore = defineStore('User', {
       // error=>error.message
       if (res.data?.code === 200) {
         this.token = GET_TOKEN()
-
+        this.userInfo()
         return 'ok'
       } else {
         return Promise.reject(new Error(res.data as string))
@@ -90,11 +97,13 @@ const useUserStore = defineStore('User', {
         this.email = res.data.email
         this.favoriteShop = res.data.favoriteShops
         this.cartCount = res.data.cartCount
+        this.address = res.data.address
 
-        const userAsyncRoute = filterAsyncRoute(
-          cloneDeep(asyncRoute),
-          this.token,
-        )
+        // const userAsyncRoute = filterAsyncRoute(
+        //   cloneDeep(asyncRoute),
+        //   this.token,
+        // )
+        
         return 'ok'
       } else {
         return Promise.reject(new Error(res.message))
@@ -134,7 +143,6 @@ const useUserStore = defineStore('User', {
         return Promise.reject(new Error(res.message))
       }
     },
-
     async changeFavoriteStore(id: number) {
       const res: LovesResponseData = await reqChangeFavorite(id)
       if (res.code === 200) {
@@ -144,6 +152,16 @@ const useUserStore = defineStore('User', {
         return Promise.reject(new Error(res.message))
       }
     },
+    async isLove(id: number) {
+      console.log("this.favoriteShop",this.favoriteShop)
+      const isFavorite = this.favoriteShop.some((value: ShopData) => value.id === id)
+      if (isFavorite) {
+        return '#fd7e14'
+      } else {
+        return 'rgb(139, 139, 139)'
+      }
+    },
+
     async userLogout() {
       const res = await reqLogOut()
       if (res.code === 200) {
@@ -158,12 +176,21 @@ const useUserStore = defineStore('User', {
       this.username = ''
       this.account = ''
       this.avatar = ''
-      ;(this.email = ''),
-        (this.phone = ''),
-        (this.favoriteShop = []),
-        (this.cartCount = 0),
-        REMOVE_TOKEN()
+        ; (this.email = ''),
+          (this.phone = ''),
+          (this.favoriteShop = []),
+          (this.cartCount = 0),
+          REMOVE_TOKEN()
     },
+    async getUserAddress() {
+      const res: UserInfoResponseData = await reqChangeUserInfo(v)
+      if (res.code === 200) {
+        return await this.userInfo()
+      } else {
+        return Promise.reject(new Error(res.message))
+      }
+    },
+
   },
   getters: {},
 })

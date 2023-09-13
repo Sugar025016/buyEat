@@ -1,3 +1,6 @@
+
+import { ShopList } from '../shop/type';
+
 export interface LoginFormData {
   username?: string
   password?: string
@@ -30,7 +33,15 @@ export interface UserInfoResponseData extends ResponseData {
     favoriteShops: ShopList
     avatar: string
     cartCount: number
+    address?:Address
   }
+}
+
+export interface Address {
+  id?: number
+  city: string
+  area: string
+  detail: string
 }
 
 export interface UserProfile {
@@ -38,8 +49,8 @@ export interface UserProfile {
   account: string
   phone: string
   email: string
+  address: Address
 }
-
 export interface UserPwd {
   password: string
   NewPassword: string
@@ -49,16 +60,11 @@ export interface UserProfileChangeResponse extends ResponseData {
   data: string
 }
 
-export interface ShopData {
-  id: number
-  name: string
-  description: string
-  address: string
-  img: string
+export interface LovesResponseData extends ResponseData {
+  data: ShopList
 }
 
-export type ShopList = ShopData[]
 
-export interface LovesResponseData extends ResponseData {
+export interface UserAddressResponseData extends ResponseData {
   data: ShopList
 }

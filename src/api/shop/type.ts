@@ -22,9 +22,10 @@ export interface ShopData {
   name: string
   description: string
   address: string
-  phone: string
+  phone?: string
   img: string
-  schedules: Schedules
+  schedules?: Schedules
+  orderable?:boolean
 }
 
 export type Schedules = Schedule[]

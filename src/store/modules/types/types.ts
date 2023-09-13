@@ -1,6 +1,8 @@
 import type { RouteRecordRaw } from 'vue-router'
-import type { CategoryObj } from '@/api/product/attr/type'
-import { Category, Shop, ShopList } from '@/api/shop/type'
+import type { CategoryObj } from '@/api/product/type'
+import { Category, ShopList } from '@/api/shop/type'
+import { Address } from '@/api/user/type'
+
 export interface UserState {
   token: string | null
   menuRoutes: RouteRecordRaw[]
@@ -13,6 +15,7 @@ export interface UserState {
   buttons: string[]
   favoriteShop: ShopList
   cartCount: number
+  address:Address
 }
 
 export interface CategoryState {

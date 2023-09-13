@@ -13,7 +13,7 @@ export const constantRoute = [
     children: [
       {
         path: '/BuyShops',
-        component: () => import('@/components/BuyShops/src/index.vue'),
+        component: () => import('@/components/Buy/BuyShops/src/index.vue'),
         name: 'BuyShops',
         meta: {
           title: '首页',
@@ -24,7 +24,7 @@ export const constantRoute = [
       },
       {
         path: '/BuyMember',
-        component: () => import('@/components/BuyMember/src/index.vue'),
+        component: () => import('@/components/Buy/BuyMember/src/index.vue'),
         meta: {
           title: 'BuyMember',
           hidden: false,
@@ -37,7 +37,7 @@ export const constantRoute = [
             path: '/BuyMember/profile/:number',
             name: 'profile',
             component: () =>
-              import('@/components/BuyMember/src/profile/index.vue'),
+              import('@/components/Buy/BuyMember/src/profile/index.vue'),
             meta: {
               title: 'profile',
               hidden: false,
@@ -49,7 +49,7 @@ export const constantRoute = [
             path: 'changeProfile/:number',
             name: 'changeProfile',
             component: () =>
-              import('@/components/BuyMember/src/changeProfile/index.vue'),
+              import('@/components/Buy/BuyMember/src/changeProfile/index.vue'),
             meta: {
               title: 'changeProfile',
               hidden: false,
@@ -61,7 +61,7 @@ export const constantRoute = [
             path: 'changeCompany/:number',
             name: 'changeCompany',
             component: () =>
-              import('@/components/BuyMember/src/changeCompany/index.vue'),
+              import('@/components/Buy/BuyMember/src/changeCompany/index.vue'),
             meta: {
               title: 'changeCompany',
               hidden: false,
@@ -73,7 +73,7 @@ export const constantRoute = [
             path: 'changePassword/:number',
             name: 'changePassword',
             component: () =>
-              import('@/components/BuyMember/src/changePassword/index.vue'),
+              import('@/components/Buy/BuyMember/src/changePassword/index.vue'),
             meta: {
               title: 'changePassword',
               hidden: false,
@@ -85,7 +85,7 @@ export const constantRoute = [
             path: 'love/:number',
             name: 'love',
             component: () =>
-              import('@/components/BuyMember/src/love/index.vue'),
+              import('@/components/Buy/BuyMember/src/love/index.vue'),
             meta: {
               title: 'love',
               hidden: false,
@@ -97,7 +97,7 @@ export const constantRoute = [
             path: 'recommend/:number',
             name: 'recommend',
             component: () =>
-              import('@/components/BuyMember/src/recommend/index.vue'),
+              import('@/components/Buy/BuyMember/src/recommend/index.vue'),
             meta: {
               title: 'recommend',
               hidden: false,
@@ -110,7 +110,7 @@ export const constantRoute = [
       {
         path: 'BuyOrder',
         name: 'BuyOrder',
-        component: () => import('@/components/BuyOrder/src/index.vue'),
+        component: () => import('@/components/Buy/BuyOrder/src/index.vue'),
         meta: {
           title: 'BuyOrder',
           hidden: false,
@@ -121,7 +121,7 @@ export const constantRoute = [
       {
         path: 'BuyShop/:id',
         name: 'BuyShop',
-        component: () => import('@/components/BuyShop/src/index.vue'),
+        component: () => import('@/components/Buy/BuyShop/src/index.vue'),
         meta: {
           title: 'BuyShop',
           hidden: false,
@@ -132,9 +132,20 @@ export const constantRoute = [
       {
         path: 'BuyShopCart',
         name: 'BuyShopCart',
-        component: () => import('@/components/BuyShopCart/src/index.vue'),
+        component: () => import('@/components/Buy/BuyShopCart/src/index.vue'),
         meta: {
           title: 'BuyShopCart',
+          hidden: false,
+          icon: 'HomeFilled',
+          mustToken: true,
+        },
+      },
+      {
+        path: 'BuyCheck',
+        name: 'BuyCheck',
+        component: () => import('@/components/Buy/BuyCheck/src/index.vue'),
+        meta: {
+          title: 'BuyCheck',
           hidden: false,
           icon: 'HomeFilled',
           mustToken: true,
@@ -241,7 +252,7 @@ export const constantRoute = [
       },
       {
         path: 'category',
-        component: () => import('@/components/BackstageCategory/src/index.vue'),
+        component: () => import('@/components/Backstage/BackstageCategory/src/index.vue'),
         meta: {
           title: 'ategory',
           hidden: false,
@@ -296,7 +307,7 @@ export const asyncRoute = [
       },
       {
         path: 'category',
-        component: () => import('@/components/BackstageCategory/src/index.vue'),
+        component: () => import('@/components/Backstage/BackstageCategory/src/index.vue'),
         meta: {
           title: 'ategory',
           hidden: false,
@@ -352,7 +363,7 @@ export const menuRoutes = [
       },
       {
         path: 'category',
-        component: () => import('@/components/BackstageCategory/src/index.vue'),
+        component: () => import('@/components/Backstage/BackstageCategory/src/index.vue'),
         meta: {
           title: 'Category',
           hidden: false,

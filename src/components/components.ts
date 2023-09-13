@@ -1,13 +1,11 @@
-// export { DefPagination } from './Pagination'
-export { DefSvgIcon } from './SvgIcon'
-// export { DefCategory } from './Category'
-export { DefBuyTabBar } from './BuyTabBar'
-export { DefBuyShops } from './BuyShops'
-export { DefBuyFooter } from './BuyFooter'
-export { DefBuyMessage } from './BuyMessage'
-export { DefBuyShop } from './BuyShop'
-export { DefBuyShopCart } from './BuyShopCart'
-export { DefBuyMember } from './BuyMember'
-export { DefBuyOrder } from './BuyOrder'
-export { DefBackstageMenu } from './BackstageMenu'
-export { DefBackstageTabBar } from './BackstageTabBar'
+export { DefCard } from './GlobalComponents/card'
+
+export { DefSvgIcon } from './GlobalComponents/SvgIcon'
+
+export { DefBackstageMenu } from './Backstage/BackstageMenu'
+export { DefBackstageTabBar } from './Backstage/BackstageTabBar'
+
+export { DefBuyTabBar } from './Buy/BuyTabBar'
+export { DefBuyMessage } from './Buy/BuyMessage'
+export { DefBuyFooter } from './Buy/BuyFooter'
+

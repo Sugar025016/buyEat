@@ -13,6 +13,7 @@ enum API {
   USERINFO_URL = '/api/user',
   LOGOUT_URL = '/logout',
   USER_PWD_URL = '/api/user/pwd',
+  USER_ADDRESS_URL = '/api/user/address',
   USER_FAVORITE_URL = '/api/user/favorite',
 }
 
@@ -35,3 +36,6 @@ export const reqFavorites = () =>
 
 export const reqChangeFavorite = (id: number) =>
   request.put<any, LovesResponseData>(API.USER_FAVORITE_URL + '/' + id)
+
+  export const reqUserAddress = () =>
+  request.get<any, UserInfoResponseData>(API.USER_ADDRESS_URL)
