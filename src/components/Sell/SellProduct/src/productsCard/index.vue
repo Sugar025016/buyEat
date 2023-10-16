@@ -56,7 +56,7 @@ import {  useRoute } from 'vue-router'
 let sellProductStore = useSellProductStore()
 const option1 = ref(false)
 let $route = useRoute()
-$route.params.
+// $route.params.
 const deleteProduct = (productId:number) => {
   ElMessageBox.confirm('是否確認要刪除?', 'Warning', {
     confirmButtonText: '刪除',
@@ -66,7 +66,7 @@ const deleteProduct = (productId:number) => {
   })
     .then(() => {
       console.log('這-------')
-      sellProductStore.deleteSellProduct( ,productId)
+      sellProductStore.deleteSellProduct( productId)
       ElMessage({
         type: 'success',
         message: 'Delete completed',
