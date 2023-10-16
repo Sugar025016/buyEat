@@ -15,7 +15,7 @@
       class="delete"
       :icon="Delete"
       circle
-      @click.stop="deleteProduct( product.productId)"
+      @click.stop="deleteProduct(product.productId)"
     />
     <span class="orderable" v-if="!product.orderable">未上架</span>
 
@@ -79,8 +79,6 @@ const deleteProduct = (productId:number) => {
       })
     })
 }
-
-
 </script>
 <style lang="scss" scoped>
 .productCard.active .overlay {

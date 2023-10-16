@@ -11,7 +11,7 @@ import type {
   ProductResponseData,
   ProductList,
   ProductData,
-ProductOrderResponseData,
+  ProductOrderResponseData,
 } from '@/api/backstage/Product/type'
 
 import { UploadProps } from 'element-plus/es/components/upload/src/upload'
@@ -133,20 +133,23 @@ const updateProduct = async (row: ProductData) => {
 }
 
 const setOrderable = async (row: ProductData) => {
-  let res: ProductOrderResponseData = await reqIsOrderableProduct(row.id as number, row.orderable)
+  let res: ProductOrderResponseData = await reqIsOrderableProduct(
+    row.id as number,
+    row.orderable,
+  )
   if (res.code === 200) {
     ElMessage({
       type: 'success',
       message: productParams.id ? '更新成功' : '添加成功',
     })
-    return row.orderable;
+    return row.orderable
   } else {
     window.location.reload()
     ElMessage({
       type: 'error',
       message: productParams.id ? '更新失败' : '添加失败',
     })
-    return !row.orderable;
+    return !row.orderable
   }
 }
 

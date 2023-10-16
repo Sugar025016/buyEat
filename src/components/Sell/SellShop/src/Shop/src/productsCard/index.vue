@@ -89,7 +89,7 @@ const option1 = ref(false)
     font-size: 10px;
     z-index: 1;
     position: absolute;
-    margin:  5px 25px;
+    margin: 5px 25px;
   }
   .checkbox:checked::before {
     /* 使用 content 属性来创建勾选标志 */

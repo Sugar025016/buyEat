@@ -1,4 +1,4 @@
-import { TabsData,ProductList  } from '../tab/type'
+import { TabsData, ProductList } from '../tab/type'
 
 export interface ResponseData {
   code: number
@@ -19,16 +19,14 @@ export interface CategoryResponseData extends ResponseData {
 
 export type ShopList = ShopData[]
 
-
-
 export type Schedules = Schedule[]
-export interface Schedule { 
+export interface Schedule {
   id?: number
   week: number
   timePeriods: TimePeriods
 }
 
-export interface PutSchedule { 
+export interface PutSchedule {
   type: number
   schedules: Schedules
 }
@@ -64,13 +62,10 @@ export interface ShopName {
   name: string
 }
 
-
 export type ShopNames = ShopName[]
 export interface ShopNamesResponse extends ResponseData {
   data: ShopNames
 }
-
-
 
 export interface Address {
   id?: number
@@ -88,8 +83,8 @@ export interface ShopDetailData {
   imgId: number
   imgUrl: string
   schedules?: Schedules
-  tabProducts:TabsData
-  products:ProductList
+  tabProducts: TabsData
+  products: ProductList
   isOrderable: boolean
 }
 

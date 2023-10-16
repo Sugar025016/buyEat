@@ -215,9 +215,13 @@ let rules1 = {
 let rules2 = {
   weeks: [{ required: true, message: 'weeks不能為空', trigger: 'change' }],
   times: [{ required: true, message: 'times不能為空', trigger: 'change' }],
-  'times.startTime': [{ required: true, message: '請輸入startTime', trigger: 'change' }],
+  'times.startTime': [
+    { required: true, message: '請輸入startTime', trigger: 'change' },
+  ],
 
-  'times.endTime': [{ required: true, message: '請輸入endTime', trigger: 'change' }],
+  'times.endTime': [
+    { required: true, message: '請輸入endTime', trigger: 'change' },
+  ],
 }
 
 const radioChange = () => {
@@ -226,7 +230,6 @@ const radioChange = () => {
     formRef.value.clearValidate('times.startTime')
     formRef.value.clearValidate('times.endTime')
   })
-
 }
 </script>
 
@@ -347,36 +350,35 @@ const radioChange = () => {
                   height="30px"
                 ></def-svg-icon> -->
 
-                <el-form-item prop="times.startTime">
-                    <el-time-select
-                      v-model="time.startTime"
-                      :max-time="
-                        time.endTime === '00:00' ? '23:59' : time.endTime
-                      "
-                      class="mr-4"
-                      placeholder="Start time"
-                      start="00:00"
-                      step="00:10"
-                      end="23:50"
-                      :disabled="radio !== 2"
-                      :clearable="false"
-                    />
+                    <el-form-item prop="times.startTime">
+                      <el-time-select
+                        v-model="time.startTime"
+                        :max-time="
+                          time.endTime === '00:00' ? '23:59' : time.endTime
+                        "
+                        class="mr-4"
+                        placeholder="Start time"
+                        start="00:00"
+                        step="00:10"
+                        end="23:50"
+                        :disabled="radio !== 2"
+                        :clearable="false"
+                      />
                     </el-form-item>
                     <span>～</span>
 
-                <el-form-item prop="times.endTime">
-                    <el-time-select
-                      v-model="time.endTime"
-                      :min-time="time.startTime"
-                      placeholder="End time"
-                      start="00:10"
-                      step="00:10"
-                      end="24:00"
-                      :disabled="radio !== 2"
-                      :clearable="false"
-                    />
-
-                  </el-form-item>
+                    <el-form-item prop="times.endTime">
+                      <el-time-select
+                        v-model="time.endTime"
+                        :min-time="time.startTime"
+                        placeholder="End time"
+                        start="00:10"
+                        step="00:10"
+                        end="24:00"
+                        :disabled="radio !== 2"
+                        :clearable="false"
+                      />
+                    </el-form-item>
                     <el-button
                       class="button-icon"
                       type="primary"

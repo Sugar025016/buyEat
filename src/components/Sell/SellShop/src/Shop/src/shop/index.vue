@@ -120,9 +120,7 @@ const dayOfWeek = currentDate.getDay()
         <el-col :span="16" class="shop-content">
           <div class="shop-title">
             <span>{{ shopData?.name }}</span>
-            <span class="change" @click="shopDrawerOpen">
-              編輯商店
-            </span>
+            <span class="change" @click="shopDrawerOpen">編輯商店</span>
           </div>
           <div class="shop-remark">
             <span>

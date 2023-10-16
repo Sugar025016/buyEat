@@ -3,7 +3,7 @@
     <!-- 没有子路由 -->
     <template v-if="!item.children">
       <el-menu-item v-if="!item.meta.hidden" :index="item.path">
-      <!-- <el-menu-item v-if="!item.meta.hidden" @click="goRoute(item)"> -->
+        <!-- <el-menu-item v-if="!item.meta.hidden" @click="goRoute(item)"> -->
         <el-icon>
           <component :is="item.meta.icon"></component>
         </el-icon>
@@ -59,7 +59,7 @@ import { useRouter, useRoute, Router } from 'vue-router'
 import { onMounted, ref } from 'vue'
 
 import useSellShopStore from '@/store/modules/sellShop'
-import { timePanelSharedProps } from 'element-plus/es/components/time-picker/src/props/shared.js';
+import { timePanelSharedProps } from 'element-plus/es/components/time-picker/src/props/shared.js'
 
 let sellShopStore = useSellShopStore()
 let props = defineProps(['menuList'])
@@ -84,13 +84,13 @@ let $route = useRoute()
 
 const goRoute = async (item: any) => {
   const pattern = /^\/sell\/.*\/:shopId$/
-  let path=item.path
-    console.log("%%%%%%%%%%tem.path")
+  let path = item.path
+  console.log('%%%%%%%%%%tem.path')
   if (pattern.test(item.path)) {
-    path =item.path.replace(/:shopId/g, sellShopStore.shopId)
-    console.log("%%%%%%%%%%tem.path",path)
+    path = item.path.replace(/:shopId/g, sellShopStore.shopId)
+    console.log('%%%%%%%%%%tem.path', path)
   }
-    $router.push(path)
+  $router.push(path)
 }
 const getPath = async (item: Router) => {
   if (!sellShopStore.shopId) {

@@ -93,7 +93,6 @@ const openModal = (v: ProductData) => {
   productData.value.department = ''
   productData.value.orderUsername = userStore.username
   productData.value.note = ''
-
 }
 
 const getProductsData = async (id: number) => {
@@ -102,7 +101,6 @@ const getProductsData = async (id: number) => {
   console.log('res.data ', res.data)
   console.log('TabProductsData.value ', TabProductsData.value)
 }
-
 
 const scrollToSection = (sectionId: number) => {
   const element = document.getElementById(sectionId + '')
@@ -113,7 +111,6 @@ const scrollToSection = (sectionId: number) => {
       element.getBoundingClientRect().top + window.scrollY - headerHeight
     window.scrollTo({ top: targetPosition, behavior: 'smooth' })
     shopStore.scrollTop = targetPosition
-
   }
 }
 

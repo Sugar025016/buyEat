@@ -287,7 +287,7 @@ const remoteMethod = debounce((query) => {
   } else {
     searchUsers.value = []
   }
-}, 1000) 
+}, 1000)
 
 const city: string[] = Object.keys(cityAreas)
 
@@ -313,8 +313,6 @@ const beforeAvatarUpload: UploadProps['beforeUpload'] = (rawFile) => {
     return false
   }
 }
-
-
 
 const changeCity = () => {
   shopParams.address.area = ''
@@ -418,7 +416,7 @@ const changeCity = () => {
                 --el-switch-on-color: #fd7e14;
               "/> -->
 
-            <el-switch v-model="row.isOrderable"/>
+            <el-switch v-model="row.isOrderable" />
           </div>
           <div>
             關閉商店:
@@ -429,9 +427,7 @@ const changeCity = () => {
               "
             /> -->
 
-            <el-switch
-              v-model="row.disable"
-            />
+            <el-switch v-model="row.disable" />
           </div>
           <el-button
             type="primary"
@@ -598,33 +594,32 @@ const changeCity = () => {
 }
 
 .el-switch.is-checked .el-switch__core {
-  --darkreader-bg--el-switch-on-color:$color;
-     background-color: var(--darkreader-bg--el-switch-on-color); 
-    /* border-color: var(--darkreader-border--el-switch-border-color, var(--darkreader-border--el-switch-on-color)); */
-background-color: bisque;
+  --darkreader-bg--el-switch-on-color: $color;
+  background-color: var(--darkreader-bg--el-switch-on-color);
+  /* border-color: var(--darkreader-border--el-switch-border-color, var(--darkreader-border--el-switch-on-color)); */
+  background-color: bisque;
 }
 
 // .el-switch{
 
 //   // background-color: bisque;
 // }
-::v-deep .el-switch__action{
+::v-deep .el-switch__action {
   background-color: $color;
-  ::v-deep .el-switch__action{
-  background-color: bisque;
-}
-}
-
-::v-deep .el-switch__core{
-  background-color: aqua;
-  ::v-deep .el-switch__action{
-  background-color: bisque;
-}
-}
-::v-deep .is-checked{
-  ::v-deep .el-switch__action{
-  background-color: red;
+  ::v-deep .el-switch__action {
+    background-color: bisque;
   }
 }
 
+::v-deep .el-switch__core {
+  background-color: aqua;
+  ::v-deep .el-switch__action {
+    background-color: bisque;
+  }
+}
+::v-deep .is-checked {
+  ::v-deep .el-switch__action {
+    background-color: red;
+  }
+}
 </style>

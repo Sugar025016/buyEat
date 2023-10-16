@@ -1,5 +1,5 @@
 <template>
-  <div  class="buyShop">
+  <div class="buyShop">
     <div class="header">
       <div class="header-link">
         <socialMedia></socialMedia>

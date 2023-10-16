@@ -19,7 +19,7 @@
           <el-dropdown-menu>
             <el-dropdown-item
               v-for="item in shopStore.shopNames"
-              @click="goRoute( item.id)"
+              @click="goRoute(item.id)"
             >
               {{ item.name }}
             </el-dropdown-item>
@@ -52,8 +52,8 @@ let $route = useRoute()
 // }
 
 const goRoute = async (shopId: number) => {
-  $route.meta.shopId=shopId.toString()
-  
+  $route.meta.shopId = shopId.toString()
+
   console.log('////////////////$route.path', $route.path)
   await sellShopStore.getSellShop(shopId)
   sellShopStore.shopId = shopId

@@ -14,13 +14,13 @@ const endTime = ref('')
 const props = defineProps({
   visible: Boolean,
   title: String,
-});
+})
 
-const { emit } = defineEmits();
+const { emit } = defineEmits()
 
 const closeDialog = () => {
-  emit('update:visible', false);
-};
+  emit('update:visible', false)
+}
 
 // const props = defineProps({
 //   dialogVisible: Boolean,
@@ -144,7 +144,7 @@ const formLabelWidth = '140px'
     :name="shopData?.name"
   ></scheduleSetModal> -->
   <!-- <el-dialog :visible="visible" @close="closeDialog" title="Shipping address"> -->
-    <!-- <el-form :model="form">
+  <!-- <el-form :model="form">
       <el-form-item label="Promotion name" :label-width="formLabelWidth">
         <el-input v-model="form.name" autocomplete="off" />
       </el-form-item>
@@ -164,8 +164,6 @@ const formLabelWidth = '140px'
       </span>
     </template> -->
   <!-- </el-dialog> -->
-
-  
 </template>
 
 <style lang="scss" scoped>

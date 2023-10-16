@@ -222,7 +222,8 @@ export const constantRoute = [
     children: [
       {
         path: '/Backstage/shops',
-        component: () => import('@/components/Backstage/BackstageShops/src/index.vue'),
+        component: () =>
+          import('@/components/Backstage/BackstageShops/src/index.vue'),
         meta: {
           title: 'Shops',
           hidden: false,
@@ -232,7 +233,8 @@ export const constantRoute = [
       },
       {
         path: '/Backstage/users',
-        component: () => import('@/components/Backstage/BackstageUser/src/index.vue'),
+        component: () =>
+          import('@/components/Backstage/BackstageUser/src/index.vue'),
         meta: {
           title: 'users',
           hidden: false,
@@ -242,7 +244,8 @@ export const constantRoute = [
       },
       {
         path: 'product',
-        component: () => import('@/components/Backstage/BackstageProduct/src/index.vue'),
+        component: () =>
+          import('@/components/Backstage/BackstageProduct/src/index.vue'),
         meta: {
           title: 'product',
           hidden: false,
@@ -323,67 +326,68 @@ export const constantRoute = [
   // },
 ]
 
-export const sellShop =[{
-  path: '/sell/:shopId',
-  component: () => import('@/views/sell/index.vue'),
-  meta: {
-    title: '餐廳設定',
-    hidden: false,
-    icon: 'HomeFilled',
-    mustToken: false,
-    shopId: 0,
-  },
-  redirect: '/sell/:shopId/Shop',
-  children: [
-    {
-      path: 'Shop',
-      component: () => import('@/components/Sell/SellShop/src/Shop/src/index.vue'),
-      meta: {
-        title: '商店編輯',
-        hidden: false,
-        icon: 'HomeFilled',
-        mustToken: false,
-        id: 0,
+export const sellShop = [
+  {
+    path: '/sell/:shopId',
+    component: () => import('@/views/sell/index.vue'),
+    meta: {
+      title: '餐廳設定',
+      hidden: false,
+      icon: 'HomeFilled',
+      mustToken: false,
+      shopId: 0,
+    },
+    redirect: '/sell/:shopId/Shop',
+    children: [
+      {
+        path: 'Shop',
+        component: () =>
+          import('@/components/Sell/SellShop/src/Shop/src/index.vue'),
+        meta: {
+          title: '商店編輯',
+          hidden: false,
+          icon: 'HomeFilled',
+          mustToken: false,
+          id: 0,
+        },
+        // children: [
+        //   {
+        //     path: '/sell/Shop/:id',
+        //     component: () => import('@/components/Sell/SellShop/src/Shop/src/index.vue'),
+        //     meta: {
+        //       title: 'Register',
+        //       hidden: false,
+        //       icon: 'HomeFilled',
+        //       mustToken: false,
+        //     },
+        //   },
+        // ],
       },
-      // children: [
-      //   {
-      //     path: '/sell/Shop/:id',
-      //     component: () => import('@/components/Sell/SellShop/src/Shop/src/index.vue'),
-      //     meta: {
-      //       title: 'Register',
-      //       hidden: false,
-      //       icon: 'HomeFilled',
-      //       mustToken: false,
-      //     },
+
+      {
+        path: 'product',
+        component: () => import('@/components/Sell/SellProduct/src/index.vue'),
+        meta: {
+          title: '餐點編輯',
+          hidden: false,
+          icon: 'HomeFilled',
+          mustToken: false,
+          id: 0,
+        },
+      },
+      // {
+      //   path: '/sell/shop',
+      //   component: () => import('@/components/Sell/SellShop/src/index.vue'),
+      //   meta: {
+      //     title: 'Register',
+      //     hidden: false,
+      //     icon: 'HomeFilled',
+      //     mustToken: false,
       //   },
-      // ],
-    },
-
-    {
-      path: 'product',
-      component: () => import('@/components/Sell/SellProduct/src/index.vue'),
-      meta: {
-        title: '餐點編輯',
-        hidden: false,
-        icon: 'HomeFilled',
-        mustToken: false,
-        id: 0,
-      },
-
-    },
-    // {
-    //   path: '/sell/shop',
-    //   component: () => import('@/components/Sell/SellShop/src/index.vue'),
-    //   meta: {
-    //     title: 'Register',
-    //     hidden: false,
-    //     icon: 'HomeFilled',
-    //     mustToken: false,
-    //   },
-    // },
-  ],
-}]
-
+      // },
+    ],
+  },
+]
 
 export const asyncRoute = [
   {
@@ -399,7 +403,8 @@ export const asyncRoute = [
     children: [
       {
         path: '/Backstage/shops',
-        component: () => import('@/components/Backstage/BackstageShops/src/index.vue'),
+        component: () =>
+          import('@/components/Backstage/BackstageShops/src/index.vue'),
         meta: {
           title: 'Shops',
           hidden: false,
@@ -409,7 +414,8 @@ export const asyncRoute = [
       },
       {
         path: '/Backstage/users',
-        component: () => import('@/components/Backstage/BackstageUser/src/index.vue'),
+        component: () =>
+          import('@/components/Backstage/BackstageUser/src/index.vue'),
         meta: {
           title: 'users',
           hidden: false,
@@ -446,7 +452,8 @@ export const menuRoutes = [
     children: [
       {
         path: 'shops',
-        component: () => import('@/components/Backstage/BackstageShops/src/index.vue'),
+        component: () =>
+          import('@/components/Backstage/BackstageShops/src/index.vue'),
         meta: {
           title: 'Shops',
           hidden: false,
@@ -456,7 +463,8 @@ export const menuRoutes = [
       },
       {
         path: 'users',
-        component: () => import('@/components/Backstage/BackstageUser/src/index.vue'),
+        component: () =>
+          import('@/components/Backstage/BackstageUser/src/index.vue'),
         meta: {
           title: 'Users',
           hidden: false,
@@ -466,7 +474,8 @@ export const menuRoutes = [
       },
       {
         path: 'product',
-        component: () => import('@/components/Backstage/BackstageProduct/src/index.vue'),
+        component: () =>
+          import('@/components/Backstage/BackstageProduct/src/index.vue'),
         meta: {
           title: 'Product',
           hidden: false,
@@ -489,11 +498,11 @@ export const menuRoutes = [
   },
 ]
 
-
 export const menuSellRoutes = [
   {
     path: '/sell/shop/:shopId',
-    component: () => import('@/components/Sell/SellShop/src/Shop/src/index.vue'),
+    component: () =>
+      import('@/components/Sell/SellShop/src/Shop/src/index.vue'),
     meta: {
       title: '編輯商店',
       hidden: false,
@@ -514,8 +523,7 @@ export const menuSellRoutes = [
     },
   },
 ]
-export const anyRoute =
-{
+export const anyRoute = {
   path: '/:pathMatch(.*)*',
   component: () => import('@/views/404/index.vue'),
   name: '404',

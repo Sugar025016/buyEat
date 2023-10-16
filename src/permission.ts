@@ -16,7 +16,6 @@ router.beforeEach(async (to, from, next) => {
   const username = userStore.username
 
   if (token && !userStore.username) {
-
     try {
       await userStore.userInfo()
 

@@ -214,7 +214,6 @@ $b-color: $color;
           display: flex;
           justify-content: center; /* 水平置中 */
           align-items: center; /* 垂直置中 */
-          
         }
         .favorite:hover {
           // background-color: #f0f0f0;

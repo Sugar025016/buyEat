@@ -108,13 +108,11 @@ defineExpose({
   updateShop,
 })
 
-
-
 const save = async () => {
   await formRef.value.validate()
-  console.log("shopParams",shopParams)
+  console.log('shopParams', shopParams)
   let res: any = await reqAddOrUpdateShop(shopParams)
-  console.log("res",res)
+  console.log('res', res)
   if (res.code === 200) {
     sellShopStore.shopDrawer = false
     ElMessage({
@@ -362,8 +360,7 @@ const changeCity = () => {
   </el-drawer>
 </template>
 <style lang="scss" scoped>
-
-h3{
+h3 {
   font-size: 18px;
 }
 .form {
@@ -372,13 +369,10 @@ h3{
   align-items: center;
 }
 
-
-  .avatar-uploader {
+.avatar-uploader {
   .avatar {
     width: 100%;
     display: block;
   }
-
 }
-
 </style>

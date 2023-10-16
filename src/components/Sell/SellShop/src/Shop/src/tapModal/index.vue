@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {  reactive, ref } from 'vue'
+import { reactive, ref } from 'vue'
 import { PutTabData, TabData } from '@/api/tab/type'
 import useUserStore from '@/store/modules/user'
 import productsCard from '../productsCard/index.vue'
@@ -74,19 +74,18 @@ const save = async () => {
   let res = await reqAddOrUpdateTab(tabParams)
   if (res.code === 200 && res.data) {
     await sellShopStore.getSellShop(sellShopStore.shop.id)
-    console.log("sellShopStore.shop",sellShopStore.shop)
+    console.log('sellShopStore.shop', sellShopStore.shop)
   }
 }
 
-
-const getData = (t :TabData) => {
-  tapProduct.value=t
+const getData = (t: TabData) => {
+  tapProduct.value = t
   getChooses()
   setTab()
 }
 
 defineExpose({
-  getData
+  getData,
 })
 </script>
 <template>

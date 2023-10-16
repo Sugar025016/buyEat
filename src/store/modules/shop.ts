@@ -1,9 +1,14 @@
 import { getShop, getShopList, getShopNames } from '@/api/shop'
 import { defineStore } from 'pinia'
-import type { ShopsResponseData, ShopSearch, ShopResponseData, ShopNamesResponse } from '@/api/shop/type'
+import type {
+  ShopsResponseData,
+  ShopSearch,
+  ShopResponseData,
+  ShopNamesResponse,
+} from '@/api/shop/type'
 import { ShopState } from './types/types'
 import ElMessage from 'element-plus/lib/components/message/index.js'
-import {  useRouter } from 'vue-router'
+import { useRouter } from 'vue-router'
 let $router = useRouter()
 
 const useShopStore = defineStore('Category', {
@@ -14,28 +19,32 @@ const useShopStore = defineStore('Category', {
         name: '',
         description: '',
         address: {
-          id:0,
-          city:'',
-          area:'',
-          detail:'',
+          id: 0,
+          city: '',
+          area: '',
+          detail: '',
         },
         phone: '',
-        imgId:0,
+        imgId: 0,
         imgUrl: '',
-        schedules: [{
-          id:0,
-          week:0,
-          timePeriods:[{
-            startTime: '',
-            endTime: ''
-          }]
-        }],
+        schedules: [
+          {
+            id: 0,
+            week: 0,
+            timePeriods: [
+              {
+                startTime: '',
+                endTime: '',
+              },
+            ],
+          },
+        ],
         isOrderable: false,
       },
       shopNames: [],
       shopId: 0,
-      shopArr:[],
-      scrollTop:0,
+      shopArr: [],
+      scrollTop: 0,
     }
   },
   actions: {
@@ -60,9 +69,9 @@ const useShopStore = defineStore('Category', {
     //   }
     // },
 
-    async getShop(shopId:number) {
+    async getShop(shopId: number) {
       let res: ShopResponseData = await getShop(shopId)
-      console.log("res",res.data)
+      console.log('res', res.data)
       if (res.code === 200) {
         this.shop = res.data
       } else {
@@ -73,15 +82,15 @@ const useShopStore = defineStore('Category', {
       }
     },
     async getShopItem() {
-      console.log("getShopItem")
+      console.log('getShopItem')
       let res: ShopNamesResponse = await getShopNames()
       if (res.code === 200) {
         if (res.data.length === 0) {
           $router.push('/')
         }
         this.shopNames = res.data
-        if(this.shopId===0){
-          this.shopId=this.shopNames[0].id
+        if (this.shopId === 0) {
+          this.shopId = this.shopNames[0].id
         }
       } else {
         ElMessage({

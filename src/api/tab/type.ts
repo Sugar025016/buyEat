@@ -1,21 +1,18 @@
-import { ProductData } from "../product/type"
+import { ProductData } from '../product/type'
 export interface ResponseData {
   code: number
   message: string
   ok: boolean
 }
 
-
-
 export type ProductList = ProductData[]
 
 export interface TabData {
   id: number
   name: string
-  shelve:boolean
+  shelve: boolean
   products: ProductList
 }
-
 
 export type TabsData = TabData[]
 
@@ -39,6 +36,6 @@ export interface PutTabData {
   id?: number
   name: string
   shopId: number
-  shelve:boolean
+  shelve: boolean
   productIds: Number[]
 }

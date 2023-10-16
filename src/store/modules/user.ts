@@ -183,11 +183,11 @@ const useUserStore = defineStore('User', {
       this.username = ''
       this.account = ''
       this.avatar = ''
-        ; (this.email = ''),
-          (this.phone = ''),
-          (this.favoriteShop = []),
-          (this.cartCount = 0),
-          REMOVE_TOKEN()
+      ;(this.email = ''),
+        (this.phone = ''),
+        (this.favoriteShop = []),
+        (this.cartCount = 0),
+        REMOVE_TOKEN()
     },
     async getUserAddress() {
       const res: UserInfoResponseData = await reqChangeUserInfo(v)

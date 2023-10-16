@@ -43,7 +43,7 @@ import { onMounted, ref } from 'vue'
 let $router = useRouter()
 let $route = useRoute()
 const goRoute = async (shopId: number) => {
-  $route.meta.shopId=shopId.toString()
+  $route.meta.shopId = shopId.toString()
   await sellShopStore.getSellShop(shopId)
   sellShopStore.shopId = shopId
   $router.push(`/sell/${shopId}/Shop`)
@@ -51,10 +51,10 @@ const goRoute = async (shopId: number) => {
 }
 
 const goRoute2 = async (path: string, shopId: number) => {
-  $route.params.id=sellShopStore.shopId.toString();
+  $route.params.id = sellShopStore.shopId.toString()
   sellShopStore.shopId = shopId
   await sellShopStore.getSellShop(shopId)
-  $router.push(path+ shopId)
+  $router.push(path + shopId)
   // console.log("+++++++path+++++++++"+path)
   // $router.push(path )
 }

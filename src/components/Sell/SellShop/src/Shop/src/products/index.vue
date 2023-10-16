@@ -3,11 +3,11 @@ import productsCard from '.././productsCard/index.vue'
 import { computed, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { ProductModalData, TabData } from '@/api/tab/type'
-import { reqDeleteTab} from '@/api/tab/index'
+import { reqDeleteTab } from '@/api/tab/index'
 import useUserStore from '@/store/modules/user'
 import useSellShopStore from '@/store/modules/sellShop'
 import TapModal from '../tapModal/index.vue'
-import {  ProductData } from '@/api/product/type'
+import { ProductData } from '@/api/product/type'
 
 let userStore = useUserStore()
 let sellShopStore = useSellShopStore()
@@ -43,7 +43,7 @@ const openModal = (v: ProductData) => {
 }
 
 tabProductsData = computed(() => {
-  console.log("sellShopStore.shop.tabProducts",sellShopStore.shop.tabProducts)
+  console.log('sellShopStore.shop.tabProducts', sellShopStore.shop.tabProducts)
   return sellShopStore.shop.tabProducts
 })
 
@@ -70,29 +70,27 @@ const addTab = (sectionId: number) => {
   }
 }
 
-const deleteTab =async (tabId: number) => {
+const deleteTab = async (tabId: number) => {
   let res = await reqDeleteTab(tabId)
   if (res.code === 200 && res.data) {
     await sellShopStore.getSellShop(sellShopStore.shop.id)
   }
 }
 
-
 const editTab = (
   tab: TabData = {
     id: 0,
     name: '',
-    shelve:false,
+    shelve: false,
     products: [],
   },
 ) => {
   if (tapModalRef.value) {
     // 调用子组件的 getData 方法
-    console.log("调用子组件的 getData 方法")
-    tapModalRef.value.getData(tab);
+    console.log('调用子组件的 getData 方法')
+    tapModalRef.value.getData(tab)
   }
-};
-
+}
 
 const activeTab = ref(0)
 
@@ -103,9 +101,7 @@ myModal?.addEventListener('shown.bs.modal', () => {
   myInput?.focus()
 })
 
-
-
-const tapModalRef = ref<typeof TapModal | null>(null);
+const tapModalRef = ref<typeof TapModal | null>(null)
 </script>
 
 <template>
@@ -255,10 +251,10 @@ const tapModalRef = ref<typeof TapModal | null>(null);
       }
     }
     .change:hover {
-            color: $color-light-7;
-            // color: #ffb171;
-            // background-color: aquamarine;
-          }
+      color: $color-light-7;
+      // color: #ffb171;
+      // background-color: aquamarine;
+    }
     .tab-label {
       display: inline-block;
       position: relative;

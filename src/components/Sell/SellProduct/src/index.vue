@@ -3,7 +3,6 @@ import productsCard from './productsCard/index.vue'
 import { onMounted, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 
-
 import useSellProductStore from '@/store/modules/sellProduct'
 import { SellProduct, SellProductList } from '@/api/sellProduct/type'
 import SellProductDrawer from './SellProductDrawer/src/index.vue'
@@ -18,7 +17,7 @@ const keyword = ref('')
 let regex = new RegExp('', 'i')
 let shopId: number = parseInt($route.params.shopId as string)
 
-onMounted(async() => {
+onMounted(async () => {
   await setShopId()
   getProducts()
 })
@@ -53,12 +52,11 @@ const reset = () => {
   products.value = sellProductStore.products
 }
 
-
 const updateProduct = (product: SellProduct) => {
   SellProductDrawerRef.value?.updateProduct(product)
 }
 
-const addProduct = () => { 
+const addProduct = () => {
   SellProductDrawerRef.value?.addProduct()
 }
 

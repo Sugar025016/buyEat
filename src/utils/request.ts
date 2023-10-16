@@ -47,48 +47,46 @@ request.interceptors.response.use(
   (error) => {
     const userStore = useUserStore()
     let message = ''
-    console.log("error",error)
-    if(error.response){
-
+    console.log('error', error)
+    if (error.response) {
       const status = error.response.status
-  
 
-    switch (status) {
-      // 401: 未登錄
-      case 203:
-        message = '服务异常'
-        break // 403 token過期
-      // 401: 未登錄
-      case 401:
-        router.push('/login')
-        message = '未登錄'
-        userStore.userClear()
-        break // 403 token過期
-      case 403:
-        router.push('/login')
-        userStore.userClear()
-        message = '登錄過期，請重新登錄'
-        break
-      case 404:
-        message = '網絡請求不存在'
-        break
-      case 500:
-        message = '服務器出現問題'
-        break
-      default:
-        message = error.response.data.message
-        break
+      switch (status) {
+        // 401: 未登錄
+        case 203:
+          message = '服务异常'
+          break // 403 token過期
+        // 401: 未登錄
+        case 401:
+          router.push('/login')
+          message = '未登錄'
+          userStore.userClear()
+          break // 403 token過期
+        case 403:
+          router.push('/login')
+          userStore.userClear()
+          message = '登錄過期，請重新登錄'
+          break
+        case 404:
+          message = '網絡請求不存在'
+          break
+        case 500:
+          message = '服務器出現問題'
+          break
+        default:
+          message = error.response.data.message
+          break
+      }
+      ElMessage({
+        type: 'error',
+        message,
+      })
+      alert(message) //錯誤彈窗，可以用ant模板代替
+      return Promise.resolve({
+        data: error.response.data.errors,
+        code: error.response.status,
+      })
     }
-    ElMessage({
-      type: 'error',
-      message,
-    })
-    alert(message) //錯誤彈窗，可以用ant模板代替
-    return Promise.resolve({
-      data: error.response.data.errors,
-      code: error.response.status,
-    })
-  }
   },
 )
 

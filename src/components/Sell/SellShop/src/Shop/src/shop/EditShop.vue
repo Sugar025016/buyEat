@@ -116,9 +116,8 @@ const save = async () => {
       message: shopParams.id ? '更新成功' : '添加成功',
       type: 'success',
     })
-    console.log("#######shopParams",shopParams)
+    console.log('#######shopParams', shopParams)
     await sellShopStore.getSellShop(shopParams.id)
-    
 
     // window.location.reload()
   } else {

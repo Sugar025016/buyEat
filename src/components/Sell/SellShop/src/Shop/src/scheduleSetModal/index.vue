@@ -150,7 +150,7 @@ const handleCheckedCitiesChange = (value: number[]) => {
 const handleWeekChange = (value: number[], timePeriods: TimePeriods) => {
   scheduleParams.value.weeks = value
   handleCheckedCitiesChange(scheduleParams.value.weeks)
-  scheduleParams.value.times=[{ startTime: '', endTime: '' }]
+  scheduleParams.value.times = [{ startTime: '', endTime: '' }]
   if (timePeriods.length === 0) {
     radio.value = 1
   } else if (

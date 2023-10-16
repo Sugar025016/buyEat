@@ -47,7 +47,7 @@ const updateProduct = async (row: SellProduct) => {
   Object.assign(productParams, row)
 
   drawer.value = true
-  console.log("productParams/////////",productParams)
+  console.log('productParams/////////', productParams)
 
   nextTick(() => {
     formRef.value.clearValidate('name')
@@ -142,7 +142,6 @@ const beforeAvatarUpload: UploadProps['beforeUpload'] = (rawFile) => {
 const uploadHeaders = {
   'X-CSRF-Token': userStore.token, // 初始为空
 }
-
 </script>
 <template>
   <el-drawer v-model="drawer" class="drawer">
@@ -175,8 +174,7 @@ const uploadHeaders = {
           ></el-input>
         </el-form-item>
         <el-form-item label="上架" prop="order">
-
-          <el-switch v-model="productParams.orderable"/>
+          <el-switch v-model="productParams.orderable" />
         </el-form-item>
         <el-form-item label="產品圖">
           <el-upload
@@ -207,7 +205,6 @@ const uploadHeaders = {
   </el-drawer>
 </template>
 <style lang="scss" scoped>
-
 .avatar-uploader {
   .avatar {
     width: 100%;

@@ -11,17 +11,14 @@ export interface SellProduct {
   imgId?: number
   imgUrl?: URL
   prise: number
-  orderable:boolean
+  orderable: boolean
 }
-
-
 
 export type SellProductList = SellProduct[]
 
 export interface ResponseProductList extends ResponseData {
   data: SellProductList
 }
-
 
 export interface ResponseBoolean extends ResponseData {
   data: boolean

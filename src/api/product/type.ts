@@ -10,7 +10,7 @@ export interface ProductData {
   description: string
   imgUrl: string
   prise: number
-  isOrderable:boolean
+  isOrderable: boolean
 }
 // export interface ProductData {
 //   id: number | string
