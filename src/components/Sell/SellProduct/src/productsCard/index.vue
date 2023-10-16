@@ -51,13 +51,13 @@ import { ElMessageBox } from 'element-plus'
 import ElMessage from 'element-plus/lib/components/message/index.js'
 import useSellShopStore from '@/store/modules/sellShop'
 import useSellProductStore from '@/store/modules/sellProduct'
-import { async } from 'rxjs';
-import {  useRoute } from 'vue-router'
+import { async } from 'rxjs'
+import { useRoute } from 'vue-router'
 let sellProductStore = useSellProductStore()
 const option1 = ref(false)
 let $route = useRoute()
 // $route.params.
-const deleteProduct = (productId:number) => {
+const deleteProduct = (productId: number) => {
   ElMessageBox.confirm('是否確認要刪除?', 'Warning', {
     confirmButtonText: '刪除',
     cancelButtonText: '取消',
@@ -66,7 +66,7 @@ const deleteProduct = (productId:number) => {
   })
     .then(() => {
       console.log('這-------')
-      sellProductStore.deleteSellProduct( productId)
+      sellProductStore.deleteSellProduct(productId)
       ElMessage({
         type: 'success',
         message: 'Delete completed',
