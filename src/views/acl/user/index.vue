@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted, reactive, nextTick } from 'vue'
 import {
-  reqUserInfo,
+  reqUserInfo2,
   reqAddOrUpdateUser,
   reqAllRole,
   reqSetUserRole,

@@ -19,7 +19,7 @@
     </el-row>
 
     <el-row class="row3">
-      <template v-for="c1 in categoryStore.c1Arr">
+      <template v-for="c1 in categoryStore.shopArr">
         <def-card :shop="c1"></def-card>
       </template>
     </el-row>

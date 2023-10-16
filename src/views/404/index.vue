@@ -2,7 +2,7 @@
 import { useRouter } from 'vue-router'
 let $router = useRouter()
 const goHome = () => {
-  $router.push('/home')
+  $router.push('/')
 }
 </script>
 <template>
@@ -40,7 +40,7 @@ const goHome = () => {
     <em>location</em>
     = home;}
   </code>
-  <center><a @click="goHome">HOME</a></center>
+  <center><a href="#" @click="goHome">HOME</a></center>
 </template>
 <style lang="scss" scoped>
 @import url('https://fonts.googleapis.com/css?family=Bevan');

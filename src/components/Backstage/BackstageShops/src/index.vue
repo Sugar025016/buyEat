@@ -3,7 +3,7 @@ import { ref, onMounted, reactive, nextTick, watch } from 'vue'
 import {
   reqRemoveShop,
   reqShopInfo,
-  reqAddOrUpdateShop,
+  reqBackstageAddOrUpdateShop,
 } from '@/api/backstage/shop'
 import type {
   ShopSearch,
@@ -19,6 +19,7 @@ import { ShopPutRequest } from '@/api/backstage/shop/type'
 import { reqSearchUser } from '@/api/backstage/user'
 import debounce from 'lodash/debounce'
 import { SearchUserResponseData, SearchUsers } from '@/api/backstage/user/type'
+import { PutShopData } from '@/api/shop/type'
 // import useLayOutSettingStore from '@/store/modules/setting'
 let userStore = useUserStore()
 
@@ -46,7 +47,7 @@ let shopParams = reactive<ShopPutRequest>({
     detail: '',
   },
   imgId: 0,
-  imgUrl: undefined,
+  imgUrl: '',
   isOrderable: false,
   disable: false,
 })
@@ -95,7 +96,7 @@ const addShop = () => {
     },
     imgId: 0,
     imageGetUrl: '',
-    img: '',
+    imgUrl: '',
   })
   const tempAddress = {
     id: shopParams.address.id,
@@ -143,7 +144,7 @@ const updateShop = (row: ShopData) => {
 
 const save = async () => {
   await formRef.value.validate()
-  let res: any = await reqAddOrUpdateShop(shopParams)
+  let res: any = await reqBackstageAddOrUpdateShop(shopParams)
   if (res.code === 200) {
     drawer.value = false
     ElMessage({
@@ -235,6 +236,7 @@ const deleteShop = async (ShopId: number) => {
   if (res.code === 200) {
     ElMessage({ type: 'success', message: '删除成功' })
     getHasShop(shopArr.value.length > 1 ? pageNo.value : pageNo.value - 1)
+    window.location.reload()
   }
 }
 
@@ -278,8 +280,6 @@ const search = async (query: string) => {
 const searchUsers = ref<SearchUsers>([])
 
 const remoteMethod = debounce((query) => {
-  // 在这里执行搜索操作
-
   if (query) {
     loading.value = true
     search(query.toLowerCase())
@@ -287,8 +287,7 @@ const remoteMethod = debounce((query) => {
   } else {
     searchUsers.value = []
   }
-  // 这只是一个示例，您需要根据实际情况实现搜索逻辑
-}, 1000) // 1000 毫秒的防抖延迟
+}, 1000) 
 
 const city: string[] = Object.keys(cityAreas)
 
@@ -315,17 +314,8 @@ const beforeAvatarUpload: UploadProps['beforeUpload'] = (rawFile) => {
   }
 }
 
-const uploadHeaders = {
-  'X-CSRF-Token': userStore.token, // 初始为空
-}
-const handleAvatarSuccess: UploadProps['onSuccess'] = (
-  response,
-  uploadFile,
-) => {
-  shopParams.imgUrl = response.url
-  shopParams.imgId = response.id
-  formRef.value.clearValidate('img')
-}
+
+
 const changeCity = () => {
   shopParams.address.area = ''
 }
@@ -390,12 +380,12 @@ const changeCity = () => {
         prop="shopName"
         width="100"
       ></el-table-column>
-      <el-table-column
+      <!-- <el-table-column
         label="商店電話"
         prop="phone"
         show-overflow-tooltip
-      ></el-table-column>
-      <el-table-column label="標籤" prop="tabs"></el-table-column>
+      ></el-table-column> -->
+      <!-- <el-table-column label="標籤" prop="tabs"></el-table-column> -->
       <el-table-column label="介紹" prop="description"></el-table-column>
       <el-table-column label="地址">
         <template #default="{ row }">
@@ -423,16 +413,24 @@ const changeCity = () => {
         <template #="{ row, $index }">
           <div>
             開始訂購:
-            <el-switch v-model="row.isOrderable" />
+            <!-- <el-switch v-model="row.isOrderable" 
+              style="
+                --el-switch-on-color: #fd7e14;
+              "/> -->
+
+            <el-switch v-model="row.isOrderable"/>
           </div>
           <div>
             關閉商店:
-            <el-switch
+            <!-- <el-switch
               v-model="row.disable"
               style="
-                --el-switch-on-color: #13ce66;
-                --el-switch-off-color: #ff4949;
+                --el-switch-on-color: #fd7e14;
               "
+            /> -->
+
+            <el-switch
+              v-model="row.disable"
             />
           </div>
           <el-button
@@ -592,4 +590,41 @@ const changeCity = () => {
   justify-content: space-between;
   align-items: center;
 }
+.avatar-uploader {
+  .avatar {
+    width: 100%;
+    display: block;
+  }
+}
+
+.el-switch.is-checked .el-switch__core {
+  --darkreader-bg--el-switch-on-color:$color;
+     background-color: var(--darkreader-bg--el-switch-on-color); 
+    /* border-color: var(--darkreader-border--el-switch-border-color, var(--darkreader-border--el-switch-on-color)); */
+background-color: bisque;
+}
+
+// .el-switch{
+
+//   // background-color: bisque;
+// }
+::v-deep .el-switch__action{
+  background-color: $color;
+  ::v-deep .el-switch__action{
+  background-color: bisque;
+}
+}
+
+::v-deep .el-switch__core{
+  background-color: aqua;
+  ::v-deep .el-switch__action{
+  background-color: bisque;
+}
+}
+::v-deep .is-checked{
+  ::v-deep .el-switch__action{
+  background-color: red;
+  }
+}
+
 </style>

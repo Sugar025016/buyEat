@@ -47,8 +47,11 @@ request.interceptors.response.use(
   (error) => {
     const userStore = useUserStore()
     let message = ''
+    console.log("error",error)
+    if(error.response){
 
-    const status = error.response.status
+      const status = error.response.status
+  
 
     switch (status) {
       // 401: 未登錄
@@ -76,13 +79,16 @@ request.interceptors.response.use(
         message = error.response.data.message
         break
     }
-
     ElMessage({
       type: 'error',
       message,
     })
     alert(message) //錯誤彈窗，可以用ant模板代替
-    return Promise.reject(error.response)
+    return Promise.resolve({
+      data: error.response.data.errors,
+      code: error.response.status,
+    })
+  }
   },
 )
 

@@ -13,7 +13,7 @@ export const reqShopInfo = (page: number, limit: number, data: ShopSearch) =>
     API.SHOP + `?name=${data.other}&page=${page - 1}&size=${limit}`,
   )
 
-export const reqAddOrUpdateShop = (data: ShopData) => {
+export const reqBackstageAddOrUpdateShop = (data: ShopData) => {
   if (data.id) {
     return request.put<any, any>(API.SHOP, data)
   } else {
@@ -22,4 +22,4 @@ export const reqAddOrUpdateShop = (data: ShopData) => {
 }
 
 export const reqRemoveShop = (data: number) =>
-  request.get<any, ShopData>(API.SHOP + '/' + data)
+  request.delete<any, ShopData>(API.SHOP + '/' + data)

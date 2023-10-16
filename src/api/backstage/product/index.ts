@@ -1,5 +1,5 @@
 import request from '@/utils/request'
-import type { ProductData, ProductResponseData } from './type'
+import type { ProductData, ProductOrderResponseData, ProductResponseData } from './type'
 enum API {
   product = '/backstage/product',
 }
@@ -25,3 +25,11 @@ export const reqAddOrUpdateProduct = (data: ProductData) => {
     return request.post<any, any>(API.product, data)
   }
 }
+
+export const reqDeleteProduct = (data: number) =>
+  request.delete<any, ProductData>(API.product + '/' + data)
+
+
+export const reqIsOrderableProduct = (productId: number, isOrderable: boolean) =>
+  request.put<any, ProductOrderResponseData>(API.product + '/' + productId + '/' + isOrderable)
+

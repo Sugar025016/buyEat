@@ -15,9 +15,9 @@ router.beforeEach(async (to, from, next) => {
   const token = userStore.token
   const username = userStore.username
 
-  if (token && !username) {
+  if (token && !userStore.username) {
+
     try {
-      // next({ path: '/BuyShops' })
       await userStore.userInfo()
 
       next({ ...to })

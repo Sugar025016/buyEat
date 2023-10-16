@@ -93,7 +93,7 @@
               plain
               color=""
               data-bs-toggle="modal"
-              data-bs-target="#scheduleModal"
+              data-bs-target="#shopInfoModal"
             >
               營業資訊
             </el-button>
@@ -102,12 +102,12 @@
       </el-row>
     </div>
   </div>
-  <scheduleModal
+  <shopInfoModal
     :schedules="shopData?.schedules"
     :phone="shopData?.phone"
     :name="shopData?.name"
-  ></scheduleModal>
-  <!-- <scheduleModal :schedules="123"></scheduleModal> -->
+  ></shopInfoModal>
+  <!-- <shopInfoModal :schedules="123"></shopInfoModal> -->
 </template>
 
 <script setup lang="ts">
@@ -117,8 +117,8 @@ import { onMounted, ref, computed } from 'vue'
 import { getShop } from '@/api/shop'
 import { ShopData, ShopResponseData } from '@/api/shop/type'
 // import 'bootstrap/dist/css/bootstrap.css' // Import Bootstrap CSS
-
-import scheduleModal from '../scheduleModal/index.vue'
+import shopInfoModal from '../shopInfoModal/index.vue'
+import useUserStore from '@/store/modules/user'
 
 let $route = useRoute()
 
@@ -128,7 +128,6 @@ let shopData = ref<ShopData>()
 // let isFavorite = ref<boolean>()
 let favorite = ref('')
 
-import useUserStore from '@/store/modules/user'
 let userStore = useUserStore()
 
 // const isLove = (v: ShopList) => {
@@ -215,6 +214,7 @@ $b-color: $color;
           display: flex;
           justify-content: center; /* 水平置中 */
           align-items: center; /* 垂直置中 */
+          
         }
         .favorite:hover {
           // background-color: #f0f0f0;

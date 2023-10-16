@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { ref, onMounted, reactive, nextTick } from 'vue'
-import {
-  // reqUserInfo,
-  // reqAddOrUpdateUser,
-  reqAllRole,
-  reqSetUserRole,
-  reqRemoveUser,
-  reqSelectUser,
-} from '@/api/acl/user'
+// import {
+//   // reqUserInfo,
+//   // reqAddOrUpdateUser,
+//   reqAllRole,
+//   reqSetUserRole,
+//   reqRemoveUser,
+//   reqSelectUser,
+// } from '@/api/acl/user'
 import type {
   // UserResponseData,
   // Records,
@@ -17,7 +17,7 @@ import type {
   SetRoleData,
 } from '@/api/acl/user/type'
 
-import { reqAddOrUpdateUser, reqUserInfo } from '@/api/backstage/user'
+import { reqAddOrUpdateUser, getBackstageUser } from '@/api/backstage/user'
 
 import type {
   UserResponseData,
@@ -60,7 +60,7 @@ let keyword = ref<string>('')
 let settingStore = useLayOutSettingStore()
 const getHasUser = async (pager = 1) => {
   pageNo.value = pager
-  let res: UserResponseData = await reqUserInfo(
+  let res: UserResponseData = await getBackstageUser(
     pageNo.value,
     pageSize.value,
     keyword.value,
@@ -154,16 +154,16 @@ const rules = {
   password: [{ required: true, trigger: 'blur', validator: validatorPassword }],
 }
 
-const setRole = async (row: User) => {
-  drawer1.value = true
-  Object.assign(userParams, row)
-  let res: AllRoleResponseData = await reqAllRole(userParams.id as number)
-  if (res.code === 200) {
-    allRole.value = res.data.allRolesList
-    userRole.value = res.data.assignRoles
-    drawer1.value = true
-  }
-}
+// const setRole = async (row: User) => {
+//   drawer1.value = true
+//   Object.assign(userParams, row)
+//   let res: AllRoleResponseData = await reqAllRole(userParams.id as number)
+//   if (res.code === 200) {
+//     allRole.value = res.data.allRolesList
+//     userRole.value = res.data.assignRoles
+//     drawer1.value = true
+//   }
+// }
 
 const checkAll = ref<boolean>(false)
 const isIndeterminate = ref<boolean>(true)

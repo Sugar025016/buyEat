@@ -6,6 +6,7 @@ import type {
   UserProfileChangeResponse,
   UserPwd,
   UserInfoResponseData,
+  ChangeLovesResponseData,
 } from './type'
 
 enum API {
@@ -35,7 +36,7 @@ export const reqFavorites = () =>
   request.get<any, LovesResponseData>(API.USER_FAVORITE_URL)
 
 export const reqChangeFavorite = (id: number) =>
-  request.put<any, LovesResponseData>(API.USER_FAVORITE_URL + '/' + id)
+  request.put<any, ChangeLovesResponseData>(API.USER_FAVORITE_URL + '/' + id)
 
 export const reqUserAddress = () =>
   request.get<any, UserInfoResponseData>(API.USER_ADDRESS_URL)

@@ -1,57 +1,99 @@
-import { getShopList } from '@/api/shop'
+import { getShop, getShopList, getShopNames } from '@/api/shop'
 import { defineStore } from 'pinia'
-import type { ShopsResponseData, ShopSearch } from '@/api/shop/type'
-import { CategoryState } from './types/types'
+import type { ShopsResponseData, ShopSearch, ShopResponseData, ShopNamesResponse } from '@/api/shop/type'
+import { ShopState } from './types/types'
+import ElMessage from 'element-plus/lib/components/message/index.js'
+import {  useRouter } from 'vue-router'
+let $router = useRouter()
 
 const useShopStore = defineStore('Category', {
-  state: (): CategoryState => {
+  state: (): ShopState => {
     return {
-      c1Id: '',
-      c2Id: '',
-      c3Id: '',
-      c1Arr: [],
-      c2Arr: [],
-      c3Arr: [],
-      c4Arr: [],
-      c5Arr: {
+      shop: {
         id: 0,
         name: '',
         description: '',
-        address: '',
-        img: '',
+        address: {
+          id:0,
+          city:'',
+          area:'',
+          detail:'',
+        },
+        phone: '',
+        imgId:0,
+        imgUrl: '',
+        schedules: [{
+          id:0,
+          week:0,
+          timePeriods:[{
+            startTime: '',
+            endTime: ''
+          }]
+        }],
+        isOrderable: false,
       },
+      shopNames: [],
+      shopId: 0,
+      shopArr:[],
+      scrollTop:0,
     }
   },
   actions: {
-    // async getShop() {
-    //   let shop: Shop = await getShop()
-    //   //   if (res.code === 200) {
-    //   this.c5Arr = shop
-    //
-    //   //   }
-    // },
-    // async getShopList() {
-    //   let response =await  getShopList()
-    //
-    //   let res: ShopList = await  getShopList()
-    //
-    //   //   if (res.code === 200) {
-    //   this.c1Arr = res
-    //
-    //   //   }
-
-    // },
-
     async getShopList(data: ShopSearch) {
       const res: ShopsResponseData = await getShopList(data)
       if (res.code === 200) {
-        this.c1Arr = res.data
+        this.shopArr = res.data
       } else {
         return Promise.reject(new Error(res.message))
       }
     },
+    // async getShop2() {
+    //   let res: ShopResponseData = await getShop(this.shopId)
+    //   console.log("res",res.data)
+    //   if (res.code === 200) {
+    //     this.shop = res.data
+    //   } else {
+    //     ElMessage({
+    //       type: 'error',
+    //       message: '搜尋失败',
+    //     })
+    //   }
+    // },
+
+    async getShop(shopId:number) {
+      let res: ShopResponseData = await getShop(shopId)
+      console.log("res",res.data)
+      if (res.code === 200) {
+        this.shop = res.data
+      } else {
+        ElMessage({
+          type: 'error',
+          message: '搜尋失败',
+        })
+      }
+    },
+    async getShopItem() {
+      console.log("getShopItem")
+      let res: ShopNamesResponse = await getShopNames()
+      if (res.code === 200) {
+        if (res.data.length === 0) {
+          $router.push('/')
+        }
+        this.shopNames = res.data
+        if(this.shopId===0){
+          this.shopId=this.shopNames[0].id
+        }
+      } else {
+        ElMessage({
+          type: 'error',
+          message: '搜尋失败',
+        })
+      }
+    },
   },
-  getters: {},
+  getters: {
+    getStoreData: (state) => state.shop,
+  },
 })
 
 export default useShopStore

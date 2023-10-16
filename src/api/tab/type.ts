@@ -1,24 +1,21 @@
+import { ProductData } from "../product/type"
 export interface ResponseData {
   code: number
   message: string
   ok: boolean
 }
 
-export interface ProductData {
-  id: number
-  name: string
-  description: string
-  img: string
-  prise: number
-}
+
 
 export type ProductList = ProductData[]
 
 export interface TabData {
   id: number
   name: string
+  shelve:boolean
   products: ProductList
 }
+
 
 export type TabsData = TabData[]
 
@@ -31,9 +28,17 @@ export interface ProductModalData {
   name: string
   description: string
   qty: number
-  img: string
+  imgUrl: string
   prise: number
   department: string
   orderUsername: string
   note: string
+}
+
+export interface PutTabData {
+  id?: number
+  name: string
+  shopId: number
+  shelve:boolean
+  productIds: Number[]
 }

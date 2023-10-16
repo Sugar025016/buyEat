@@ -3,11 +3,12 @@
     <!-- 没有子路由 -->
     <template v-if="!item.children">
       <el-menu-item v-if="!item.meta.hidden" :index="item.path">
+      <!-- <el-menu-item v-if="!item.meta.hidden" @click="goRoute(item)"> -->
         <el-icon>
           <component :is="item.meta.icon"></component>
         </el-icon>
         <template #title>
-          <span>{{ item.meta.title }}</span>
+          <span>{{ item.meta.title }}**-</span>
         </template>
       </el-menu-item>
     </template>
@@ -21,7 +22,7 @@
           <component :is="item.children[0].meta.icon"></component>
         </el-icon>
         <template #title>
-          <span>{{ item.children[0].meta.title }}</span>
+          <span>{{ item.children[0].meta.title }}--</span>
         </template>
       </el-menu-item>
     </template>
@@ -39,20 +40,74 @@
         <el-icon>
           <component :is="item.meta.icon"></component>
         </el-icon>
-        <span>{{ item.meta.title }}</span>
+        <span>{{ item.meta.title }}--</span>
       </template>
       <Menu :menuList="item.children"></Menu>
     </el-sub-menu>
   </template>
 </template>
 <script setup lang="ts" name="Menu">
-import { useRouter } from 'vue-router'
+// import { useRouter } from 'vue-router'
+// let props = defineProps(['menuList'])
+
+// let $router = useRouter()
+// const goRoute = (vc: any) => {
+//   $router.push(vc.index)
+// }
+
+import { useRouter, useRoute, Router } from 'vue-router'
+import { onMounted, ref } from 'vue'
+
+import useSellShopStore from '@/store/modules/sellShop'
+import { timePanelSharedProps } from 'element-plus/es/components/time-picker/src/props/shared.js';
+
+let sellShopStore = useSellShopStore()
 let props = defineProps(['menuList'])
 
 let $router = useRouter()
-const goRoute = (vc: any) => {
-  $router.push(vc.index)
+let $route = useRoute()
+// const shopId = ref<number>()
+// const goRoute = async (path: string, shopId: number) => {
+//   console.log($route.path)
+//   // if($route.path != '/sell/shop){
+
+//   // }
+
+//   // sellShopStore.shopId = shopId
+//   // await sellShopStore.getSellShop(shopId)
+//   // $router.push(path)
+//   // $router.push(path + shopId)
+//   // if ($route.path != '/sell/shop') {
+//   //   $router.push(path + shopId)
+//   // }
+// }
+
+const goRoute = async (item: any) => {
+  const pattern = /^\/sell\/.*\/:shopId$/
+  let path=item.path
+    console.log("%%%%%%%%%%tem.path")
+  if (pattern.test(item.path)) {
+    path =item.path.replace(/:shopId/g, sellShopStore.shopId)
+    console.log("%%%%%%%%%%tem.path",path)
+  }
+    $router.push(path)
 }
+const getPath = async (item: Router) => {
+  if (!sellShopStore.shopId) {
+    console.log('$route$$$$$$$', $route.path)
+  }
+
+  console.log('item$$$$$$$', item)
+  console.log('$route$$$$$$$', $route.path)
+  $route.params.id = sellShopStore.shopId.toString()
+}
+// const getItem = async () => {
+
+//   console.log("-------------",$route.path)
+// }
+// onMounted(() => {
+//   getItem()
+// })
 </script>
 <script lang="ts">
 export default {

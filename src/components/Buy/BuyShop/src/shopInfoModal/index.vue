@@ -1,9 +1,9 @@
 <template>
   <div
     class="modal fade"
-    id="scheduleModal"
+    id="shopInfoModal"
     tabindex="-1"
-    aria-labelledby="scheduleModalLabel"
+    aria-labelledby="shopInfoModalLabel"
     aria-hidden="true"
   >
     <div class="modal-dialog modal-dialog-centered">
@@ -109,6 +109,7 @@ defineProps(['schedules', 'phone', 'name'])
         }
       }
       .week {
+        font-size: 14px;
         margin: 5px 20px;
         span {
           margin: 0 2px;

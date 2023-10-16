@@ -63,6 +63,10 @@ export interface LovesResponseData extends ResponseData {
   data: ShopList
 }
 
+export interface ChangeLovesResponseData extends ResponseData {
+  data: boolean
+}
+
 export interface UserAddressResponseData extends ResponseData {
   data: ShopList
 }

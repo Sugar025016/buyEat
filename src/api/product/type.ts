@@ -5,11 +5,19 @@ export interface ResponseData {
 }
 
 export interface ProductData {
-  id: number | string
+  id: number
   name: string
   description: string
-  img: string
+  imgUrl: string
+  prise: number
+  isOrderable:boolean
 }
+// export interface ProductData {
+//   id: number | string
+//   name: string
+//   description: string
+//   imgUrl: string
+// }
 
 export type ProductList = ProductData[]
 

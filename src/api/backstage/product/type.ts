@@ -13,16 +13,14 @@ export interface Address {
 export interface ProductData {
   shopId: number
   shopName: string
-  tabId?: number
-  tabName: string
   id?: number
   productName: string
   description: string
   prise: number
-  isOrderable: boolean
-  isDelete: boolean
-  createTime: string
-  updateTime: string
+  orderable: boolean
+  delete: boolean
+  createTime?: string
+  updateTime?: string
   imgId?: number
   imgUrl?: URL
 }
@@ -51,8 +49,6 @@ export interface ProductSearch {
 export interface ProductPutRequest {
   shopId?: number
   shopName: string
-  tabId?: number
-  tabName: string
   id?: number
   productName: string
   description: string
@@ -78,4 +74,8 @@ export interface ProductAddRequest {
   updateTime: string
   imgId?: number
   imgUrl?: URL
+}
+
+export interface ProductOrderResponseData extends ResponseData {
+  data: boolean
 }

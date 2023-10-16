@@ -18,6 +18,7 @@
         :key="index"
         v-show="true"
         class="content"
+        :ref="`${tab.id}`"
       >
         <h3>{{ tab.name }}</h3>
         <div class="products-body">
@@ -46,34 +47,36 @@ import productsCard from '.././productsCard/index.vue'
 import productModal from '../productModal/index.vue'
 import { onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
-import { getTabProducts } from '@/api/tab'
+import { reqGetTabProducts } from '@/api/tab'
 import {
   ProductModalData,
   TabProductsResponseData,
   TabData,
-  ProductData,
 } from '@/api/tab/type'
+
+import { ProductData } from '@/api/product/type'
 import useUserStore from '@/store/modules/user'
+import useShopStore from '@/store/modules/shop'
+
+const props = defineProps<{
+  scrollWhere: String
+}>()
 
 let userStore = useUserStore()
-
-// import { ProductData } from '@/api/product/type'
-// import { CategoryResponseData, ProductData, ProductsResponseData } from '@/api/product/type'
+let shopStore = useShopStore()
 
 let $route = useRoute()
 
 let id: number = $route.params.id
 
 let TabProductsData = ref<TabData[]>([])
-const isProductModalVisible = ref(false) // 控制是否显示 product-modal
-// const productData = ref({ /* 你的产品数据 */ })
 
 let productData = ref<ProductModalData>({
   productId: 0,
   name: '',
   description: '',
   qty: 1,
-  img: '',
+  imgUrl: '',
   prise: 0,
   department: '',
   orderUsername: '',
@@ -91,60 +94,35 @@ const openModal = (v: ProductData) => {
   productData.value.orderUsername = userStore.username
   productData.value.note = ''
 
-  // isProductModalVisible.value = true
 }
 
 const getProductsData = async (id: number) => {
-  let res: TabProductsResponseData = await getTabProducts(id)
+  let res: TabProductsResponseData = await reqGetTabProducts(id)
   TabProductsData.value = res.data
+  console.log('res.data ', res.data)
+  console.log('TabProductsData.value ', TabProductsData.value)
 }
 
-// const openModal = (v: ProductData) => {
-//   productData.value = v
-// }
 
 const scrollToSection = (sectionId: number) => {
-  const element = document.getElementById(sectionId)
+  const element = document.getElementById(sectionId + '')
+  console.log('element', element)
   if (element) {
     const headerHeight = 100
     const targetPosition =
       element.getBoundingClientRect().top + window.scrollY - headerHeight
     window.scrollTo({ top: targetPosition, behavior: 'smooth' })
-    // element.scrollIntoView({ behavior: 'smooth' })
+    shopStore.scrollTop = targetPosition
+
   }
-  // VueScrollTo.scrollTo(`#${sectionId}`, 500, { easing: 'ease-in-out' });
 }
 
 onMounted(() => {
   getProductsData(id)
 })
 
-const showModal = ref(false)
-
-interface Tab {
-  label: string
-  content: string
-}
-
 const activeTab = ref(0)
 
-const changeTab = (index: number) => {
-  activeTab.value = index
-}
-
-// const dialogFormVisible = ref(false)
-// const formLabelWidth = '140px'
-
-// const form = reactive({
-//   name: '',
-//   region: '',
-//   date1: '',
-//   date2: '',
-//   delivery: false,
-//   type: [],
-//   resource: '',
-//   desc: '',
-// })
 const myModal = document.getElementById('myModal')
 const myInput = document.getElementById('myInput')
 

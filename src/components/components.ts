@@ -1,4 +1,5 @@
-export { DefCard } from './GlobalComponents/card'
+export { DefCard } from './GlobalComponents/Card'
+export { DefShop } from './GlobalComponents/Shop'
 
 export { DefSvgIcon } from './GlobalComponents/SvgIcon'
 
@@ -8,3 +9,5 @@ export { DefBackstageTabBar } from './Backstage/BackstageTabBar'
 export { DefBuyTabBar } from './Buy/BuyTabBar'
 export { DefBuyMessage } from './Buy/BuyMessage'
 export { DefBuyFooter } from './Buy/BuyFooter'
+
+

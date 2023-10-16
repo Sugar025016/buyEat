@@ -16,6 +16,8 @@ import type {
   UserProfileChangeResponse,
   UserPwd,
   UserInfoResponseData,
+  Address,
+  ChangeLovesResponseData,
 } from '@/api/user/type'
 import type { UserState } from './types/types'
 import { GET_TOKEN, REMOVE_TOKEN } from '@/utils/token'
@@ -24,12 +26,14 @@ import {
   asyncRoute,
   anyRoute,
   menuRoutes,
+  menuSellRoutes,
+  sellShop,
 } from '@/router/routes'
 
 // @ts-expect-error
 import cloneDeep from 'lodash/cloneDeep'
 import { useRouter } from 'vue-router'
-import { ShopData, ShopList } from '@/api/shop/type'
+import { ShopData } from '@/api/shop/type'
 
 let $router = useRouter()
 
@@ -49,6 +53,7 @@ const useUserStore = defineStore('User', {
     return {
       token: GET_TOKEN()!,
       menuRoutes: menuRoutes,
+      menuSellRoutes: sellShop,
       asyncRoute: [...constantRoute, ...asyncRoute, anyRoute],
       username: '',
       account: '',
@@ -82,7 +87,7 @@ const useUserStore = defineStore('User', {
       // error=>error.message
       if (res.data?.code === 200) {
         this.token = GET_TOKEN()
-        this.userInfo()
+        await this.userInfo()
         return 'ok'
       } else {
         return Promise.reject(new Error(res.data as string))
@@ -97,7 +102,7 @@ const useUserStore = defineStore('User', {
         this.email = res.data.email
         this.favoriteShop = res.data.favoriteShops
         this.cartCount = res.data.cartCount
-        this.address = res.data.address
+        this.address = res.data.address as Address
 
         // const userAsyncRoute = filterAsyncRoute(
         //   cloneDeep(asyncRoute),
@@ -144,16 +149,16 @@ const useUserStore = defineStore('User', {
       }
     },
     async changeFavoriteStore(id: number) {
-      const res: LovesResponseData = await reqChangeFavorite(id)
-      if (res.code === 200) {
-        this.favoriteShop = await res.data
+      const res: ChangeLovesResponseData = await reqChangeFavorite(id)
+      console.log(res)
+      if (res.code === 200 && res.data) {
+        await this.getLove()
         return this.favoriteShop
       } else {
         return Promise.reject(new Error(res.message))
       }
     },
     async isLove(id: number) {
-      console.log('this.favoriteShop', this.favoriteShop)
       const isFavorite = this.favoriteShop.some(
         (value: ShopData) => value.id === id,
       )
@@ -178,11 +183,11 @@ const useUserStore = defineStore('User', {
       this.username = ''
       this.account = ''
       this.avatar = ''
-      ;(this.email = ''),
-        (this.phone = ''),
-        (this.favoriteShop = []),
-        (this.cartCount = 0),
-        REMOVE_TOKEN()
+        ; (this.email = ''),
+          (this.phone = ''),
+          (this.favoriteShop = []),
+          (this.cartCount = 0),
+          REMOVE_TOKEN()
     },
     async getUserAddress() {
       const res: UserInfoResponseData = await reqChangeUserInfo(v)

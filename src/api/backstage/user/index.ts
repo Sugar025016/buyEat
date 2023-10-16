@@ -11,7 +11,7 @@ enum API {
   USER_ACCOUNT_URL = '/backstage/user/account',
 }
 
-export const reqUserInfo = (page: number, limit: number, username: string) =>
+export const getBackstageUser = (page: number, limit: number, username: string) =>
   request.get<any, UserResponseData>(
     API.USER_URL + `?name=${username}&page=${page - 1}&size=${limit}`,
   )

@@ -7,7 +7,7 @@ defineProps({
   name: String,
   color: {
     type: String,
-    default: '',
+    default: '#fd7e14',
   },
   width: {
     type: String,

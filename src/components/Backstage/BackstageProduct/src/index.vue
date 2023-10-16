@@ -1,11 +1,17 @@
 <script setup lang="ts">
 import { Plus } from '@element-plus/icons-vue'
 import { ref, onMounted, reactive, nextTick } from 'vue'
-import { reqProductInfo, reqAddOrUpdateProduct } from '@/api/backstage/product'
+import {
+  reqProductInfo,
+  reqAddOrUpdateProduct,
+  reqDeleteProduct,
+  reqIsOrderableProduct,
+} from '@/api/backstage/product'
 import type {
   ProductResponseData,
   ProductList,
   ProductData,
+ProductOrderResponseData,
 } from '@/api/backstage/Product/type'
 
 import { UploadProps } from 'element-plus/es/components/upload/src/upload'
@@ -46,7 +52,6 @@ let productParams = reactive<ProductPutRequest>({
   isDelete: false,
   imgId: 0,
   imgUrl: undefined,
-  tabName: '',
 })
 
 let selectIdArr = ref<ProductData[]>([])
@@ -84,8 +89,6 @@ const addProduct = () => {
   Object.assign(productParams, {
     shopId: 0,
     shopName: '',
-    tabId: 0,
-    tabName: '',
     id: 0,
     productName: '',
     description: '',
@@ -99,7 +102,7 @@ const addProduct = () => {
   nextTick(() => {
     //清除特定字段的驗證狀態
     formRef.value.clearValidate('shopName')
-    formRef.value.clearValidate('tabName')
+    // formRef.value.clearValidate('tabName')
     formRef.value.clearValidate('productName')
     formRef.value.clearValidate('prise')
     formRef.value.clearValidate('img')
@@ -107,35 +110,53 @@ const addProduct = () => {
 }
 
 const updateProduct = async (row: ProductData) => {
-  let res: SearchShopRequestData = await reqTab(row.shopId)
-  if (res.code === 200) {
-    searchTabsData.value = res.data.tabs
-  } else {
-    ElMessage({
-      type: 'error',
-      message: '空標籤',
-    })
-  }
+  // let res: SearchShopRequestData = await reqTab(row.shopId)
+  // if (res.code === 200) {
+  //   searchTabsData.value = res.data.tabs
+  // } else {
+  //   ElMessage({
+  //     type: 'error',
+  //     message: '空標籤',
+  //   })
+  // }
+  Object.assign(productParams, row)
 
   drawer.value = true
 
-  Object.assign(productParams, row)
   nextTick(() => {
     formRef.value.clearValidate('shopName')
-    formRef.value.clearValidate('tabName')
+    // formRef.value.clearValidate('tabName')
     formRef.value.clearValidate('productName')
     formRef.value.clearValidate('prise')
     formRef.value.clearValidate('img')
   })
 }
 
+const setOrderable = async (row: ProductData) => {
+  let res: ProductOrderResponseData = await reqIsOrderableProduct(row.id as number, row.orderable)
+  if (res.code === 200) {
+    ElMessage({
+      type: 'success',
+      message: productParams.id ? '更新成功' : '添加成功',
+    })
+    return row.orderable;
+  } else {
+    window.location.reload()
+    ElMessage({
+      type: 'error',
+      message: productParams.id ? '更新失败' : '添加失败',
+    })
+    return !row.orderable;
+  }
+}
+
 const save = async () => {
   await formRef.value.validate()
-  if (!productParams.id && productParams.tabName) {
-    productParams.tabId = searchTabsData.value.find(
-      (v) => v.name === productParams.tabName,
-    )?.id
-  }
+  // if (!productParams.id ) {
+  //   productParams.tabId = searchTabsData.value.find(
+  //     (v) => v.name === productParams.tabName,
+  //   )?.id
+  // }
   let res: any = await reqAddOrUpdateProduct(productParams)
   if (res.code === 200) {
     drawer.value = false
@@ -227,13 +248,13 @@ const rules = {
 //     checkedCount > 0 && checkedCount < allRole.value.length
 // }
 
-// const deleteProduct = async (ProductId: number) => {
-//   let res: any = await reqRemoveProduct(ProductId)
-//   if (res.code === 200) {
-//     ElMessage({ type: 'success', message: '删除成功' })
-//     getHasProduct(ProductArr.value.length > 1 ? pageNo.value : pageNo.value - 1)
-//   }
-// }
+const deleteProduct = async (ProductId: number) => {
+  let res: any = await reqDeleteProduct(ProductId)
+  if (res.code === 200) {
+    ElMessage({ type: 'success', message: '删除成功' })
+    getHasProduct(productArr.value.length > 1 ? pageNo.value : pageNo.value - 1)
+  }
+}
 
 const selectChange = (value: any) => {
   selectIdArr.value = value
@@ -469,11 +490,6 @@ const handleClose = (done) => {
         width="100"
       ></el-table-column>
       <el-table-column
-        label="標籤名稱"
-        prop="tabName"
-        width="100"
-      ></el-table-column>
-      <el-table-column
         label="產品名稱"
         prop="productName"
         width="100"
@@ -504,8 +520,8 @@ const handleClose = (done) => {
       <el-table-column label="操作" width="180px" align="center">
         <template #="{ row, $index }">
           <div>
-            開始訂購:
-            <el-switch v-model="row.isOrderable" />
+            開啟訂購:
+            <el-switch v-model="row.orderable" @change="setOrderable(row)" />
           </div>
           <el-button
             type="primary"
@@ -521,6 +537,7 @@ const handleClose = (done) => {
             @confirm="deleteProduct(row.id)"
           >
             <template #reference>
+              <!-- <el-button type="danger" size="small" icon="Delete" @click="deleteProduct(row.id)"  > -->
               <el-button type="danger" size="small" icon="Delete">
                 删除
               </el-button>
@@ -565,7 +582,7 @@ const handleClose = (done) => {
             />
           </el-select>
         </el-form-item>
-        <el-form-item label="標籤名稱" prop="tabName" class="drawer-tab">
+        <!-- <el-form-item label="標籤名稱" prop="tabName" class="drawer-tab">
           <div class="drawer-tab">
             <el-select
               v-model="productParams.tabName"
@@ -579,13 +596,8 @@ const handleClose = (done) => {
                 :value="item.name"
               />
             </el-select>
-            <!-- <el-button text
-              style="color: #ffffff;  font-size: 20px"
-              :icon="Plus"
-              @click="open"
-            ></el-button> -->
           </div>
-        </el-form-item>
+        </el-form-item> -->
         <el-form-item label="產品名稱" prop="productName">
           <el-input
             placeholder="请您输入產品名稱"
@@ -665,6 +677,12 @@ const handleClose = (done) => {
   }
   .is-message-box {
     z-index: 1000000;
+  }
+}
+.avatar-uploader {
+  .avatar {
+    width: 100%;
+    display: block;
   }
 }
 </style>
