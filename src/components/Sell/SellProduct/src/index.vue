@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import productsCard from './productsCard/index.vue'
+import productsCard from '@/components/Sell/SellGlobalComponents/productsCard/index.vue'
 import { onMounted, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 
@@ -32,7 +32,12 @@ const getProducts = async () => {
   if (shopId) {
     await sellProductStore.getSellProduct()
   }
-  products.value = sellProductStore.products
+  if(sellProductStore.products.length>0){
+
+    products.value = sellProductStore.products
+  }else{
+    addProduct()
+  }
 }
 
 watch(keyword, () => {
@@ -80,24 +85,41 @@ const SellProductDrawerRef = ref<typeof SellProductDrawer>()
       </el-form-item>
     </el-form>
   </el-card>
-
+  <!-- <el-tooltip content="Bottom center" effect="customized">
+    <el-button>Customized theme</el-button>
+  </el-tooltip> -->
   <el-card style="margin: 10px 0">
     <div class="products-body">
+      <el-tooltip
+        class="box-item"
+        effect="dark"
+        content="新增餐點"
+        placement="bottom-end"
+      >
+        <productsCard :add="true" @click="addProduct()"></productsCard>
+      </el-tooltip>
+
+      <!-- <el-popover
+    placement="bottom"
+    title="新增餐點"
+    trigger="hover"
+  >
+    <template #reference>
+      <productsCard
+          :add="true"
+          @click="addProduct()"
+        ></productsCard>
+
+  </template>
+  </el-popover> -->
+
       <component v-for="product in products" :key="product.id">
-        <!-- <div class="delete">
-          <el-button
-            type="danger"
-            class="delete-button"
-            :icon="Delete"
-            circle
-            @click.stop="deleteProduct"
-          /> -->
         <productsCard
+          :change="true"
           :product="product"
           :setting="true"
           @click="updateProduct(product)"
         ></productsCard>
-        <!-- </div> -->
       </component>
     </div>
   </el-card>
@@ -116,12 +138,6 @@ const SellProductDrawerRef = ref<typeof SellProductDrawer>()
 .el-dialog {
   background-image: url('@/assets/images/product001.jpeg') !important; /* 設置背景圖片 */
   border-radius: 10px !important;
-
-  img {
-    // width: 100%;
-    // height: auto;
-    // background-color: aqua;
-  }
 }
 
 .el-button--text {
@@ -199,14 +215,8 @@ const SellProductDrawerRef = ref<typeof SellProductDrawer>()
     }
   }
   .tabs-content {
-    // font-size: 30px;
-    // margin: 10px;
-    // border-bottom: #636262;
-    // display: flex;
-    // align-items: center;
     .content {
       margin: 25px 0;
-      // background-color: aqua;
       .tab-title {
         display: flex;
         align-items: center;
@@ -280,5 +290,16 @@ const SellProductDrawerRef = ref<typeof SellProductDrawer>()
       right: 0px;
     }
   }
+}
+
+.el-popper.is-customized {
+  /* Set padding to ensure the height is 32px */
+  padding: 6px 12px;
+  background: linear-gradient(90deg, rgb(159, 229, 151), rgb(204, 229, 129));
+}
+
+.el-popper.is-customized .el-popper__arrow::before {
+  background: linear-gradient(45deg, #b2e68d, #bce689);
+  right: 0;
 }
 </style>

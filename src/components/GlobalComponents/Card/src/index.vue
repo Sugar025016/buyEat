@@ -6,8 +6,8 @@
   >
     <div class="image-container">
       <img
-        v-if="shop.img"
-        :src="shop.img"
+        v-if="shop.imgUrl"
+        :src="shop.imgUrl"
         alt="Your Image"
         onerror="this.classList.add('no-image-label');"
       />
@@ -50,7 +50,7 @@ const props = defineProps<{
 
 let $router = useRouter()
 var imageContainer = document.querySelector('.image-container')
-var image = imageContainer?.querySelector('img')
+var image = imageContainer?.querySelector('imgUrl')
 
 image?.addEventListener('load', function () {
   imageContainer?.classList.add('loaded')

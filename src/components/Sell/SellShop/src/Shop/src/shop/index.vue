@@ -99,14 +99,14 @@ const shopImageStyle = computed(() => {
   return {}
 })
 
-const getShopDetail = async (shopId: number) => {
-  await sellShopStore.getSellShop(shopId)
-  console.log('sellShopStore.shop', sellShopStore.shop.tabProducts)
-}
+// const getShopDetail = async (shopId: number) => {
+//   await sellShopStore.getSellShop(shopId)
+//   console.log('sellShopStore.shop', sellShopStore.shop.tabProducts)
+// }
 
-onMounted(() => {
-  getShopDetail(id)
-})
+// onMounted(() => {
+//   getShopDetail(id)
+// })
 const currentDate = new Date()
 const dayOfWeek = currentDate.getDay()
 </script>

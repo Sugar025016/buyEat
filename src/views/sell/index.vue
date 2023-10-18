@@ -108,7 +108,8 @@ let sellShopStore = useSellShopStore()
 let $route = useRoute()
 // let $router = useRouter()
 const shopNameItem = ref<ShopNames>([])
-const shopId = ref(0)
+// const shopId = ref(0)
+let shopId: number = parseInt($route.params.shopId as string)
 const getItem = async () => {
   drawer.value = true
   console.log('const getItem = async () => {')
@@ -118,7 +119,7 @@ const getItem = async () => {
   shopNameItem.value = res
   // shopId.value = shopNameItem.value
   // getShopData(shopId.value)
-  await getShopData()
+  // await sellShopStore.getSellShop(shopId)
   // if (res.code === 200) {
   //   if (res.data.length === 0) {
   //     // $router.push('/')
@@ -143,7 +144,7 @@ const shopData = ref<ShopData>()
 // }
 
 const getShopData = async () => {
-  await sellShopStore.getSellShopThisId()
+  await sellShopStore.getSellShop()
   shopData.value = sellShopStore.shop
   console.log('hopData.value', shopData.value)
 }

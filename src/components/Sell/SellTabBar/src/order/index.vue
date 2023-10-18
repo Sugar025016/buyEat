@@ -47,17 +47,9 @@ const goRoute = async (shopId: number) => {
   await sellShopStore.getSellShop(shopId)
   sellShopStore.shopId = shopId
   $router.push(`/sell/${shopId}/Shop`)
-  console.log('////////////////$route.path', $route.meta)
 }
 
-const goRoute2 = async (path: string, shopId: number) => {
-  $route.params.id = sellShopStore.shopId.toString()
-  sellShopStore.shopId = shopId
-  await sellShopStore.getSellShop(shopId)
-  $router.push(path + shopId)
-  // console.log("+++++++path+++++++++"+path)
-  // $router.push(path )
-}
+
 
 const getItem = async () => {
   await sellShopStore.getShopItem()

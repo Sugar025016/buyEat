@@ -604,22 +604,22 @@ const changeCity = () => {
 
 //   // background-color: bisque;
 // }
-::v-deep .el-switch__action {
-  background-color: $color;
-  ::v-deep .el-switch__action {
-    background-color: bisque;
-  }
-}
+// ::v-deep .el-switch__action {
+//   background-color: $color;
+//   ::v-deep .el-switch__action {
+//     background-color: bisque;
+//   }
+// }
 
-::v-deep .el-switch__core {
-  background-color: aqua;
-  ::v-deep .el-switch__action {
-    background-color: bisque;
-  }
-}
-::v-deep .is-checked {
-  ::v-deep .el-switch__action {
-    background-color: red;
-  }
-}
+// ::v-deep .el-switch__core {
+//   background-color: rgb(255, 81, 12);
+//   ::v-deep .el-switch__action {
+//     background-color: bisque;
+//   }
+// }
+// ::v-deep .is-checked {
+//   ::v-deep .el-switch__action {
+//     background-color: red;
+//   }
+// }
 </style>

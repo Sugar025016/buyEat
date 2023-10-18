@@ -2,7 +2,7 @@
 import { reactive, ref } from 'vue'
 import { PutTabData, TabData } from '@/api/tab/type'
 import useUserStore from '@/store/modules/user'
-import productsCard from '../productsCard/index.vue'
+import productsCard from '@/components/Sell/SellGlobalComponents/productsCard/index.vue'
 import useSellShopStore from '@/store/modules/sellShop'
 import { ProductData } from '@/api/product/type'
 import { reqAddOrUpdateTab } from '@/api/tab'
@@ -11,7 +11,6 @@ let sellShopStore = useSellShopStore()
 
 let userStore = useUserStore()
 const chooses = ref<ChooseProduct[]>([])
-
 export interface ChooseProduct extends ProductData {
   isChoose: boolean
 }
@@ -115,6 +114,7 @@ defineExpose({
         <hr class="divider" />
         <div class="modal-body">
           <div
+            v-if="chooses.length > 0"
             class="products-card"
             v-for="product in chooses"
             :key="product.id"
@@ -122,6 +122,20 @@ defineExpose({
             <!-- <productsCard :product="product" :setting="true" v-model:choose="choose"></productsCard> -->
             <productsCard :product="product" :setting="true"></productsCard>
           </div>
+          <router-link
+            v-else
+            class="box-item"
+            :to="`/sell/${sellShopStore.shop.id}/product`"
+          >
+            <el-tooltip
+              class="box-item"
+              effect="dark"
+              content="新增餐點"
+              placement="bottom-end"
+            >
+              <productsCard :setting="true"></productsCard>
+            </el-tooltip>
+          </router-link>
         </div>
         <div class="modal-footer">
           <div class="form-check form-switch">

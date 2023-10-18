@@ -10,7 +10,6 @@ import type {
   SellProduct,
 } from '@/api/sellProduct/type'
 import { SellProductState, ShopState } from './types/types'
-import ElMessage from 'element-plus/lib/components/message/index.js'
 
 const useSellProductStore = defineStore('sellProductStore', {
   state: (): SellProductState => {
@@ -26,41 +25,11 @@ const useSellProductStore = defineStore('sellProductStore', {
 
     async getSellProduct() {
       let res: ResponseProductList = await reqGetSellProducts(this.shopId)
-      console.log('res', res.data)
       if (res.code === 200) {
         this.products = res.data
+        return this.products
       } else {
-        ElMessage({
-          type: 'error',
-          message: '搜尋失败',
-        })
-      }
-    },
-
-    async deleteSellProduct(productId: number) {
-      let res: ResponseBoolean = await reqDeleteSellProducts(productId)
-      if (res.code === 200) {
-        this.getSellProduct()
-      } else {
-        ElMessage({
-          type: 'error',
-          message: '搜尋失败',
-        })
-      }
-    },
-
-    async addOrUpdateSellProduct(sellProduct: SellProduct) {
-      let res: ResponseBoolean = await reqAddOrUpdateSellProduct(
-        this.shopId,
-        sellProduct,
-      )
-      if (res.code === 200) {
-        this.getSellProduct()
-      } else {
-        ElMessage({
-          type: 'error',
-          message: '搜尋失败',
-        })
+        return Promise.reject(new Error(res.message))
       }
     },
   },

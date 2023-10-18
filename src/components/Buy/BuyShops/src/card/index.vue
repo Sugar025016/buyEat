@@ -6,8 +6,8 @@
   >
     <div class="image-container">
       <img
-        v-if="shop.img"
-        :src="shop.img"
+        v-if="shop.imgUrl"
+        :src="shop.imgUrl"
         alt="Your Image"
         onerror="this.classList.add('no-image-label');"
       />

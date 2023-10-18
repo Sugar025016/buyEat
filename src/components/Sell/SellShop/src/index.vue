@@ -12,6 +12,9 @@ import useSellShopStore from '@/store/modules/sellShop'
 import useUserStore from '@/store/modules/user'
 import { PutShopData } from '@/api/shop/type'
 import { reqAddOrUpdateShop } from '@/api/shop'
+import { useRoute } from 'vue-router'
+
+let $route = useRoute()
 
 let sellShopStore = useSellShopStore()
 
@@ -260,6 +263,16 @@ const handleAvatarSuccess: UploadProps['onSuccess'] = (
 const changeCity = () => {
   shopParams.address.area = ''
 }
+
+let shopId: number = parseInt($route.params.shopId as string)
+
+const getSellShop = async () => {
+  console.log("沒來嗎",shopId)
+  await sellShopStore.getSellShop(shopId)
+}
+onMounted(async () => {
+  getSellShop()
+})
 </script>
 <template>
   <!-- <el-card style="margin: 10px 0">

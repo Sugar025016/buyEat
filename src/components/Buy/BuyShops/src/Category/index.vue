@@ -163,7 +163,7 @@ onMounted(() => {
           @input="handleInput"
           @focus="showHistory = true"
         />
-        <button @click="search">Search</button>
+        <el-button @click="search" type="primary">搜尋</el-button>
       </div>
       <div class="search-history" v-if="showHistory">
         <div class="history-title">Search History:</div>
@@ -265,7 +265,7 @@ onMounted(() => {
       button {
         left: 0;
         padding: 10px 15px;
-        background-color: #007bff;
+        // background-color: #007bff;
         color: #fff;
         border: none;
         cursor: pointer;

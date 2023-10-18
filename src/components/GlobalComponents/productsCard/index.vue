@@ -8,7 +8,7 @@ import { reqDeleteSellProducts } from '@/api/sellProduct'
 import { ElMessageBox } from 'element-plus/lib/components/message-box/index.js'
 import { ResponseBoolean } from '@/api/sellProduct/type'
 
-defineProps(['product', 'setting', 'choose', 'add'])
+defineProps(['product', 'setting', 'choose', 'add' , 'change'])
 
 const deleteProduct = async (productId: number) => {
   ElMessageBox.confirm('是否確認要刪除?', 'Warning', {
@@ -52,7 +52,9 @@ const deleteProduct = async (productId: number) => {
     "
     :class="{ active: setting }"
   >
+    <!-- <el-icon><Close /></el-icon> -->
     <el-button
+      v-if="change"
       type="primary"
       class="delete"
       :icon="Delete"

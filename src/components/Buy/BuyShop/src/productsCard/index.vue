@@ -7,7 +7,7 @@
       </span>
       <span class="content-price">{{ product.prise }}$</span>
     </div>
-    <img :src="product.img" v-if="product.img" alt="AA" />
+    <img :src="product.imgUrl" v-if="product.imgUrl" alt="AA" />
     <!-- <img src="@/assets/images/product001.jpeg" alt="AA" /> -->
   </div>
 </template>

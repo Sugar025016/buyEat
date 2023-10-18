@@ -1,12 +1,14 @@
 <script setup lang="ts">
-import { ref, onMounted, reactive, nextTick, defineExpose } from 'vue'
+import { ref, reactive, nextTick, defineExpose } from 'vue'
 
-import { SellProduct } from '@/api/sellProduct/type'
+import { ResponseBoolean, SellProduct } from '@/api/sellProduct/type'
 import ElMessage from 'element-plus/lib/components/message/index.js'
-import { reqAddOrUpdateSellProduct } from '@/api/sellProduct'
 import useUserStore from '@/store/modules/user'
 import { UploadProps } from 'element-plus/es/components/index.js'
+import useSellProductStore from '@/store/modules/sellProduct'
+import { reqAddOrUpdateSellProduct } from '@/api/sellProduct'
 
+let sellProductStore = useSellProductStore()
 let userStore = useUserStore()
 let drawer = ref<boolean>(false)
 
@@ -22,13 +24,12 @@ let productParams = reactive<SellProduct>({
 
 let formRef = ref<any>()
 
-let shopId: number
 
 const addProduct = () => {
   drawer.value = true
   Object.assign(productParams, {
     id: 0,
-    productName: '',
+    name: '',
     description: '',
     prise: 0,
     orderable: false,
@@ -45,16 +46,14 @@ const addProduct = () => {
 
 const updateProduct = async (row: SellProduct) => {
   Object.assign(productParams, row)
-
   drawer.value = true
-  console.log('productParams/////////', productParams)
-
   nextTick(() => {
     formRef.value.clearValidate('name')
     formRef.value.clearValidate('prise')
     formRef.value.clearValidate('img')
   })
 }
+
 defineExpose({
   updateProduct,
   addProduct,
@@ -89,22 +88,22 @@ const rules = {
 
 const save = async () => {
   await formRef.value.validate()
-  let res: any = await reqAddOrUpdateSellProduct(productParams)
-  if (res.code === 200) {
+  let res: ResponseBoolean = await reqAddOrUpdateSellProduct(sellProductStore.shopId,productParams)
     drawer.value = false
+  if (res.code === 200) {
     ElMessage({
       type: 'success',
       message: productParams.id ? '更新成功' : '添加成功',
     })
     window.location.reload()
   } else {
-    drawer.value = false
     ElMessage({
       type: 'error',
       message: productParams.id ? '更新失败' : '添加失败',
     })
   }
 }
+
 const cancel = () => {
   drawer.value = false
 }
@@ -146,7 +145,7 @@ const uploadHeaders = {
 <template>
   <el-drawer v-model="drawer" class="drawer">
     <template #header>
-      <h4>{{ productParams.id ? '更新產品' : '添加產品' }}</h4>
+      <h4>{{ productParams.id ? '更新餐點' : '添加餐點' }}</h4>
     </template>
     <template #default>
       <el-form :model="productParams" :rules="rules" ref="formRef">

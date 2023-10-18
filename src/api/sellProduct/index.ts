@@ -3,7 +3,6 @@ import type {
   ResponseBoolean,
   ResponseProductList,
   SellProduct,
-  SellProductList,
 } from './type'
 enum API {
   PRODUCT = '/sell/product',

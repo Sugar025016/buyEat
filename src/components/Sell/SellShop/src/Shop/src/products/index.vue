@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import productsCard from '.././productsCard/index.vue'
+import productsCard from '@/components/Sell/SellGlobalComponents/productsCard/index.vue'
 import { computed, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { ProductModalData, TabData } from '@/api/tab/type'
@@ -35,7 +35,7 @@ const openModal = (v: ProductData) => {
   productData.value.name = v.name
   productData.value.description = ''
   productData.value.qty = 1
-  productData.value.img = v.img
+  productData.value.imgUrl = v.imgUrl
   productData.value.prise = v.prise
   productData.value.department = ''
   productData.value.orderUsername = userStore.username
@@ -184,7 +184,7 @@ const tapModalRef = ref<typeof TapModal | null>(null)
   <tap-modal
     :v-if="openModal"
     :products="sellShopStore.shop.products"
-    title="分類 設定"
+    :title="sellShopStore.shop.products.length>0? '分類 設定':'還沒有餐點，請新增餐點'"
     ref="tapModalRef"
   ></tap-modal>
 </template>
