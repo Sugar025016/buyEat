@@ -184,7 +184,11 @@ const tapModalRef = ref<typeof TapModal | null>(null)
   <tap-modal
     :v-if="openModal"
     :products="sellShopStore.shop.products"
-    :title="sellShopStore.shop.products.length>0? '分類 設定':'還沒有餐點，請新增餐點'"
+    :title="
+      sellShopStore.shop.products.length > 0
+        ? '分類 設定'
+        : '還沒有餐點，請新增餐點'
+    "
     ref="tapModalRef"
   ></tap-modal>
 </template>

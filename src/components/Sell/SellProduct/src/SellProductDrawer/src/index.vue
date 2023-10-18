@@ -24,7 +24,6 @@ let productParams = reactive<SellProduct>({
 
 let formRef = ref<any>()
 
-
 const addProduct = () => {
   drawer.value = true
   Object.assign(productParams, {
@@ -88,8 +87,11 @@ const rules = {
 
 const save = async () => {
   await formRef.value.validate()
-  let res: ResponseBoolean = await reqAddOrUpdateSellProduct(sellProductStore.shopId,productParams)
-    drawer.value = false
+  let res: ResponseBoolean = await reqAddOrUpdateSellProduct(
+    sellProductStore.shopId,
+    productParams,
+  )
+  drawer.value = false
   if (res.code === 200) {
     ElMessage({
       type: 'success',

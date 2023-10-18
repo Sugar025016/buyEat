@@ -32,10 +32,9 @@ const getProducts = async () => {
   if (shopId) {
     await sellProductStore.getSellProduct()
   }
-  if(sellProductStore.products.length>0){
-
+  if (sellProductStore.products.length > 0) {
     products.value = sellProductStore.products
-  }else{
+  } else {
     addProduct()
   }
 }

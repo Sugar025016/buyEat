@@ -17,7 +17,7 @@
 import products from './products/index.vue'
 import socialMedia from './socialMedia/index.vue'
 import shop from './shop/index.vue'
-import { onMounted } from 'vue';
+import { onMounted } from 'vue'
 
 import { useRoute } from 'vue-router'
 import useSellShopStore from '@/store/modules/sellShop'
@@ -26,7 +26,7 @@ let $route = useRoute()
 let shopId: number = parseInt($route.params.shopId as string)
 
 const getSellShop = async () => {
-  console.log("沒來嗎",shopId)
+  console.log('沒來嗎', shopId)
   await sellShopStore.getSellShop(shopId)
 }
 onMounted(async () => {

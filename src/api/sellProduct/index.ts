@@ -1,9 +1,5 @@
 import request from '@/utils/request'
-import type {
-  ResponseBoolean,
-  ResponseProductList,
-  SellProduct,
-} from './type'
+import type { ResponseBoolean, ResponseProductList, SellProduct } from './type'
 enum API {
   PRODUCT = '/sell/product',
 }

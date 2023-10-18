@@ -8,7 +8,7 @@ import { reqDeleteSellProducts } from '@/api/sellProduct'
 import { ElMessageBox } from 'element-plus/lib/components/message-box/index.js'
 import { ResponseBoolean } from '@/api/sellProduct/type'
 
-defineProps(['product', 'setting', 'choose', 'add' , 'change'])
+defineProps(['product', 'setting', 'choose', 'add', 'change'])
 
 const deleteProduct = async (productId: number) => {
   ElMessageBox.confirm('是否確認要刪除?', 'Warning', {

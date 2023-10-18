@@ -49,8 +49,6 @@ const goRoute = async (shopId: number) => {
   $router.push(`/sell/${shopId}/Shop`)
 }
 
-
-
 const getItem = async () => {
   await sellShopStore.getShopItem()
 }
