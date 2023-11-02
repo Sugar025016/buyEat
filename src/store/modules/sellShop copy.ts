@@ -68,9 +68,9 @@ const useSellShopStore = defineStore('sellShopStore', {
         shopId = this.shopNames[0].id
       }
 
-      console.log('$$$$$$$$$$$$$', shopId)
+      
       let res: ShopDetailsResponse = await getSellShop(shopId)
-      console.log('res', res.data)
+      
       if (res.code === 200) {
         this.shop = res.data
       } else {
@@ -81,7 +81,7 @@ const useSellShopStore = defineStore('sellShopStore', {
       }
     },
     async getShopItem() {
-      console.log('*******************')
+      
       let res: ShopNamesResponse = await getShopNames()
       if (res.code === 200) {
         if (res.data.length === 0) {

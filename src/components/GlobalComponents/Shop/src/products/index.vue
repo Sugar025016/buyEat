@@ -22,12 +22,12 @@
         <h3>{{ tab.name }}</h3>
         <div class="products-body">
           <component v-for="product in tab.products" :key="product.id">
-            <productsCard
+            <def-product-card
               :product="product"
               @click="openModal(product)"
               data-bs-toggle="modal"
               data-bs-target="#staticBackdrop"
-            ></productsCard>
+            ></def-product-card>
           </component>
         </div>
       </div>
@@ -75,7 +75,7 @@ let productData = ref<ProductModalData>({
   prise: 0,
   department: '',
   orderUsername: '',
-  note: '',
+  remark: '',
 })
 
 const openModal = (v: ProductData) => {
@@ -87,7 +87,7 @@ const openModal = (v: ProductData) => {
   productData.value.prise = v.prise
   productData.value.department = ''
   productData.value.orderUsername = userStore.username
-  productData.value.note = ''
+  productData.value.remark = ''
 
   // isProductModalVisible.value = true
 }

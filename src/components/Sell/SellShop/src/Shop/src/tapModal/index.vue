@@ -2,19 +2,20 @@
 import { reactive, ref } from 'vue'
 import { PutTabData, TabData } from '@/api/tab/type'
 import useUserStore from '@/store/modules/user'
-import productsCard from '@/components/Sell/SellGlobalComponents/productsCard/index.vue'
 import useSellShopStore from '@/store/modules/sellShop'
 import { ProductData } from '@/api/product/type'
 import { reqAddOrUpdateTab } from '@/api/tab'
+import Search from '@/components/SharedComponents/search.vue'
 
 let sellShopStore = useSellShopStore()
 
 let userStore = useUserStore()
 const chooses = ref<ChooseProduct[]>([])
-export interface ChooseProduct extends ProductData {
+interface ChooseProduct extends ProductData {
   isChoose: boolean
 }
 
+const choosesAll = ref<Boolean>()
 const tapProduct = ref<TabData>()
 
 const inputUserName = ref('')
@@ -73,7 +74,6 @@ const save = async () => {
   let res = await reqAddOrUpdateTab(tabParams)
   if (res.code === 200 && res.data) {
     await sellShopStore.getSellShop(sellShopStore.shop.id)
-    console.log('sellShopStore.shop', sellShopStore.shop)
   }
 }
 
@@ -83,10 +83,15 @@ const getData = (t: TabData) => {
   setTab()
 }
 
+const getSearchResult = (sellProductList: any) => {
+  chooses.value = sellProductList
+}
+
 defineExpose({
   getData,
 })
 </script>
+
 <template>
   <div
     class="modal fade"
@@ -111,16 +116,34 @@ defineExpose({
             aria-label="Close"
           ></button>
         </div>
+        <!-- <div class="form-check">
+          <input
+            class="checkbox"
+            type="checkbox"
+            id="flexCheckDefault"
+            v-model="choosesAll"
+          />
+          <label class="form-check-label" for="flexCheckDefault">全選</label>
+        </div> -->
         <hr class="divider" />
         <div class="modal-body">
+          <Search
+            class="search"
+            v-on:search-result="getSearchResult"
+            :products="sellShopStore.shop.products"
+          ></Search>
+
           <div
             v-if="chooses.length > 0"
             class="products-card"
             v-for="product in chooses"
             :key="product.id"
           >
-            <!-- <productsCard :product="product" :setting="true" v-model:choose="choose"></productsCard> -->
-            <productsCard :product="product" :setting="true"></productsCard>
+            <def-product-card
+              :product="product"
+              :setting="true"
+              :choose="true"
+            ></def-product-card>
           </div>
           <router-link
             v-else
@@ -133,7 +156,7 @@ defineExpose({
               content="新增餐點"
               placement="bottom-end"
             >
-              <productsCard :setting="true"></productsCard>
+              <def-product-card :setting="true"></def-product-card>
             </el-tooltip>
           </router-link>
         </div>
@@ -205,7 +228,7 @@ defineExpose({
       width: 100%;
       background-position: center;
       background-size: cover;
-      margin: 20px 0;
+      margin: 20px 0 0px 0;
       .rounded-input {
         padding: 0 20px;
         width: 100%;
@@ -217,6 +240,10 @@ defineExpose({
         background-color: #50505000;
         height: 40px;
       }
+    }
+
+    .search {
+      margin: 0 0 0 5px;
     }
     .modal-body {
       .products-card {
@@ -293,6 +320,42 @@ defineExpose({
         }
       }
     }
+  }
+}
+
+.form-check {
+  display: flex;
+  align-items: center;
+  // justify-content: center;
+  // position: relative;
+
+  .checkbox {
+    height: 18px;
+    width: 18px;
+    // position: absolute;
+    // background-color: $color;
+    margin: 0;
+  }
+
+  .checkbox:checked::before {
+    content: '\2713'; /* 这是 Unicode 编码的勾选符号 */
+    font-size: 30px; /* 勾选标志的大小 */
+    color: #fff; /* 勾选标志的颜色 */
+    position: absolute; /* 使勾选标志居中 */
+    // top: 50%;
+    // left: 50%;
+    // transform: translate(-50%, -50%);
+    width: 18px; /* 勾选标志的宽度 */
+    height: 18px; /* 勾选标志的高度 */
+    line-height: 14px; /* 行高与高度相同，使文本垂直居中 */
+    background-color: $color;
+    vertical-align: middle;
+    border: 1px solid #f80505;
+  }
+  .form-check-label {
+    font-size: 14px;
+    color: $color;
+    margin: 0 10px;
   }
 }
 </style>

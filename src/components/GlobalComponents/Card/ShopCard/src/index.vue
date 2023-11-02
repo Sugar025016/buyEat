@@ -1,3 +1,37 @@
+
+<script lang="ts" setup>
+import { useRouter } from 'vue-router'
+import useUserStore from '@/store/modules/user'
+import { onMounted, ref } from 'vue'
+import { ShopData } from '@/api/shop/type'
+
+let userStore = useUserStore()
+// defineProps(['shop'])
+const props = defineProps<{
+  shop: ShopData
+}>()
+
+let $router = useRouter()
+var imageContainer = document.querySelector('.image-container')
+var image = imageContainer?.querySelector('imgUrl')
+
+image?.addEventListener('load', function () {
+  imageContainer?.classList.add('loaded')
+})
+
+const toShop = (id: number) => {
+  $router.push(`/BuyShop/${id}`)
+}
+let favorite = ref('')
+const changeFavorite = async (id: number) => {
+  await userStore.changeFavoriteStore(id)
+  favorite.value = await userStore.isLove(id)
+}
+
+onMounted(async () => {
+  favorite.value = await userStore.isLove(props.shop.id)
+})
+</script>
 <template>
   <el-card
     class="card"
@@ -36,39 +70,6 @@
   </el-card>
 </template>
 
-<script lang="ts" setup>
-import { useRouter } from 'vue-router'
-import useUserStore from '@/store/modules/user'
-import { onMounted, ref } from 'vue'
-import { ShopData } from '@/api/shop/type'
-
-let userStore = useUserStore()
-// defineProps(['shop'])
-const props = defineProps<{
-  shop: ShopData
-}>()
-
-let $router = useRouter()
-var imageContainer = document.querySelector('.image-container')
-var image = imageContainer?.querySelector('imgUrl')
-
-image?.addEventListener('load', function () {
-  imageContainer?.classList.add('loaded')
-})
-
-const toShop = (id: number) => {
-  $router.push(`/BuyShop/${id}`)
-}
-let favorite = ref('')
-const changeFavorite = async (id: number) => {
-  await userStore.changeFavoriteStore(id)
-  favorite.value = await userStore.isLove(id)
-}
-
-onMounted(async () => {
-  favorite.value = await userStore.isLove(props.shop.id)
-})
-</script>
 
 <style lang="scss" scoped>
 .el-card {

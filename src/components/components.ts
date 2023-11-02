@@ -1,4 +1,6 @@
-export { DefCard } from './GlobalComponents/Card'
+export { DefShopCard } from './GlobalComponents/Card/ShopCard'
+export { DefProductCard } from './GlobalComponents/Card/ProductCard'
+
 export { DefShop } from './GlobalComponents/Shop'
 
 export { DefSvgIcon } from './GlobalComponents/SvgIcon'

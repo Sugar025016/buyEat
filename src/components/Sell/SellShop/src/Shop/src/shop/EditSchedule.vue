@@ -10,7 +10,7 @@ import useSellShopStore from '@/store/modules/sellShop'
 let sellShopStore = useSellShopStore()
 // const props = defineProps({
 //   product: Object as () => ProductModalData,
-// })
+// })」defineEmit」
 // 定义需要的 props
 const props = defineProps({
   scheduleVisible: Boolean,
@@ -24,10 +24,7 @@ let schedulesChange = ref<Schedules>([])
 // let schedulesChange = ref<Schedules>([])
 
 const setting = () => {
-  console.log(
-    'sellShopStore.shop.schedules',
-    JSON.parse(JSON.stringify(sellShopStore.shop.schedules)),
-  )
+
   // 在这里处理来自子组件的数据
   schedulesChange.value = JSON.parse(
     JSON.stringify(sellShopStore.shop.schedules),
@@ -39,7 +36,7 @@ watchEffect(() => {
   }
 })
 
-export interface ScheduleParams {
+type ScheduleParams = {
   weeks: number[]
   times: TimePeriods
 }
@@ -139,7 +136,7 @@ const confirm = async () => {
       putSchedule.value,
     )
     if (res.data) {
-      console.log('//////////////////////////////////////////')
+      
       await sellShopStore.getSellShop(sellShopStore.shopId)
     }
   }

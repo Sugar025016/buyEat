@@ -113,9 +113,9 @@ defineExpose({
 
 const save = async () => {
   await formRef.value.validate()
-  console.log('shopParams', shopParams)
+  
   let res: any = await reqAddOrUpdateShop(shopParams)
-  console.log('res', res)
+  
   if (res.code === 200) {
     sellShopStore.shopDrawer = false
     ElMessage({
@@ -267,7 +267,7 @@ const changeCity = () => {
 let shopId: number = parseInt($route.params.shopId as string)
 
 const getSellShop = async () => {
-  console.log('沒來嗎', shopId)
+  
   await sellShopStore.getSellShop(shopId)
 }
 onMounted(async () => {

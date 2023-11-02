@@ -7,6 +7,10 @@ import type {
   UserPwd,
   UserInfoResponseData,
   ChangeLovesResponseData,
+  UserAddress,
+  UserAddressResponseData,
+  Address,
+  Addresses,
 } from './type'
 
 enum API {
@@ -38,5 +42,12 @@ export const reqFavorites = () =>
 export const reqChangeFavorite = (id: number) =>
   request.put<any, ChangeLovesResponseData>(API.USER_FAVORITE_URL + '/' + id)
 
-export const reqUserAddress = () =>
-  request.get<any, UserInfoResponseData>(API.USER_ADDRESS_URL)
+// export const reqUserAddress = () =>
+//   request.get<any, UserInfoResponseData>(API.USER_ADDRESS_URL)
+
+  export const reqGetUserAddresses = () =>
+  request.get<any, UserAddressResponseData>(API.USER_ADDRESS_URL)
+
+
+  export const reqPutUserAddresses = (date:Addresses) =>
+  request.put<any, UserAddressResponseData>(API.USER_ADDRESS_URL,date)

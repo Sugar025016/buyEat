@@ -56,7 +56,7 @@ const formLabelWidth = '140px'
 // const openModal = (modalId: string) => {
 //   const modal = document.getElementById(modalId);
 //   if (modal) {
-//     console.log("shown.bs.modal")
+//     
 //     modal.addEventListener('shown.bs.modal', () => {
 //       modal.focus()
 // })

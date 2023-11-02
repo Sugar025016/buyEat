@@ -19,9 +19,9 @@
           <el-dropdown-menu>
             <el-dropdown-item
               v-for="item in sellShopStore.shopNames"
-              @click="goRoute(item.id)"
+              @click="goRoute(item.id, item.name )"
             >
-              {{ item.name }}--
+              {{ item.name }}-
             </el-dropdown-item>
           </el-dropdown-menu>
         </template>
@@ -42,10 +42,11 @@ import { ShopNames } from '@/api/shop/type'
 import { onMounted, ref } from 'vue'
 let $router = useRouter()
 let $route = useRoute()
-const goRoute = async (shopId: number) => {
+const goRoute = async (shopId: number ,shopName:string) => {
   $route.meta.shopId = shopId.toString()
   await sellShopStore.getSellShop(shopId)
   sellShopStore.shopId = shopId
+  $route.meta.title = shopName
   $router.push(`/sell/${shopId}/Shop`)
 }
 

@@ -47,14 +47,14 @@ let $route = useRoute()
 //   sellShopStore.shopId = shopId
 //   await sellShopStore.getSellShop(shopId)
 //   $router.push(path+ shopId)
-//   // console.log("+++++++path+++++++++"+path)
+//   
 //   // $router.push(path )
 // }
 
 const goRoute = async (shopId: number) => {
   $route.meta.shopId = shopId.toString()
 
-  console.log('////////////////$route.path', $route.path)
+  
   await sellShopStore.getSellShop(shopId)
   sellShopStore.shopId = shopId
   $router.push(`/sell/${shopId}/Shop`)

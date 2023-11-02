@@ -366,7 +366,7 @@ export const sellShop = [
 
       {
         path: 'product',
-        component: () => import('@/components/Sell/SellProduct/src/index.vue'),
+        component: () => import('@/components/Sell/SellProduct/index.vue'),
         meta: {
           title: '餐點編輯',
           hidden: false,

@@ -29,7 +29,7 @@ export interface ProductModalData {
   prise: number
   department: string
   orderUsername: string
-  note: string
+  remark: string
 }
 
 export interface PutTabData {

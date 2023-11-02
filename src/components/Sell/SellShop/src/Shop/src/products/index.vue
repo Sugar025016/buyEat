@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import productsCard from '@/components/Sell/SellGlobalComponents/productsCard/index.vue'
 import { computed, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { ProductModalData, TabData } from '@/api/tab/type'
@@ -27,7 +26,7 @@ let productData = ref<ProductModalData>({
   prise: 0,
   department: '',
   orderUsername: '',
-  note: '',
+  remark: '',
 })
 
 const openModal = (v: ProductData) => {
@@ -39,17 +38,17 @@ const openModal = (v: ProductData) => {
   productData.value.prise = v.prise
   productData.value.department = ''
   productData.value.orderUsername = userStore.username
-  productData.value.note = ''
+  productData.value.remark = ''
 }
 
 tabProductsData = computed(() => {
-  console.log('sellShopStore.shop.tabProducts', sellShopStore.shop.tabProducts)
+  
   return sellShopStore.shop.tabProducts
 })
 
 const scrollToSection = (sectionId: number) => {
   const element = document.getElementById(sectionId + '')
-  console.log('element', element)
+  
   if (element) {
     const headerHeight = 100
     const targetPosition =
@@ -61,7 +60,7 @@ const scrollToSection = (sectionId: number) => {
 
 const addTab = (sectionId: number) => {
   const element = document.getElementById(sectionId + '')
-  console.log('element', element)
+  
   if (element) {
     const headerHeight = 100
     const targetPosition =
@@ -87,7 +86,7 @@ const editTab = (
 ) => {
   if (tapModalRef.value) {
     // 调用子组件的 getData 方法
-    console.log('调用子组件的 getData 方法')
+    
     tapModalRef.value.getData(tab)
   }
 }
@@ -167,10 +166,10 @@ const tapModalRef = ref<typeof TapModal | null>(null)
 
         <div class="products-body">
           <component v-for="product in tab.products" :key="product.id">
-            <productsCard
+            <def-product-card
               :product="product"
               @click="openModal(product)"
-            ></productsCard>
+            ></def-product-card>
           </component>
         </div>
       </div>

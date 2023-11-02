@@ -47,7 +47,7 @@ request.interceptors.response.use(
   (error) => {
     const userStore = useUserStore()
     let message = ''
-    console.log('error', error)
+    
     if (error.response) {
       const status = error.response.status
 

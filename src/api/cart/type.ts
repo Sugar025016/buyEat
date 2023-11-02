@@ -1,3 +1,6 @@
+
+import { Schedule, Schedules } from '@/api/shop/type'
+
 export interface ResponseData {
   code: number
   message: string
@@ -7,8 +10,9 @@ export interface ResponseData {
 export interface CartsData {
   shopId?: number
   shopName: string
-  isOrderable: boolean
+  orderable: boolean
   cartResponses: CartList
+  schedules:Schedules
 }
 
 export type CartList = CartData[]
@@ -18,7 +22,7 @@ export interface CartData {
   department: string
   orderUsername: string
   qty: number
-  note: string
+  remark: string
   productResponse: ProductResponse
 }
 
@@ -39,5 +43,5 @@ export interface CartRequest {
   department?: string
   orderUsername: string
   qty: number
-  note: string
+  remark: string
 }

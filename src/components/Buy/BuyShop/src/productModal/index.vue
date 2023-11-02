@@ -13,7 +13,7 @@
         <!-- <div class="modal-header" style="background-image: url(product.img);"> -->
         <div
           class="modal-header"
-          :style="{ backgroundImage: 'url(' + product!.img + ')' }"
+          :style="{ backgroundImage: 'url(' + product!.imgUrl + ')' }"
         >
           <el-button
             type="button"
@@ -57,7 +57,7 @@
               type="text"
               class="rounded-input"
               placeholder="输入文本"
-              v-model="product!.note"
+              v-model="product!.remark"
             />
           </div>
         </div>
@@ -130,7 +130,7 @@ const addCart = async () => {
     department: props.product!.department,
     orderUsername: props.product!.orderUsername,
     qty: props.product!.qty,
-    note: props.product!.note,
+    remark: props.product!.remark,
   })
   // Object.assign(cartReq.value, productModal.value)
 

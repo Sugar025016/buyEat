@@ -141,7 +141,7 @@ onMounted(() => {
       </div>
     </div>
 
-    <div class="el-form-item">
+    <div class="el-form-item item-category">
       <div class="custom-select-wrapper">
         <select class="custom-select category" v-model="selectedOption3">
           <option value="0">全部</option>
@@ -184,9 +184,8 @@ onMounted(() => {
 .form {
   display: grid;
   grid-template-columns: 3fr 4fr 5fr 12fr;
-
+  grid-column-gap: 10px;
   .el-form-item {
-    margin: 0 16px 16px 0;
     overflow: hidden;
     padding: 0px;
     display: flex;
@@ -247,8 +246,10 @@ onMounted(() => {
 
   .search-container {
     margin-right: 0px;
+    height: 40px;
 
     .search-input {
+      height: 100%;
       position: relative;
       width: 100%;
       border: 1px solid #ccc;
@@ -263,6 +264,7 @@ onMounted(() => {
       }
 
       button {
+        height: 100%;
         left: 0;
         padding: 10px 15px;
         // background-color: #007bff;
@@ -314,6 +316,7 @@ onMounted(() => {
   }
 
   @media (max-width: $breakpoint-md) {
+    margin: 0 10px;
     display: grid;
     grid-template-columns: minmax(120px, 2fr) minmax(150px, 3fr) minmax(
         200px,
@@ -323,8 +326,20 @@ onMounted(() => {
       display: grid;
       grid-column: span 3;
     }
-    .el-form-item:nth-last-child(2) {
-      margin: 0 0 16px 0;
+  }
+
+  @media (max-width: $breakpoint-xs) {
+    margin: 0 10px;
+    display: grid;
+    grid-template-columns: minmax(120px, 2fr) minmax(150px, 3fr);
+    grid-column-gap: 10px;
+    .search-container {
+      display: grid;
+      grid-column: span 2;
+    }
+    .item-category {
+      display: grid;
+      grid-column: span 2;
     }
   }
 }

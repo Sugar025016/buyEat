@@ -2,13 +2,13 @@
 import { markRaw } from 'vue'
 
 import { Delete } from '@element-plus/icons-vue'
-import setting from '@/setting'
+// import setting from '@/setting'
 import ElMessage from 'element-plus/lib/components/message/index.js'
 import { reqDeleteSellProducts } from '@/api/sellProduct'
 import { ElMessageBox } from 'element-plus/lib/components/message-box/index.js'
-import { ResponseBoolean } from '@/api/sellProduct/type'
+// import { ResponseBoolean } from '@/api/sellProduct/type'
 
-defineProps(['product', 'setting', 'choose', 'add'])
+defineProps(['product', 'setting', 'choose', 'add', 'change'])
 
 const deleteProduct = async (productId: number) => {
   ElMessageBox.confirm('是否確認要刪除?', 'Warning', {
@@ -52,7 +52,9 @@ const deleteProduct = async (productId: number) => {
     "
     :class="{ active: setting }"
   >
+    <!-- <el-icon><Close /></el-icon> -->
     <el-button
+      v-if="change"
       type="primary"
       class="delete"
       :icon="Delete"
@@ -101,6 +103,8 @@ const deleteProduct = async (productId: number) => {
   transform: scale(1);
 }
 .productCard {
+
+  word-break:break-all;
   position: relative;
   box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.2);
   display: flex;
@@ -117,13 +121,7 @@ const deleteProduct = async (productId: number) => {
     background-color: rgba(212, 212, 212, 0.7); /* 遮罩层的颜色和透明度 */
     border-radius: 10px;
   }
-  .checkbox {
-    height: 18px;
-    width: 18px;
-    position: absolute;
-    background-color: $color;
-    margin: 0;
-  }
+
   .delete {
     z-index: 10;
     position: absolute;
@@ -136,6 +134,13 @@ const deleteProduct = async (productId: number) => {
     z-index: 1;
     position: absolute;
     margin: 5px 25px;
+  }
+  .checkbox {
+    height: 18px;
+    width: 18px;
+    position: absolute;
+    // background-color: $color;
+    margin: 0;
   }
   .checkbox:checked::before {
     content: '\2713'; /* 这是 Unicode 编码的勾选符号 */
@@ -182,6 +187,7 @@ const deleteProduct = async (productId: number) => {
   }
 }
 .addCard {
+  cursor: pointer;
   .add {
     display: flex;
     flex-wrap: nowrap;
@@ -201,7 +207,7 @@ const deleteProduct = async (productId: number) => {
 
 .addCard:hover {
   background-color: #dddddd8a;
-  // transform: scale(1.02);
+  transform: scale(1.01);
   .add {
     transform: scale(1.03);
     .add-icon {
@@ -214,7 +220,7 @@ const deleteProduct = async (productId: number) => {
 }
 .addCard:active {
   background-color: #dddddd8a;
-  // transform: scale(1.02);
+  transform: scale(1.02);
   .add {
     transform: scale(1);
     .add-icon {

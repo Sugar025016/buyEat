@@ -23,12 +23,12 @@
         <h3>{{ tab.name }}</h3>
         <div class="products-body">
           <component v-for="product in tab.products" :key="product.id">
-            <productsCard
+            <def-product-card
               :product="product"
               @click="openModal(product)"
               data-bs-toggle="modal"
               data-bs-target="#staticBackdrop"
-            ></productsCard>
+            ></def-product-card>
           </component>
         </div>
       </div>
@@ -80,7 +80,7 @@ let productData = ref<ProductModalData>({
   prise: 0,
   department: '',
   orderUsername: '',
-  note: '',
+  remark: '',
 })
 
 const openModal = (v: ProductData) => {
@@ -88,23 +88,23 @@ const openModal = (v: ProductData) => {
   productData.value.name = v.name
   productData.value.description = ''
   productData.value.qty = 1
-  productData.value.img = v.img
+  productData.value.imgUrl = v.imgUrl
   productData.value.prise = v.prise
   productData.value.department = ''
   productData.value.orderUsername = userStore.username
-  productData.value.note = ''
+  productData.value.remark = ''
 }
 
 const getProductsData = async (id: number) => {
   let res: TabProductsResponseData = await reqGetTabProducts(id)
   TabProductsData.value = res.data
-  console.log('res.data ', res.data)
-  console.log('TabProductsData.value ', TabProductsData.value)
+  
+  
 }
 
 const scrollToSection = (sectionId: number) => {
   const element = document.getElementById(sectionId + '')
-  console.log('element', element)
+  
   if (element) {
     const headerHeight = 100
     const targetPosition =

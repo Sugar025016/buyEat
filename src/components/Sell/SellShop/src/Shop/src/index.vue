@@ -26,8 +26,13 @@ let $route = useRoute()
 let shopId: number = parseInt($route.params.shopId as string)
 
 const getSellShop = async () => {
-  console.log('沒來嗎', shopId)
+  
   await sellShopStore.getSellShop(shopId)
+
+  
+  $route.meta.title = sellShopStore.shop.name
+  
+
 }
 onMounted(async () => {
   getSellShop()

@@ -63,7 +63,7 @@ const useUserStore = defineStore('User', {
       avatar: '',
       buttons: [],
       cartCount: 0,
-      address: {
+      addresses: {
         id: 0,
         city: '',
         area: '',
@@ -83,9 +83,11 @@ const useUserStore = defineStore('User', {
         formData.append('password', data.password)
       }
       const res: LoginResponseData = await reqLogin(formData)
+      // console.log("*********",res)
       // success=>token
       // error=>error.message
-      if (res.data?.code === 200) {
+      if (res.code === 200) {
+        // console.log("*********",res)
         this.token = GET_TOKEN()
         await this.userInfo()
         return 'ok'
@@ -150,7 +152,7 @@ const useUserStore = defineStore('User', {
     },
     async changeFavoriteStore(id: number) {
       const res: ChangeLovesResponseData = await reqChangeFavorite(id)
-      console.log(res)
+      
       if (res.code === 200 && res.data) {
         await this.getLove()
         return this.favoriteShop

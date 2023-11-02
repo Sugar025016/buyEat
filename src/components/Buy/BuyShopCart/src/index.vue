@@ -26,7 +26,7 @@
                 <td>{{ cart.department }}</td>
                 <td>{{ cart.orderUsername }}</td>
                 <td>{{ cart.productResponse.price }}</td>
-                <td>{{ cart.note }}</td>
+                <td>{{ cart.remark }}</td>
                 <td>
                   <el-input-number
                     v-model="cart.qty"
@@ -82,7 +82,7 @@
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { apiGetCart, apiDeleteCart, apiPutCart } from '@/api/cart'
-import { CartResponseData, CartsData } from '@/api/cart/type'
+import { CartList, CartResponseData, CartsData } from '@/api/cart/type'
 import useUserStore from '@/store/modules/user'
 
 let userStore = useUserStore()
@@ -91,14 +91,15 @@ let $router = useRouter()
 const sum = ref(0)
 
 const carts = ref<CartsData>({
-  shopName: '',
-  isOrderable: false,
-  cartResponses: [],
+shopName: '',
+orderable: false,
+cartResponses: [],
+schedules: []
 })
+
 
 const shopLink = () => {
   if (carts.value?.shopId) {
-    console.log('carts.value.shopId', carts.value.shopId)
     $router.push('/BuyShop/' + carts.value.shopId)
   } else {
     $router.push('/')
@@ -114,15 +115,15 @@ const getCart = async () => {
 
   if (res.code === 200) {
     carts.value = res.data
-    userStore.cartCount = res.data.cartResponses.reduce(
-      (total, cartData) => total + cartData.qty,
-      0,
-    )
-
-    sum.value = carts.value.cartResponses.reduce(
+    userStore.cartCount = getCartCount(res.data.cartResponses)
+      sum.value=0
+    if(userStore.cartCount!==0){
+      sum.value = carts.value.cartResponses.reduce(
       (total, v) => total + v.qty * v.productResponse.price,
       0,
     )
+    }
+
   }
 }
 
@@ -134,24 +135,28 @@ const deleteCart = async (cartId: number) => {
   if (res.code === 200) {
     carts.value = res.data
     if (res.data.cartResponses) {
-      userStore.cartCount = res.data.cartResponses.reduce(
-        (total, cartData) => total + cartData.qty,
-        0,
-      )
+      userStore.cartCount = getCartCount(res.data.cartResponses)
     } else {
       userStore.cartCount = 0
     }
   }
+}
+const getCartCount = (cartResponses: CartList) => {
+  if(cartResponses){
+    return cartResponses.length > 0
+    ? cartResponses.reduce((total, cartData) => total + cartData.qty, 0)
+    : 0
+  }else{
+    return 0;
+  }
+
 }
 
 const updateCart = async (cartId: number, qty: number) => {
   let res: CartResponseData = await apiPutCart(cartId, qty)
   if (res.code === 200) {
     carts.value = res.data
-    userStore.cartCount = res.data.cartResponses.reduce(
-      (total, cartData) => total + cartData.qty,
-      0,
-    )
+    userStore.cartCount = getCartCount(res.data.cartResponses)
   }
 }
 </script>

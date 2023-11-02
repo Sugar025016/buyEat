@@ -23,7 +23,7 @@ export interface UserState {
   buttons: string[]
   favoriteShop: ShopList
   cartCount: number
-  address: Address
+  addresses: Address
 }
 
 // export interface CategoryState {

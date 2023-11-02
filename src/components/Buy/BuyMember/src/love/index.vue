@@ -2,7 +2,8 @@
   <div class="cards">
     <template v-for="c1 in userStore.favoriteShop">
       <!-- <Card :shop="c1"></Card> -->
-      <def-card :shop="c1"></def-card>
+      <def-shop-card :shop="c1"></def-shop-card>
+      <def-shop-card2 :shop="c1"></def-shop-card2>
     </template>
   </div>
 </template>

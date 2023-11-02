@@ -77,10 +77,7 @@ let formRef = ref<any>()
 // });
 const updateShop = () => {
   sellShopStore.shopDrawer = true
-  console.log(
-    'sellShopStore.shopDrawer = true',
-    (sellShopStore.shopDrawer = true),
-  )
+
   Object.assign(shopParams, sellShopStore.shop)
 
   // 创建一个临时的地址对象，以免影响到 row 对象
@@ -107,16 +104,16 @@ defineExpose({
 
 const save = async () => {
   await formRef.value.validate()
-  console.log('shopParams', shopParams)
+  
   let res: any = await reqAddOrUpdateShop(shopParams)
-  console.log('res', res)
+  
   if (res.code === 200) {
     sellShopStore.shopDrawer = false
     ElMessage({
       message: shopParams.id ? '更新成功' : '添加成功',
       type: 'success',
     })
-    console.log('#######shopParams', shopParams)
+    
     await sellShopStore.getSellShop(shopParams.id)
 
     // window.location.reload()
@@ -260,6 +257,8 @@ const handleAvatarSuccess: UploadProps['onSuccess'] = (
 const changeCity = () => {
   shopParams.address.area = ''
 }
+
+
 </script>
 <template>
   <!-- <el-card style="margin: 10px 0">

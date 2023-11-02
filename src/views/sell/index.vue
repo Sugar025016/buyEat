@@ -112,10 +112,10 @@ const shopNameItem = ref<ShopNames>([])
 let shopId: number = parseInt($route.params.shopId as string)
 const getItem = async () => {
   drawer.value = true
-  console.log('const getItem = async () => {')
+  
   let res: ShopNames = await sellShopStore.getShopItem()
 
-  console.log('%%%%%%%%%%%%%%%%', res)
+  
   shopNameItem.value = res
   // shopId.value = shopNameItem.value
   // getShopData(shopId.value)
@@ -124,7 +124,7 @@ const getItem = async () => {
   //   if (res.data.length === 0) {
   //     // $router.push('/')
   //   }
-  //     console.log('%%%%%%%%%%%%%%%%')
+  //     
   //   shopNameItem.value = res.data
   //   shopId.value = shopNameItem.value[0].id
   //   // getShopData(shopId.value)
@@ -146,7 +146,7 @@ const shopData = ref<ShopData>()
 const getShopData = async () => {
   await sellShopStore.getSellShop()
   shopData.value = sellShopStore.shop
-  console.log('hopData.value', shopData.value)
+  
 }
 
 import { ElScrollbar } from 'element-plus'
@@ -157,7 +157,7 @@ const innerRef = ref<HTMLDivElement>()
 const scrollbarRef = ref<InstanceType<typeof ElScrollbar>>()
 
 const scroll = ({ scrollTop }) => {
-  console.log('value.value', value.value)
+  
   value.value = scrollTop
 }
 

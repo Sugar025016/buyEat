@@ -78,21 +78,17 @@ const confirmSet3 = async () => {
       }
     })
   })
-  console.log('scheduleParams.value.times', scheduleParams.value.times)
+  
 }
 
-export interface ChangeWeek {
+type ChangeWeek ={
   weeks: number[]
   times: Time[]
 }
 
 function convertTimeToMinutes(timeStr: string) {
   const [hours, minutes] = timeStr.split(':')
-  console.log('hours, minutes', hours, minutes)
-  console.log(
-    'parseInt(hours) * 60 + parseInt(minutes)',
-    parseInt(hours) * 60 + parseInt(minutes),
-  )
+
   return parseInt(hours) * 60 + parseInt(minutes)
 }
 const cancel = () => {
@@ -101,12 +97,12 @@ const cancel = () => {
   handleClose()
 }
 
-export interface Week {
+type Week ={
   week: number
   weekName: String
 }
 
-export interface Time {
+type Time ={
   startTime: String
   endTime: String
 }
@@ -123,7 +119,7 @@ const weekLists = ref<Week[]>([
 const checkAll = ref(true)
 const isIndeterminate = ref(false)
 
-export interface ScheduleParams {
+type ScheduleParams ={
   weeks: number[]
   times: TimePeriods
 }
@@ -134,7 +130,7 @@ const scheduleParams = ref<ScheduleParams>({
 })
 
 const handleCheckAllChange = (val: boolean) => {
-  console.log('val', val)
+  
   scheduleParams.value.weeks = val
     ? weekLists.value.map((item) => item.week)
     : []

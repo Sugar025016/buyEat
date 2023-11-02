@@ -8,7 +8,7 @@ import { ShopDetailData } from '@/api/shop/type'
 // import 'bootstrap/dist/css/bootstrap.css' // Import Bootstrap CSS
 
 // import shopInfoModal from '../shopInfoModal/index.vue'
-import MyDialog from './MyDialog.vue'
+import EditSchedule from './EditSchedule.vue'
 // const scheduleModelSwitch = ref(false)
 // const scheduleSetModel = ref(false)
 // const formLabelWidth = '140px'
@@ -24,7 +24,7 @@ const dialogTitle = ref('My Dialog Title')
 const dialogMessage = ref('This is a dialog message.')
 
 const openDialog = () => {
-  console.log(dialogVisible.value)
+  
   dialogVisible.value = true
 }
 
@@ -86,7 +86,7 @@ let shopData = ref<ShopDetailData>({
 })
 
 shopData = computed(() => {
-  console.log(sellShopStore.shop)
+  
   return sellShopStore.shop
 })
 
@@ -101,7 +101,7 @@ const shopImageStyle = computed(() => {
 
 // const getShopDetail = async (shopId: number) => {
 //   await sellShopStore.getSellShop(shopId)
-//   console.log('sellShopStore.shop', sellShopStore.shop.tabProducts)
+//   
 // }
 
 // onMounted(() => {
@@ -231,7 +231,7 @@ const dayOfWeek = currentDate.getDay()
       </el-row>
     </div>
   </div>
-  <MyDialog
+  <EditSchedule
     v-model:scheduleVisible="scheduleVisible"
     :title="dialogTitle"
     :message="dialogMessage"
