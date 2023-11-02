@@ -78,10 +78,9 @@ const confirmSet3 = async () => {
       }
     })
   })
-  
 }
 
-type ChangeWeek ={
+type ChangeWeek = {
   weeks: number[]
   times: Time[]
 }
@@ -97,12 +96,12 @@ const cancel = () => {
   handleClose()
 }
 
-type Week ={
+type Week = {
   week: number
   weekName: String
 }
 
-type Time ={
+type Time = {
   startTime: String
   endTime: String
 }
@@ -119,7 +118,7 @@ const weekLists = ref<Week[]>([
 const checkAll = ref(true)
 const isIndeterminate = ref(false)
 
-type ScheduleParams ={
+type ScheduleParams = {
   weeks: number[]
   times: TimePeriods
 }
@@ -130,7 +129,6 @@ const scheduleParams = ref<ScheduleParams>({
 })
 
 const handleCheckAllChange = (val: boolean) => {
-  
   scheduleParams.value.weeks = val
     ? weekLists.value.map((item) => item.week)
     : []

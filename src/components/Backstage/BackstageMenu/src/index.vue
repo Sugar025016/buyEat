@@ -68,7 +68,7 @@ let $router = useRouter()
 let $route = useRoute()
 // const shopId = ref<number>()
 // const goRoute = async (path: string, shopId: number) => {
-//   
+//
 //   // if($route.path != '/sell/shop){
 
 //   // }
@@ -85,25 +85,21 @@ let $route = useRoute()
 const goRoute = async (item: any) => {
   const pattern = /^\/sell\/.*\/:shopId$/
   let path = item.path
-  
+
   if (pattern.test(item.path)) {
     path = item.path.replace(/:shopId/g, sellShopStore.shopId)
-    
   }
   $router.push(path)
 }
 const getPath = async (item: Router) => {
   if (!sellShopStore.shopId) {
-    
   }
 
-  
-  
   $route.params.id = sellShopStore.shopId.toString()
 }
 // const getItem = async () => {
 
-//   
+//
 // }
 // onMounted(() => {
 //   getItem()

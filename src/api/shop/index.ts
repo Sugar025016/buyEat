@@ -54,7 +54,6 @@ export const reqPutSchedule = (shopId: number, schedule: PutSchedule) =>
   request.put<any, ShopDetailsResponse>(API.SCHEDULE + '/' + shopId, schedule)
 
 export const reqAddOrUpdateShop = (data: PutShopData) => {
-  
   if (data.id) {
     return request.put<any, PutShopResponse>(API.SHOP, data)
   } else {

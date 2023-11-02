@@ -45,9 +45,8 @@ export const reqChangeFavorite = (id: number) =>
 // export const reqUserAddress = () =>
 //   request.get<any, UserInfoResponseData>(API.USER_ADDRESS_URL)
 
-  export const reqGetUserAddresses = () =>
+export const reqGetUserAddresses = () =>
   request.get<any, UserAddressResponseData>(API.USER_ADDRESS_URL)
 
-
-  export const reqPutUserAddresses = (date:Addresses) =>
-  request.put<any, UserAddressResponseData>(API.USER_ADDRESS_URL,date)
+export const reqPutUserAddresses = (date: Addresses) =>
+  request.put<any, UserAddressResponseData>(API.USER_ADDRESS_URL, date)

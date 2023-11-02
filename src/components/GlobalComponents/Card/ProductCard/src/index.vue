@@ -103,8 +103,7 @@ const deleteProduct = async (productId: number) => {
   transform: scale(1);
 }
 .productCard {
-
-  word-break:break-all;
+  word-break: break-all;
   position: relative;
   box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.2);
   display: flex;

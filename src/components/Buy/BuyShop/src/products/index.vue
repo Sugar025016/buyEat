@@ -98,13 +98,11 @@ const openModal = (v: ProductData) => {
 const getProductsData = async (id: number) => {
   let res: TabProductsResponseData = await reqGetTabProducts(id)
   TabProductsData.value = res.data
-  
-  
 }
 
 const scrollToSection = (sectionId: number) => {
   const element = document.getElementById(sectionId + '')
-  
+
   if (element) {
     const headerHeight = 100
     const targetPosition =

@@ -57,8 +57,6 @@ const addressRules = {
   ],
 }
 
-
-
 let formRef = ref<any>()
 
 const save = async () => {
@@ -159,7 +157,6 @@ defineExpose({
     .el-select {
       margin: 0 !important;
     }
-    
   }
   .el-button {
     // margin: auto 0 auto 5px;

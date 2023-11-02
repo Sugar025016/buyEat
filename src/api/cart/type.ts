@@ -1,4 +1,3 @@
-
 import { Schedule, Schedules } from '@/api/shop/type'
 
 export interface ResponseData {
@@ -12,7 +11,7 @@ export interface CartsData {
   shopName: string
   orderable: boolean
   cartResponses: CartList
-  schedules:Schedules
+  schedules: Schedules
 }
 
 export type CartList = CartData[]

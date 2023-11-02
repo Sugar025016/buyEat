@@ -42,13 +42,12 @@ const openModal = (v: ProductData) => {
 }
 
 tabProductsData = computed(() => {
-  
   return sellShopStore.shop.tabProducts
 })
 
 const scrollToSection = (sectionId: number) => {
   const element = document.getElementById(sectionId + '')
-  
+
   if (element) {
     const headerHeight = 100
     const targetPosition =
@@ -60,7 +59,7 @@ const scrollToSection = (sectionId: number) => {
 
 const addTab = (sectionId: number) => {
   const element = document.getElementById(sectionId + '')
-  
+
   if (element) {
     const headerHeight = 100
     const targetPosition =
@@ -86,7 +85,7 @@ const editTab = (
 ) => {
   if (tapModalRef.value) {
     // 调用子组件的 getData 方法
-    
+
     tapModalRef.value.getData(tab)
   }
 }

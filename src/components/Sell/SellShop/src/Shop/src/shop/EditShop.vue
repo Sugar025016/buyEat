@@ -104,16 +104,16 @@ defineExpose({
 
 const save = async () => {
   await formRef.value.validate()
-  
+
   let res: any = await reqAddOrUpdateShop(shopParams)
-  
+
   if (res.code === 200) {
     sellShopStore.shopDrawer = false
     ElMessage({
       message: shopParams.id ? '更新成功' : '添加成功',
       type: 'success',
     })
-    
+
     await sellShopStore.getSellShop(shopParams.id)
 
     // window.location.reload()
@@ -257,8 +257,6 @@ const handleAvatarSuccess: UploadProps['onSuccess'] = (
 const changeCity = () => {
   shopParams.address.area = ''
 }
-
-
 </script>
 <template>
   <!-- <el-card style="margin: 10px 0">

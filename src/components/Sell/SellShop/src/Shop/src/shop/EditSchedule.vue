@@ -24,7 +24,6 @@ let schedulesChange = ref<Schedules>([])
 // let schedulesChange = ref<Schedules>([])
 
 const setting = () => {
-
   // 在这里处理来自子组件的数据
   schedulesChange.value = JSON.parse(
     JSON.stringify(sellShopStore.shop.schedules),
@@ -136,7 +135,6 @@ const confirm = async () => {
       putSchedule.value,
     )
     if (res.data) {
-      
       await sellShopStore.getSellShop(sellShopStore.shopId)
     }
   }

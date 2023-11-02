@@ -24,7 +24,6 @@ const dialogTitle = ref('My Dialog Title')
 const dialogMessage = ref('This is a dialog message.')
 
 const openDialog = () => {
-  
   dialogVisible.value = true
 }
 
@@ -86,7 +85,6 @@ let shopData = ref<ShopDetailData>({
 })
 
 shopData = computed(() => {
-  
   return sellShopStore.shop
 })
 
@@ -101,7 +99,7 @@ const shopImageStyle = computed(() => {
 
 // const getShopDetail = async (shopId: number) => {
 //   await sellShopStore.getSellShop(shopId)
-//   
+//
 // }
 
 // onMounted(() => {

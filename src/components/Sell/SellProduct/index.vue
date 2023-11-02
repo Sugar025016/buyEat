@@ -37,7 +37,6 @@ const getProducts = async () => {
   }
 }
 
-
 // drawer
 const SellProductDrawerRef = ref<typeof SellProductDrawer>()
 
@@ -48,7 +47,6 @@ const updateProduct = (product: SellProduct) => {
 const addProduct = () => {
   SellProductDrawerRef.value?.addProduct()
 }
-
 
 // search
 const getSearchResult = (sellProductList: SellProductList) => {

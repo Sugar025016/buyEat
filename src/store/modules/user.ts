@@ -152,7 +152,7 @@ const useUserStore = defineStore('User', {
     },
     async changeFavoriteStore(id: number) {
       const res: ChangeLovesResponseData = await reqChangeFavorite(id)
-      
+
       if (res.code === 200 && res.data) {
         await this.getLove()
         return this.favoriteShop

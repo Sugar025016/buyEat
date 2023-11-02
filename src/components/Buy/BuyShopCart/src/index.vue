@@ -91,12 +91,11 @@ let $router = useRouter()
 const sum = ref(0)
 
 const carts = ref<CartsData>({
-shopName: '',
-orderable: false,
-cartResponses: [],
-schedules: []
+  shopName: '',
+  orderable: false,
+  cartResponses: [],
+  schedules: [],
 })
-
 
 const shopLink = () => {
   if (carts.value?.shopId) {
@@ -116,14 +115,13 @@ const getCart = async () => {
   if (res.code === 200) {
     carts.value = res.data
     userStore.cartCount = getCartCount(res.data.cartResponses)
-      sum.value=0
-    if(userStore.cartCount!==0){
+    sum.value = 0
+    if (userStore.cartCount !== 0) {
       sum.value = carts.value.cartResponses.reduce(
-      (total, v) => total + v.qty * v.productResponse.price,
-      0,
-    )
+        (total, v) => total + v.qty * v.productResponse.price,
+        0,
+      )
     }
-
   }
 }
 
@@ -142,14 +140,13 @@ const deleteCart = async (cartId: number) => {
   }
 }
 const getCartCount = (cartResponses: CartList) => {
-  if(cartResponses){
+  if (cartResponses) {
     return cartResponses.length > 0
-    ? cartResponses.reduce((total, cartData) => total + cartData.qty, 0)
-    : 0
-  }else{
-    return 0;
+      ? cartResponses.reduce((total, cartData) => total + cartData.qty, 0)
+      : 0
+  } else {
+    return 0
   }
-
 }
 
 const updateCart = async (cartId: number, qty: number) => {

@@ -84,9 +84,6 @@ const getCart = async () => {
   }
 }
 
-
-
-
 let isChangeAddress = ref<boolean>(true)
 onMounted(() => {
   getCart()
@@ -104,14 +101,13 @@ const deliveryTime = ref<DeliveryTime>({
   time: '',
 })
 
-
 onBeforeUnmount(() => {
   clearTimeout(timer)
 })
 </script>
 <template>
-    <span class="total">總金額:</span>
-    <span class="total-data">NT${{ sum }}</span>
+  <span class="total">總金額:</span>
+  <span class="total-data">NT${{ sum }}</span>
 </template>
 
 <style lang="scss" scoped>

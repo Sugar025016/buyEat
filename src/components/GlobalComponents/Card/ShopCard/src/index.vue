@@ -1,4 +1,3 @@
-
 <script lang="ts" setup>
 import { useRouter } from 'vue-router'
 import useUserStore from '@/store/modules/user'
@@ -69,7 +68,6 @@ onMounted(async () => {
     </div>
   </el-card>
 </template>
-
 
 <style lang="scss" scoped>
 .el-card {

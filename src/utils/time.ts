@@ -22,15 +22,13 @@ export const deleteSecond = (time: string) => {
   return newTime
 }
 
-
 export const formatTime = (today: Date) => {
+  const year = today.getFullYear()
+  const month = today.getMonth() + 1 // 月份从0开始，所以要加1
+  const day = today.getDate()
+  const hours = today.getHours()
+  const minutes = today.getMinutes()
+  const seconds = today.getSeconds()
 
-  const year = today.getFullYear();
-  const month = today.getMonth() + 1; // 月份从0开始，所以要加1
-  const day = today.getDate();
-  const hours = today.getHours();
-  const minutes = today.getMinutes();
-  const seconds = today.getSeconds();
-  
-  return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`;
+  return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`
 }

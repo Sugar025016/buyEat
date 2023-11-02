@@ -145,7 +145,6 @@ const saveAddresses = async () => {
   }
 }
 
-
 const close = async () => {
   addressParams.value = JSON.parse(JSON.stringify(addresses.value))
   isChangeAddress.value = true
@@ -161,10 +160,9 @@ const t = ref('')
 const getSelectDate = (date: string) => {
   d.value = date
 }
-let aaa:string;
-const getDeliveryTime = (dateTime:string) => {
-  aaa=dateTime
-
+let aaa: string
+const getDeliveryTime = (dateTime: string) => {
+  aaa = dateTime
 }
 
 const getSelectTime = (time: string) => {
@@ -175,11 +173,9 @@ const deleteAddress = (index: number) => {
   addressParams.value.splice(index, 1)
 }
 
-
 const radio1 = ref(0)
 
 const TimeSelectRef = ref<typeof TimeSelect>()
-
 
 const sendOrder = async () => {
   await TimeSelectRef.value?.save()
@@ -193,7 +189,6 @@ const sendOrder = async () => {
   let res: OrderResponseData = await reqAddOrder(order.value)
 
   if (res.code === 200) {
-
     $router.push('/BuyOrder')
   } else {
     ElMessage({
@@ -256,7 +251,7 @@ onBeforeUnmount(() => {
               </div> -->
               <el-radio-group v-model="radio1" class="radio">
                 <el-radio
-                  v-for="(address ,index) in addresses"
+                  v-for="(address, index) in addresses"
                   :label="index"
                   size="large"
                 >

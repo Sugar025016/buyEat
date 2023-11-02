@@ -185,21 +185,22 @@ const clearTime = () => {
   deliveryTime.value.time = ''
   setEmit()
 }
-import moment from 'moment';
+import moment from 'moment'
 const setEmit = () => {
-  let setDeliveryTime= new Date()
+  let setDeliveryTime = new Date()
   setDeliveryTime.setFullYear(deliveryTime.value.date.year)
-  setDeliveryTime.setMonth(deliveryTime.value.date.month-1)
+  setDeliveryTime.setMonth(deliveryTime.value.date.month - 1)
   setDeliveryTime.setDate(deliveryTime.value.date.date)
 
   const [hours, minutes] = deliveryTime.value.time.split(':').map(Number)
-  setDeliveryTime.setHours(hours,minutes,0,0)
-  
-  const momentTime = moment(setDeliveryTime.toLocaleString(), 'YYYY-MM-DD HH:mm:ss');
+  setDeliveryTime.setHours(hours, minutes, 0, 0)
 
-  $emit('deliveryTime', (
-    momentTime.format('YYYY-MM-DDTHH:mm:ss')
-  ))
+  const momentTime = moment(
+    setDeliveryTime.toLocaleString(),
+    'YYYY-MM-DD HH:mm:ss',
+  )
+
+  $emit('deliveryTime', momentTime.format('YYYY-MM-DDTHH:mm:ss'))
 }
 
 const selectedTimeRules = {

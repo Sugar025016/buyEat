@@ -58,7 +58,7 @@ const useShopStore = defineStore('Category', {
     },
     // async getShop2() {
     //   let res: ShopResponseData = await getShop(this.shopId)
-    //   
+    //
     //   if (res.code === 200) {
     //     this.shop = res.data
     //   } else {
@@ -71,7 +71,7 @@ const useShopStore = defineStore('Category', {
 
     async getShop(shopId: number) {
       let res: ShopResponseData = await getShop(shopId)
-      
+
       if (res.code === 200) {
         this.shop = res.data
       } else {
@@ -82,7 +82,6 @@ const useShopStore = defineStore('Category', {
       }
     },
     async getShopItem() {
-      
       let res: ShopNamesResponse = await getShopNames()
       if (res.code === 200) {
         if (res.data.length === 0) {

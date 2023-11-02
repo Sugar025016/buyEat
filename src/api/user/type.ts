@@ -48,8 +48,6 @@ export interface UserAddressResponseData extends ResponseData {
   data: Addresses
 }
 
-
-
 export interface UserProfile {
   name: string
   account: string
