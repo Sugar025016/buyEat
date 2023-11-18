@@ -120,7 +120,7 @@ const availableTimes = (date: number, timePeriods: TimePeriods) => {
 }
 
 // 辅助函数，将时间格式化为HH:mm字符串
-function formatTime(time) {
+function formatTime(time: Date) {
   const hours = time.getHours().toString().padStart(2, '0')
   const minutes = time.getMinutes().toString().padStart(2, '0')
   return `${hours}:${minutes}`

@@ -35,8 +35,6 @@ import cloneDeep from 'lodash/cloneDeep'
 import { useRouter } from 'vue-router'
 import { ShopData } from '@/api/shop/type'
 
-let $router = useRouter()
-
 function filterAsyncRoute(asyncRoute: any, routes: any) {
   return asyncRoute.filter((item: any) => {
     if (routes.includes(item.name)) {
@@ -53,7 +51,7 @@ const useUserStore = defineStore('User', {
     return {
       token: GET_TOKEN()!,
       menuRoutes: menuRoutes,
-      menuSellRoutes: sellShop,
+      menuSellRoutes: sellShop[0].children,
       asyncRoute: [...constantRoute, ...asyncRoute, anyRoute],
       username: '',
       account: '',

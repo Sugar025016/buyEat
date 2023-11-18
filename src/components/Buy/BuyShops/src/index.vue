@@ -30,7 +30,6 @@
     </div>
   </div>
 </template>
-
 <script setup lang="ts">
 import Category from './Category/index.vue'
 

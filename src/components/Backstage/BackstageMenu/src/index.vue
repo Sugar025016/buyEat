@@ -8,7 +8,7 @@
           <component :is="item.meta.icon"></component>
         </el-icon>
         <template #title>
-          <span>{{ item.meta.title }}**-</span>
+          <span>{{ item.meta.title }}</span>
         </template>
       </el-menu-item>
     </template>
@@ -59,7 +59,6 @@ import { useRouter, useRoute, Router } from 'vue-router'
 import { onMounted, ref } from 'vue'
 
 import useSellShopStore from '@/store/modules/sellShop'
-import { timePanelSharedProps } from 'element-plus/es/components/time-picker/src/props/shared.js'
 
 let sellShopStore = useSellShopStore()
 let props = defineProps(['menuList'])

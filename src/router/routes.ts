@@ -266,6 +266,17 @@ export const constantRoute = [
       },
     ],
   },
+
+  {
+    path: '/map',
+    component: () => import('@/components/Map/src/index.vue'),
+    meta: {
+      title: '已完成訂單',
+      hidden: false,
+      icon: 'HomeFilled',
+      mustToken: false,
+    },
+  },
   // {
   //   path: '/sell',
   //   component: () => import('@/views/sell/index.vue'),
@@ -350,20 +361,7 @@ export const sellShop = [
           mustToken: false,
           id: 0,
         },
-        // children: [
-        //   {
-        //     path: '/sell/Shop/:id',
-        //     component: () => import('@/components/Sell/SellShop/src/Shop/src/index.vue'),
-        //     meta: {
-        //       title: 'Register',
-        //       hidden: false,
-        //       icon: 'HomeFilled',
-        //       mustToken: false,
-        //     },
-        //   },
-        // ],
       },
-
       {
         path: 'product',
         component: () => import('@/components/Sell/SellProduct/index.vue'),
@@ -375,16 +373,36 @@ export const sellShop = [
           id: 0,
         },
       },
-      // {
-      //   path: '/sell/shop',
-      //   component: () => import('@/components/Sell/SellShop/src/index.vue'),
-      //   meta: {
-      //     title: 'Register',
-      //     hidden: false,
-      //     icon: 'HomeFilled',
-      //     mustToken: false,
-      //   },
-      // },
+      {
+        path: 'orderNew',
+        component: () => import('@/components/Sell/SellOrderNew/index.vue'),
+        meta: {
+          title: '新訂單',
+          hidden: false,
+          icon: 'HomeFilled',
+          mustToken: false,
+        },
+      },
+      {
+        path: 'orderPending',
+        component: () => import('@/components/Sell/SellOrderPending/index.vue'),
+        meta: {
+          title: '待處理訂單',
+          hidden: false,
+          icon: 'HomeFilled',
+          mustToken: false,
+        },
+      },
+      {
+        path: 'orderFinish',
+        component: () => import('@/components/Sell/SellOrderFinish/index.vue'),
+        meta: {
+          title: '已完成訂單',
+          hidden: false,
+          icon: 'HomeFilled',
+          mustToken: false,
+        },
+      },
     ],
   },
 ]
@@ -513,7 +531,7 @@ export const menuSellRoutes = [
   },
   {
     path: '/sell/product/:shopId',
-    component: () => import('@/components/Sell/SellProduct/src/index.vue'),
+    component: () => import('@/components/Sell/SellProduct/index.vue'),
     meta: {
       title: '編輯商品',
       hidden: false,

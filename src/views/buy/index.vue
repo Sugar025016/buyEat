@@ -43,7 +43,8 @@ watch(
 
 .common-layout {
   // background: url('@/assets/images/fondo.webp');
-  background-color: rgba(201, 192, 167, 0.507);
+  // background-color: rgba(201, 192, 167, 0.507);
+  background-color: rgba(250, 205, 69, 0.1);
   width: auto;
   height: 500px;
   border-radius: 0 0 100% 100% / 100% 100% 100% 100%;

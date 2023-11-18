@@ -179,7 +179,6 @@ const TimeSelectRef = ref<typeof TimeSelect>()
 
 const sendOrder = async () => {
   await TimeSelectRef.value?.save()
-
   const order = ref<ReqAddOrder>({
     takeTime: aaa,
     addressId: addresses.value[radio1.value].id as number,
@@ -189,6 +188,7 @@ const sendOrder = async () => {
   let res: OrderResponseData = await reqAddOrder(order.value)
 
   if (res.code === 200) {
+    userStore.cartCount = 0
     $router.push('/BuyOrder')
   } else {
     ElMessage({

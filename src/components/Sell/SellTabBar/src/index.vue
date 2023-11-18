@@ -70,10 +70,15 @@ defineProps(['scene'])
 
   .toolbar_order {
     // width: 100px;
-    display: inline-block;
+    // display: inline-block;
     // display: inline-flex;
 
     // margin: auto;淤ㄝ
+    // height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
   }
   .toolbar_right {
     display: flex;

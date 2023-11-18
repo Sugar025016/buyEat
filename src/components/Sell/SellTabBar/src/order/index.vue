@@ -63,12 +63,14 @@ onMounted(() => {
   display: flex;
   align-items: center;
   justify-content: center;
-
+  height: 100%;
+  // height: 15px;
   .order-text {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 12px 10px 8px 10px;
+    // margin: 11px 10px 7px 10px;
+    margin: 0 10px;
     font-size: 15px;
 
     a {
