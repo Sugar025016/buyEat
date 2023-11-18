@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <div>
     <input v-model="address" placeholder="Enter address" />
     <button @click="geocodeAddress">Geocode</button>
@@ -11,8 +11,9 @@ import { ref, onMounted } from 'vue'
 import 'leaflet/dist/leaflet.css'
 import L from 'leaflet'
 
+declare const L: any
 const address = ref('台南')
-let map
+let map: any
 
 onMounted(() => {
   map = L.map('map').setView([0, 0], 2)
@@ -198,3 +199,4 @@ const getCoordinates = async (addresses) => {
   width: 100%;
 }
 </style> -->
+-->
